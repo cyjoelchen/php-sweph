@@ -192,6 +192,7 @@ PHP_MINIT_FUNCTION(sweph)
 	/*
 	 * planet numbers for the ipl parameter in swe_calc()
 	 */
+	REGISTER_LONG_CONSTANT("SE_ECL_NUT", SE_ECL_NUT, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_SUN", SE_SUN, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_MOON", SE_MOON, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_MERCURY", SE_MERCURY  , CONST_CS | CONST_PERSISTENT);
@@ -889,7 +890,7 @@ PHP_FUNCTION(swe_houses_armc)
 PHP_FUNCTION(swe_house_pos)
 {
 	char *arg = NULL;
-	int arg_len;
+	int arg_len, str_len;
 	char *hsys = NULL;
 	double armc, geolat, eps, xpin[2], rc;
 	char serr[AS_MAXCH]; 
@@ -897,13 +898,13 @@ PHP_FUNCTION(swe_house_pos)
 	
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dddldd",
-			&armc, &geolat, &eps, &hsys, &xpin[0], &xpin[1], &arg_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dddsdd",
+			&armc, &geolat, &eps, &hsys, &str_len, &xpin[0], &xpin[1], &arg_len) == FAILURE) {
 		return;
 	}
 	rc = swe_house_pos(armc, geolat, eps, hsys[0], xpin, serr);
 
-	if ((rc >= 1.0) && (rc <= 12.999999))
+	if ((rc >= 1.0) && (rc < 13.0))
 	{
 		RETURN_DOUBLE(rc);
 	}
