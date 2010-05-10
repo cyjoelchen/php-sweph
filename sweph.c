@@ -492,14 +492,16 @@ PHP_FUNCTION(swe_calc_ut)
 	}
 }
 
+#define MAX_FIXSTAR_NAME (2 * SE_MAX_STNAME + 1)
 PHP_FUNCTION(swe_fixstar)
 {
 	char *arg = NULL;
 	int arg_len, rc;
 	int ipl, iflag;
 	double tjd_et, xx[6];
-	char star[AS_MAXCH], serr[AS_MAXCH];
+	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
 	int i;
+	zval *xx_arr;
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
@@ -516,9 +518,11 @@ PHP_FUNCTION(swe_fixstar)
 	{
 		/* create an array */
 		array_init(return_value);
+		MAKE_STD_ZVAL(xx_arr);
 		for(i = 0; i < 6; i++)
-			add_index_double(return_value, i, xx[i]);
-		
+			add_index_double(xx_arr, i, xx[i]);
+		add_assoc_string(return_value, "name", star, 1);
+		add_assoc_zval(return_value, "xx", xx_arr);	
 		return;
 	}
 }
@@ -529,8 +533,9 @@ PHP_FUNCTION(swe_fixstar_ut)
 	int arg_len, rc;
 	int ipl, iflag;
 	double tjd_ut, xx[6];
-	char star[AS_MAXCH], serr[AS_MAXCH];
+	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
 	int i;
+	zval *xx_arr;
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
@@ -547,8 +552,11 @@ PHP_FUNCTION(swe_fixstar_ut)
 	{
 		/* create an array */
 		array_init(return_value);
+		MAKE_STD_ZVAL(xx_arr);
 		for(i = 0; i < 6; i++)
 			add_index_double(return_value, i, xx[i]);
+		add_assoc_string(return_value, "name", star, 1);
+		add_assoc_zval(return_value, "xx", xx_arr);	
 		
 		return;
 	}
