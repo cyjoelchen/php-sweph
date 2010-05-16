@@ -496,9 +496,11 @@ PHP_FUNCTION(swe_calc_ut)
 PHP_FUNCTION(swe_fixstar)
 {
 	char *arg = NULL;
-	int arg_len, rc;
-	int ipl, iflag;
+	int rc;
+	long iflag;
 	double tjd_et, xx[6];
+	char *star_ptr = NULL;
+	int star_len;
 	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
 	int i;
 	zval *xx_arr;
@@ -506,9 +508,11 @@ PHP_FUNCTION(swe_fixstar)
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sdl",
-			&star, &tjd_et, &iflag, &arg_len) == FAILURE) {
+			&star_ptr, &star_len, &tjd_et, &iflag) == FAILURE) {
 		return;
 	}
+	memset(star, 0, MAX_FIXSTAR_NAME);
+	strncpy(star, star_ptr, star_len);
 	rc = swe_fixstar(star, tjd_et, iflag, xx, serr);
 	if (rc < 0)
 	{
@@ -519,8 +523,10 @@ PHP_FUNCTION(swe_fixstar)
 		/* create an array */
 		array_init(return_value);
 		MAKE_STD_ZVAL(xx_arr);
-		for(i = 0; i < 6; i++)
+		array_init(xx_arr);
+		for(i = 0; i < 6; i++) {
 			add_index_double(xx_arr, i, xx[i]);
+		}
 		add_assoc_string(return_value, "name", star, 1);
 		add_assoc_zval(return_value, "xx", xx_arr);	
 		return;
@@ -530,19 +536,23 @@ PHP_FUNCTION(swe_fixstar)
 PHP_FUNCTION(swe_fixstar_ut)
 {
 	char *arg = NULL;
-	int arg_len, rc;
-	int ipl, iflag;
+	int rc;
+	long iflag;
 	double tjd_ut, xx[6];
+	char *star_ptr = NULL;
+	int star_len;
 	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
 	int i;
 	zval *xx_arr;
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
-
+		
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sdl",
-			&star, &tjd_ut, &iflag, &arg_len) == FAILURE) {
+			&star_ptr, &star_len, &tjd_ut, &iflag) == FAILURE) {
 		return;
 	}
+	memset(star, 0, MAX_FIXSTAR_NAME);
+	strncpy(star, star_ptr, star_len);
 	rc = swe_fixstar_ut(star, tjd_ut, iflag, xx, serr);
 	if (rc < 0)
 	{
@@ -553,11 +563,12 @@ PHP_FUNCTION(swe_fixstar_ut)
 		/* create an array */
 		array_init(return_value);
 		MAKE_STD_ZVAL(xx_arr);
-		for(i = 0; i < 6; i++)
-			add_index_double(return_value, i, xx[i]);
+		array_init(xx_arr);
+		for(i = 0; i < 6; i++) {
+			add_index_double(xx_arr, i, xx[i]);
+		}
 		add_assoc_string(return_value, "name", star, 1);
 		add_assoc_zval(return_value, "xx", xx_arr);	
-		
 		return;
 	}
 }
