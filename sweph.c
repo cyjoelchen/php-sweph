@@ -52,6 +52,7 @@ function_entry sweph_functions[] = {
 	PHP_FE(swe_get_ayanamsa, NULL)
 	PHP_FE(swe_get_ayanamsa_ut, NULL)
 	PHP_FE(swe_get_ayanamsa_name, NULL)
+	PHP_FE(swe_version, NULL)
 
 	/**************************** 
 	 * exports from swedate.c 
@@ -425,13 +426,11 @@ PHP_MINFO_FUNCTION(sweph)
  ****************************/
  
 /* int swe_calc ( double tjd_et, int ipl, int iflag, double* xx, char* serr); */
-/* int swe_calc ( double tjd_et, int ipl, int iflag);
-/* returns array if success, returns string if error */
 PHP_FUNCTION(swe_calc)
 {
 	char *arg = NULL;
-	int arg_len, rc;
-	int ipl, iflag;
+	int rc;
+	long ipl, iflag;
 	double tjd_et, xx[6];
 	char serr[AS_MAXCH]; 
 	int i;
@@ -439,33 +438,25 @@ PHP_FUNCTION(swe_calc)
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
-			&tjd_et, &ipl, &iflag, &arg_len) == FAILURE) {
+			&tjd_et, &ipl, &iflag) == FAILURE) {
 		return;
 	}
-	rc = swe_calc(tjd_et, ipl, iflag, xx, serr);
-	if (rc < 0)
-	{
-		RETURN_STRINGL(serr, strlen(serr), 1);
-	}
-	else
-	{
+	rc = swe_calc(tjd_et, (int)ipl, (int)iflag, xx, serr);
+
 		/* create an array */
-		array_init(return_value);
-		for(i = 0; i < 6; i++)
-			add_index_double(return_value, i, xx[i]);
-		
-		return;
-	}
+	array_init(return_value);
+	for(i = 0; i < 6; i++)
+		add_index_double(return_value, i, xx[i]);
+	add_assoc_string(return_value, "serr", serr, true);
+	add_assoc_long(return_value, "rc", rc);
 }
 
 /* int swe_calc_ut ( double tjd_ut, int ipl, int iflag, double* xx, char* serr); */
-/* int swe_calc_ut ( double tjd_ut, int ipl, int iflag);
-/* returns array if success, returns string if error */
 PHP_FUNCTION(swe_calc_ut)
 {
 	char *arg = NULL;
-	int arg_len, rc;
-	int ipl, iflag;
+	int rc;
+	long ipl, iflag;
 	double tjd_ut, xx[6];
 	char serr[AS_MAXCH]; 
 	int i;
@@ -473,23 +464,17 @@ PHP_FUNCTION(swe_calc_ut)
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
-			&tjd_ut, &ipl, &iflag, &arg_len) == FAILURE) {
+			&tjd_ut, &ipl, &iflag) == FAILURE) {
 		return;
 	}
-	rc = swe_calc_ut(tjd_ut, ipl, iflag, xx, serr);
-	if (rc < 0)
-	{
-		RETURN_STRINGL(serr, strlen(serr), 1);
-	}
-	else
-	{
-		/* create an array */
-		array_init(return_value);
-		for(i = 0; i < 6; i++)
-			add_index_double(return_value, i, xx[i]);
-		
-		return;
-	}
+	rc = swe_calc_ut(tjd_ut, (int)ipl, (int)iflag, xx, serr);
+
+	/* create an array */
+	array_init(return_value);
+	for(i = 0; i < 6; i++)
+		add_index_double(return_value, i, xx[i]);
+	add_assoc_string(return_value, "serr", serr, true);
+	add_assoc_long(return_value, "rc", rc);
 }
 
 #define MAX_FIXSTAR_NAME (2 * SE_MAX_STNAME + 1)
@@ -513,24 +498,16 @@ PHP_FUNCTION(swe_fixstar)
 	}
 	memset(star, 0, MAX_FIXSTAR_NAME);
 	strncpy(star, star_ptr, star_len);
-	rc = swe_fixstar(star, tjd_et, iflag, xx, serr);
-	if (rc < 0)
-	{
-		RETURN_STRINGL(serr, strlen(serr), 1);
-	}
-	else
-	{
-		/* create an array */
-		array_init(return_value);
-		MAKE_STD_ZVAL(xx_arr);
-		array_init(xx_arr);
-		for(i = 0; i < 6; i++) {
-			add_index_double(xx_arr, i, xx[i]);
-		}
-		add_assoc_string(return_value, "name", star, 1);
-		add_assoc_zval(return_value, "xx", xx_arr);	
-		return;
-	}
+	php_printf("%s", star);
+	rc = swe_fixstar(star, tjd_et, (int)iflag, xx, serr);
+	php_printf("%s %s %d\n", star, serr, rc);
+
+	array_init(return_value);
+	for(i = 0; i < 6; i++)
+		add_index_double(return_value, i, xx[i]);
+	add_assoc_string(return_value, "star", star, true);
+	add_assoc_string(return_value, "serr", serr, true);
+	add_assoc_long(return_value, "rc", rc);
 }
 
 PHP_FUNCTION(swe_fixstar_ut)
@@ -553,24 +530,14 @@ PHP_FUNCTION(swe_fixstar_ut)
 	}
 	memset(star, 0, MAX_FIXSTAR_NAME);
 	strncpy(star, star_ptr, star_len);
-	rc = swe_fixstar_ut(star, tjd_ut, iflag, xx, serr);
-	if (rc < 0)
-	{
-		RETURN_STRINGL(serr, strlen(serr), 1);
-	}
-	else
-	{
-		/* create an array */
-		array_init(return_value);
-		MAKE_STD_ZVAL(xx_arr);
-		array_init(xx_arr);
-		for(i = 0; i < 6; i++) {
-			add_index_double(xx_arr, i, xx[i]);
-		}
-		add_assoc_string(return_value, "name", star, 1);
-		add_assoc_zval(return_value, "xx", xx_arr);	
-		return;
-	}
+	rc = swe_fixstar_ut(star, tjd_ut, (int)iflag, xx, serr);
+
+	array_init(return_value);
+	for(i = 0; i < 6; i++)
+		add_index_double(return_value, i, xx[i]);
+	add_assoc_string(return_value, "star", star, true);
+	add_assoc_string(return_value, "serr", serr, true);
+	add_assoc_long(return_value, "rc", rc);
 }
 
 PHP_FUNCTION(swe_close)
@@ -578,7 +545,7 @@ PHP_FUNCTION(swe_close)
 	if(ZEND_NUM_ARGS() != 0) WRONG_PARAM_COUNT;
 
 	swe_close();
-	RETURN_TRUE;
+	RETURN_NULL();
 }
 
 PHP_FUNCTION(swe_set_ephe_path)
@@ -593,7 +560,7 @@ PHP_FUNCTION(swe_set_ephe_path)
 	}
 
 	swe_set_ephe_path(arg);
-	return;
+	RETURN_NULL();
 }
 
 PHP_FUNCTION(swe_set_jpl_file)
@@ -608,102 +575,107 @@ PHP_FUNCTION(swe_set_jpl_file)
 	}
 
 	swe_set_jpl_file(arg);
-	return;
+	RETURN_NULL();
 }
 
 PHP_FUNCTION(swe_get_planet_name)
 {
-	int ipl;
-	int arg_len;
-	char name[256];
+	long ipl;
+	char name[AS_MAXCH];
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &ipl, &arg_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &ipl) == FAILURE) {
 		return;
 	}
 
-	swe_get_planet_name(ipl, name);
+	swe_get_planet_name((int)ipl, name);
 
-	RETURN_STRING(name, 1);
+	RETURN_STRING(name, true);
 }
 
 PHP_FUNCTION(swe_set_topo)
 {
-	int arg_len, rc;
+	int rc;
 	double geo_lon, geo_lat, geo_alt;
 
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddd",
-		&geo_lon, &geo_lat, &geo_alt, &arg_len) == FAILURE) {
+		&geo_lon, &geo_lat, &geo_alt) == FAILURE) {
 		return;
 	}
 	swe_set_topo(geo_lon, geo_lat, geo_alt);
-	return;
+	RETURN_NULL();
 }
 
 PHP_FUNCTION(swe_set_sid_mode)
 {
-	int arg_len, rc, sid_mode;
+	long sid_mode;
+	int rc;
 	double t0, ayan_t0;
 		
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ldd",
-		&sid_mode, &t0, &ayan_t0, &arg_len) == FAILURE) {
+		&sid_mode, &t0, &ayan_t0) == FAILURE) {
 		return;
 	}
-	swe_set_sid_mode(sid_mode, t0, ayan_t0);
-	return;
+	swe_set_sid_mode((int)sid_mode, t0, ayan_t0);
+	RETURN_NULL();
 }
 
 PHP_FUNCTION(swe_get_ayanamsa)
 {
-	int arg_len;
-	double tjd_et, ayanamsa;
+	double tjd_et;
 		
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
-		&tjd_et, &arg_len) == FAILURE) {
+		&tjd_et) == FAILURE) {
 		return;
 	}
-	ayanamsa = swe_get_ayanamsa(tjd_et);
 	
-	RETURN_DOUBLE(ayanamsa);
+	RETURN_DOUBLE(swe_get_ayanamsa(tjd_et));
 }
 
 PHP_FUNCTION(swe_get_ayanamsa_ut)
 {
-	int arg_len;
-	double tjd_ut, ayanamsa;
+	double tjd_ut;
 		
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
-		&tjd_ut, &arg_len) == FAILURE) {
+		&tjd_ut) == FAILURE) {
 		return;
 	}
-	ayanamsa = swe_get_ayanamsa_ut(tjd_ut);
 	
-	RETURN_DOUBLE(ayanamsa);
+	RETURN_DOUBLE(swe_get_ayanamsa_ut(tjd_ut));
 }
 
 PHP_FUNCTION(swe_get_ayanamsa_name)
 {
-	int isidmode;
-	int arg_len, rc;
+	long isidmode;
+	int rc;
 	char *name = NULL;
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &isidmode, &arg_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &isidmode) == FAILURE) {
 		return;
 	}
 
-	name = swe_get_ayanamsa_name(isidmode);
-	RETURN_STRING(name, 1);
+	name = swe_get_ayanamsa_name((int)isidmode);
+	RETURN_STRING(name, true);
+}
+
+PHP_FUNCTION(swe_version)
+{
+	char name[AS_MAXCH];
+	
+	if(ZEND_NUM_ARGS() != 0) WRONG_PARAM_COUNT;
+
+	RETURN_STRING(swe_version(name), true);
 }
 
 /**************************** 
@@ -737,7 +709,7 @@ PHP_FUNCTION(swe_date_conversion)
 PHP_FUNCTION(swe_julday)
 {
 	int arg_len, rc;
-	int year, month, day, gregflag;
+	long year, month, day, gregflag;
 	double hour, julday;
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;

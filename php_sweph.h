@@ -51,6 +51,7 @@ PHP_FUNCTION(swe_set_sid_mode);
 PHP_FUNCTION(swe_get_ayanamsa);
 PHP_FUNCTION(swe_get_ayanamsa_ut);
 PHP_FUNCTION(swe_get_ayanamsa_name);
+PHP_FUNCTION(swe_version);
 
 /**************************** 
  * exports from swedate.c 
