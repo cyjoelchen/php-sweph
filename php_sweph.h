@@ -59,6 +59,9 @@ PHP_FUNCTION(swe_version);
 PHP_FUNCTION(swe_date_conversion);
 PHP_FUNCTION(swe_julday);
 PHP_FUNCTION(swe_revjul);
+PHP_FUNCTION(swe_jdet_to_utc);
+PHP_FUNCTION(swe_jdut1_to_utc);
+PHP_FUNCTION(swe_utc_to_jd);
 
 /**************************** 
  * exports from swehouse.c 

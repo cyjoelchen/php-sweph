@@ -50,6 +50,6 @@ if test "$PHP_SWEPH" != "no"; then
   dnl PHP_SUBST(SWEPH_SHARED_LIBADD)
 
   # remove this... it causes runtime error when running php5
-  AC_SUBST(LDFLAGS, "-lswe -lm")
+  AC_SUBST(LDFLAGS, "-L. -lswe -lm")
   PHP_NEW_EXTENSION(sweph, sweph.c, $ext_shared)
 fi
