@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5 Swiss Ephemeris extension                              |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2007-2010                                              |
+  | Copyright (c) 2007-2011                                              |
   +----------------------------------------------------------------------+
   | Author: Joel Chen (cyjoelchen@gmail.com)                             |
   +----------------------------------------------------------------------+
@@ -22,7 +22,7 @@
 
 #include "swephexp.h"
 
-#define SWEPH_EXTENSION_VERSION "0.6 $Rev: 10 $"
+#define SWEPH_EXTENSION_VERSION "0.7 $Rev: 10 $"
 
 /* If you declare any globals in php_sweph.h uncomment this:
 ZEND_DECLARE_MODULE_GLOBALS(sweph)
@@ -63,6 +63,7 @@ function_entry sweph_functions[] = {
 	PHP_FE(swe_jdet_to_utc, NULL)
 	PHP_FE(swe_jdut1_to_utc, NULL)
 	PHP_FE(swe_utc_to_jd, NULL)
+	PHP_FE(swe_utc_time_zone, NULL)
 	
 	/**************************** 
 	 * exports from swehouse.c 
@@ -358,7 +359,12 @@ PHP_MINIT_FUNCTION(sweph)
 	REGISTER_LONG_CONSTANT("SE_CALC_MTRANSIT", SE_CALC_MTRANSIT	    , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_CALC_ITRANSIT", SE_CALC_ITRANSIT	    , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_BIT_DISC_CENTER", SE_BIT_DISC_CENTER   , CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_BIT_DISC_BOTTOM", SE_BIT_DISC_BOTTOM   , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_BIT_NO_REFRACTION", SE_BIT_NO_REFRACTION, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_BIT_CIVIL_TWILIGHT", SE_BIT_CIVIL_TWILIGHT, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_BIT_NAUTIC_TWILIGHT", SE_BIT_NAUTIC_TWILIGHT, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_BIT_ASTRO_TWILIGHT", SE_BIT_ASTRO_TWILIGHT, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_BIT_FIXED_DISC_SIZE", SE_BIT_FIXED_DISC_SIZE, CONST_CS | CONST_PERSISTENT);
 
 	/* for swe_azalt() and swe_azalt_rev() */
 	REGISTER_LONG_CONSTANT("SE_ECL2HOR", SE_ECL2HOR, CONST_CS | CONST_PERSISTENT);
@@ -840,6 +846,45 @@ PHP_FUNCTION(swe_utc_to_jd)
 	add_index_double(return_value, 1, dret[1]);
 	add_assoc_long(return_value, "rc", rc);
 	add_assoc_string(return_value, "serr", serr, 1);
+}
+
+/*
+New function since 1.77:
+ext_def(void) swe_utc_time_zone(
+        int32 iyear, int32 imonth, int32 iday,
+	int32 ihour, int32 imin, double dsec,
+	double d_timezone,
+	int32 *iyear_out, int32 *imonth_out, int32 *iday_out,
+	int32 *ihour_out, int32 *imin_out, double *dsec_out);
+*/
+PHP_FUNCTION(swe_utc_time_zone)
+{
+	long iyear, imonth, iday;
+	long ihour, imin;
+	double dsec, d_timezone;
+	int32 iyear_out, imonth_out, iday_out, ihour_out, imin_out;
+	double dsec_out;
+	
+	int32 rc;
+	
+	if(ZEND_NUM_ARGS() != 7) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "llllldd",
+			&iyear, &imonth, &iday, &ihour, &imin, &dsec, &d_timezone) == FAILURE) {
+		return;
+	}
+	swe_utc_time_zone((int32)iyear, (int32)imonth, (int32)iday, (int32)ihour, (int32)imin,
+			dsec, d_timezone, &iyear_out, &imonth_out, &iday_out, &ihour_out,
+			&imin_out, &dsec_out);
+			
+			
+	array_init(return_value);
+	add_assoc_long(return_value, "year", iyear_out);
+	add_assoc_long(return_value, "month", imonth_out);
+	add_assoc_long(return_value, "day", iday_out);
+	add_assoc_long(return_value, "hour", ihour_out);
+	add_assoc_long(return_value, "min", imin_out);
+	add_assoc_double(return_value, "sec", dsec_out);
 }
 
 
