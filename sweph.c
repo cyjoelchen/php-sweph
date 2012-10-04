@@ -1805,7 +1805,7 @@ PHP_FUNCTION(swe_cotrans)
 		return;
 	}
 	
-	sweph_cotrans(xpo, xpn, eps);
+	swe_cotrans(xpo, xpn, eps);
 
 	/* create an array */
 	array_init(return_value);
@@ -1825,7 +1825,7 @@ PHP_FUNCTION(swe_cotrans_sp)
 		return;
 	}
 	
-	sweph_cotrans_sp(xpo, xpn, eps);
+	swe_cotrans_sp(xpo, xpn, eps);
 
 	/* create an array */
 	array_init(return_value);
