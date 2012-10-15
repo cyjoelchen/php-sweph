@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 5 Swiss Ephemeris extension                              |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2007-2011                                              |
+  | Copyright (c) 2007-2012                                              |
   +----------------------------------------------------------------------+
   | Author: Joel Chen (cyjoelchen@gmail.com)                             |
   +----------------------------------------------------------------------+
 
-  $Id: sweph.c 10 2007-01-26 16:37:31Z joel $
+  $Id$
   
 */
 
@@ -22,7 +22,7 @@
 
 #include "swephexp.h"
 
-#define SWEPH_EXTENSION_VERSION "0.7 $Rev: 10 $"
+#define SWEPH_EXTENSION_VERSION "1.78 $Rev$"
 
 /* If you declare any globals in php_sweph.h uncomment this:
 ZEND_DECLARE_MODULE_GLOBALS(sweph)
@@ -89,9 +89,12 @@ function_entry sweph_functions[] = {
 	PHP_FE(swe_pheno, NULL)
 	PHP_FE(swe_pheno_ut, NULL)
 	PHP_FE(swe_refrac, NULL)
+	PHP_FE(swe_refrac_extended, NULL)
+	PHP_FE(swe_set_lapse_rate, NULL)
 	PHP_FE(swe_azalt, NULL)
 	PHP_FE(swe_azalt_rev, NULL)
 	PHP_FE(swe_rise_trans, NULL)
+	PHP_FE(swe_rise_trans_true_hor, NULL)
 	PHP_FE(swe_nod_aps, NULL)
 	PHP_FE(swe_nod_aps_ut, NULL)
 		
@@ -418,7 +421,8 @@ PHP_MINFO_FUNCTION(sweph)
 	swe_version(version);
 	php_info_print_table_start();
 	php_info_print_table_header(2, "sweph support", "enabled");
-	php_info_print_table_row(2, "Swiss Ephemeris version", version);
+	php_info_print_table_row(2, "extension version", SWEPH_EXTENSION_VERSION);
+	php_info_print_table_row(2, "library (libswe.a) version", version);
 	php_info_print_table_row(2, "default ephemeris file path", SE_EPHE_PATH);
 	php_info_print_table_end();
 
@@ -1531,6 +1535,44 @@ PHP_FUNCTION(swe_refrac)
 	RETURN_DOUBLE(rc);
 }
 
+PHP_FUNCTION(swe_refrac_extended)
+{
+	char *arg = NULL;
+	int arg_len, rc, calc_flag, i;
+	double inalt, geoalt, atpress, lapse_rate, attemp;
+	double dret[4];
+
+	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dddddl",
+			&inalt, &geoalt, &atpress, &lapse_rate, &attemp, &calc_flag, &arg_len) == FAILURE) {
+		return;
+	}
+	rc = swe_refrac_extended(inalt, geoalt, atpress, lapse_rate, attemp, calc_flag, dret);
+
+	RETURN_DOUBLE(rc);
+	
+	array_init(return_value);
+	for(i = 0; i < 3; i++)
+		add_index_double(return_value, i, dret[i]);
+	add_assoc_double(return_value, "retflag", rc);
+}
+
+PHP_FUNCTION(swe_set_lapse_rate)
+{
+	char *arg = NULL;
+	int arg_len;
+	double lapse_rate;
+
+	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+			&lapse_rate, &arg_len) == FAILURE) {
+		return;
+	}
+	swe_set_lapse_rate(lapse_rate);
+}
+
 PHP_FUNCTION(swe_azalt)
 {
 	char *arg = NULL;
@@ -1599,6 +1641,47 @@ PHP_FUNCTION(swe_rise_trans)
 	}
 	rc = swe_rise_trans(tjd_ut, ipl, starname, epheflag, rsmi,
 			&(geopos[0]), atpress, attemp, tret, serr);
+
+	array_init(return_value);
+	add_assoc_long(return_value, "retflag", rc);
+
+	if (rc == ERR)
+	{
+		add_assoc_string(return_value, "serr", serr, 1);			
+	}
+	else
+	{
+		MAKE_STD_ZVAL(tret_arr);
+		array_init(tret_arr);
+		
+		for(i = 0; i < 10; i++)
+			add_index_double(tret_arr, i, tret[i]);
+			
+		add_assoc_zval(return_value, "tret", tret_arr);
+	}
+}
+
+PHP_FUNCTION(swe_rise_trans_true_hor)
+{
+	char *arg = NULL;
+	int arg_len, rc, s_len;
+	long ipl, epheflag, rsmi;
+	double tjd_ut, geopos[3], tret[10], atpress, attemp, horhgt;
+	char serr[AS_MAXCH], *starname = NULL; 
+	int i;
+	zval *tret_arr;
+
+	if(ZEND_NUM_ARGS() != 11) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlslldddddd",
+			&tjd_ut, &ipl, &starname, &s_len, &epheflag, &rsmi,
+			&(geopos[0]), &(geopos[1]), &(geopos[2]),
+			&atpress, &attemp, &horhgt,
+			&arg_len) == FAILURE) {
+		return;
+	}
+	rc = swe_rise_trans_true_hor(tjd_ut, ipl, starname, epheflag, rsmi,
+			&(geopos[0]), atpress, attemp, horhgt, tret, serr);
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);

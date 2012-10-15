@@ -87,12 +87,17 @@ PHP_FUNCTION(swe_sol_eclipse_when_glob);
 PHP_FUNCTION(swe_lun_occult_when_glob);
 PHP_FUNCTION(swe_lun_eclipse_how);
 PHP_FUNCTION(swe_lun_eclipse_when);
+
+/* planetary phenomena */
 PHP_FUNCTION(swe_pheno);
 PHP_FUNCTION(swe_pheno_ut);
 PHP_FUNCTION(swe_refrac);
+PHP_FUNCTION(swe_refrac_extended);
+PHP_FUNCTION(swe_set_lapse_rate);
 PHP_FUNCTION(swe_azalt);
 PHP_FUNCTION(swe_azalt_rev);
 PHP_FUNCTION(swe_rise_trans);
+PHP_FUNCTION(swe_rise_trans_true_hor);
 PHP_FUNCTION(swe_nod_aps);
 PHP_FUNCTION(swe_nod_aps_ut);
 
