@@ -1497,7 +1497,7 @@ PHP_FUNCTION(swe_pheno_ut)
 			&tjd_ut, &ipl, &iflag, &arg_len) == FAILURE) {
 		return;
 	}
-	rc = swe_pheno(tjd_ut, ipl, iflag, attr, serr);
+	rc = swe_pheno_ut(tjd_ut, ipl, iflag, attr, serr);
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
