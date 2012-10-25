@@ -1675,13 +1675,13 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlslldddddd",
 			&tjd_ut, &ipl, &starname, &s_len, &epheflag, &rsmi,
-			&(geopos[0]), &(geopos[1]), &(geopos[2]),
+			&geopos[0], &geopos[1], &geopos[2],
 			&atpress, &attemp, &horhgt,
 			&arg_len) == FAILURE) {
 		return;
 	}
 	rc = swe_rise_trans_true_hor(tjd_ut, ipl, starname, epheflag, rsmi,
-			&(geopos[0]), atpress, attemp, horhgt, tret, serr);
+			geopos, atpress, attemp, horhgt, tret, serr);
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
