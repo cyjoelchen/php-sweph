@@ -35,7 +35,7 @@ static int le_sweph;
  *
  * Every user visible function must have an entry in sweph_functions[].
  */
-function_entry sweph_functions[] = {
+zend_function_entry sweph_functions[] = {
 	/**************************** 
 	 * exports from sweph.c 
 	 ****************************/
