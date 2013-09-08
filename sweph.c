@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5 Swiss Ephemeris extension                              |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2007-2012                                              |
+  | Copyright (c) 2007-2013                                              |
   +----------------------------------------------------------------------+
   | Author: Joel Chen (cyjoelchen@gmail.com)                             |
   +----------------------------------------------------------------------+
@@ -22,7 +22,7 @@
 
 #include "swephexp.h"
 
-#define SWEPH_EXTENSION_VERSION "1.78 $Rev$"
+#define SWEPH_EXTENSION_VERSION "1.80 $Rev$"
 
 /* If you declare any globals in php_sweph.h uncomment this:
 ZEND_DECLARE_MODULE_GLOBALS(sweph)
@@ -73,6 +73,7 @@ zend_function_entry sweph_functions[] = {
 	PHP_FE(swe_houses_armc, NULL)
 	PHP_FE(swe_house_pos, NULL)
 	PHP_FE(swe_gauquelin_sector, NULL)
+	PHP_FE(swe_house_name, NULL)
 	
 	/**************************** 
 	 * exports from swecl.c 
@@ -325,6 +326,12 @@ PHP_MINIT_FUNCTION(sweph)
 	REGISTER_LONG_CONSTANT("SE_SIDM_J2000", SE_SIDM_J2000          , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_SIDM_J1900", SE_SIDM_J1900          , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_SIDM_B1950", SE_SIDM_B1950          , CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SIDM_SURYASIDDHANTA", SE_SIDM_SURYASIDDHANTA          , CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SIDM_SURYASIDDHANTA_MSUN", SE_SIDM_SURYASIDDHANTA_MSUN          , CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SIDM_ARYABHATA", SE_SIDM_ARYABHATA          , CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SIDM_ARYABHATA_MSUN", SE_SIDM_ARYABHATA_MSUN          , CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SIDM_SS_REVATI", SE_SIDM_SS_REVATI          , CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SIDM_SS_CITRA", SE_SIDM_SS_CITRA          , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_SIDM_USER", SE_SIDM_USER           , CONST_CS | CONST_PERSISTENT);
 
 	REGISTER_LONG_CONSTANT("SE_NSIDM_PREDEF", SE_NSIDM_PREDEF, CONST_CS | CONST_PERSISTENT);
@@ -1061,6 +1068,26 @@ PHP_FUNCTION(swe_house_pos)
 	{
 		RETURN_STRING(serr, 1);
 	}	
+}
+
+/*
+New function since 1.80:
+ext_def(char *) swe_house_name(int hsys);
+*/
+PHP_FUNCTION(swe_house_name)
+{
+	long hsys;
+	char *name;
+	
+	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &hsys) == FAILURE) {
+		return;
+	}
+
+	name = swe_house_name((int)hsys);
+
+	RETURN_STRING(name, 1);
 }
 
 /**************************** 

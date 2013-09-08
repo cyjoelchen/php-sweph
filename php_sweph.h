@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 4 Swiss Ephemeris extension                              |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2007-2008                                              |
+  | Copyright (c) 2007-2013                                              |
   +----------------------------------------------------------------------+
   | Author: Joel Chen                                                    |
   +----------------------------------------------------------------------+
@@ -73,6 +73,7 @@ PHP_FUNCTION(swe_houses_ex);
 PHP_FUNCTION(swe_houses_armc);
 PHP_FUNCTION(swe_house_pos);
 PHP_FUNCTION(swe_gauquelin_sector);
+PHP_FUNCTION(swe_house_name);
 
 /**************************** 
  * exports from swecl.c 
