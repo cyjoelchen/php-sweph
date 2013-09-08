@@ -1076,16 +1076,19 @@ ext_def(char *) swe_house_name(int hsys);
 */
 PHP_FUNCTION(swe_house_name)
 {
-	long hsys;
+	int hsys_len;
+	char *hsys = NULL;
 	char *name;
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &hsys) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &hsys, &hsys_len) == FAILURE) {
 		return;
 	}
 
-	name = swe_house_name((int)hsys);
+	if (hsys_len < 1)
+		return;
+	name = swe_house_name(hsys[0]);
 
 	RETURN_STRING(name, 1);
 }
