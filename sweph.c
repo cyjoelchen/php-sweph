@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5 Swiss Ephemeris extension                              |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2007-2013                                              |
+  | Copyright (c) 2007-2014                                              |
   +----------------------------------------------------------------------+
   | Author: Joel Chen (cyjoelchen@gmail.com)                             |
   +----------------------------------------------------------------------+
@@ -22,7 +22,7 @@
 
 #include "swephexp.h"
 
-#define SWEPH_EXTENSION_VERSION "1.80 $Rev$"
+#define SWEPH_EXTENSION_VERSION "2.0 $Rev$"
 
 /* If you declare any globals in php_sweph.h uncomment this:
 ZEND_DECLARE_MODULE_GLOBALS(sweph)
@@ -1442,6 +1442,42 @@ PHP_FUNCTION(swe_lun_eclipse_how)
 			add_index_double(attr_arr, i, attr[i]);
 			
 		add_assoc_zval(return_value, "attr", attr_arr);
+	}
+}
+
+PHP_FUNCTION(swe_lun_eclipse_when)
+{
+	char *arg = NULL;
+	int arg_len, rc, ifl, ifltype;
+	double tjd_start, tret[10];
+	char serr[AS_MAXCH]; 
+	int i, backward;
+	zval *tret_arr;
+
+	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
+			&tjd_start, &ifl, &ifltype, &backward, &arg_len) == FAILURE) {
+		return;
+	}
+	rc = swe_lun_eclipse_when(tjd_start, ifl, ifltype, tret, backward, serr);
+
+	array_init(return_value);
+	add_assoc_long(return_value, "retflag", rc);
+
+	if (rc == ERR)
+	{
+		add_assoc_string(return_value, "serr", serr, 1);			
+	}
+	else
+	{
+		MAKE_STD_ZVAL(tret_arr);
+		array_init(tret_arr);
+		
+		for(i = 0; i < 10; i++)
+			add_index_double(tret_arr, i, tret[i]);
+			
+		add_assoc_zval(return_value, "tret", tret_arr);
 	}
 }
 
