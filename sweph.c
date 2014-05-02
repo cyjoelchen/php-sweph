@@ -86,7 +86,8 @@ zend_function_entry sweph_functions[] = {
 	PHP_FE(swe_sol_eclipse_when_glob, NULL)
 	PHP_FE(swe_lun_occult_when_glob, NULL)
 	PHP_FE(swe_lun_eclipse_how, NULL)
-	PHP_FE(swe_lun_eclipse_when, NULL)
+	PHP_FE(swe_lun_eclipse_when, NULL)	
+	PHP_FE(swe_lun_eclipse_when_loc, NULL)
 	PHP_FE(swe_pheno, NULL)
 	PHP_FE(swe_pheno_ut, NULL)
 	PHP_FE(swe_refrac, NULL)
@@ -104,6 +105,8 @@ zend_function_entry sweph_functions[] = {
 	 ****************************/
 	PHP_FE(swe_deltat, NULL)
 	PHP_FE(swe_time_equ, NULL)
+	PHP_FE(swe_lmt_to_lat, NULL)
+	PHP_FE(swe_lat_to_lmt, NULL)
 	PHP_FE(swe_sidtime0, NULL)
 	PHP_FE(swe_sidtime, NULL)
 	PHP_FE(swe_cotrans, NULL)
@@ -332,6 +335,8 @@ PHP_MINIT_FUNCTION(sweph)
 	REGISTER_LONG_CONSTANT("SE_SIDM_ARYABHATA_MSUN", SE_SIDM_ARYABHATA_MSUN          , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_SIDM_SS_REVATI", SE_SIDM_SS_REVATI          , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_SIDM_SS_CITRA", SE_SIDM_SS_CITRA          , CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SIDM_TRUE_CITRA", SE_SIDM_TRUE_CITRA          , CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SIDM_TRUE_REVATI", SE_SIDM_TRUE_REVATI          , CONST_CS | CONST_PERSISTENT);	
 	REGISTER_LONG_CONSTANT("SE_SIDM_USER", SE_SIDM_USER           , CONST_CS | CONST_PERSISTENT);
 
 	REGISTER_LONG_CONSTANT("SE_NSIDM_PREDEF", SE_NSIDM_PREDEF, CONST_CS | CONST_PERSISTENT);
@@ -1433,29 +1438,29 @@ PHP_FUNCTION(swe_lun_eclipse_how)
 		MAKE_STD_ZVAL(attr_arr);
 		array_init(attr_arr);
 		
-		for(i = 0; i < 20; i++)
+		for(i = 0; i < 10; i++)
 			add_index_double(attr_arr, i, attr[i]);
 			
 		add_assoc_zval(return_value, "attr", attr_arr);
 	}
 }
 
-PHP_FUNCTION(swe_lun_eclipse_when)
+PHP_FUNCTION(swe_lun_eclipse_when_loc)
 {
 	char *arg = NULL;
-	int arg_len, rc, ifl, ifltype;
-	double tjd_start, tret[10];
-	char serr[AS_MAXCH]; 
+	int arg_len, rc, ifl;
+	double tjd_ut, geopos[3], tret[10], attr[20];
+	char serr[AS_MAXCH], *starname = NULL;
 	int i, backward;
-	zval *tret_arr;
+	zval *tret_arr, *attr_arr;
 
-	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
+	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
-			&tjd_start, &ifl, &ifltype, &backward, &arg_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dldddl",
+			&tjd_ut, &ifl, &geopos[0], &geopos[1], &geopos[2], &backward, &arg_len) == FAILURE) {
 		return;
 	}
-	rc = swe_lun_eclipse_when(tjd_start, ifl, ifltype, tret, backward, serr);
+	rc = swe_lun_eclipse_when_loc(tjd_ut, ifl, geopos, tret, attr, backward, serr);
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
@@ -1468,11 +1473,17 @@ PHP_FUNCTION(swe_lun_eclipse_when)
 	{
 		MAKE_STD_ZVAL(tret_arr);
 		array_init(tret_arr);
-		
+
 		for(i = 0; i < 10; i++)
 			add_index_double(tret_arr, i, tret[i]);
-			
-		add_assoc_zval(return_value, "tret", tret_arr);
+		add_assoc_zval(return_value, "tret", tret_arr);	
+
+		MAKE_STD_ZVAL(attr_arr);
+		array_init(attr_arr);
+
+		for(i = 0; i < 20; i++)
+			add_index_double(attr_arr, i, attr[i]);			
+		add_assoc_zval(return_value, "attr", attr_arr);
 	}
 }
 
@@ -1876,6 +1887,49 @@ PHP_FUNCTION(swe_time_equ)
 	
 	add_assoc_long(return_value, "rc", rc);
 	add_assoc_double(return_value, "te", te);
+	add_assoc_string(return_value, "serr", serr, 1);
+}
+
+PHP_FUNCTION(swe_lmt_to_lat)
+{
+	char *arg = NULL;
+	double tjd_lmt, geolon;
+	double tjd_lat;
+	int rc;
+	char serr[AS_MAXCH]; 
+	
+	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+			&tjd_lmt, &geolon) == FAILURE) {
+		return;
+	}
+	rc = swe_lmt_to_lat(tjd_lmt, geolon, &tjd_lat, serr);
+	array_init(return_value);
+	
+	add_assoc_long(return_value, "rc", rc);
+	add_assoc_double(return_value, "tjd_lat", tjd_lat);
+	add_assoc_string(return_value, "serr", serr, 1);
+}
+
+PHP_FUNCTION(swe_lat_to_lmt)
+{
+	char *arg = NULL;
+	double tjd_lmt, tjd_lat, geolon;
+	int rc;
+	char serr[AS_MAXCH]; 
+	
+	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+			&tjd_lat, &geolon) == FAILURE) {
+		return;
+	}
+	rc = swe_lmt_to_lat(tjd_lat, geolon, &tjd_lmt, serr);
+	array_init(return_value);
+	
+	add_assoc_long(return_value, "rc", rc);
+	add_assoc_double(return_value, "tjd_lmt", tjd_lmt);
 	add_assoc_string(return_value, "serr", serr, 1);
 }
 
