@@ -1,35 +1,3 @@
-# PHP Extension for Swiss Ephemeris
-## Introduction
-`php-sweph` is a PHP extension to Astrodienst Swiss Ephemeris library. It's statically linked with libswe.a to implement one-to-one, C-to-PHP function mapping, no external binary executable required.
-
-## Installation
-
-Follow the steps. Make sure `php-dev` has installed already.
-
-```
-    git clone https://github.com/almuten/php-sweph.git
-    cd php-sweph
-    phpize
-    ./configure 
-    make
-    sudo make install
-```
-
-Add `extension=sweph.so` to php.ini. In my case (nginx + php-fpm), it's located in `/etc/php/7.0/fpm/php.ini`. Reload php-fpm to make it take effect.
-
-Now you should able to see sweph section from `phpinfo()`.
-
- sweph support | enabled 
----|---
- extension version | 2.0 Rev: 28 
- library (libswe.a) version | 2.07.01 
- default ephemeris file path | .:/users/ephe2/:/users/ephe/ 
-
-You are all set!
-
-## Example
-
-```php
 <?php
 
 swe_set_ephe_path("/usr/local/share/sweph");
@@ -73,6 +41,4 @@ for($i = 1; $i <= 12; $i ++)
 }
 
 echo "houses: \n" . json_encode($houses, $options = JSON_PRETTY_PRINT) . "\n";
-
-```
 
