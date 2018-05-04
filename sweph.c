@@ -7,7 +7,7 @@
   | Author: Joel Chen (cyjoelchen@gmail.com)                             |
   +----------------------------------------------------------------------+
 
-  $Id$
+  $Id: sweph.c 27 2014-05-02 02:54:47Z cyjoelchen@gmail.com $
   
 */
 
@@ -22,7 +22,7 @@
 
 #include "swephexp.h"
 
-#define SWEPH_EXTENSION_VERSION "2.0 $Rev$"
+#define SWEPH_EXTENSION_VERSION "2.0 $Rev: 27 $"
 
 /* If you declare any globals in php_sweph.h uncomment this:
 ZEND_DECLARE_MODULE_GLOBALS(sweph)
@@ -472,7 +472,7 @@ PHP_FUNCTION(swe_calc)
 	array_init(return_value);
 	for(i = 0; i < 6; i++)
 		add_index_double(return_value, i, xx[i]);
-	add_assoc_string(return_value, "serr", serr, 1);
+	add_assoc_string(return_value, "serr", serr);
 	add_assoc_long(return_value, "rc", rc);
 }
 
@@ -498,7 +498,7 @@ PHP_FUNCTION(swe_calc_ut)
 	array_init(return_value);
 	for(i = 0; i < 6; i++)
 		add_index_double(return_value, i, xx[i]);
-	add_assoc_string(return_value, "serr", serr, 1);
+	add_assoc_string(return_value, "serr", serr);
 	add_assoc_long(return_value, "rc", rc);
 }
 
@@ -530,8 +530,8 @@ PHP_FUNCTION(swe_fixstar)
 	array_init(return_value);
 	for(i = 0; i < 6; i++)
 		add_index_double(return_value, i, xx[i]);
-	add_assoc_string(return_value, "star", star, 1);
-	add_assoc_string(return_value, "serr", serr, 1);
+	add_assoc_string(return_value, "star", star);
+	add_assoc_string(return_value, "serr", serr);
 	add_assoc_long(return_value, "rc", rc);
 }
 
@@ -560,8 +560,8 @@ PHP_FUNCTION(swe_fixstar_ut)
 	array_init(return_value);
 	for(i = 0; i < 6; i++)
 		add_index_double(return_value, i, xx[i]);
-	add_assoc_string(return_value, "star", star, 1);
-	add_assoc_string(return_value, "serr", serr, 1);
+	add_assoc_string(return_value, "star", star);
+	add_assoc_string(return_value, "serr", serr);
 	add_assoc_long(return_value, "rc", rc);
 }
 
@@ -616,7 +616,7 @@ PHP_FUNCTION(swe_get_planet_name)
 
 	swe_get_planet_name((int)ipl, name);
 
-	RETURN_STRING(name, 1);
+	RETURN_STRING(name);
 }
 
 PHP_FUNCTION(swe_set_topo)
@@ -688,7 +688,7 @@ PHP_FUNCTION(swe_get_ayanamsa_name)
 		return;
 	}
 
-	RETURN_STRING(swe_get_ayanamsa_name((int)isidmode), 1);
+	RETURN_STRING(swe_get_ayanamsa_name((int)isidmode));
 }
 
 PHP_FUNCTION(swe_version)
@@ -697,7 +697,7 @@ PHP_FUNCTION(swe_version)
 	
 	if(ZEND_NUM_ARGS() != 0) WRONG_PARAM_COUNT;
 
-	RETURN_STRING(swe_version(name), 1);
+	RETURN_STRING(swe_version(name));
 }
 
 /**************************** 
@@ -861,7 +861,7 @@ PHP_FUNCTION(swe_utc_to_jd)
 	add_index_double(return_value, 0, dret[0]);
 	add_index_double(return_value, 1, dret[1]);
 	add_assoc_long(return_value, "rc", rc);
-	add_assoc_string(return_value, "serr", serr, 1);
+	add_assoc_string(return_value, "serr", serr);
 }
 
 /*
@@ -1071,7 +1071,7 @@ PHP_FUNCTION(swe_house_pos)
 	}
 	else
 	{
-		RETURN_STRING(serr, 1);
+		RETURN_STRING(serr);
 	}	
 }
 
@@ -1095,7 +1095,7 @@ PHP_FUNCTION(swe_house_name)
 		return;
 	name = swe_house_name(hsys[0]);
 
-	RETURN_STRING(name, 1);
+	RETURN_STRING(name);
 }
 
 /**************************** 
@@ -1122,7 +1122,7 @@ PHP_FUNCTION(swe_gauquelin_sector)
 
 	if (rc == ERR)
 	{
-		RETURN_STRING(serr, 1);
+		RETURN_STRING(serr);
 	}
 	else
 	{
@@ -1152,7 +1152,7 @@ PHP_FUNCTION(swe_sol_eclipse_where)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1194,7 +1194,7 @@ PHP_FUNCTION(swe_lun_occult_where)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1236,7 +1236,7 @@ PHP_FUNCTION(swe_sol_eclipse_how)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1272,7 +1272,7 @@ PHP_FUNCTION(swe_sol_eclipse_when_loc)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1316,7 +1316,7 @@ PHP_FUNCTION(swe_lun_occult_when_loc)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1357,7 +1357,7 @@ PHP_FUNCTION(swe_sol_eclipse_when_glob)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1395,7 +1395,7 @@ PHP_FUNCTION(swe_lun_occult_when_glob)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1431,7 +1431,7 @@ PHP_FUNCTION(swe_lun_eclipse_how)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1467,7 +1467,7 @@ PHP_FUNCTION(swe_lun_eclipse_when)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1503,7 +1503,7 @@ PHP_FUNCTION(swe_lun_eclipse_when_loc)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1545,7 +1545,7 @@ PHP_FUNCTION(swe_pheno)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1581,7 +1581,7 @@ PHP_FUNCTION(swe_pheno_ut)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1724,7 +1724,7 @@ PHP_FUNCTION(swe_rise_trans)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1765,7 +1765,7 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1802,7 +1802,7 @@ PHP_FUNCTION(swe_nod_aps)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1856,7 +1856,7 @@ PHP_FUNCTION(swe_nod_aps_ut)
 
 	if (rc == ERR)
 	{
-		add_assoc_string(return_value, "serr", serr, 1);			
+		add_assoc_string(return_value, "serr", serr);			
 	}
 	else
 	{
@@ -1923,7 +1923,7 @@ PHP_FUNCTION(swe_time_equ)
 	
 	add_assoc_long(return_value, "rc", rc);
 	add_assoc_double(return_value, "te", te);
-	add_assoc_string(return_value, "serr", serr, 1);
+	add_assoc_string(return_value, "serr", serr);
 }
 
 PHP_FUNCTION(swe_lmt_to_lat)
@@ -1945,7 +1945,7 @@ PHP_FUNCTION(swe_lmt_to_lat)
 	
 	add_assoc_long(return_value, "rc", rc);
 	add_assoc_double(return_value, "tjd_lat", tjd_lat);
-	add_assoc_string(return_value, "serr", serr, 1);
+	add_assoc_string(return_value, "serr", serr);
 }
 
 PHP_FUNCTION(swe_lat_to_lmt)
@@ -1966,7 +1966,7 @@ PHP_FUNCTION(swe_lat_to_lmt)
 	
 	add_assoc_long(return_value, "rc", rc);
 	add_assoc_double(return_value, "tjd_lmt", tjd_lmt);
-	add_assoc_string(return_value, "serr", serr, 1);
+	add_assoc_string(return_value, "serr", serr);
 }
 
 PHP_FUNCTION(swe_sidtime0)
@@ -2263,7 +2263,7 @@ PHP_FUNCTION(swe_cs2timestr)
 		return;
 	}
 
-	RETURN_STRING(swe_cs2timestr((int)t, (int)sep, (int)suppressZero, a), 1);
+	RETURN_STRING(swe_cs2timestr((int)t, (int)sep, (int)suppressZero, a));
 }
 
 PHP_FUNCTION(swe_cs2lonlatstr)
@@ -2281,7 +2281,7 @@ PHP_FUNCTION(swe_cs2lonlatstr)
 	if ((pchar_len < 1) || (mchar_len < 1))
 		return;
 
-	RETURN_STRING(swe_cs2lonlatstr((int)t, pchar[0], mchar[0], s), 1);
+	RETURN_STRING(swe_cs2lonlatstr((int)t, pchar[0], mchar[0], s));
 }
 
 PHP_FUNCTION(swe_cs2degstr)
@@ -2296,7 +2296,7 @@ PHP_FUNCTION(swe_cs2degstr)
 		return;
 	}
 
-	RETURN_STRING(swe_cs2degstr((int)t, a), 1);
+	RETURN_STRING(swe_cs2degstr((int)t, a));
 }
 
 #if 0
@@ -2318,7 +2318,7 @@ PHP_FUNCTION(confirm_sweph_compiled)
 	}
 
 	len = sprintf(string, "Congratulations! You have successfully modified ext/%.78s/config.m4. Module %.78s is now compiled into PHP.", "sweph", arg);
-	RETURN_STRINGL(string, len, 1);
+	RETURN_STRINGL(string, len);
 }
 #endif
 
