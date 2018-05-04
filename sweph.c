@@ -1,14 +1,11 @@
 /*
   +----------------------------------------------------------------------+
-  | PHP Version 5 Swiss Ephemeris extension                              |
+  | PHP Version 7 Swiss Ephemeris extension                              |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2007-2014                                              |
+  | Copyright (c) 2007-2018                                              |
   +----------------------------------------------------------------------+
   | Author: Joel Chen (cyjoelchen@gmail.com)                             |
   +----------------------------------------------------------------------+
-
-  $Id: sweph.c 27 2014-05-02 02:54:47Z cyjoelchen@gmail.com $
-  
 */
 
 #ifdef HAVE_CONFIG_H
@@ -22,7 +19,7 @@
 
 #include "swephexp.h"
 
-#define SWEPH_EXTENSION_VERSION "2.0 $Rev: 27 $"
+#define SWEPH_EXTENSION_VERSION "2.0 Rev: 28"
 
 /* If you declare any globals in php_sweph.h uncomment this:
 ZEND_DECLARE_MODULE_GLOBALS(sweph)
