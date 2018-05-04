@@ -510,7 +510,6 @@ PHP_FUNCTION(swe_fixstar)
 	int star_len;
 	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
 	int i;
-	zval *xx_arr;
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
@@ -542,7 +541,6 @@ PHP_FUNCTION(swe_fixstar_ut)
 	int star_len;
 	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
 	int i;
-	zval *xx_arr;
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
@@ -572,15 +570,16 @@ PHP_FUNCTION(swe_close)
 
 PHP_FUNCTION(swe_set_ephe_path)
 {
-	char *arg = NULL;
-	int arg_len, rc;
+	char *arg = emalloc(100);
+	size_t arg_len;
+	int rc;
 
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
 		return;
 	}
-
+	
 	swe_set_ephe_path(arg);
 	RETURN_NULL();
 }
@@ -588,7 +587,8 @@ PHP_FUNCTION(swe_set_ephe_path)
 PHP_FUNCTION(swe_set_jpl_file)
 {
 	char *arg = NULL;
-	int arg_len, rc;
+	size_t arg_len;
+	int rc;
 
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
@@ -703,7 +703,8 @@ PHP_FUNCTION(swe_version)
 
 PHP_FUNCTION(swe_date_conversion)
 {
-	int arg_len, rc;
+	size_t arg_len;
+	int rc;
 	long year, month, day;
 	double hour, tjd;
 	char *gregflag = NULL;
@@ -907,12 +908,14 @@ PHP_FUNCTION(swe_utc_time_zone)
 PHP_FUNCTION(swe_houses)
 {
 	char *arg = NULL;
-	int hsys_len, rc;
+	size_t hsys_len;
+	int rc;
+
 	char *hsys = NULL;
 	double tjd_ut, geolat, geolon;
 	double cusps[37], ascmc[10]; 
 	int i, houses;
-	zval *cusps_arr, *ascmc_arr;
+	zval cusps_arr, ascmc_arr;
 	
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -922,14 +925,12 @@ PHP_FUNCTION(swe_houses)
 	}
 	if (hsys_len < 1)
 		return;
-		
+
 	rc = swe_houses(tjd_ut, geolat, geolon, hsys[0], cusps, ascmc);
 
 	/* create 2 index array, and 1 assoc array */
 	array_init(return_value);
-	
-	MAKE_STD_ZVAL(cusps_arr);
-	array_init(cusps_arr);
+	array_init(&cusps_arr);
 	
 	if (hsys[0] == 'G')
 		houses = 37;
@@ -937,28 +938,28 @@ PHP_FUNCTION(swe_houses)
 		houses = 13;
 		
 	for(i = 0; i < houses; i++)
-		add_index_double(cusps_arr, i, cusps[i]);
+		add_index_double(&cusps_arr, i, cusps[i]);
 
-	MAKE_STD_ZVAL(ascmc_arr);
-	array_init(ascmc_arr);
+	array_init(&ascmc_arr);
 	for(i = 0; i < 10; i++)
-		add_index_double(ascmc_arr, i, ascmc[i]);
+		add_index_double(&ascmc_arr, i, ascmc[i]);
 		
-	add_assoc_zval(return_value, "cusps", cusps_arr);
-	add_assoc_zval(return_value, "ascmc", ascmc_arr);
+	add_assoc_zval(return_value, "cusps", &cusps_arr);
+	add_assoc_zval(return_value, "ascmc", &ascmc_arr);
 	add_assoc_long(return_value, "rc", rc);
 }
 
 PHP_FUNCTION(swe_houses_ex)
 {
 	char *arg = NULL;
-	int hsys_len, rc;
+	size_t hsys_len;
+	int rc;
 	char *hsys = NULL;
 	double tjd_ut, geolat, geolon;
 	double cusps[37], ascmc[10]; 
 	int i, houses;
 	long iflag;
-	zval *cusps_arr, *ascmc_arr;
+	zval cusps_arr, ascmc_arr;
 	
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
@@ -973,9 +974,7 @@ PHP_FUNCTION(swe_houses_ex)
 
 	/* create 2 index array, and 1 assoc array */
 	array_init(return_value);
-	
-	MAKE_STD_ZVAL(cusps_arr);
-	array_init(cusps_arr);
+	array_init(&cusps_arr);
 	
 	if (hsys[0] == 'G')
 		houses = 37;
@@ -983,27 +982,27 @@ PHP_FUNCTION(swe_houses_ex)
 		houses = 13;
 		
 	for(i = 0; i < houses; i++)
-		add_index_double(cusps_arr, i, cusps[i]);
+		add_index_double(&cusps_arr, i, cusps[i]);
 
-	MAKE_STD_ZVAL(ascmc_arr);
-	array_init(ascmc_arr);
+	array_init(&ascmc_arr);
 	for(i = 0; i < 10; i++)
-		add_index_double(ascmc_arr, i, ascmc[i]);
+		add_index_double(&ascmc_arr, i, ascmc[i]);
 		
-	add_assoc_zval(return_value, "cusps", cusps_arr);
-	add_assoc_zval(return_value, "ascmc", ascmc_arr);
+	add_assoc_zval(return_value, "cusps", &cusps_arr);
+	add_assoc_zval(return_value, "ascmc", &ascmc_arr);
 	add_assoc_long(return_value, "rc", rc);
 }
 
 PHP_FUNCTION(swe_houses_armc)
 {
 	char *arg = NULL;
-	int hsys_len, rc;
+	size_t hsys_len;
+	int rc;
 	char *hsys = NULL;
 	double armc, geolat, eps;
 	double cusps[37], ascmc[10]; 
 	int i, iflag, houses;
-	zval *cusps_arr, *ascmc_arr;
+	zval cusps_arr, ascmc_arr;
 	
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -1018,9 +1017,7 @@ PHP_FUNCTION(swe_houses_armc)
 
 	/* create 2 index array, and 1 assoc array */
 	array_init(return_value);
-	
-	MAKE_STD_ZVAL(cusps_arr);
-	array_init(cusps_arr);
+	array_init(&cusps_arr);
 	
 	if (hsys[0] == 'G')
 		houses = 37;
@@ -1028,22 +1025,21 @@ PHP_FUNCTION(swe_houses_armc)
 		houses = 13;
 		
 	for(i = 0; i < houses; i++)
-		add_index_double(cusps_arr, i, cusps[i]);
+		add_index_double(&cusps_arr, i, cusps[i]);
 
-	MAKE_STD_ZVAL(ascmc_arr);
-	array_init(ascmc_arr);
+	array_init(&ascmc_arr);
 	for(i = 0; i < 10; i++)
-		add_index_double(ascmc_arr, i, ascmc[i]);
+		add_index_double(&ascmc_arr, i, ascmc[i]);
 		
-	add_assoc_zval(return_value, "cusps", cusps_arr);
-	add_assoc_zval(return_value, "ascmc", ascmc_arr);
+	add_assoc_zval(return_value, "cusps", &cusps_arr);
+	add_assoc_zval(return_value, "ascmc", &ascmc_arr);
 	add_assoc_long(return_value, "rc", rc);
 }
 
 PHP_FUNCTION(swe_house_pos)
 {
 	char *arg = NULL;
-	int hsys_len;
+	size_t hsys_len;
 	char *hsys = NULL;
 	double armc, geolat, eps, xpin[2], rc;
 	char serr[AS_MAXCH]; 
@@ -1078,7 +1074,7 @@ ext_def(char *) swe_house_name(int hsys);
 */
 PHP_FUNCTION(swe_house_name)
 {
-	int hsys_len;
+	size_t hsys_len;
 	char *hsys = NULL;
 	char *name;
 	
@@ -1101,7 +1097,8 @@ PHP_FUNCTION(swe_house_name)
 PHP_FUNCTION(swe_gauquelin_sector)
 {
 	char *arg = NULL;
-	int arg_len, ipl, iflag, imeth, rc;
+	size_t arg_len;
+	int ipl, iflag, imeth, rc;
 	char *starname = NULL;
 	double t_ut, geopos[3], atpress, attemp, dgsect;
 	char serr[AS_MAXCH]; 
@@ -1110,8 +1107,8 @@ PHP_FUNCTION(swe_gauquelin_sector)
 	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsllddddd",
-			&t_ut, &ipl, &starname, &iflag, &imeth, &geopos[0],
-			&geopos[1], &geopos[2], &atpress, &attemp, &arg_len) == FAILURE) {
+			&t_ut, &ipl, &starname, &arg_len, &iflag, &imeth, &geopos[0],
+			&geopos[1], &geopos[2], &atpress, &attemp) == FAILURE) {
 		return;
 	}
 	rc = swe_gauquelin_sector(t_ut, ipl, starname, iflag, imeth, geopos,
@@ -1134,7 +1131,7 @@ PHP_FUNCTION(swe_sol_eclipse_where)
 	double tjd_ut, geopos[2], attr[20];
 	char serr[AS_MAXCH]; 
 	int i;
-	zval *geopos_arr, *attr_arr;
+	zval geopos_arr, attr_arr;
 
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
@@ -1153,35 +1150,34 @@ PHP_FUNCTION(swe_sol_eclipse_where)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(geopos_arr);
-		array_init(geopos_arr);
+		array_init(&geopos_arr);
 		
 		for(i = 0; i < 2; i++)
-			add_index_double(geopos_arr, i, geopos[i]);
+			add_index_double(&geopos_arr, i, geopos[i]);
 	
-		MAKE_STD_ZVAL(attr_arr);
-		array_init(attr_arr);
+		array_init(&attr_arr);
 		for(i = 0; i < 20; i++)
-			add_index_double(attr_arr, i, attr[i]);
+			add_index_double(&attr_arr, i, attr[i]);
 		
-		add_assoc_zval(return_value, "geopos", geopos_arr);
-		add_assoc_zval(return_value, "attr", attr_arr);
+		add_assoc_zval(return_value, "geopos", &geopos_arr);
+		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
 }
 
 PHP_FUNCTION(swe_lun_occult_where)
 {
 	char *arg = NULL;
-	int arg_len, ipl, ifl, rc;
+	int ipl, ifl, rc;
+	size_t arg_len;
 	double tjd_ut, geopos[2], attr[20];
 	char serr[AS_MAXCH], *starname = NULL; 
 	int i;
-	zval *geopos_arr, *attr_arr;
+	zval geopos_arr, attr_arr;
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsd",
-			&tjd_ut, &ipl, &starname, &ifl, &arg_len) == FAILURE) {
+			&tjd_ut, &ipl, &starname, &arg_len, &ifl) == FAILURE) {
 		return;
 	}
 	rc = swe_lun_occult_where(tjd_ut, ipl, starname, ifl, geopos, attr, serr);
@@ -1195,19 +1191,17 @@ PHP_FUNCTION(swe_lun_occult_where)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(geopos_arr);
-		array_init(geopos_arr);
+		array_init(&geopos_arr);
 		
 		for(i = 0; i < 2; i++)
-			add_index_double(geopos_arr, i, geopos[i]);
+			add_index_double(&geopos_arr, i, geopos[i]);
 	
-		MAKE_STD_ZVAL(attr_arr);
-		array_init(attr_arr);
+		array_init(&attr_arr);
 		for(i = 0; i < 20; i++)
-			add_index_double(attr_arr, i, attr[i]);
+			add_index_double(&attr_arr, i, attr[i]);
 		
-		add_assoc_zval(return_value, "geopos", geopos_arr);
-		add_assoc_zval(return_value, "attr", attr_arr);
+		add_assoc_zval(return_value, "geopos", &geopos_arr);
+		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
 }
 
@@ -1218,7 +1212,7 @@ PHP_FUNCTION(swe_sol_eclipse_how)
 	double tjd_ut, geopos[3], attr[20];
 	char serr[AS_MAXCH]; 
 	int i;
-	zval *geopos_arr, *attr_arr;
+	zval geopos_arr, attr_arr;
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
@@ -1237,12 +1231,11 @@ PHP_FUNCTION(swe_sol_eclipse_how)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(attr_arr);
-		array_init(attr_arr);
+		array_init(&attr_arr);
 		for(i = 0; i < 20; i++)
-			add_index_double(attr_arr, i, attr[i]);
+			add_index_double(&attr_arr, i, attr[i]);
 		
-		add_assoc_zval(return_value, "attr", attr_arr);
+		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
 }
 
@@ -1254,7 +1247,7 @@ PHP_FUNCTION(swe_sol_eclipse_when_loc)
 	char serr[AS_MAXCH]; 
 	int i;
 	int backward;
-	zval *tret_arr, *attr_arr;
+	zval tret_arr, attr_arr;
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
@@ -1273,36 +1266,35 @@ PHP_FUNCTION(swe_sol_eclipse_when_loc)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(tret_arr);
-		array_init(tret_arr);
+		array_init(&tret_arr);
 		for(i = 0; i < 10; i++)
-			add_index_double(tret_arr, i, attr[i]);
-		add_assoc_zval(return_value, "tret", tret_arr);
+			add_index_double(&tret_arr, i, attr[i]);
+		add_assoc_zval(return_value, "tret", &tret_arr);
 
-		MAKE_STD_ZVAL(attr_arr);
-		array_init(attr_arr);
+		array_init(&attr_arr);
 		for(i = 0; i < 20; i++)
-			add_index_double(attr_arr, i, attr[i]);
+			add_index_double(&attr_arr, i, attr[i]);
 		
-		add_assoc_zval(return_value, "attr", attr_arr);
+		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
 }
 
 PHP_FUNCTION(swe_lun_occult_when_loc)
 {
 	char *arg = NULL;
-	int arg_len, ipl, ifl, rc;
+	int ipl, ifl, rc;
+	size_t arg_len;
 	double tjd_start, geopos[3], tret[10], attr[20];
 	char serr[AS_MAXCH], *starname = NULL; 
 	int i;
 	int backward;
-	zval *tret_arr, *attr_arr;
+	zval tret_arr, attr_arr;
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsldddl",
-			&tjd_start, &ipl, &starname, &ifl, &geopos[0], &geopos[1],
-			&geopos[2], &backward, &arg_len) == FAILURE) {
+			&tjd_start, &ipl, &starname, &arg_len, &ifl, &geopos[0], &geopos[1],
+			&geopos[2], &backward) == FAILURE) {
 		return;
 	}
 	rc = swe_lun_occult_when_loc(tjd_start, ipl, starname, ifl, geopos,
@@ -1317,18 +1309,16 @@ PHP_FUNCTION(swe_lun_occult_when_loc)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(tret_arr);
-		array_init(tret_arr);
+		array_init(&tret_arr);
 		for(i = 0; i < 10; i++)
-			add_index_double(tret_arr, i, attr[i]);
-		add_assoc_zval(return_value, "tret", tret_arr);
+			add_index_double(&tret_arr, i, attr[i]);
+		add_assoc_zval(return_value, "tret", &tret_arr);
 
-		MAKE_STD_ZVAL(attr_arr);
-		array_init(attr_arr);
+		array_init(&attr_arr);
 		for(i = 0; i < 20; i++)
-			add_index_double(attr_arr, i, attr[i]);
+			add_index_double(&attr_arr, i, attr[i]);
 		
-		add_assoc_zval(return_value, "attr", attr_arr);
+		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
 }
 
@@ -1339,7 +1329,7 @@ PHP_FUNCTION(swe_sol_eclipse_when_glob)
 	double tjd_start, tret[10];
 	char serr[AS_MAXCH]; 
 	int i, backward;
-	zval *tret_arr;
+	zval tret_arr;
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -1358,24 +1348,24 @@ PHP_FUNCTION(swe_sol_eclipse_when_glob)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(tret_arr);
-		array_init(tret_arr);
+		array_init(&tret_arr);
 		
 		for(i = 0; i < 10; i++)
-			add_index_double(tret_arr, i, tret[i]);
+			add_index_double(&tret_arr, i, tret[i]);
 			
-		add_assoc_zval(return_value, "tret", tret_arr);
+		add_assoc_zval(return_value, "tret", &tret_arr);
 	}
 }
 
 PHP_FUNCTION(swe_lun_occult_when_glob)
 {
 	char *arg = NULL;
-	int arg_len, rc, ipl, ifl, ifltype;
+	int rc, ipl, ifl, ifltype;
+	size_t arg_len;
 	double tjd_start, tret[10];
 	char serr[AS_MAXCH], *starname = NULL; 
 	int i, backward;
-	zval *tret_arr;
+	zval tret_arr;
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
@@ -1396,13 +1386,12 @@ PHP_FUNCTION(swe_lun_occult_when_glob)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(tret_arr);
-		array_init(tret_arr);
+		array_init(&tret_arr);
 		
 		for(i = 0; i < 10; i++)
-			add_index_double(tret_arr, i, tret[i]);
+			add_index_double(&tret_arr, i, tret[i]);
 			
-		add_assoc_zval(return_value, "tret", tret_arr);
+		add_assoc_zval(return_value, "tret", &tret_arr);
 	}
 }
 
@@ -1413,7 +1402,7 @@ PHP_FUNCTION(swe_lun_eclipse_how)
 	double tjd_ut, geopos[3], attr[10];
 	char serr[AS_MAXCH], *starname = NULL; 
 	int i, backward;
-	zval *attr_arr;
+	zval attr_arr;
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
@@ -1432,13 +1421,12 @@ PHP_FUNCTION(swe_lun_eclipse_how)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(attr_arr);
-		array_init(attr_arr);
+		array_init(&attr_arr);
 		
 		for(i = 0; i < 10; i++)
-			add_index_double(attr_arr, i, attr[i]);
+			add_index_double(&attr_arr, i, attr[i]);
 			
-		add_assoc_zval(return_value, "attr", attr_arr);
+		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
 }
 
@@ -1449,7 +1437,7 @@ PHP_FUNCTION(swe_lun_eclipse_when)
 	double tjd_start, tret[10];
 	char serr[AS_MAXCH]; 
 	int i, backward;
-	zval *tret_arr;
+	zval tret_arr;
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -1468,13 +1456,12 @@ PHP_FUNCTION(swe_lun_eclipse_when)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(tret_arr);
-		array_init(tret_arr);
+		array_init(&tret_arr);
 		
 		for(i = 0; i < 10; i++)
-			add_index_double(tret_arr, i, tret[i]);
+			add_index_double(&tret_arr, i, tret[i]);
 			
-		add_assoc_zval(return_value, "tret", tret_arr);
+		add_assoc_zval(return_value, "tret", &tret_arr);
 	}
 }
 
@@ -1485,7 +1472,7 @@ PHP_FUNCTION(swe_lun_eclipse_when_loc)
 	double tjd_ut, geopos[3], tret[10], attr[20];
 	char serr[AS_MAXCH], *starname = NULL;
 	int i, backward;
-	zval *tret_arr, *attr_arr;
+	zval tret_arr, attr_arr;
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
@@ -1504,19 +1491,17 @@ PHP_FUNCTION(swe_lun_eclipse_when_loc)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(tret_arr);
-		array_init(tret_arr);
+		array_init(&tret_arr);
 
 		for(i = 0; i < 10; i++)
-			add_index_double(tret_arr, i, tret[i]);
-		add_assoc_zval(return_value, "tret", tret_arr);	
+			add_index_double(&tret_arr, i, tret[i]);
+		add_assoc_zval(return_value, "tret", &tret_arr);	
 
-		MAKE_STD_ZVAL(attr_arr);
-		array_init(attr_arr);
+		array_init(&attr_arr);
 
 		for(i = 0; i < 20; i++)
-			add_index_double(attr_arr, i, attr[i]);			
-		add_assoc_zval(return_value, "attr", attr_arr);
+			add_index_double(&attr_arr, i, attr[i]);			
+		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
 }
 
@@ -1527,7 +1512,7 @@ PHP_FUNCTION(swe_pheno)
 	double tjd, attr[20];
 	char serr[AS_MAXCH]; 
 	int i;
-	zval *attr_arr;
+	zval attr_arr;
 
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
@@ -1546,13 +1531,12 @@ PHP_FUNCTION(swe_pheno)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(attr_arr);
-		array_init(attr_arr);
+		array_init(&attr_arr);
 		
 		for(i = 0; i < 20; i++)
-			add_index_double(attr_arr, i, attr[i]);
+			add_index_double(&attr_arr, i, attr[i]);
 			
-		add_assoc_zval(return_value, "attr", attr_arr);
+		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
 }
 
@@ -1563,7 +1547,7 @@ PHP_FUNCTION(swe_pheno_ut)
 	double tjd_ut, attr[20];
 	char serr[AS_MAXCH]; 
 	int i;
-	zval *attr_arr;
+	zval attr_arr;
 
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
@@ -1582,13 +1566,12 @@ PHP_FUNCTION(swe_pheno_ut)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(attr_arr);
-		array_init(attr_arr);
+		array_init(&attr_arr);
 		
 		for(i = 0; i < 20; i++)
-			add_index_double(attr_arr, i, attr[i]);
+			add_index_double(&attr_arr, i, attr[i]);
 			
-		add_assoc_zval(return_value, "attr", attr_arr);
+		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
 }
 
@@ -1702,7 +1685,7 @@ PHP_FUNCTION(swe_rise_trans)
 	double tjd_ut, geopos[3], tret[10], atpress, attemp;
 	char serr[AS_MAXCH], *starname = NULL; 
 	int i;
-	zval *tret_arr;
+	zval tret_arr;
 
 	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
 
@@ -1725,13 +1708,12 @@ PHP_FUNCTION(swe_rise_trans)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(tret_arr);
-		array_init(tret_arr);
+		array_init(&tret_arr);
 		
 		for(i = 0; i < 10; i++)
-			add_index_double(tret_arr, i, tret[i]);
+			add_index_double(&tret_arr, i, tret[i]);
 			
-		add_assoc_zval(return_value, "tret", tret_arr);
+		add_assoc_zval(return_value, "tret", &tret_arr);
 	}
 }
 
@@ -1743,7 +1725,7 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 	double tjd_ut, geopos[3], tret[10], atpress, attemp, horhgt;
 	char serr[AS_MAXCH], *starname = NULL; 
 	int i;
-	zval *tret_arr;
+	zval tret_arr;
 
 	if(ZEND_NUM_ARGS() != 11) WRONG_PARAM_COUNT;
 
@@ -1766,13 +1748,12 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(tret_arr);
-		array_init(tret_arr);
+		array_init(&tret_arr);
 		
 		for(i = 0; i < 10; i++)
-			add_index_double(tret_arr, i, tret[i]);
+			add_index_double(&tret_arr, i, tret[i]);
 			
-		add_assoc_zval(return_value, "tret", tret_arr);
+		add_assoc_zval(return_value, "tret", &tret_arr);
 	}
 }
 
@@ -1783,7 +1764,7 @@ PHP_FUNCTION(swe_nod_aps)
 	double tjd_et, xnasc[6], xndsc[6], xperi[6], xaphe[6];
 	char serr[AS_MAXCH]; 
 	int i;
-	zval *xnasc_arr, *xndsc_arr, *xperi_arr, *xaphe_arr;
+	zval xnasc_arr, xndsc_arr, xperi_arr, xaphe_arr;
 
 	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
 
@@ -1803,30 +1784,26 @@ PHP_FUNCTION(swe_nod_aps)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(xnasc_arr);
-		array_init(xnasc_arr);
+		array_init(&xnasc_arr);
 		for(i = 0; i < 6; i++)
-			add_index_double(xnasc_arr, i, xnasc[i]);
+			add_index_double(&xnasc_arr, i, xnasc[i]);
 
-		MAKE_STD_ZVAL(xndsc_arr);
-		array_init(xndsc_arr);
+		array_init(&xndsc_arr);
 		for(i = 0; i < 6; i++)
-			add_index_double(xndsc_arr, i, xndsc[i]);
+			add_index_double(&xndsc_arr, i, xndsc[i]);
 
-		MAKE_STD_ZVAL(xperi_arr);
-		array_init(xperi_arr);
+		array_init(&xperi_arr);
 		for(i = 0; i < 6; i++)
-			add_index_double(xperi_arr, i, xperi[i]);
+			add_index_double(&xperi_arr, i, xperi[i]);
 
-		MAKE_STD_ZVAL(xaphe_arr);
-		array_init(xaphe_arr);
+		array_init(&xaphe_arr);
 		for(i = 0; i < 6; i++)
-			add_index_double(xaphe_arr, i, xaphe[i]);
+			add_index_double(&xaphe_arr, i, xaphe[i]);
 			
-		add_assoc_zval(return_value, "xnasc", xnasc_arr);
-		add_assoc_zval(return_value, "xndsc", xndsc_arr);
-		add_assoc_zval(return_value, "xnperi", xperi_arr);
-		add_assoc_zval(return_value, "xnaphe", xaphe_arr);
+		add_assoc_zval(return_value, "xnasc", &xnasc_arr);
+		add_assoc_zval(return_value, "xndsc", &xndsc_arr);
+		add_assoc_zval(return_value, "xnperi", &xperi_arr);
+		add_assoc_zval(return_value, "xnaphe", &xaphe_arr);
 	}
 }
 
@@ -1837,7 +1814,7 @@ PHP_FUNCTION(swe_nod_aps_ut)
 	double tjd_ut, xnasc[6], xndsc[6], xperi[6], xaphe[6];
 	char serr[AS_MAXCH]; 
 	int i;
-	zval *xnasc_arr, *xndsc_arr, *xperi_arr, *xaphe_arr;
+	zval xnasc_arr, xndsc_arr, xperi_arr, xaphe_arr;
 
 	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
 
@@ -1857,30 +1834,26 @@ PHP_FUNCTION(swe_nod_aps_ut)
 	}
 	else
 	{
-		MAKE_STD_ZVAL(xnasc_arr);
-		array_init(xnasc_arr);
+		array_init(&xnasc_arr);
 		for(i = 0; i < 6; i++)
-			add_index_double(xnasc_arr, i, xnasc[i]);
+			add_index_double(&xnasc_arr, i, xnasc[i]);
 
-		MAKE_STD_ZVAL(xndsc_arr);
-		array_init(xndsc_arr);
+		array_init(&xndsc_arr);
 		for(i = 0; i < 6; i++)
-			add_index_double(xndsc_arr, i, xndsc[i]);
+			add_index_double(&xndsc_arr, i, xndsc[i]);
 
-		MAKE_STD_ZVAL(xperi_arr);
-		array_init(xperi_arr);
+		array_init(&xperi_arr);
 		for(i = 0; i < 6; i++)
-			add_index_double(xperi_arr, i, xperi[i]);
+			add_index_double(&xperi_arr, i, xperi[i]);
 
-		MAKE_STD_ZVAL(xaphe_arr);
-		array_init(xaphe_arr);
+		array_init(&xaphe_arr);
 		for(i = 0; i < 6; i++)
-			add_index_double(xaphe_arr, i, xaphe[i]);
+			add_index_double(&xaphe_arr, i, xaphe[i]);
 			
-		add_assoc_zval(return_value, "xnasc", xnasc_arr);
-		add_assoc_zval(return_value, "xndsc", xndsc_arr);
-		add_assoc_zval(return_value, "xnperi", xperi_arr);
-		add_assoc_zval(return_value, "xnaphe", xaphe_arr);
+		add_assoc_zval(return_value, "xnasc", &xnasc_arr);
+		add_assoc_zval(return_value, "xndsc", &xndsc_arr);
+		add_assoc_zval(return_value, "xnperi", &xperi_arr);
+		add_assoc_zval(return_value, "xnaphe", &xaphe_arr);
 	}
 }
 
@@ -2266,7 +2239,7 @@ PHP_FUNCTION(swe_cs2timestr)
 PHP_FUNCTION(swe_cs2lonlatstr)
 {
 	long t;
-	int pchar_len, mchar_len;
+	size_t pchar_len, mchar_len;
 	char s[AS_MAXCH], *pchar = NULL, *mchar = NULL;
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
