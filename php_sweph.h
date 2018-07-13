@@ -49,6 +49,7 @@ PHP_FUNCTION(swe_get_ayanamsa);
 PHP_FUNCTION(swe_get_ayanamsa_ut);
 PHP_FUNCTION(swe_get_ayanamsa_name);
 PHP_FUNCTION(swe_version);
+PHP_FUNCTION(swe_get_library_path);
 
 /**************************** 
  * exports from swedate.c 
