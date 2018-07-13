@@ -7,7 +7,7 @@
 Follow the steps. Make sure `php-dev` has installed already.
 
 ```
-    git clone https://github.com/almuten/php-sweph.git
+    git clone https://github.com/cyjoelchen/php-sweph.git
     cd php-sweph
     phpize
     ./configure 
