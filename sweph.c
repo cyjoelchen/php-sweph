@@ -1776,7 +1776,7 @@ PHP_FUNCTION(swe_nod_aps)
 	int i;
 	zval xnasc_arr, xndsc_arr, xperi_arr, xaphe_arr;
 
-	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
+	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
 			&tjd_et, &ipl, &iflag, &method,
@@ -1826,7 +1826,7 @@ PHP_FUNCTION(swe_nod_aps_ut)
 	int i;
 	zval xnasc_arr, xndsc_arr, xperi_arr, xaphe_arr;
 
-	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
+	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
 			&tjd_ut, &ipl, &iflag, &method,
