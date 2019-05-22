@@ -1778,12 +1778,17 @@ PHP_FUNCTION(swe_nod_aps)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
+	fprintf(stderr,"swe_nod_aps: tj=%lf, ipl=%ld, iflag=%ld, mthod=%ld\n", tjd_et, ipl, iflag, method);
+
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
 			&tjd_et, &ipl, &iflag, &method,
 			&arg_len) == FAILURE) {
 		return;
 	}
-	rc = swe_nod_aps_ut(tjd_et, ipl, iflag, method, xnasc, xndsc, xperi, xaphe, serr);
+
+	fprintf(stderr,"swe_nod_aps: tj=%lf, ipl=%ld, iflag=%ld, mthod=%ld\n", tjd_et, ipl, iflag, method);
+
+	rc = swe_nod_aps(tjd_et, ipl, iflag, method, xnasc, xndsc, xperi, xaphe, serr);
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
@@ -1882,10 +1887,14 @@ PHP_FUNCTION(swe_deltat)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
+	fprintf(stderr,"swe_deltat: tj=%lf\n", tjd_ut);
+
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
 			&tjd_ut) == FAILURE) {
 		return;
 	}
+
+	fprintf(stderr,"swe_deltat: tj=%lf\n", tjd_ut);
 
 	RETURN_DOUBLE(swe_deltat(tjd_ut));
 }
