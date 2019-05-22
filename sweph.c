@@ -1828,11 +1828,16 @@ PHP_FUNCTION(swe_nod_aps_ut)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
+    fprintf(stderr,"swe_nod_aps_ut: tj=%lf, ipl=%ld, iflag=%ld, mthod=%ld\n", tjd_ut, ipl, iflag, method);
+
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
 			&tjd_ut, &ipl, &iflag, &method,
 			&arg_len) == FAILURE) {
 		return;
 	}
+
+    fprintf(stderr,"swe_nod_aps_ut: tj=%lf, ipl=%ld, iflag=%ld, mthod=%ld\n", tjd_ut, ipl, iflag, method);
+
 	rc = swe_nod_aps_ut(tjd_ut, ipl, iflag, method, xnasc, xndsc, xperi, xaphe, serr);
 
 	array_init(return_value);
