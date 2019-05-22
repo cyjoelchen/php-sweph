@@ -1770,7 +1770,7 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 PHP_FUNCTION(swe_nod_aps)
 {
 	char *arg = NULL;
-	int arg_len, rc, ipl, iflag, method;
+	int rc, ipl, iflag, method;
 	double tjd_et, xnasc[6], xndsc[6], xperi[6], xaphe[6];
 	char serr[AS_MAXCH]; 
 	int i;
@@ -1781,8 +1781,7 @@ PHP_FUNCTION(swe_nod_aps)
 	fprintf(stderr,"swe_nod_aps: tj=%lf, ipl=%ld, iflag=%ld, mthod=%ld\n", tjd_et, ipl, iflag, method);
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
-			&tjd_et, &ipl, &iflag, &method,
-			&arg_len) == FAILURE) {
+			&tjd_et, &ipl, &iflag, &method) == FAILURE) {
 		return;
 	}
 
@@ -1825,7 +1824,7 @@ PHP_FUNCTION(swe_nod_aps)
 PHP_FUNCTION(swe_nod_aps_ut)
 {
 	char *arg = NULL;
-	int arg_len, rc, ipl, iflag, method;
+	int rc, ipl, iflag, method;
 	double tjd_ut, xnasc[6], xndsc[6], xperi[6], xaphe[6];
 	char serr[AS_MAXCH]; 
 	int i;
@@ -1836,8 +1835,7 @@ PHP_FUNCTION(swe_nod_aps_ut)
     fprintf(stderr,"swe_nod_aps_ut: tj=%lf, ipl=%ld, iflag=%ld, mthod=%ld\n", tjd_ut, ipl, iflag, method);
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
-			&tjd_ut, &ipl, &iflag, &method,
-			&arg_len) == FAILURE) {
+			&tjd_ut, &ipl, &iflag, &method) == FAILURE) {
 		return;
 	}
 
