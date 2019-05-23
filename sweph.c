@@ -1770,13 +1770,14 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 PHP_FUNCTION(swe_nod_aps)
 {
 	char *arg = NULL;
-	int arg_len, rc, ipl, iflag, method;
+	int arg_len, rc;
+    long ipl, iflag, method;
 	double tjd_et, xnasc[6], xndsc[6], xperi[6], xaphe[6];
 	char serr[AS_MAXCH]; 
 	int i;
 	zval xnasc_arr, xndsc_arr, xperi_arr, xaphe_arr;
 
-	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
+	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
 			&tjd_et, &ipl, &iflag, &method,
@@ -1820,13 +1821,14 @@ PHP_FUNCTION(swe_nod_aps)
 PHP_FUNCTION(swe_nod_aps_ut)
 {
 	char *arg = NULL;
-	int arg_len, rc, ipl, iflag, method;
+	int arg_len, rc;
+    long ipl, iflag, method;
 	double tjd_ut, xnasc[6], xndsc[6], xperi[6], xaphe[6];
 	char serr[AS_MAXCH]; 
 	int i;
 	zval xnasc_arr, xndsc_arr, xperi_arr, xaphe_arr;
 
-	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
+	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
 			&tjd_ut, &ipl, &iflag, &method,
