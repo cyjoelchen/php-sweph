@@ -1784,7 +1784,7 @@ PHP_FUNCTION(swe_nod_aps)
 			&arg_len) == FAILURE) {
 		return;
 	}
-	rc = swe_nod_aps_ut(tjd_et, ipl, iflag, method, xnasc, xndsc, xperi, xaphe, serr);
+	rc = swe_nod_aps(tjd_et, ipl, iflag, method, xnasc, xndsc, xperi, xaphe, serr);
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
