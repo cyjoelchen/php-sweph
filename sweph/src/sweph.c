@@ -1,5 +1,4 @@
 /* SWISSEPH
-   $Header: /home/dieter/sweph/RCS/sweph.c,v 1.76 2009/07/10 14:08:53 dieter Exp $
 
    Ephemeris computations
 
@@ -174,7 +173,13 @@ static const char *ayanamsa_name[] = {
    "Aryabhata 522",                    /* 37 SE_SIDM_ARYABHATA_522 */
    "Babylonian/Britton",               /* 38 SE_SIDM_BABYL_BRITTON */
    "\"Vedic\"/Sheoran",                /* 39 SE_SIDM_TRUE_SHEORAN */
-   /*"Cochrane (Gal.Center = 0 Cap)",    * 40 SE_SIDM_GALCENT_COCHRANE */
+   "Cochrane (Gal.Center = 0 Cap)",    /* 40 SE_SIDM_GALCENT_COCHRANE */
+   "Galactic Equator (Fiorenza)",      /* 41 SE_SIDM_GALEQU_FIORENZA */
+   "Vettius Valens",                   /* 42 SE_SIDM_VALENS_MOON */
+   "Lahiri 1940",                      /* 43 SE_SIDM_LAHIRI_1940 */
+   "Lahiri VP285",                     /* 44 SE_SIDM_LAHIRI_VP285 */
+   "Krishnamurti-Senthilathiban",      /* 45 SE_SIDM_KRISHNAMURTI_VP291 */
+   "Lahiri ICRC",                      /* 46 SE_SIDM_LAHIRI_ICRC */
    /*"Manjula/Laghumanasa",*/
 };
 static const int pnoint2jpl[]   = PNOINT2JPL;
@@ -243,7 +248,11 @@ HANDLE dllhandle = NULL;        // global used in swe_version
 				// if DLL, set by DllMain()
 #else		
 #ifdef __GNUC__
+// The following define is actually forbidden. 
+// It would be better to compile with -D_GNU_SOURCE.
+#ifndef __USE_GNU
 #define __USE_GNU
+#endif
 #include <dlfcn.h>		// must be linked with -ldl
   static Dl_info dli;
 #endif
@@ -256,8 +265,9 @@ char *CALL_CONV swe_get_library_path(char *s)
   *s = '\0';
 #if !defined(__APPLE) 
   len = AS_MAXCH;
+  bytes = 0;
 #if MSDOS
-  bytes = GetModuleFileName(dllhandle, (TCHAR*) s, len);
+  bytes = GetModuleFileName((HMODULE) dllhandle, (TCHAR*) s, (DWORD) len);
 #else
   #ifdef __GNUC__
     if (dladdr((void *)swe_version, &dli) != 0) {
@@ -275,10 +285,15 @@ char *CALL_CONV swe_get_library_path(char *s)
     bytes = readlink("/proc/self/exe", s, len);
   #endif
 #endif
-  if(bytes >= 0) {
-    s[bytes] = '\0';
-  }
+  s[bytes] = '\0';
 #endif
+  return s;
+}
+#else	// NO_SWE_GLP
+// we need this function because swetest requires it
+char *CALL_CONV swe_get_library_path(char *s)
+{
+  *s = '\0';
   return s;
 }
 #endif	// NO_SWE_GLP
@@ -328,6 +343,8 @@ int32 CALL_CONV swe_calc(double tjd, int ipl, int32 iflag,
   FILE *fp;
   char s[AS_MAXCH], *sp;
   memset(x, 0, sizeof(double) * 6);
+  if (serr != NULL) 
+    *serr = '\0';
   /* if the following file exists, flag is read from it and or'ed into iflag */
   if (!force_flag_checked) {
     if ((fp = fopen(fname_force_flg, BFILE_R_ACCESS)) != NULL) {
@@ -562,8 +579,8 @@ static int32 swecalc(double tjd, int ipl, int32 iflag, double *x, char *serr)
   double *xp, *xp2;
   double ss[3];
   char serr2[AS_MAXCH];
-  if (serr != NULL)
-    *serr = '\0';
+  //if (serr != NULL)
+  //  *serr = '\0';  // is done in calling function
   serr2[0] = '\0';
   /****************************************** 
    * iflag plausible?                       * 
@@ -1331,6 +1348,7 @@ void CALL_CONV swe_set_ephe_path(char *path)
   } else {
     strcpy(s, SE_EPHE_PATH);
   }
+/*
 #if MSDOS
   if (strchr(s, '/') != NULL)
     strcpy(s, SE_EPHE_PATH);
@@ -1338,7 +1356,8 @@ void CALL_CONV swe_set_ephe_path(char *path)
   if (strchr(s, '\\') != NULL)
     strcpy(s, SE_EPHE_PATH);
 #endif
-  i = strlen(s);
+*/
+  i = (int) strlen(s);
   if (*(s + i - 1) != *DIR_GLUE && *s != '\0')
     strcat(s, DIR_GLUE);
   strcpy(swed.ephepath, s);
@@ -1701,7 +1720,7 @@ static int main_planet_bary(double tjd, int ipli, int32 epheflag, int32 iflag, A
       sweph_planet:
       /* compute barycentric planet (+ earth, sun, moon) */
       retc = sweplan(tjd, ipli, SEI_FILE_PLANET, iflag, do_save, xp, xe, xs, xm, serr);
-#if 1
+#if 0
       if (retc == ERR || retc == NOT_AVAILABLE)
 	return retc;
 #else /* if barycentric moshier calculation were implemented */
@@ -1714,13 +1733,14 @@ static int main_planet_bary(double tjd, int ipli, int32 epheflag, int32 iflag, A
 	  if (serr != NULL && strlen(serr) + 30 < AS_MAXCH)
 	    strcat(serr, " \nusing Moshier eph.; ");
 	  goto moshier_planet;
-	} else
-	  goto return_error;
+	} else {
+	  return ERR;
+	}
       }
 #endif
       break;
     case SEFLG_MOSEPH:
-#if 0
+#if 1
       moshier_planet:
 #endif
       retc = swi_moshplan(tjd, ipli, do_save, xp, xe, serr);/**/
@@ -2175,7 +2195,7 @@ static int sweph(double tjd, int ipli, int ifno, int32 iflag, double *xsunb, AS_
     sp = strrchr(subdirnam, (int) *DIR_GLUE);
     if (sp != NULL) {
       *sp = '\0';
-      subdirlen = strlen(subdirnam);
+      subdirlen = (int) strlen(subdirnam);
     } else {
       subdirlen = 0;
     }
@@ -2295,7 +2315,7 @@ again:
 #if 1
   /* asteroids are heliocentric.
    * if JPL or SWISSEPH, convert to barycentric */
-  if ((iflag & SEFLG_JPLEPH) || (iflag & SEFLG_SWIEPH)) {
+  if (xsunb != NULL && ((iflag & SEFLG_JPLEPH) || (iflag & SEFLG_SWIEPH))) {
     if (ipl >= SEI_ANYBODY) {
       for (i = 0; i <= 2; i++)
 	xp[i] += xsunb[i];
@@ -2343,7 +2363,7 @@ FILE *swi_fopen(int ifno, char *fname, char *ephepath, char *serr)
     if (strcmp(s, ".") == 0) { /* current directory */
       *s = '\0';
     } else {
-      j = strlen(s);
+      j = (int) strlen(s);
       if (*s != '\0' && *(s + j - 1) != *DIR_GLUE)
 	strcat(s, DIR_GLUE);
     }
@@ -2825,7 +2845,8 @@ void CALL_CONV swe_set_sid_mode(int32 sid_mode, double t0, double ayan_t0)
 	  || sid_mode == SE_SIDM_B1950
 	  || sid_mode == SE_SIDM_GALALIGN_MARDYKS
 	  ) {
-    sip->sid_mode &= ~SE_SIDBIT_SSY_PLANE;
+    //sip->sid_mode &= ~SE_SIDBIT_SSY_PLANE;
+    sip->sid_mode = sid_mode;
     sip->sid_mode |= SE_SIDBIT_ECL_T0;
   }
   if (sid_mode == SE_SIDM_TRUE_CITRA 
@@ -2834,14 +2855,16 @@ void CALL_CONV swe_set_sid_mode(int32 sid_mode, double t0, double ayan_t0)
       || sid_mode == SE_SIDM_TRUE_SHEORAN 
       || sid_mode == SE_SIDM_TRUE_MULA 
       || sid_mode == SE_SIDM_GALCENT_0SAG 
-      //|| sid_mode == SE_SIDM_GALCENT_COCHRANE 
+      || sid_mode == SE_SIDM_GALCENT_COCHRANE 
       || sid_mode == SE_SIDM_GALCENT_RGILBRAND 
       || sid_mode == SE_SIDM_GALCENT_MULA_WILHELM
       || sid_mode == SE_SIDM_GALEQU_IAU1958 
       || sid_mode == SE_SIDM_GALEQU_TRUE
       || sid_mode == SE_SIDM_GALEQU_MULA
-      ) 
-    sip->sid_mode &= ~(SE_SIDBIT_ECL_T0 | SE_SIDBIT_SSY_PLANE | SE_SIDBIT_USER_UT);
+      ) {
+    //sip->sid_mode &= ~(SE_SIDBIT_ECL_T0 | SE_SIDBIT_SSY_PLANE | SE_SIDBIT_USER_UT);
+    sip->sid_mode = sid_mode;
+  }
   if (sid_mode >= SE_NSIDM_PREDEF && sid_mode != SE_SIDM_USER)
     sip->sid_mode = sid_mode = SE_SIDM_FAGAN_BRADLEY;
   swed.ayana_is_set = TRUE;
@@ -2855,6 +2878,22 @@ void CALL_CONV swe_set_sid_mode(int32 sid_mode, double t0, double ayan_t0)
     sip->t0 = ayanamsa[sid_mode].t0;
     sip->ayan_t0 = ayanamsa[sid_mode].ayan_t0;
     sip->t0_is_UT = ayanamsa[sid_mode].t0_is_UT;
+  }
+  // test feature: ayanamsha using its original precession model
+  if ((sip->sid_mode & SE_SIDBIT_PREC_ORIG) && ayanamsa[sid_mode].prec_offset > 0) {
+    swed.astro_models[SE_MODEL_PREC_LONGTERM] = ayanamsa[sid_mode].prec_offset;
+    swed.astro_models[SE_MODEL_PREC_SHORTTERM] = ayanamsa[sid_mode].prec_offset;
+    // add a corresponding nutation model
+    switch(ayanamsa[sid_mode].prec_offset) {
+      case SEMOD_PREC_NEWCOMB:
+        swed.astro_models[SE_MODEL_NUT] = SEMOD_NUT_WOOLARD;
+	break;
+      case SEMOD_PREC_IAU_1976:
+        swed.astro_models[SE_MODEL_NUT] = SEMOD_NUT_IAU_1980;
+	break;
+      default:
+        break;
+    }
   }
   swi_force_app_pos_etc();
 }
@@ -2876,18 +2915,73 @@ int32 CALL_CONV swe_get_ayanamsa_ex(double tjd_et, int32 iflag, double *daya, ch
   return retval;
 }
 
+/*
+ * Function calculates a correction for ayanamsha if the ayanamsha was
+ * defined using a different precession model than our standard one.
+ * This allows us to use this ayanamsha with our standard precession
+ * model and still remain very accurate in ephemeris positions.
+ * It has the effect that ayanamsha values change depending on the precession
+ * model used, but sidereal planetary positions remain the same.
+ *
+ * For this function to work correctly, our standard precession model 
+ * must be relative to J2000. Any future precession model should not
+ * use a different starting epoch.
+ */
+static int get_aya_correction(int iflag, double *corr, char *serr) {
+  double x[6], eps, t0;
+  struct sid_data *sip = &swed.sidd;
+  int prec_model = swed.astro_models[SE_MODEL_PREC_LONGTERM];
+  int prec_model_short = swed.astro_models[SE_MODEL_PREC_SHORTTERM];
+  int prec_offset = 0;
+  int sid_mode = sip->sid_mode;
+  sid_mode %= SE_SIDBITS;
+  *corr = 0;
+  if (sip->t0 == J2000) 
+    return 0;
+  if (sip->sid_mode & SE_SIDBIT_NO_PREC_OFFSET) 
+    return 0;
+  prec_offset = ayanamsa[sid_mode].prec_offset;
+  if (prec_offset < 0) prec_offset = 0;
+  if (prec_model == prec_offset)
+    return 0;
+  t0 = sip->t0;
+  if (sip->t0_is_UT)
+    t0 += swe_deltat_ex(t0, iflag, serr);
+  /* vernal point (tjd), cartesian */
+  x[0] = 1; 
+  x[1] = x[2] = 0;
+  swi_precess(x, t0, 0, J_TO_J2000);
+  swed.astro_models[SE_MODEL_PREC_LONGTERM] = prec_offset;
+  swed.astro_models[SE_MODEL_PREC_SHORTTERM] = prec_offset;
+  swi_precess(x, t0, 0, J2000_TO_J);
+  swed.astro_models[SE_MODEL_PREC_LONGTERM] = prec_model;
+  swed.astro_models[SE_MODEL_PREC_SHORTTERM] = prec_model_short;
+  /* to ecliptic */
+  eps = swi_epsiln(t0, 0);
+  swi_coortrf(x, x, eps);
+  /* to polar */
+  swi_cartpol(x, x);
+  /* get ayanamsa */
+  *corr = x[0] * RADTODEG;
+  if (*corr > 350 /*correct!*/) *corr -= 360; // a signed value near 0
+  //fprintf(stderr, "corr=%f\n", *corr * 3600.0);
+  return OK;
+}
+
 int32 swi_get_ayanamsa_ex(double tjd_et, int32 iflag, double *daya, char *serr)
 {
-  double x[6], eps, t0;
+  double x[6], eps, t0, corr;
   struct sid_data *sip = &swed.sidd;
   char star[AS_MAXCH];
   int32 epheflag, otherflag, retflag, iflag_true, iflag_galequ;
+  int sid_mode = sip->sid_mode;
   iflag = plaus_iflag(iflag, -1, tjd_et, serr);
   epheflag = iflag & SEFLG_EPHMASK;
   otherflag = iflag & ~SEFLG_EPHMASK;
   *daya = 0.0;
   iflag &= SEFLG_EPHMASK;
   iflag |= SEFLG_NONUT;
+  sid_mode %= SE_SIDBITS;
   /* ayanamshas based on the intersection point of galactic equator and
    * ecliptic always need SEFLG_TRUEPOS, because position of galactic
    * pole is required without aberration or light deflection */
@@ -2904,24 +2998,24 @@ int32 swi_get_ayanamsa_ex(double tjd_et, int32 iflag, double *daya, char *serr)
   /* warning, if swe_set_ephe_path() or swe_set_jplfile() was not called yet,
    * although ephemeris files are required */
   if (swi_init_swed_if_start() == 1 && !(epheflag & SEFLG_MOSEPH) 
-     && (sip->sid_mode ==  SE_SIDM_TRUE_CITRA 
-      || sip->sid_mode == SE_SIDM_TRUE_REVATI 
-      || sip->sid_mode == SE_SIDM_TRUE_PUSHYA 
+     && (sid_mode ==  SE_SIDM_TRUE_CITRA 
+      || sid_mode == SE_SIDM_TRUE_REVATI 
+      || sid_mode == SE_SIDM_TRUE_PUSHYA 
       || sip->sid_mode == SE_SIDM_TRUE_SHEORAN 
-      || sip->sid_mode == SE_SIDM_TRUE_MULA 
-      || sip->sid_mode == SE_SIDM_GALCENT_0SAG
-      //|| sip->sid_mode == SE_SIDM_GALCENT_COCHRANE
-      || sip->sid_mode == SE_SIDM_GALCENT_RGILBRAND 
-      || sip->sid_mode == SE_SIDM_GALCENT_MULA_WILHELM
-      || sip->sid_mode == SE_SIDM_GALEQU_IAU1958 
-      || sip->sid_mode == SE_SIDM_GALEQU_TRUE
-      || sip->sid_mode == SE_SIDM_GALEQU_MULA) 
+      || sid_mode == SE_SIDM_TRUE_MULA 
+      || sid_mode == SE_SIDM_GALCENT_0SAG
+      || sid_mode == SE_SIDM_GALCENT_COCHRANE
+      || sid_mode == SE_SIDM_GALCENT_RGILBRAND 
+      || sid_mode == SE_SIDM_GALCENT_MULA_WILHELM
+      || sid_mode == SE_SIDM_GALEQU_IAU1958 
+      || sid_mode == SE_SIDM_GALEQU_TRUE
+      || sid_mode == SE_SIDM_GALEQU_MULA) 
       && serr != NULL) {
     strcpy(serr, "Please call swe_set_ephe_path() or swe_set_jplfile() before calling swe_get_ayanamsa_ex()");
   }
   if (!swed.ayana_is_set)
     swe_set_sid_mode(SE_SIDM_FAGAN_BRADLEY, 0, 0);
-  if (sip->sid_mode == SE_SIDM_TRUE_CITRA) {
+  if (sid_mode == SE_SIDM_TRUE_CITRA) {
     strcpy(star, "Spica"); /* Citra */
     if ((retflag = swe_fixstar(star, tjd_et, iflag_true, x, serr)) == ERR) {
       return ERR; 
@@ -2930,35 +3024,35 @@ int32 swi_get_ayanamsa_ex(double tjd_et, int32 iflag, double *daya, char *serr)
     *daya = swe_degnorm(x[0] - 180);
     return (retflag & SEFLG_EPHMASK);
   }
-  if (sip->sid_mode == SE_SIDM_TRUE_REVATI) {
+  if (sid_mode == SE_SIDM_TRUE_REVATI) {
     strcpy(star, ",zePsc"); /* Revati */
     if ((retflag = swe_fixstar(star, tjd_et, iflag_true, x, serr)) == ERR)
       return ERR;
     *daya = swe_degnorm(x[0] - 359.8333333333);
     return (retflag & SEFLG_EPHMASK);
   }
-  if (sip->sid_mode == SE_SIDM_TRUE_PUSHYA) {
+  if (sid_mode == SE_SIDM_TRUE_PUSHYA) {
     strcpy(star, ",deCnc"); /* Pushya = Asellus Australis */
     if ((retflag = swe_fixstar(star, tjd_et, iflag_true, x, serr)) == ERR)
       return ERR;
     *daya = swe_degnorm(x[0] - 106);
     return (retflag & SEFLG_EPHMASK);
   }
-  if (sip->sid_mode == SE_SIDM_TRUE_SHEORAN) {
+  if (sid_mode == SE_SIDM_TRUE_SHEORAN) {
     strcpy(star, ",deCnc"); /* Asellus Australis */
     if ((retflag = swe_fixstar(star, tjd_et, iflag_true, x, serr)) == ERR)
       return ERR;
     *daya = swe_degnorm(x[0] - 103.49264221625);
     return (retflag & SEFLG_EPHMASK);
   }
-  if (sip->sid_mode == SE_SIDM_TRUE_MULA) {
+  if (sid_mode == SE_SIDM_TRUE_MULA) {
     strcpy(star, ",laSco"); /* Mula = lambda Scorpionis */
     if ((retflag = swe_fixstar(star, tjd_et, iflag_true, x, serr)) == ERR)
       return ERR;
     *daya = swe_degnorm(x[0] - 240);
     return (retflag & SEFLG_EPHMASK);
   }
-  if (sip->sid_mode ==  SE_SIDM_GALCENT_0SAG) {
+  if (sid_mode ==  SE_SIDM_GALCENT_0SAG) {
     strcpy(star, ",SgrA*"); /* Galactic Centre */
     if ((retflag = swe_fixstar(star, tjd_et, iflag_true, x, serr)) == ERR)
       return ERR;
@@ -2966,8 +3060,7 @@ int32 swi_get_ayanamsa_ex(double tjd_et, int32 iflag, double *daya, char *serr)
     return (retflag & SEFLG_EPHMASK);
     /*return swe_degnorm(x[0] - 359.83333333334);*/
   }
-#if 0
-  if (sip->sid_mode ==  SE_SIDM_GALCENT_COCHRANE) {
+  if (sid_mode ==  SE_SIDM_GALCENT_COCHRANE) {
     strcpy(star, ",SgrA*"); /* Galactic Centre */
     if ((retflag = swe_fixstar(star, tjd_et, iflag_true, x, serr)) == ERR)
       return ERR;
@@ -2975,8 +3068,7 @@ int32 swi_get_ayanamsa_ex(double tjd_et, int32 iflag, double *daya, char *serr)
     return (retflag & SEFLG_EPHMASK);
     /*return swe_degnorm(x[0] - 359.83333333334);*/
   }
-#endif
-  if (sip->sid_mode ==  SE_SIDM_GALCENT_RGILBRAND) {
+  if (sid_mode ==  SE_SIDM_GALCENT_RGILBRAND) {
     strcpy(star, ",SgrA*"); /* Galactic Centre */
     if ((retflag = swe_fixstar(star, tjd_et, iflag_true, x, serr)) == ERR)
       return ERR;
@@ -2984,7 +3076,7 @@ int32 swi_get_ayanamsa_ex(double tjd_et, int32 iflag, double *daya, char *serr)
     return (retflag & SEFLG_EPHMASK);
     /*return swe_degnorm(x[0] - 359.83333333334);*/
   }
-  if (sip->sid_mode == SE_SIDM_GALCENT_MULA_WILHELM) {
+  if (sid_mode == SE_SIDM_GALCENT_MULA_WILHELM) {
     strcpy(star, ",SgrA*"); /* Galactic Centre */
     /* right ascension in polar projection onto the ecliptic, 
      * and that point is put in the middle of Mula */
@@ -2996,47 +3088,91 @@ int32 swi_get_ayanamsa_ex(double tjd_et, int32 iflag, double *daya, char *serr)
     return (retflag & SEFLG_EPHMASK);
     /*return swe_degnorm(x[0] - 359.83333333334);*/
   }
-  if (sip->sid_mode == SE_SIDM_GALEQU_IAU1958) {
+  if (sid_mode == SE_SIDM_GALEQU_IAU1958) {
     strcpy(star, ",GP1958"); /* Galactic Pole IAU 1958 */
     if ((retflag = swe_fixstar(star, tjd_et, iflag_galequ, x, serr)) == ERR)
       return ERR;
     *daya = swe_degnorm(x[0] - 150);
     return (retflag & SEFLG_EPHMASK);
   }
-  if (sip->sid_mode == SE_SIDM_GALEQU_TRUE) {
+  if (sid_mode == SE_SIDM_GALEQU_TRUE) {
     strcpy(star, ",GPol"); /* Galactic Pole modern, true */
     if ((retflag = swe_fixstar(star, tjd_et, iflag_galequ, x, serr)) == ERR)
       return ERR;
     *daya = swe_degnorm(x[0] - 150);
     return (retflag & SEFLG_EPHMASK);
   }
-  if (sip->sid_mode == SE_SIDM_GALEQU_MULA) {
+  if (sid_mode == SE_SIDM_GALEQU_MULA) {
     strcpy(star, ",GPol"); /* Galactic Pole modern, true */
     if ((retflag = swe_fixstar(star, tjd_et, iflag_galequ, x, serr)) == ERR)
       return ERR;
     *daya = swe_degnorm(x[0] - 150 - 6.6666666667);
     return (retflag & SEFLG_EPHMASK);
   }
-  /* vernal point (tjd), cartesian */
-  x[0] = 1; 
-  x[1] = x[2] = 0;
-  /* to J2000 */
-  if (tjd_et != J2000)
-    swi_precess(x, tjd_et, 0, J_TO_J2000);
-  /* to t0 */
-  t0 = sip->t0;
-  if (sip->t0_is_UT)
-    t0 += swe_deltat_ex(t0, iflag, serr);
-  swi_precess(x, t0, 0, J2000_TO_J);
-  /* to ecliptic */
-  eps = swi_epsiln(t0, 0);
-  swi_coortrf(x, x, eps);
-  /* to polar */
-  swi_cartpol(x, x);
-  /* subtract initial value of ayanamsa */
-  x[0] = x[0] * RADTODEG - sip->ayan_t0;
+  if (!(sip->sid_mode & SE_SIDBIT_ECL_DATE)) {
+    // Now calculate precession for ayanamsha. 
+    // The following is the original method implemented in 1999 and
+    // still used as our default method, although it is not logical.
+    // Precession is measured on the ecliptic of the start epoch t0 (ayan_t0),
+    // then the initial value of ayanamsha is added.
+    // The procedure is as follows: The vernal point of the end epoch tjd_et
+    // is precessed to t0. Ayanamsha is the resulting longitude of that
+    // point at t0 plus the initial value.
+    // This method is not really consistent because later this ayanamsha,
+    // which is based on the ecliptic t0, will be applied to planetary
+    // positions relative to the ecliptic of date.
+    //
+    /* vernal point (tjd), cartesian */
+    x[0] = 1; 
+    x[1] = x[2] = x[3] = x[4] = x[5] = 0;
+    /* to J2000 */
+    if (tjd_et != J2000)
+      swi_precess(x, tjd_et, 0, J_TO_J2000);
+    /* to t0 */
+    t0 = sip->t0;
+    if (sip->t0_is_UT)
+      t0 += swe_deltat_ex(t0, iflag, serr);
+    swi_precess(x, t0, 0, J2000_TO_J);
+    /* to ecliptic t0 */
+    eps = swi_epsiln(t0, 0);
+    swi_coortrf(x, x, eps);
+    /* to polar */
+    swi_cartpol(x, x);
+    /* subtract initial value of ayanamsa */
+    x[0] = -x[0] * RADTODEG + sip->ayan_t0;
+  } else {
+    // Alternative method, more consistent, programmed on 15 may 2020.
+    // The ayanamsha is measured on the ecliptic of date. This is more
+    // correct because the ayanamsha will be applied to planetary positions
+    // relative to the ecliptic of date.
+    //
+    // at t0, we have ayanamsha sip->ayan_t0
+    x[0] = swe_degnorm(sip->ayan_t0) * DEGTORAD;
+    x[1] = 0; x[2] = 1;
+    // get epsilon for t0
+    t0 = sip->t0;
+    if (sip->t0_is_UT)
+      t0 += swe_deltat_ex(t0, iflag, serr);
+    eps = swi_epsiln(t0, 0);
+    // to polar equatorial relative to equinox t0
+    swi_polcart(x, x);
+    swi_coortrf(x, x, -eps);
+    // precess to J2000
+    if (t0 != J2000)
+      swi_precess(x, t0, 0, J_TO_J2000);
+    // precess to date
+    swi_precess(x, tjd_et, 0, J2000_TO_J);
+    // epsilon of date
+    eps = swi_epsiln(tjd_et, 0);
+    // to polar
+    swi_coortrf(x, x, eps);
+    swi_cartpol(x, x);
+    x[0] = swe_degnorm(x[0] * RADTODEG);
+  }
+  get_aya_correction(iflag, &corr, serr);
   /* get ayanamsa */
-  *daya = swe_degnorm(-x[0]);
+  *daya = swe_degnorm(x[0] - corr);
+  //*daya = swe_degnorm(x[0]);
   return iflag;
 }
 
@@ -3105,7 +3241,7 @@ double CALL_CONV swe_get_ayanamsa_ut(double tjd_ut)
  */
 int swi_trop_ra2sid_lon(double *xin, double *xout, double *xoutr, int32 iflag)
 {
-  double x[6];
+  double x[6], corr;
   int i;
   struct sid_data *sip = &swed.sidd;
   struct epsilon oectmp;
@@ -3125,7 +3261,9 @@ int swi_trop_ra2sid_lon(double *xin, double *xout, double *xoutr, int32 iflag)
   /* to polar coordinates */
   swi_cartpol_sp(x, x); 
   /* subtract ayan_t0 */
+  get_aya_correction(iflag, &corr, NULL);
   x[0] -= sip->ayan_t0 * DEGTORAD;
+  x[0] = swe_radnorm(x[0] + corr * DEGTORAD);
   /* back to cartesian */
   swi_polcart_sp(x, xout); 
   return OK;
@@ -3138,7 +3276,7 @@ int swi_trop_ra2sid_lon(double *xin, double *xout, double *xoutr, int32 iflag)
  */
 int swi_trop_ra2sid_lon_sosy(double *xin, double *xout, int32 iflag)
 {
-  double x[6], x0[6];
+  double x[6], x0[6], corr;
   int i;
   struct sid_data *sip = &swed.sidd;
   struct epsilon *oe = &swed.oec2000;
@@ -3178,8 +3316,9 @@ int swi_trop_ra2sid_lon_sosy(double *xin, double *xout, int32 iflag)
   x[0] -= x0[0];
   x[0] *= RADTODEG;
   /* subtract ayan_t0 */
+  get_aya_correction(iflag, &corr, NULL);
   x[0] -= sip->ayan_t0;
-  x[0] = swe_degnorm(x[0]) * DEGTORAD;
+  x[0] = swe_degnorm(x[0] + corr) * DEGTORAD;
   /* back to cartesian */
   swi_polcart_sp(x, xout); 
   return OK;
@@ -3400,6 +3539,7 @@ void swi_precess_speed(double *xx, double t, int32 iflag, int direction)
   swi_coortrf2(xx, xx, oe->seps, oe->ceps);
   swi_coortrf2(xx+3, xx+3, oe->seps, oe->ceps);
   swi_cartpol_sp(xx, xx);
+if (1) {
   if (prec_model == SEMOD_PREC_VONDRAK_2011) {
     swi_ldp_peps(t, &dpre, NULL);
     swi_ldp_peps(t + 1, &dpre2, NULL);
@@ -3408,6 +3548,7 @@ void swi_precess_speed(double *xx, double t, int32 iflag, int direction)
     xx[3] += (50.290966 + 0.0222226 * tprec) / 3600 / 365.25 * DEGTORAD * fac;
 			/* formula from Montenbruck, German 1994, p. 18 */
   }
+}
   swi_polcart_sp(xx, xx);
   swi_coortrf2(xx, xx, -oe->seps, oe->ceps);
   swi_coortrf2(xx+3, xx+3, -oe->seps, oe->ceps);
@@ -3490,6 +3631,8 @@ static void aberr_light(double *xx, double *xe) {
  * xx		planet's position accounted for light-time 
  *              and gravitational light deflection
  * xe    	earth's position and speed
+ * xe_dt    	earth's position and speed at t - dt
+ * dt    	time difference for which xe_dt is given
  */
 void swi_aberr_light_ex(double *xx, double *xe, double *xe_dt, double dt, int32 iflag) {
   int i;
@@ -3910,7 +4053,7 @@ static int app_pos_etc_moon(int32 iflag, char *serr)
   struct plan_data *psdp = &swed.pldat[SEI_SUNBARY];
   struct plan_data *pdp = &swed.pldat[SEI_MOON];
   struct epsilon *oe = &swed.oec;
-  double t; 
+  double t = 0; 
   int32 retc; 
   /* if the same conversions have already been done for the same 
    * date, then return */
@@ -3964,6 +4107,7 @@ static int app_pos_etc_moon(int32 iflag, char *serr)
   /*******************************
    * light-time                  * 
    *******************************/
+  t = pdp->teval;
   if ((iflag & SEFLG_TRUEPOS) == 0) {
     dt = sqrt(square_sum(xxm)) * AUNIT / CLIGHT / 86400.0;     
     t = pdp->teval - dt;
@@ -4333,7 +4477,7 @@ static int get_new_segment(double tjd, int ipli, int ifno, char *serr)
   return(OK);
 return_error_gns:
   fclose(fdp->fptr);
-  free(fdp->fptr);
+  // free(fdp->fptr);  is not from malloc(), must not be freed by us
   fdp->fptr = NULL;
   free_planets();
   return ERR;
@@ -4362,30 +4506,36 @@ static int read_const(int ifno, char *serr)
   double doubles[20];
   struct plan_data *pdp;
   struct file_data *fdp = &swed.fidat[ifno];
-  char *serr_file_damage = "Ephemeris file %s is damaged (0). ";
+  char *serr_file_damage = "Ephemeris file %s is damaged (0%s). ";
+  char *smsg = "";
   int nbytes_ipl = 2;
   fp = fdp->fptr;
   /************************************* 
    * version number of file            *
    *************************************/
   sp = fgets(s, AS_MAXCH, fp);
-  if (sp == NULL || strstr(sp, "\r\n") == NULL)
+  if (sp == NULL || strstr(sp, "\r\n") == NULL) {
     goto file_damage;
+  }
   sp = strchr(s, '\r');
   *sp = '\0';
   sp = s;
   while (isdigit((int) *sp) == 0 && *sp != '\0')
     sp++;
-  if (*sp == '\0') 
+  if (*sp == '\0') {
+    smsg = "a";
     goto file_damage;
+  }
   /* version unused so far */ 
   fdp->fversion = atoi(sp);
   /************************************* 
    * correct file name?                *
    *************************************/
   sp = fgets(s, AS_MAXCH, fp);
-  if (sp == NULL || strstr(sp, "\r\n") == NULL)
+  if (sp == NULL || strstr(sp, "\r\n") == NULL) {
+    smsg = "b";
     goto file_damage;
+  }
   /* file name, without path */
   sp = strrchr(fdp->fnam, (int) *DIR_GLUE);
   if (sp == NULL)
@@ -4414,22 +4564,26 @@ static int read_const(int ifno, char *serr)
    * copyright                         *
    *************************************/
   sp = fgets(s, AS_MAXCH, fp);
-  if (sp == NULL || strstr(sp, "\r\n") == NULL)
+  if (sp == NULL || strstr(sp, "\r\n") == NULL) {
+    smsg = "c";
     goto file_damage;
+  }
   /**************************************** 
    * orbital elements, if single asteroid *
    ****************************************/
   if (ifno == SEI_FILE_ANY_AST) {
     sp = fgets(s, AS_MAXCH * 2, fp);
-    if (sp == NULL || strstr(sp, "\r\n") == NULL)
+    if (sp == NULL || strstr(sp, "\r\n") == NULL) {
+      smsg = "d";
       goto file_damage;
+    }
     /* MPC number and name; will be analyzed below:
      * search "asteroid name" */
     while(*sp == ' ') sp++;
     while(isdigit(*sp)) sp++;
     sp++;
-    i = sp - s;
-    strncpy(sastnam, sp, lastnam+i);
+    i = (int) (sp - s);
+    strncpy(sastnam, s, lastnam+i);	// fixed 19-nov-19
     *(sastnam+lastnam+i) = '\0';
     /* save elements, they are required for swe_plan_pheno() */
     strcpy(swed.astelem, s);
@@ -4466,8 +4620,10 @@ static int read_const(int ifno, char *serr)
   /************************************* 
    * one int32 for test of byte order   * 
    *************************************/
-  if (fread((void *) &testendian, 4, 1, fp) != 1)
+  if (fread((void *) &testendian, 4, 1, fp) != 1) {
+    smsg = "e";
     goto file_damage;
+  }
   /* is byte order correct?            */
   if (testendian == SEI_FILE_TEST_ENDIAN) {
     freord = SEI_FILE_NOREORD;
@@ -4477,9 +4633,10 @@ static int read_const(int ifno, char *serr)
     c = (char *) &testendian;
     for (i = 0; i < 4; i++)
       *(sp+i) = *(c+3-i);
-    if (lng != SEI_FILE_TEST_ENDIAN)
+    if (lng != SEI_FILE_TEST_ENDIAN) {
+      smsg = "f";
       goto file_damage;
-      /* printf("%d  %x\n", lng, lng);*/
+    }
   }
   /* is file bigendian or littlendian? 
    * test first byte of test integer, which is highest if bigendian */
@@ -4498,11 +4655,15 @@ fendian, ifno, serr);
   if (retc != OK)
     goto return_error;
   fpos = ftell(fp);
-  if (fseek(fp, 0L, SEEK_END) != 0)
+  if (fseek(fp, 0L, SEEK_END) != 0) {
+    smsg = "g";
     goto file_damage;
+  }
   flen = ftell(fp);
-  if (lng != flen)
+  if (lng != flen) {
+    smsg = "h";
     goto file_damage;
+  }
   /********************************************************** 
    * DE number of JPL ephemeris which this file is based on * 
    **********************************************************/
@@ -4531,8 +4692,10 @@ fendian, ifno, serr);
     nbytes_ipl = 4;
     nplan %= 256;
   }
-  if (nplan < 1 || nplan > 20)
+  if (nplan < 1 || nplan > 20) {
+    smsg = "i";
     goto file_damage;
+  }
   fdp->npl = nplan;
   /* which ones?                       */
   retc = do_fread((void *) fdp->ipl, nbytes_ipl, (int) nplan, sizeof(int), fp, SEI_CURR_FPOS,
@@ -4556,17 +4719,22 @@ freord, fendian, ifno, serr);
     if (i == fdp->ipl[0] - SE_AST_OFFSET) {
       /* element record is from bowell database */
       strncpy(fdp->astnam, sastnam+j+1, lastnam);
+      fdp->astnam[lastnam] = '\0';
       /* overread old ast. name field */
-      if (fread((void *) s, 30, 1, fp) != 1)
+      if (fread((void *) s, 30, 1, fp) != 1) {
+	smsg = "j";
         goto file_damage;
+      }
     } else {
       /* older elements record structure: the name
        * is taken from old name field */
-      if (fread((void *) fdp->astnam, 30, 1, fp) != 1)
+      if (fread((void *) fdp->astnam, 30, 1, fp) != 1) {
+	smsg = "k";
         goto file_damage;
+      }
     }
     /* in worst case strlen of not null terminated area! */
-    i = strlen(fdp->astnam) - 1;
+    i = (int) (strlen(fdp->astnam) - 1);
     if (i < 0) 
       i = 0;
     sp = fdp->astnam + i;
@@ -4587,14 +4755,19 @@ fendian, ifno, serr);
   /* read check area from file */
   fseek(fp, 0L, SEEK_SET);
   /* must check that defined length of s is less than fpos */
-  if (fpos - 1 > 2 * AS_MAXCH)
+  if (fpos - 1 > 2 * AS_MAXCH) {
+    smsg = "l";
     goto file_damage;
-  if (fread((void *) s, (size_t) fpos, 1, fp) != 1)
+  }
+  if (fread((void *) s, (size_t) fpos, 1, fp) != 1) {
+    smsg = "m";
     goto file_damage;
+  }
 #if 1
-  if (swi_crc32((unsigned char *) s, (int) fpos) != ulng)
+  if (swi_crc32((unsigned char *) s, (int) fpos) != ulng) {
+    smsg = "n";
     goto file_damage;
-    /*printf("crc %d %d\n", ulng2, ulng);*/
+  }
 #endif
   fseek(fp, fpos+4, SEEK_SET);
   /************************************* 
@@ -4686,13 +4859,13 @@ SEI_CURR_FPOS, freord, fendian, ifno, serr);
 file_damage:
   if (serr != NULL) {
     *serr = '\0';
-    if (strlen(serr_file_damage) + strlen(fdp->fnam) < AS_MAXCH) {
-      sprintf(serr, serr_file_damage, fdp->fnam);
+    if (strlen(serr_file_damage) + strlen(fdp->fnam) + strlen(smsg) < AS_MAXCH) {
+      sprintf(serr, serr_file_damage, fdp->fnam, smsg);
     }
   }
 return_error:
   fclose(fdp->fptr);
-  free(fdp->fptr);
+  // free(fdp->fptr);  is not from malloc(), must not be freed by us
   fdp->fptr = NULL;
   free_planets();
   return(ERR);
@@ -5967,8 +6140,8 @@ static int32 fixstar_format_search_name(char *star, char *sstar, char *serr)
 {
   char *sp;
   size_t cmplen;
-  strncpy(sstar, star, SE_MAX_STNAME);
-  sstar[SE_MAX_STNAME] = '\0';
+  strncpy(sstar, star, SWI_STAR_LENGTH);
+  sstar[SWI_STAR_LENGTH] = '\0';
   // remove whitespaces from search name
   while ((sp = strchr(sstar, ' ')) != NULL)
     swi_strcpy(sp, sp+1);
@@ -5992,7 +6165,7 @@ static int32 save_star_in_struct(int nrecs, struct fixed_star *fstp, char *serr)
   int sizestru = sizeof(struct fixed_star);
   struct fixed_star *ftarget;
   char *serr_alloc = "error in function load_all_fixed_stars(): could not resize fixed stars array";
-  if ((swed.fixed_stars = realloc(swed.fixed_stars, nrecs * sizestru)) == NULL) {
+  if ((swed.fixed_stars = (struct fixed_star *) realloc(swed.fixed_stars, nrecs * sizestru)) == NULL) {
     if (serr != NULL) strcpy(serr, serr_alloc);
     return ERR;
   }
@@ -6045,13 +6218,13 @@ int32 fixstar_cut_string(char *srecord, char *star, struct fixed_star *stardata,
     }
     return ERR;
   }
-  if (strlen(cpos[0]) > SE_MAX_STNAME)
-    cpos[0][SE_MAX_STNAME] = '\0';
-  if (strlen(cpos[1]) > SE_MAX_STNAME-1)
-    cpos[1][SE_MAX_STNAME-1] = '\0';
+  if (strlen(cpos[0]) > SWI_STAR_LENGTH)
+    cpos[0][SWI_STAR_LENGTH] = '\0';
+  if (strlen(cpos[1]) > SWI_STAR_LENGTH-1)
+    cpos[1][SWI_STAR_LENGTH-1] = '\0';
   if (star != NULL) {
     strcpy(star, cpos[0]);
-    if (strlen(cpos[0]) + strlen(cpos[1]) + 1 < SE_MAX_STNAME - 1)
+    if (strlen(cpos[0]) + strlen(cpos[1]) + 1 < SWI_STAR_LENGTH - 1)
       sprintf(star + strlen(star), ",%s", cpos[1]);
   }
   strcpy(stardata->starname, cpos[0]);
@@ -6137,7 +6310,7 @@ static int32 load_all_fixed_stars(char *serr)
   char s[AS_MAXCH], *sp;
   char srecord[AS_MAXCH];
   struct fixed_star fstdata;
-  char last_starbayer[40];
+  char last_starbayer[SWI_STAR_LENGTH + 1];
   *last_starbayer = '\0';
   if (swed.n_fixstars_records > 0) {
     return -2;
@@ -6220,7 +6393,7 @@ static int32 fixstar_calc_from_struct(struct fixed_star *stardata, double tjd, i
   int i;
   int32 retc = OK;
   double epoch, radv, parall;
-  double ra_pm, de_pm, ra, de, t, cosra, cosde, sinra, sinde;
+  double ra_pm, de_pm, ra, de, t;
   double daya[2], rdist;
   double x[6], xxsv[6], xobs[6], xobs_dt[6], *xpo = NULL, *xpo_dt = NULL;
   static TLS double xearth[6], xearth_dt[6], xsun[6], xsun_dt[6];
@@ -6273,33 +6446,20 @@ static int32 fixstar_calc_from_struct(struct fixed_star *stardata, double tjd, i
     t= (tjd - J2000);	/* days since 2000.0 */
   x[0] = ra;
   x[1] = de;
-  x[2] = 1;	/* -> unit vector */
+  x[2] = 1;	
   if (parall == 0) {
-    rdist = 1000000;  
+    rdist = 1000000000;  
   } else {
     rdist = 1.0 / (parall * RADTODEG * 3600) * PARSEC_TO_AUNIT;	
-    rdist += t * radv / 36525.0;
+    //rdist += t * radv / 36525.0;
   }
 // rdist = 10000;  // to reproduce pre-SE2.07 star positions
   x[2] = rdist;
-  /* cartesian */
-  swi_polcart(x, x);
-  /*space motion vector */
-  cosra = cos(ra);
-  cosde = cos(de);
-  sinra = sin(ra);
-  sinde = sin(de);
-  x[3] = -ra_pm * cosde * sinra - de_pm * sinde * cosra;
-  x[4] = ra_pm * cosde * cosra - de_pm * sinde * sinra;
-  x[5] = de_pm * cosde;
-  x[3] /= 36525.0;
-  x[4] /= 36525.0;
-  x[5] /= 36525.0;
-  x[3] += (radv * parall * cosde * cosra) / 36525.0;
-  x[4] += (radv * parall * cosde * sinra) / 36525.0;
-  x[5] += (radv * parall * sinde) / 36525.0;
-  for (i = 3; i < 6; i++) 
-    x[i] *= rdist;
+  x[3] = ra_pm / 36525.0;
+  x[4] = de_pm / 36525.0;
+  x[5] = radv / 36525.0;
+  // Cartesian space motion vector
+  swi_polcart_sp(x, x);
   /******************************************
    * FK5
    ******************************************/
@@ -6373,8 +6533,9 @@ static int32 fixstar_calc_from_struct(struct fixed_star *stardata, double tjd, i
     }
   } else {
     for (i = 0; i <= 2; i++) {
-      x[i] += t * x[i+3] - parall * xpo[i] * rdist;
-      x[i+3] -= parall * xpo[i+3] * rdist;
+      x[i] += t * x[i+3];
+      x[i] -= xpo[i];
+      x[i+3] -= xpo[i+3];
     }
   }
   /************************************
@@ -6411,8 +6572,8 @@ static int32 fixstar_calc_from_struct(struct fixed_star *stardata, double tjd, i
    * nutation                                     *
    ************************************************/
   if (!(iflag & SEFLG_NONUT))
-    swi_nutate(x, 0, FALSE);
-if (0) {
+    swi_nutate(x, iflag, FALSE);
+if ((0)) {
   double r = sqrt(x[0] * x[0] + x[1] * x[1] + x[2] * x[2]);
   printf("%.17f %.17f %f\n", x[0]/r, x[1]/r, x[2]/r);
 }
@@ -6530,7 +6691,7 @@ static int32 search_star_in_list(char *sstar, struct fixed_star *stardata, char 
       return ERR;
     }
     strcpy(searchkey, sstar);
-    len = strlen(sstar) - 1;
+    len = (int) (strlen(sstar) - 1);
     searchkey[len] = '\0';
     for (i = 0; i < ndata; i++) {
       if (strncmp(stardatabegp[i].skey, sstar, len) == 0) {
@@ -6642,7 +6803,7 @@ int32 CALL_CONV swe_fixstar2(char *star, double tjd, int32 iflag,
 {
   int i;
   AS_BOOL is_builtin_star = FALSE;
-  char sstar[SE_MAX_STNAME + 1];
+  char sstar[SWI_STAR_LENGTH + 1];
   //static TLS char slast_stardata[AS_MAXCH];
   static TLS char slast_starname[AS_MAXCH];
   static TLS struct fixed_star last_stardata;
@@ -6738,7 +6899,7 @@ int32 CALL_CONV swe_fixstar2_ut(char *star, double tjd_ut, int32 iflag,
 **********************************************************/
 int32 CALL_CONV swe_fixstar2_mag(char *star, double *mag, char *serr)
 {
-  char sstar[SE_MAX_STNAME + 1];
+  char sstar[SWI_STAR_LENGTH + 1];
   //static TLS char slast_stardata[AS_MAXCH];
   static TLS char slast_starname[AS_MAXCH];
   static TLS struct fixed_star last_stardata;
@@ -7296,14 +7457,15 @@ static int open_jpl_file(double *ss, char *fname, char *fpath, char *serr)
 static int32 swi_fixstar_load_record(char *star, char *srecord, char *sname, char *sbayer, double *dparams, char *serr)
 {
   char s[AS_MAXCH + 20], *sp, *sp2;	/* 20 byte for SE_STARFILE */
-  char sstar[SE_MAX_STNAME + 1];
-  char fstar[SE_MAX_STNAME + 1];
+  char sstar[SWI_STAR_LENGTH + 1];
+  char fstar[SWI_STAR_LENGTH + 1];
   int i, star_nr = 0;
   int line = 0;
   int fline = 0;
   int32 retc = OK;
   AS_BOOL  is_bayer = FALSE;
   size_t cmplen;
+  size_t slen;
   struct fixed_star stardata;
   /* function formats the input search name of a star:
    * - remove white spaces
@@ -7368,13 +7530,16 @@ static int32 swi_fixstar_load_record(char *star, char *srecord, char *sname, cha
     }
     // search string is traditional name
     *sp = '\0';	/* cut off after first field to get star name, ',' -> '\0' */
-    strncpy(fstar, s, SE_MAX_STNAME);
+    //strncpy(fstar, s, SWI_STAR_LENGTH);
+    slen = swi_strnlen(s, SE_MAX_STNAME);
+    memcpy(fstar, s, slen);
+    fstar[slen] = '\0';  /* force termination */
     *sp = ',';  /* add comma again */
-    fstar[SE_MAX_STNAME] = '\0';	/* force termination */
+    //fstar[SWI_STAR_LENGTH] = '\0';	/* force termination */
     // remove white spaces from star name
     while ((sp = strchr(fstar, ' ')) != NULL)
       swi_strcpy(sp, sp+1);
-    i = strlen(fstar);
+    i = (int) strlen(fstar);
     // length of star name differs from length of search string: continue
     if (i < (int) cmplen)
       continue;
@@ -7431,7 +7596,7 @@ static int32 swi_fixstar_calc_from_record(char *srecord, double tjd, int32 iflag
   int i;
   int32 retc = OK;
   double epoch, radv, parall;
-  double ra_pm, de_pm, ra, de, t, cosra, cosde, sinra, sinde;
+  double ra_pm, de_pm, ra, de, t;
   struct fixed_star stardata;
   double daya, rdist;
   double x[6], xxsv[6], xobs[6], xobs_dt[6], *xpo = NULL, *xpo_dt = NULL;
@@ -7487,33 +7652,20 @@ static int32 swi_fixstar_calc_from_record(char *srecord, double tjd, int32 iflag
     t= (tjd - J2000);	/* days since 2000.0 */
   x[0] = ra;
   x[1] = de;
-  x[2] = 1;	/* -> unit vector */
+  x[2] = 1;	
   if (parall == 0) {
-    rdist = 1000000;  
+    rdist = 1000000000;  
   } else {
     rdist = 1.0 / (parall * RADTODEG * 3600) * PARSEC_TO_AUNIT;	
-    rdist += t * radv / 36525.0;
+    //rdist += t * radv / 36525.0;
   }
 // rdist = 10000;  // to reproduce pre-SE2.07 star positions
   x[2] = rdist;
-  /* cartesian */
-  swi_polcart(x, x);
-  /*space motion vector */
-  cosra = cos(ra);
-  cosde = cos(de);
-  sinra = sin(ra);
-  sinde = sin(de);
-  x[3] = -ra_pm * cosde * sinra - de_pm * sinde * cosra;
-  x[4] = ra_pm * cosde * cosra - de_pm * sinde * sinra;
-  x[5] = de_pm * cosde;
-  x[3] /= 36525.0;
-  x[4] /= 36525.0;
-  x[5] /= 36525.0;
-  x[3] += (radv * parall * cosde * cosra) / 36525.0;
-  x[4] += (radv * parall * cosde * sinra) / 36525.0;
-  x[5] += (radv * parall * sinde) / 36525.0;
-  for (i = 3; i < 6; i++) 
-    x[i] *= rdist;
+  x[3] = ra_pm / 36525.0;
+  x[4] = de_pm / 36525.0;
+  x[5] = radv / 36525.0;
+  // Cartesian space motion vector
+  swi_polcart_sp(x, x);
   /******************************************
    * FK5
    ******************************************/
@@ -7536,10 +7688,10 @@ static int32 swi_fixstar_calc_from_record(char *srecord, double tjd, int32 iflag
    * for parallax, light deflection, and aberration,
    ****************************************************/
   if (!(iflag & SEFLG_BARYCTR) && (!(iflag & SEFLG_HELCTR) || !(iflag & SEFLG_MOSEPH))) {
-    if ((retc =  main_planet_bary(tjd - dt, SEI_EARTH, epheflag, iflag, NO_SAVE, xearth_dt, xearth_dt, xsun_dt, NULL, serr)) == ERR) {
+    if ((retc =  main_planet_bary(tjd - dt, SEI_EARTH, epheflag, iflag, NO_SAVE, xearth_dt, xearth_dt, xsun_dt, NULL, serr)) != OK) {
       return ERR;
     }
-    if ((retc =  main_planet_bary(tjd, SEI_EARTH, epheflag, iflag, DO_SAVE, xearth, xearth, xsun, NULL, serr)) == ERR) {
+    if ((retc =  main_planet_bary(tjd, SEI_EARTH, epheflag, iflag, DO_SAVE, xearth, xearth, xsun, NULL, serr)) != OK) {
       return ERR;
     }
   }
@@ -7587,9 +7739,14 @@ static int32 swi_fixstar_calc_from_record(char *srecord, double tjd, int32 iflag
     }
   } else {
     for (i = 0; i <= 2; i++) {
-      x[i] += t * x[i+3] - parall * xpo[i] * rdist;
-      x[i+3] -= parall * xpo[i+3] * rdist;
+      x[i] += t * x[i+3];
+      x[i] -= xpo[i];
+      x[i+3] -= xpo[i+3];
     }
+    // rdist of date
+    //rdist = sqrt(x[0] * x[0] + x[1] * x[1] + x[2] * x[2]);
+    // parallax of date
+    //parall = PARSEC_TO_AUNIT / rdist / RADTODEG / 3600.0;
   }
   /************************************
    * relativistic deflection of light *
@@ -7616,17 +7773,19 @@ static int32 swi_fixstar_calc_from_record(char *srecord, double tjd, int32 iflag
   /*x[0] = -0.374018403; x[1] = -0.312548592; x[2] = -0.873168719;*/
   if ((iflag & SEFLG_J2000) == 0) {
     swi_precess(x, tjd, iflag, J2000_TO_J);
-    if (iflag & SEFLG_SPEED)
+    if (iflag & SEFLG_SPEED) {
       swi_precess_speed(x, tjd, iflag, J2000_TO_J);
+    }
     oe = &swed.oec;
-  } else
+  } else {
     oe = &swed.oec2000;
+  }
   /************************************************
    * nutation                                     *
    ************************************************/
   if (!(iflag & SEFLG_NONUT))
-    swi_nutate(x, 0, FALSE);
-if (0) {
+    swi_nutate(x, iflag, FALSE);
+if ((0)) {
   double r = sqrt(x[0] * x[0] + x[1] * x[1] + x[2] * x[2]);
   printf("%.17f %.17f %f\n", x[0]/r, x[1]/r, x[2]/r);
 }
@@ -7718,7 +7877,7 @@ int32 CALL_CONV swe_fixstar(char *star, double tjd, int32 iflag,
   double *xx, char *serr)
 {
   int i;
-  char sstar[SE_MAX_STNAME + 1];
+  char sstar[SWI_STAR_LENGTH + 1];
   static TLS char slast_stardata[AS_MAXCH];
   static TLS char slast_starname[AS_MAXCH];
   char srecord[AS_MAXCH + 20], *sp;	/* 20 byte for SE_STARFILE */
@@ -7810,10 +7969,11 @@ int32 CALL_CONV swe_fixstar_ut(char *star, double tjd_ut, int32 iflag,
 **********************************************************/
 int32 CALL_CONV swe_fixstar_mag(char *star, double *mag, char *serr)
 {
-  char sstar[SE_MAX_STNAME + 1];
+  char sstar[SWI_STAR_LENGTH + 1];
   static TLS char slast_stardata[AS_MAXCH];
   static TLS char slast_starname[AS_MAXCH];
   char srecord[AS_MAXCH + 20], *sp;	/* 20 byte for SE_STARFILE */
+  struct fixed_star stardata;
   int retc;
   double dparams[20];
   if (serr != NULL)
@@ -7832,6 +7992,10 @@ int32 CALL_CONV swe_fixstar_mag(char *star, double *mag, char *serr)
   /* star elements from last call: */
   if (*slast_stardata != '\0' && strcmp(slast_starname, sstar) == 0) {
     strcpy(srecord, slast_stardata);
+    retc = fixstar_cut_string(srecord, star, &stardata, serr);
+    if (retc == ERR) goto return_err;
+    // magnitude V
+    dparams[7] = stardata.mag;
     goto found;
   }
   /******************************************************

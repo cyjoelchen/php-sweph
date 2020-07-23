@@ -1,5 +1,4 @@
 /* SWISSEPH 
- $Header: /home/dieter/sweph/RCS/swehel.c,v 1.1 2009/04/21 06:05:59 dieter Exp dieter $
 
   Heliacal risings and related calculations
   
@@ -228,7 +227,7 @@ static double OpticFactor(double Bback, double kX, double *dobs, double JDNDaysU
   double OpticDia = dobs[4];
   double OpticTrans = dobs[5];
   AS_BOOL is_scotopic = FALSE;
-  JDNDaysUT = JDNDaysUT; /* currently not used, statement prevents compiler warning */
+  JDNDaysUT += 0.0; /* currently not used, statement prevents compiler warning */
   SNi = SN;
   if (SNi <= 0.00000001) SNi = 0.00000001;
   /* 23 jaar as standard from Garstang*/
@@ -553,7 +552,7 @@ static double SunRA(double JDNDaysUT, int32 helflag, char *serr)
   double dut;
   static TLS double tjdlast;
   static TLS double ralast;
-  helflag = helflag; /* statement prevents compiler warning */
+  helflag += 0; /* statement prevents compiler warning */
   *serr = '\0';
   if (JDNDaysUT == tjdlast)
     return ralast;
@@ -827,7 +826,7 @@ static double kOZ(double AltS, double sunra, double Lat)
   if (altslim < 0)
     altslim = 0;
   CHANGEKO = (100 - 11.6 * mymin(6, altslim)) / 100;
-if (0) {
+if ((0)) {
   static int a = 0;
   if (a == 0)
     printf("bsk=%f %f\n", kOZret, AltS);
@@ -1265,7 +1264,7 @@ static double Bday(double AltO, double AziO, double AltS, double AziS, double su
 static double Bcity(double Value, double Press)
 {
   double Bcity = Value;
-  Press = Press; /* unused; statement prevents compiler warning */
+  Press += 0.0; /* unused; statement prevents compiler warning */
   Bcity = mymax(Bcity, 0);
   return Bcity;
 }
@@ -1283,7 +1282,7 @@ static double Bsky(double AltO, double AziO, double AltM, double AziM, double JD
       Bsky += Bday(AltO, AziO, AltS, AziS, sunra, Lat, HeightEye, datm, helflag, serr);
     } else {
       Bsky += mymin(Bday(AltO, AziO, AltS, AziS, sunra, Lat, HeightEye, datm, helflag, serr), Btwi(AltO, AziO, AltS, AziS, sunra, Lat, HeightEye, datm, helflag, serr));
-if (0) {
+if ((0)) {
   static int a = 0;
   if (a == 0)
     printf("bsk=%f\n", Bsky);
@@ -1386,7 +1385,7 @@ static double VisLimMagn(double *dobs, double AltO, double AziO, double AltM, do
   Bsk = Bsky(AltO, AziO, AltM, AziM, JDNDaysUT, AltS, AziS, sunra, Lat, HeightEye, datm, helflag, serr);
   /* Schaefer, Astronomy and the limits of vision, Archaeoastronomy, 1993 Verder:*/
   kX = Deltam(AltO, AltS, sunra, Lat, HeightEye, datm, helflag, serr);
-if (0) {
+if ((0)) {
   static int a = 0;
   if (a == 0)
     printf("bsk=%f, kx=%f\n", Bsk, kX);
@@ -1449,6 +1448,8 @@ static char *tolower_string_star(char *str)
 }
 
 /* Limiting magnitude in dark skies 
+ * for information about input parameters, see function swe_heliacal_ut().
+ *
  * function returns:
  * -1   Error
  * -2   Object is below horizon
@@ -1600,6 +1601,7 @@ int32 CALL_CONV swe_topo_arcus_visionis(double tjdut, double *dgeo, double *datm
   sunra = SunRA(tjdut, helflag, serr);
   if (serr != NULL && *serr != '\0')
     return ERR;
+  default_heliacal_parameters(datm, dgeo, dobs, helflag);
   return TopoArcVisionis(mag, dobs, alt_obj, azi_obj, alt_moon, azi_moon, tjdut, azi_sun, sunra, dgeo[1], dgeo[2], datm, helflag, dret, serr);
 }
 
@@ -1694,6 +1696,7 @@ int32 CALL_CONV swe_heliacal_angle(double tjdut, double *dgeo, double *datm, dou
     return ERR;
   }
   swi_set_tid_acc(tjdut, helflag, 0, serr);
+  default_heliacal_parameters(datm, dgeo, dobs, helflag);
   return HeliacalAngle(mag, dobs, azi_obj, alt_moon, azi_moon, tjdut, azi_sun, dgeo, datm, helflag, dret, serr);
 }
 
@@ -1818,7 +1821,9 @@ static void strcpy_VBsafe(char *sout, char *sin)
 
 /*###################################################################
 ' JDNDaysUT [JDN]
-' HPheno
+' for information about input parameters, see function swe_heliacal_ut().
+'
+' output values:
 '0=AltO [deg]		topocentric altitude of object (unrefracted)
 '1=AppAltO [deg]        apparent altitude of object (refracted)
 '2=GeoAltO [deg]        geocentric altitude of object
@@ -1908,7 +1913,7 @@ int32 CALL_CONV swe_heliacal_pheno_ut(double JDNDaysUT, double *dgeo, double *da
     illum = attr[1] * 100;
   }
   kact = kt(AltS, sunra, dgeo[1], dgeo[2], datm[1], datm[2], datm[3], 4, serr);
-  if (0) {
+  if ((0)) {
 darr[26] = kR(AltS, dgeo[2]);
 darr[27] = kW(dgeo[2], datm[1], datm[2]);
 darr[28] = kOZ(AltS, sunra, dgeo[1]);
@@ -3222,7 +3227,7 @@ static int32 heliacal_ut_vis_lim(double tjd_start, double *dgeo, double *datm, d
     if (ipl == SE_MERCURY || ipl == SE_VENUS || TypeEvent <= 2) {
       retval = get_heliacal_details(tday, dgeo, datm, dobs, ObjectName, TypeEvent, helflag2, dret, serr);
       if (retval == ERR) goto swe_heliacal_err;
-    } else if (0) {
+    } else if ((0)) {
       if (TypeEvent == 4 || TypeEvent == 6) direct = -1;
       for (i = 0, d = 100.0 / 86400.0; i < 3; i++, d /= 10.0) {
 	while((retval = swe_vis_limit_mag(*dret + d * direct, dgeo, datm, dobs, ObjectName, helflag, darr, serr)) == -2 || (retval >= 0 && darr[0] < darr[7])) { 
@@ -3250,8 +3255,8 @@ static int32 moon_event_vis_lim(double tjdstart, double *dgeo, double *datm, dou
   int32 epheflag = helflag & (SEFLG_JPLEPH|SEFLG_SWIEPH|SEFLG_MOSEPH);
   dret[0] = tjdstart; /* will be returned in error case */
   if (TypeEvent == 1 || TypeEvent == 2) {
-    if (serr != NULL)
-      strcpy(serr, "error: the moon has no morning first or evening last");
+    if (serr_ret != NULL)
+      strcpy(serr_ret, "error: the moon has no morning first or evening last");
     return ERR;
   }
   strcpy(ObjectName, "moon");
@@ -3356,11 +3361,21 @@ static int32 heliacal_ut(double JDNDaysUTStart, double *dgeo, double *datm, doub
 '                   a good default would be 0.25
 '                   VR=-1: the ktot is calculated from the other atmospheric 
 '                   constants.
-' age [Year]        default 36, experienced sky observer in ancient times
+'
+' dobs[6]           observer parameters
+' - age [Year]      default 36, experienced sky observer in ancient times
 '                   optimum age is 23
-' SN                Snellen factor of the visual aquity of the observer
+' - SN              Snellen factor of the visual aquity of the observer
 '                   default 1
 '                   see: http://www.i-see.org/eyecharts.html#make-your-own
+' The following parameters of dobs[] are only relevant if the flag
+' SE_HELFLAG_OPTICAL_PARAMS is set:
+' - is_binocular    0 = monocular, 1 = binocular (actually a boolean)
+' - OpticMagn       telescope magnification: 
+'                   0 = default to naked eye (binocular), 1 = naked eye
+' - OpticDia        optical aperture (telescope diameter) in mm
+' - OpticTrans      optical transmission
+'
 ' TypeEvent         1 morning first
 '                   2 evening last
 '                   3 evening first
@@ -3388,7 +3403,6 @@ int32 CALL_CONV swe_heliacal_ut(double JDNDaysUTStart, double *dgeo, double *dat
     MaxCountSynodicPeriod = MAX_COUNT_SYNPER_MAX;
 /*  if (helflag & SE_HELFLAG_SEARCH_1_PERIOD)
       MaxCountSynodicPeriod = 1; */
-  *serr = '\0';
   if (serr_ret != NULL)
     *serr_ret = '\0';
   /* note, the fixed stars functions rewrite the star name. The input string 
