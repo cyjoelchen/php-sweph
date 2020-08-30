@@ -1,0 +1,10 @@
+version: "3.2"
+
+services:
+  php:
+    build:
+      context: .
+    container_name: se-php
+    image: se_php
+    volumes:
+      - ./:/root/php-sweph

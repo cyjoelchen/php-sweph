@@ -30,7 +30,7 @@ swetest: swetest.o libswe.a
 	$(CC) $(OP) -o swetest swetest.o -L. -lswe -lm -ldl
 
 swemini: swemini.o libswe.a
-	$(CC) $(OP) -o swemini swemini.o -L. -lswe -lm
+	$(CC) $(OP) -o swemini swemini.o -L. -lswe -lm -ldl
 
 # create an archive and a dynamic link libary fro SwissEph
 # a user of this library will inlcude swephexp.h  and link with -lswe
