@@ -68,6 +68,7 @@ zend_function_entry sweph_functions[] = {
 	 ****************************/
 	PHP_FE(swe_houses, NULL)
 	PHP_FE(swe_houses_ex, NULL)
+	PHP_FE(swe_houses_ex2, NULL)
 	PHP_FE(swe_houses_armc, NULL)
 	PHP_FE(swe_house_pos, NULL)
 	PHP_FE(swe_gauquelin_sector, NULL)
@@ -1022,6 +1023,61 @@ PHP_FUNCTION(swe_houses_ex)
 	add_assoc_zval(return_value, "cusps", &cusps_arr);
 	add_assoc_zval(return_value, "ascmc", &ascmc_arr);
 	add_assoc_long(return_value, "rc", rc);
+}
+
+PHP_FUNCTION(swe_houses_ex2)
+{
+	char *arg = NULL;
+	size_t hsys_len;
+	int rc;
+	char *hsys = NULL;
+	double tjd_ut, geolat, geolon;
+	double cusps[37], ascmc[10], cusp_speed[37], ascmc_speed[10];
+	int i, houses;
+	long iflag;
+	zval cusps_arr, ascmc_arr, cusp_speed_arr, ascmc_speed_arr;
+	char serr[AS_MAXCH];
+
+	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dldds",
+			&tjd_ut, &iflag, &geolat, &geolon, &hsys, &hsys_len) == FAILURE) {
+		return;
+	}
+	if (hsys_len < 1)
+		return;
+
+	rc = swe_houses_ex2(tjd_ut, (int)iflag, geolat, geolon, hsys[0], cusps, ascmc, cusp_speed, ascmc_speed, serr);
+
+	array_init(return_value);
+
+	array_init(&cusps_arr);
+	array_init(&cusp_speed_arr);
+
+	if (hsys[0] == 'G')
+		houses = 37;
+	else
+		houses = 13;
+
+	for (i = 0; i < houses; i++) {
+	    add_index_double(&cusps_arr, i, cusps[i]);
+	    add_index_double(&cusp_speed_arr, i, cusp_speed[i]);
+	}
+
+	array_init(&ascmc_arr);
+	array_init(&ascmc_speed_arr);
+
+	for(i = 0; i < 10; i++) {
+	    add_index_double(&ascmc_arr, i, ascmc[i]);
+	    add_index_double(&ascmc_speed_arr, i, ascmc_speed[i]);
+	}
+
+	add_assoc_zval(return_value, "cusps", &cusps_arr);
+	add_assoc_zval(return_value, "ascmc", &ascmc_arr);
+	add_assoc_zval(return_value, "cusp_speed", &cusp_speed_arr);
+	add_assoc_zval(return_value, "ascmc_speed", &ascmc_speed_arr);
+	add_assoc_long(return_value, "rc", rc);
+	add_assoc_string(return_value, "serr", serr);
 }
 
 PHP_FUNCTION(swe_houses_armc)
