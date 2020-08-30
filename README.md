@@ -1,5 +1,3 @@
-__This is a fork of the cyjoelchen/php-sweph repository that Arc Point Group is maintaining for our own project: LUNA Astrology (www.lunaastrology.com).__ 
-
 # PHP Extension for Swiss Ephemeris
 ## Introduction
 `php-sweph` is a PHP extension to Astrodienst Swiss Ephemeris library. It's statically linked with libswe.a to implement one-to-one, C-to-PHP function mapping, no external binary executable required.
