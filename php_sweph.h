@@ -70,6 +70,7 @@ PHP_FUNCTION(swe_houses);
 PHP_FUNCTION(swe_houses_ex);
 PHP_FUNCTION(swe_houses_ex2);
 PHP_FUNCTION(swe_houses_armc);
+PHP_FUNCTION(swe_houses_armc_ex2);
 PHP_FUNCTION(swe_house_pos);
 PHP_FUNCTION(swe_gauquelin_sector);
 PHP_FUNCTION(swe_house_name);
