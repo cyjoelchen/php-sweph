@@ -68,7 +68,9 @@ zend_function_entry sweph_functions[] = {
 	 ****************************/
 	PHP_FE(swe_houses, NULL)
 	PHP_FE(swe_houses_ex, NULL)
+	PHP_FE(swe_houses_ex2, NULL)
 	PHP_FE(swe_houses_armc, NULL)
+	PHP_FE(swe_houses_armc_ex2, NULL)
 	PHP_FE(swe_house_pos, NULL)
 	PHP_FE(swe_gauquelin_sector, NULL)
 	PHP_FE(swe_house_name, NULL)
@@ -334,8 +336,29 @@ PHP_MINIT_FUNCTION(sweph)
 	REGISTER_LONG_CONSTANT("SE_SIDM_SS_REVATI", SE_SIDM_SS_REVATI          , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_SIDM_SS_CITRA", SE_SIDM_SS_CITRA          , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_SIDM_TRUE_CITRA", SE_SIDM_TRUE_CITRA          , CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("SE_SIDM_TRUE_REVATI", SE_SIDM_TRUE_REVATI          , CONST_CS | CONST_PERSISTENT);	
+	REGISTER_LONG_CONSTANT("SE_SIDM_TRUE_REVATI", SE_SIDM_TRUE_REVATI          , CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SIDM_TRUE_PUSHYA", SE_SIDM_TRUE_PUSHYA, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SIDM_GALCENT_RGILBRAND", SE_SIDM_GALCENT_RGILBRAND, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SIDM_GALEQU_IAU1958", SE_SIDM_GALEQU_IAU1958, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("SE_SIDM_GALEQU_TRUE", SE_SIDM_GALEQU_TRUE, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("SE_SIDM_GALEQU_MULA", SE_SIDM_GALEQU_MULA, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("SE_SIDM_GALALIGN_MARDYKS", SE_SIDM_GALALIGN_MARDYKS, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("SE_SIDM_TRUE_MULA", SE_SIDM_TRUE_MULA, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("SE_SIDM_GALCENT_MULA_WILHELM", SE_SIDM_GALCENT_MULA_WILHELM, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("SE_SIDM_ARYABHATA_522", SE_SIDM_ARYABHATA_522, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("SE_SIDM_BABYL_BRITTON", SE_SIDM_BABYL_BRITTON, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("SE_SIDM_TRUE_SHEORAN", SE_SIDM_TRUE_SHEORAN, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("SE_SIDM_GALCENT_COCHRANE", SE_SIDM_GALCENT_COCHRANE, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("SE_SIDM_GALEQU_FIORENZA", SE_SIDM_GALEQU_FIORENZA, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("SE_SIDM_VALENS_MOON", SE_SIDM_VALENS_MOON, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("SE_SIDM_LAHIRI_1940", SE_SIDM_LAHIRI_1940, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("SE_SIDM_LAHIRI_VP285", SE_SIDM_LAHIRI_VP285, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("SE_SIDM_KRISHNAMURTI_VP291", SE_SIDM_KRISHNAMURTI_VP291, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("SE_SIDM_LAHIRI_ICRC", SE_SIDM_LAHIRI_ICRC, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_SIDM_USER", SE_SIDM_USER           , CONST_CS | CONST_PERSISTENT);
+
+    /* For projection onto ecliptic of t0. */
+	REGISTER_LONG_CONSTANT("SE_SIDBIT_ECL_DATE", SE_SIDBIT_ECL_DATE, CONST_CS | CONST_PERSISTENT);
 
 	REGISTER_LONG_CONSTANT("SE_NSIDM_PREDEF", SE_NSIDM_PREDEF, CONST_CS | CONST_PERSISTENT);
 
@@ -1003,6 +1026,61 @@ PHP_FUNCTION(swe_houses_ex)
 	add_assoc_long(return_value, "rc", rc);
 }
 
+PHP_FUNCTION(swe_houses_ex2)
+{
+	char *arg = NULL;
+	size_t hsys_len;
+	int rc;
+	char *hsys = NULL;
+	double tjd_ut, geolat, geolon;
+	double cusps[37], ascmc[10], cusp_speed[37], ascmc_speed[10];
+	int i, houses;
+	long iflag;
+	zval cusps_arr, ascmc_arr, cusp_speed_arr, ascmc_speed_arr;
+	char serr[AS_MAXCH];
+
+	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dldds",
+			&tjd_ut, &iflag, &geolat, &geolon, &hsys, &hsys_len) == FAILURE) {
+		return;
+	}
+	if (hsys_len < 1)
+		return;
+
+	rc = swe_houses_ex2(tjd_ut, (int)iflag, geolat, geolon, hsys[0], cusps, ascmc, cusp_speed, ascmc_speed, serr);
+
+	array_init(return_value);
+
+	array_init(&cusps_arr);
+	array_init(&cusp_speed_arr);
+
+	if (hsys[0] == 'G')
+		houses = 37;
+	else
+		houses = 13;
+
+	for (i = 0; i < houses; i++) {
+	    add_index_double(&cusps_arr, i, cusps[i]);
+	    add_index_double(&cusp_speed_arr, i, cusp_speed[i]);
+	}
+
+	array_init(&ascmc_arr);
+	array_init(&ascmc_speed_arr);
+
+	for(i = 0; i < 10; i++) {
+	    add_index_double(&ascmc_arr, i, ascmc[i]);
+	    add_index_double(&ascmc_speed_arr, i, ascmc_speed[i]);
+	}
+
+	add_assoc_zval(return_value, "cusps", &cusps_arr);
+	add_assoc_zval(return_value, "ascmc", &ascmc_arr);
+	add_assoc_zval(return_value, "cusp_speed", &cusp_speed_arr);
+	add_assoc_zval(return_value, "ascmc_speed", &ascmc_speed_arr);
+	add_assoc_long(return_value, "rc", rc);
+	add_assoc_string(return_value, "serr", serr);
+}
+
 PHP_FUNCTION(swe_houses_armc)
 {
 	char *arg = NULL;
@@ -1044,6 +1122,60 @@ PHP_FUNCTION(swe_houses_armc)
 	add_assoc_zval(return_value, "cusps", &cusps_arr);
 	add_assoc_zval(return_value, "ascmc", &ascmc_arr);
 	add_assoc_long(return_value, "rc", rc);
+}
+
+PHP_FUNCTION(swe_houses_armc_ex2)
+{
+	char *arg = NULL;
+	size_t hsys_len;
+	int rc;
+	char *hsys = NULL;
+	double armc, geolat, eps;
+	double cusps[37], ascmc[10], cusp_speed[37], ascmc_speed[10];
+	int i, iflag, houses;
+	zval cusps_arr, ascmc_arr, cusp_speed_arr, ascmc_speed_arr;
+	char serr[AS_MAXCH];
+
+	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddds",
+			&armc, &geolat, &eps, &hsys, &hsys_len) == FAILURE) {
+		return;
+	}
+	if (hsys_len < 1)
+		return;
+
+	rc = swe_houses_armc_ex2(armc, geolat, eps, hsys[0], cusps, ascmc, cusp_speed, ascmc_speed, serr);
+
+	array_init(return_value);
+
+	array_init(&cusps_arr);
+	array_init(&cusp_speed_arr);
+
+	if (hsys[0] == 'G')
+		houses = 37;
+	else
+		houses = 13;
+
+	for (i = 0; i < houses; i++) {
+	    add_index_double(&cusps_arr, i, cusps[i]);
+	    add_index_double(&cusp_speed_arr, i, cusp_speed[i]);
+	}
+
+	array_init(&ascmc_arr);
+	array_init(&ascmc_speed_arr);
+
+	for (i = 0; i < 10; i++) {
+	    add_index_double(&ascmc_arr, i, ascmc[i]);
+	    add_index_double(&ascmc_speed_arr, i, ascmc_speed[i]);
+	}
+
+	add_assoc_zval(return_value, "cusps", &cusps_arr);
+	add_assoc_zval(return_value, "ascmc", &ascmc_arr);
+	add_assoc_zval(return_value, "cusp_speed", &cusp_speed_arr);
+	add_assoc_zval(return_value, "ascmc_speed", &ascmc_speed_arr);
+	add_assoc_long(return_value, "rc", rc);
+	add_assoc_string(return_value, "serr", serr);
 }
 
 PHP_FUNCTION(swe_house_pos)
