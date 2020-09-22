@@ -107,6 +107,7 @@ PHP_FUNCTION(swe_nod_aps_ut);
  * exports from swephlib.c 
  ****************************/
 PHP_FUNCTION(swe_deltat);
+PHP_FUNCTION(swe_deltat_ex);
 PHP_FUNCTION(swe_time_equ);
 PHP_FUNCTION(swe_lmt_to_lat);
 PHP_FUNCTION(swe_lat_to_lmt);
