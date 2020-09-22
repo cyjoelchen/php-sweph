@@ -48,6 +48,8 @@ zend_function_entry sweph_functions[] = {
 	PHP_FE(swe_set_sid_mode, NULL)
 	PHP_FE(swe_get_ayanamsa, NULL)
 	PHP_FE(swe_get_ayanamsa_ut, NULL)
+	PHP_FE(swe_get_ayanamsa_ex, NULL)
+	PHP_FE(swe_get_ayanamsa_ex_ut, NULL)
 	PHP_FE(swe_get_ayanamsa_name, NULL)
 	PHP_FE(swe_version, NULL)
 	PHP_FE(swe_get_library_path, NULL)
@@ -104,6 +106,7 @@ zend_function_entry sweph_functions[] = {
 	 * exports from swephlib.c 
 	 ****************************/
 	PHP_FE(swe_deltat, NULL)
+	PHP_FE(swe_deltat_ex, NULL)
 	PHP_FE(swe_time_equ, NULL)
 	PHP_FE(swe_lmt_to_lat, NULL)
 	PHP_FE(swe_lat_to_lmt, NULL)
@@ -685,6 +688,27 @@ PHP_FUNCTION(swe_get_ayanamsa)
 	RETURN_DOUBLE(swe_get_ayanamsa(tjd_et));
 }
 
+PHP_FUNCTION(swe_get_ayanamsa_ex)
+{
+	double tjd_et, daya;
+	long iflag;
+	char serr[AS_MAXCH];
+
+	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+		&tjd_et, &iflag) == FAILURE) {
+		return;
+	}
+
+	swe_get_ayanamsa_ex(tjd_et, iflag, &daya, serr);
+
+    array_init(return_value);
+
+    add_assoc_double(return_value, "daya", daya);
+    add_assoc_string(return_value, "serr", serr);
+}
+
 PHP_FUNCTION(swe_get_ayanamsa_ut)
 {
 	double tjd_ut;
@@ -697,6 +721,27 @@ PHP_FUNCTION(swe_get_ayanamsa_ut)
 	}
 	
 	RETURN_DOUBLE(swe_get_ayanamsa_ut(tjd_ut));
+}
+
+PHP_FUNCTION(swe_get_ayanamsa_ex_ut)
+{
+	double tjd_ut, daya;
+	long iflag;
+	char serr[AS_MAXCH];
+
+	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+		&tjd_ut, &iflag) == FAILURE) {
+		return;
+	}
+
+	swe_get_ayanamsa_ex_ut(tjd_ut, iflag, &daya, serr);
+
+    array_init(return_value);
+
+    add_assoc_double(return_value, "daya", daya);
+    add_assoc_string(return_value, "serr", serr);
 }
 
 PHP_FUNCTION(swe_get_ayanamsa_name)
@@ -2017,6 +2062,27 @@ PHP_FUNCTION(swe_deltat)
 	}
 
 	RETURN_DOUBLE(swe_deltat(tjd_ut));
+}
+
+PHP_FUNCTION(swe_deltat_ex)
+{
+	double tjd_ut, tjd_et;
+	long ephe_flag;
+	char serr[AS_MAXCH];
+
+	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+			&tjd_ut, &ephe_flag) == FAILURE) {
+		return;
+	}
+
+	tjd_et = swe_deltat_ex(tjd_ut, ephe_flag, serr);
+
+	array_init(return_value);
+
+	add_assoc_double(return_value, "tjd_et", tjd_et);
+	add_assoc_string(return_value, "serr", serr);
 }
 
 PHP_FUNCTION(swe_time_equ)

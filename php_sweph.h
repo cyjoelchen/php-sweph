@@ -47,6 +47,8 @@ PHP_FUNCTION(swe_set_topo);
 PHP_FUNCTION(swe_set_sid_mode);
 PHP_FUNCTION(swe_get_ayanamsa);
 PHP_FUNCTION(swe_get_ayanamsa_ut);
+PHP_FUNCTION(swe_get_ayanamsa_ex);
+PHP_FUNCTION(swe_get_ayanamsa_ex_ut);
 PHP_FUNCTION(swe_get_ayanamsa_name);
 PHP_FUNCTION(swe_version);
 PHP_FUNCTION(swe_get_library_path);
@@ -107,6 +109,7 @@ PHP_FUNCTION(swe_nod_aps_ut);
  * exports from swephlib.c 
  ****************************/
 PHP_FUNCTION(swe_deltat);
+PHP_FUNCTION(swe_deltat_ex);
 PHP_FUNCTION(swe_time_equ);
 PHP_FUNCTION(swe_lmt_to_lat);
 PHP_FUNCTION(swe_lat_to_lmt);
