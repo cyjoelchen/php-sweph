@@ -75,4 +75,18 @@ for($i = 1; $i <= 12; $i ++)
 echo "houses: \n" . json_encode($houses, $options = JSON_PRETTY_PRINT) . "\n";
 
 ```
+## Development
 
+This repository ships with a simple Docker setup for easy development.
+Setup your local environment for iterative testing:
+
+```
+> docker-compose build
+> docker-compose up
+> docker exec -it se-php bash
+> ./go
+``` 
+
+The `go` bash script will compile the PHP extension and install it for you.
+Run tests from the PHP command line via `php -a`.
+Repeat `go` execution runs as needed.
