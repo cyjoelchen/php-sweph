@@ -1848,9 +1848,9 @@ PHP_FUNCTION(swe_azalt_rev)
 	double tjd_ut, geopos[3], xin[2], xout[3];
 	int i;
 
-	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
+	if(ZEND_NUM_ARGS() != 7) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlddddd",
 			&tjd_ut, &calc_flag, 
 			&geopos[0], &geopos[1], &geopos[2], 
 			&xin[0], &xin[1], 
@@ -1860,7 +1860,7 @@ PHP_FUNCTION(swe_azalt_rev)
 	swe_azalt_rev(tjd_ut, calc_flag, geopos, xin, xout);
 
 	array_init(return_value);
-	for(i = 0; i < 3; i++)
+	for(i = 0; i < 2; i++)
 		add_index_double(return_value, i, xout[i]);
 }
 
