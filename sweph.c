@@ -1866,82 +1866,60 @@ PHP_FUNCTION(swe_azalt_rev)
 
 PHP_FUNCTION(swe_rise_trans)
 {
-	char *arg = NULL;
-	int arg_len, rc, s_len;
+	int rc;
+	size_t s_len;
 	long ipl, epheflag, rsmi;
-	double tjd_ut, geopos[3], tret[10], atpress, attemp;
-	char serr[AS_MAXCH], *starname = NULL; 
-	int i;
-	zval tret_arr;
+	double tjd_ut, geopos[3], tret, atpress, attemp;
+	char serr[AS_MAXCH], *starname = NULL;
 
-	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
+	if (ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsllddddd",
 			&tjd_ut, &ipl, &starname, &s_len, &epheflag, &rsmi,
-			&(geopos[0]), &(geopos[1]), &(geopos[2]),
-			&atpress, &attemp, 
-			&arg_len) == FAILURE) {
+			&geopos[0], &geopos[1], &geopos[2],
+			&atpress, &attemp) == FAILURE) {
 		return;
 	}
-	rc = swe_rise_trans(tjd_ut, ipl, starname, epheflag, rsmi,
-			&(geopos[0]), atpress, attemp, tret, serr);
+
+	rc = swe_rise_trans(tjd_ut, ipl, starname, epheflag, rsmi, geopos, atpress, attemp, &tret, serr);
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
 
-	if (rc == ERR)
-	{
+	if (rc == ERR) {
 		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
-		array_init(&tret_arr);
-		
-		for(i = 0; i < 10; i++)
-			add_index_double(&tret_arr, i, tret[i]);
-			
-		add_assoc_zval(return_value, "tret", &tret_arr);
+	} else {
+	    add_assoc_double(return_value, "tret", tret);
 	}
 }
 
 PHP_FUNCTION(swe_rise_trans_true_hor)
 {
-	char *arg = NULL;
-	int arg_len, rc, s_len;
+	int rc;
+	size_t s_len;
 	long ipl, epheflag, rsmi;
-	double tjd_ut, geopos[3], tret[10], atpress, attemp, horhgt;
-	char serr[AS_MAXCH], *starname = NULL; 
-	int i;
-	zval tret_arr;
+	double tjd_ut, geopos[3], tret, atpress, attemp, horhgt;
+	char serr[AS_MAXCH], *starname = NULL;
 
 	if(ZEND_NUM_ARGS() != 11) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlslldddddd",
 			&tjd_ut, &ipl, &starname, &s_len, &epheflag, &rsmi,
 			&geopos[0], &geopos[1], &geopos[2],
-			&atpress, &attemp, &horhgt,
-			&arg_len) == FAILURE) {
+			&atpress, &attemp, &horhgt) == FAILURE) {
 		return;
 	}
 	rc = swe_rise_trans_true_hor(tjd_ut, ipl, starname, epheflag, rsmi,
-			geopos, atpress, attemp, horhgt, tret, serr);
+			geopos, atpress, attemp, horhgt, &tret, serr);
 
-	array_init(return_value);
-	add_assoc_long(return_value, "retflag", rc);
+    array_init(return_value);
+    add_assoc_long(return_value, "retflag", rc);
 
-	if (rc == ERR)
-	{
-		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
-		array_init(&tret_arr);
-		
-		for(i = 0; i < 10; i++)
-			add_index_double(&tret_arr, i, tret[i]);
-			
-		add_assoc_zval(return_value, "tret", &tret_arr);
-	}
+    if (rc == ERR) {
+        add_assoc_string(return_value, "serr", serr);
+    } else {
+        add_assoc_double(return_value, "tret", tret);
+    }
 }
 
 PHP_FUNCTION(swe_nod_aps)
