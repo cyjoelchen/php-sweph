@@ -1898,7 +1898,7 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 	char *arg = NULL;
 	int arg_len, rc, s_len;
 	long ipl, epheflag, rsmi;
-	double tjd_ut, geopos[3], tret[10], atpress, attemp, horhgt;
+	double tjd_ut, geopos[3], tret, atpress, attemp, horhgt;
 	char serr[AS_MAXCH], *starname = NULL; 
 	int i;
 	zval tret_arr;
@@ -1913,24 +1913,16 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 		return;
 	}
 	rc = swe_rise_trans_true_hor(tjd_ut, ipl, starname, epheflag, rsmi,
-			geopos, atpress, attemp, horhgt, tret, serr);
+			geopos, atpress, attemp, horhgt, &tret, serr);
 
-	array_init(return_value);
-	add_assoc_long(return_value, "retflag", rc);
+    array_init(return_value);
+    add_assoc_long(return_value, "retflag", rc);
 
-	if (rc == ERR)
-	{
-		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
-		array_init(&tret_arr);
-		
-		for(i = 0; i < 10; i++)
-			add_index_double(&tret_arr, i, tret[i]);
-			
-		add_assoc_zval(return_value, "tret", &tret_arr);
-	}
+    if (rc == ERR) {
+        add_assoc_string(return_value, "serr", serr);
+    } else {
+        add_assoc_double(return_value, "tret", tret);
+    }
 }
 
 PHP_FUNCTION(swe_nod_aps)
