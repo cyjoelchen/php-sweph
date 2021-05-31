@@ -1895,21 +1895,18 @@ PHP_FUNCTION(swe_rise_trans)
 
 PHP_FUNCTION(swe_rise_trans_true_hor)
 {
-	char *arg = NULL;
-	int arg_len, rc, s_len;
+	int rc;
+	size_t s_len;
 	long ipl, epheflag, rsmi;
 	double tjd_ut, geopos[3], tret, atpress, attemp, horhgt;
-	char serr[AS_MAXCH], *starname = NULL; 
-	int i;
-	zval tret_arr;
+	char serr[AS_MAXCH], *starname = NULL;
 
 	if(ZEND_NUM_ARGS() != 11) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlslldddddd",
 			&tjd_ut, &ipl, &starname, &s_len, &epheflag, &rsmi,
 			&geopos[0], &geopos[1], &geopos[2],
-			&atpress, &attemp, &horhgt,
-			&arg_len) == FAILURE) {
+			&atpress, &attemp, &horhgt) == FAILURE) {
 		return;
 	}
 	rc = swe_rise_trans_true_hor(tjd_ut, ipl, starname, epheflag, rsmi,
