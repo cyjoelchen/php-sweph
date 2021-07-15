@@ -2,9 +2,10 @@
   +----------------------------------------------------------------------+
   | PHP Version 7 Swiss Ephemeris extension                              |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2007-2018                                              |
+  | Copyright (c) 2007-2021                                              |
   +----------------------------------------------------------------------+
   | Author: Joel Chen (cyjoelchen@gmail.com)                             |
+  | Contributor: Alois Treindl
   +----------------------------------------------------------------------+
 */
 
@@ -19,7 +20,7 @@
 
 #include "swephexp.h"
 
-#define SWEPH_EXTENSION_VERSION "2.0 Rev: 28"
+#define SWEPH_EXTENSION_VERSION "2.0 Rev: 29"
 
 /* If you declare any globals in php_sweph.h uncomment this:
 ZEND_DECLARE_MODULE_GLOBALS(sweph)
@@ -2411,6 +2412,60 @@ PHP_FUNCTION(swe_cs2degstr)
 	}
 
 	RETURN_STRING(swe_cs2degstr((int)t, a));
+}
+
+/* new for SE 2.10 */
+/* int swe_calc_pctr ( double tjd_et, int ipl, int iplctr, int iflag, double* xx, char* serr); */
+PHP_FUNCTION(swe_calc_pctr)
+{
+	char *arg = NULL;
+	int rc;
+	long ipl, iflag, iplctr;
+	double tjd_et, xx[6];
+	char serr[AS_MAXCH]; 
+	int i;
+	
+	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
+			&tjd_et, &ipl, &iplctr, &iflag) == FAILURE) {
+		return;
+	}
+	rc = swe_calc_pctr(tjd_et, (int)ipl, (int)iplctr, (int)iflag, xx, serr);
+
+		/* create an array */
+	array_init(return_value);
+	for(i = 0; i < 6; i++)
+		add_index_double(return_value, i, xx[i]);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+}
+
+
+/* char * swe_get_current_file_data(int ifno, double *tfstart, double *tfend, int *denum); */
+PHP_FUNCTION(swe_get_current_file_data)
+{
+	int ifno;
+	int denum;
+	double tfstart, tfend;
+	char *a;
+
+	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l",
+			&ifno) == FAILURE) {
+		return;
+	}
+
+	a = swe_get_current_file_data(ifno, &tfstart, &tfend, &denum);
+	if (a == NULL) {
+		RETURN_NULL();
+	} else {
+		add_assoc_double(return_value, "tfstart", tfstart);
+		add_assoc_double(return_value, "tfend", tfend);
+		add_assoc_long(return_value, "denum", denum);
+		RETURN_STRING(a);
+    }
 }
 
 #if 0

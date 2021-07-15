@@ -2,9 +2,10 @@
   +----------------------------------------------------------------------+
   | PHP Version 7 Swiss Ephemeris extension                              |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2007-2018                                              |
+  | Copyright (c) 2007-2021                                              |
   +----------------------------------------------------------------------+
   | Author: Joel Chen                                                    |
+  | Contributor: Alois Treindl
   +----------------------------------------------------------------------+
 */
 
@@ -37,6 +38,7 @@ PHP_MINFO_FUNCTION(sweph);
  ****************************/
 PHP_FUNCTION(swe_calc);
 PHP_FUNCTION(swe_calc_ut);
+PHP_FUNCTION(swe_calc_pctr);
 PHP_FUNCTION(swe_fixstar);
 PHP_FUNCTION(swe_fixstar_ut);
 PHP_FUNCTION(swe_close);
@@ -50,6 +52,7 @@ PHP_FUNCTION(swe_get_ayanamsa_ut);
 PHP_FUNCTION(swe_get_ayanamsa_name);
 PHP_FUNCTION(swe_version);
 PHP_FUNCTION(swe_get_library_path);
+PHP_FUNCTION(swe_get_current_file_data);
 
 /**************************** 
  * exports from swedate.c 
