@@ -39,6 +39,7 @@ zend_function_entry sweph_functions[] = {
 	 ****************************/
 	PHP_FE(swe_calc, NULL)
 	PHP_FE(swe_calc_ut, NULL)
+	PHP_FE(swe_calc_pctr, NULL)
 	PHP_FE(swe_fixstar, NULL)
 	PHP_FE(swe_fixstar_ut, NULL)
 	PHP_FE(swe_close, NULL)
@@ -52,6 +53,7 @@ zend_function_entry sweph_functions[] = {
 	PHP_FE(swe_get_ayanamsa_name, NULL)
 	PHP_FE(swe_version, NULL)
 	PHP_FE(swe_get_library_path, NULL)
+	PHP_FE(swe_get_current_file_data, NULL)
 
 	/**************************** 
 	 * exports from swedate.c 
@@ -300,7 +302,12 @@ PHP_MINIT_FUNCTION(sweph)
 	REGISTER_LONG_CONSTANT("SEFLG_BARYCTR", SEFLG_BARYCTR	, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SEFLG_TOPOCTR", SEFLG_TOPOCTR	, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SEFLG_SIDEREAL", SEFLG_SIDEREAL	, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("SEFLG_ICRS", SEFLG_ICRS		, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SEFLG_ICRS", SEFLG_ICRS	, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SEFLG_DPSIDEPS_1980", SEFLG_DPSIDEPS_1980	, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SEFLG_JPLHOR", SEFLG_JPLHOR	, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SEFLG_JPLHOR_APPROX", SEFLG_JPLHOR_APPROX	, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SEFLG_CENTER_BODY", SEFLG_CENTER_BODY	, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SEFLG_TEST_PLMOON", SEFLG_TEST_PLMOON	, CONST_CS | CONST_PERSISTENT);
 
 	REGISTER_LONG_CONSTANT("SE_SIDBITS", SE_SIDBITS, CONST_CS | CONST_PERSISTENT);
 	/* for projection onto ecliptic of t0 */
@@ -413,6 +420,25 @@ PHP_MINIT_FUNCTION(sweph)
 	REGISTER_LONG_CONSTANT("SE_TRUE_TO_APP", SE_TRUE_TO_APP, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_APP_TO_TRUE", SE_APP_TO_TRUE, CONST_CS | CONST_PERSISTENT);
 
+	/* for swe_set_tid_acc() */
+	REGISTER_LONG_CONSTANT("SE_TIDAL_DE200", SE_TIDAL_DE200, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_DE403", SE_TIDAL_DE403, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_DE404", SE_TIDAL_DE404, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_DE405", SE_TIDAL_DE405, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_DE406", SE_TIDAL_DE406, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_DE421", SE_TIDAL_DE421, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_DE422", SE_TIDAL_DE422, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_DE430", SE_TIDAL_DE430, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_DE431", SE_TIDAL_DE431, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_DE441", SE_TIDAL_DE441, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_26", SE_TIDAL_26, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_STEPHENSON_2016", SE_TIDAL_STEPHENSON_2016, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_DEFAULT", SE_TIDAL_DEFAULT, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_AUTOMATIC", SE_TIDAL_AUTOMATIC, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_MOSEPH", SE_TIDAL_MOSEPH, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_SWIEPH", SE_TIDAL_SWIEPH, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_TIDAL_JPLEPH", SE_TIDAL_JPLEPH, CONST_CS | CONST_PERSISTENT);
+
 	return SUCCESS;
 }
 /* }}} */
@@ -517,6 +543,32 @@ PHP_FUNCTION(swe_calc_ut)
 	rc = swe_calc_ut(tjd_ut, (int)ipl, (int)iflag, xx, serr);
 
 	/* create an array */
+	array_init(return_value);
+	for(i = 0; i < 6; i++)
+		add_index_double(return_value, i, xx[i]);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+}
+
+/* int swe_calc_pctr ( double tjd_et, int ipl, int iplctr, int iflag, double* xx, char* serr); */
+PHP_FUNCTION(swe_calc_pctr)
+{
+	char *arg = NULL;
+	int rc;
+	long ipl, iflag, iplctr;
+	double tjd_et, xx[6];
+	char serr[AS_MAXCH]; 
+	int i;
+	
+	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
+			&tjd_et, &ipl, &iplctr, &iflag) == FAILURE) {
+		return;
+	}
+	rc = swe_calc_pctr(tjd_et, (int)ipl, (int)iplctr, (int)iflag, xx, serr);
+
+		/* create an array */
 	array_init(return_value);
 	for(i = 0; i < 6; i++)
 		add_index_double(return_value, i, xx[i]);
@@ -729,6 +781,32 @@ PHP_FUNCTION(swe_get_library_path)
     if (ZEND_NUM_ARGS() != 0) WRONG_PARAM_COUNT;
 
     RETURN_STRING(swe_get_library_path(path));
+}
+
+/* char * swe_get_current_file_data(int ifno, double *tfstart, double *tfend, int *denum); */
+PHP_FUNCTION(swe_get_current_file_data)
+{
+	int ifno;
+	int denum;
+	double tfstart, tfend;
+	char *a;
+
+	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l",
+			&ifno) == FAILURE) {
+		return;
+	}
+
+	a = swe_get_current_file_data(ifno, &tfstart, &tfend, &denum);
+	if (a == NULL) {
+		RETURN_NULL();
+	} else {
+		add_assoc_double(return_value, "tfstart", tfstart);
+		add_assoc_double(return_value, "tfend", tfend);
+		add_assoc_long(return_value, "denum", denum);
+		RETURN_STRING(a);
+    }
 }
 
 /**************************** 
@@ -2414,59 +2492,6 @@ PHP_FUNCTION(swe_cs2degstr)
 	RETURN_STRING(swe_cs2degstr((int)t, a));
 }
 
-/* new for SE 2.10 */
-/* int swe_calc_pctr ( double tjd_et, int ipl, int iplctr, int iflag, double* xx, char* serr); */
-PHP_FUNCTION(swe_calc_pctr)
-{
-	char *arg = NULL;
-	int rc;
-	long ipl, iflag, iplctr;
-	double tjd_et, xx[6];
-	char serr[AS_MAXCH]; 
-	int i;
-	
-	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
-		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
-			&tjd_et, &ipl, &iplctr, &iflag) == FAILURE) {
-		return;
-	}
-	rc = swe_calc_pctr(tjd_et, (int)ipl, (int)iplctr, (int)iflag, xx, serr);
-
-		/* create an array */
-	array_init(return_value);
-	for(i = 0; i < 6; i++)
-		add_index_double(return_value, i, xx[i]);
-	add_assoc_string(return_value, "serr", serr);
-	add_assoc_long(return_value, "rc", rc);
-}
-
-
-/* char * swe_get_current_file_data(int ifno, double *tfstart, double *tfend, int *denum); */
-PHP_FUNCTION(swe_get_current_file_data)
-{
-	int ifno;
-	int denum;
-	double tfstart, tfend;
-	char *a;
-
-	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
-
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l",
-			&ifno) == FAILURE) {
-		return;
-	}
-
-	a = swe_get_current_file_data(ifno, &tfstart, &tfend, &denum);
-	if (a == NULL) {
-		RETURN_NULL();
-	} else {
-		add_assoc_double(return_value, "tfstart", tfstart);
-		add_assoc_double(return_value, "tfend", tfend);
-		add_assoc_long(return_value, "denum", denum);
-		RETURN_STRING(a);
-    }
-}
 
 #if 0
 /* Remove the following function when you have succesfully modified config.m4
