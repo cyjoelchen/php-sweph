@@ -1,5 +1,6 @@
 <?php
 
+# this needs to be set to where the users keeps ephemeris files and sefstars.txt
 swe_set_ephe_path("/home/ephe");
 
 # calc planet position
@@ -30,6 +31,7 @@ echo "planets: \n" . json_encode($planets, $options = JSON_PRETTY_PRINT) . "\n";
 # calc house cusps
 define("GEO_LNG", 121.5);
 define("GEO_LAT", 25.05);   // Taipei, Taiwan: 121E30, 25N03
+$place = 'Taipei, Taiwan';
 
 $yy = swe_houses($jul_ut, GEO_LAT, GEO_LNG, "P"); // P = Placidus. 
 
@@ -40,7 +42,7 @@ for($i = 1; $i <= 12; $i ++)
     $houses[$i] = array('lng' => $yy['cusps'][$i]);
 }
 
-echo "houses: \n" . json_encode($houses, $options = JSON_PRETTY_PRINT) . "\n";
+echo "houses for $place: \n" . json_encode($houses, $options = JSON_PRETTY_PRINT) . "\n";
 
 $flags = array(SE_CALC_RISE, SE_CALC_MTRANSIT, SE_CALC_SET, SE_CALC_ITRANSIT );
 $flagnam = array('rise', 'mer_transit', 'set', 'lower_mer_transit');
