@@ -22,6 +22,12 @@
 
 #define SWEPH_EXTENSION_VERSION "2.0 Rev: 29"
 
+#if PHP_MAJOR_VERSION < 8
+# define IS_PHP7	1
+#else
+# define IS_PHP7	0
+#endif
+
 /* If you declare any globals in php_sweph.h uncomment this:
 ZEND_DECLARE_MODULE_GLOBALS(sweph)
 */
@@ -1907,8 +1913,10 @@ PHP_FUNCTION(swe_rise_trans)
 	long ipl, epheflag, rsmi;
 	double tjd_ut, geopos[3], tret[10], atpress, attemp;
 	char serr[AS_MAXCH], *starname = NULL; 
+	char star[AS_MAXCH];
 	int i;
 	zval tret_arr;
+	*star = '\0';
 
 	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
 
@@ -1919,7 +1927,10 @@ PHP_FUNCTION(swe_rise_trans)
 			&arg_len) == FAILURE) {
 		return;
 	}
-	rc = swe_rise_trans(tjd_ut, ipl, starname, epheflag, rsmi,
+
+    if (starname != NULL && s_len > 0)
+		strcpy(star, starname);
+	rc = swe_rise_trans(tjd_ut, ipl, star, epheflag, rsmi,
 			&(geopos[0]), atpress, attemp, tret, serr);
 
 	array_init(return_value);
@@ -1932,11 +1943,11 @@ PHP_FUNCTION(swe_rise_trans)
 	else
 	{
 		array_init(&tret_arr);
-		
 		for(i = 0; i < 10; i++)
 			add_index_double(&tret_arr, i, tret[i]);
-			
 		add_assoc_zval(return_value, "tret", &tret_arr);
+		if (starname != NULL && s_len > 0)
+			add_assoc_string(return_value, "starname", star);
 	}
 }
 
