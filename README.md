@@ -28,7 +28,22 @@ Now you should able to see sweph section from `phpinfo()`.
 You are all set!
 
 ## missing functions
-swe_heliacal*
+swe_heliacal_ut
+swe_heliacal_pheno_ut
+swe_vis_limit_mag
+swe_heliacal_angle
+swe_fixstar_mag
+swe_fixstar2
+swe_fixstar2_ut
+swe_fixstar2_mag
+swe_get_ayanamsa_ex
+swe_get_ayanamsa_ex_ut
+swe_set_timeout
+swe_get_orbital_elements
+swe_orbit_max_min_true_distance
+swe_deltat_ex
+swe_set_interpolate_nut
+swe_set_delta_t_userdef
 
 ## Example
 
