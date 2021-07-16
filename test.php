@@ -1,6 +1,6 @@
 <?php
 
-swe_set_ephe_path("/usr/local/share/sweph");
+swe_set_ephe_path("/home/ephe");
 
 # calc planet position
 list($y, $m, $d, $h, $mi, $s) = sscanf(gmdate("Y m d G i s"), "%d %d %d %d %d %d");
@@ -41,4 +41,36 @@ for($i = 1; $i <= 12; $i ++)
 }
 
 echo "houses: \n" . json_encode($houses, $options = JSON_PRETTY_PRINT) . "\n";
+
+$flags = array(SE_CALC_RISE, SE_CALC_MTRANSIT, SE_CALC_SET, SE_CALC_ITRANSIT );
+$flagnam = array('rise', 'mer_transit', 'set', 'lower_mer_transit');
+$planet = SE_MOON;
+$pnam = swe_get_planet_name($planet);
+for($i = 0; $i < 4; $i++) {
+  $rv = swe_rise_trans($jul_ut, $planet, "", 0, $flags[$i], GEO_LNG, GEO_LAT, 0, 0, 0);
+  if ($rv['retval'] < 0)
+    $tr = 'never';
+  else
+    $tr = $rv['tret'][0];
+  $ptrans[$i] = array(
+    'what' => $flagnam[$i],
+    'when' => $tr
+  );
+}
+echo "rise $pnam: \n" . json_encode($ptrans, $options = JSON_PRETTY_PRINT) . "\n";
+
+$starname = 'Sirius';
+for($i = 0; $i < 4; $i++) {
+  $rv = swe_rise_trans($jul_ut, $planet, $starname, 0, $flags[$i], GEO_LNG, GEO_LAT, 0, 0, 0);
+  if ($rv['retval'] < 0)
+    $tr = 'never';
+  else
+    $tr = $rv['tret'][0];
+  $strans[$i] = array(
+    'who' => $rv['starname'],
+    'what' => $flagnam[$i],
+    'when' => $tr
+  );
+}
+echo "rise $starname: \n" . json_encode($strans, $options = JSON_PRETTY_PRINT) . "\n";
 ?>
