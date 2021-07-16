@@ -22,10 +22,13 @@ Now you should able to see sweph section from `phpinfo()`.
  sweph support | enabled 
 ---|---
  extension version | 2.0 Rev: 29
- library (libswe.a) version | 2.19.01a
+ library (libswe.a) version | 2.10.01a
  default ephemeris file path | .:/users/ephe2/:/users/ephe/ 
 
 You are all set!
+
+## missing functions
+swe_heliacal*
 
 ## Example
 
