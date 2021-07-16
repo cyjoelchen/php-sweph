@@ -93,6 +93,7 @@ for($i = 1; $i <= 12; $i ++)
 }
 
 echo "houses: \n" . json_encode($houses, $options = JSON_PRETTY_PRINT) . "\n";
+?>
 
 ```
 
