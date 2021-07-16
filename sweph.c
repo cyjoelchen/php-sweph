@@ -560,7 +560,7 @@ PHP_FUNCTION(swe_calc_pctr)
 	char serr[AS_MAXCH]; 
 	int i;
 	
-	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
+	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 		
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
 			&tjd_et, &ipl, &iplctr, &iflag) == FAILURE) {
@@ -791,7 +791,7 @@ PHP_FUNCTION(swe_get_current_file_data)
 	double tfstart, tfend;
 	char *a;
 
-	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
+	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l",
 			&ifno) == FAILURE) {
