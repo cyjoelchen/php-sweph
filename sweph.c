@@ -797,7 +797,7 @@ PHP_FUNCTION(swe_get_current_file_data)
 	int ifno;
 	int denum;
 	double tfstart, tfend;
-	char *a;
+	char *a = NULL;
 
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
@@ -806,7 +806,7 @@ PHP_FUNCTION(swe_get_current_file_data)
 		return;
 	}
 
-	a = swe_get_current_file_data(ifno, &tfstart, &tfend, &denum);
+	a = (char *)swe_get_current_file_data(ifno, &tfstart, &tfend, &denum);
 	if (a == NULL) {
 		RETURN_NULL();
 	} else {
@@ -1958,8 +1958,10 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 	long ipl, epheflag, rsmi;
 	double tjd_ut, geopos[3], tret[10], atpress, attemp, horhgt;
 	char serr[AS_MAXCH], *starname = NULL; 
+	char star[AS_MAXCH];
 	int i;
 	zval tret_arr;
+	*star = '\0';
 
 	if(ZEND_NUM_ARGS() != 11) WRONG_PARAM_COUNT;
 
@@ -1970,7 +1972,9 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 			&arg_len) == FAILURE) {
 		return;
 	}
-	rc = swe_rise_trans_true_hor(tjd_ut, ipl, starname, epheflag, rsmi,
+    if (starname != NULL && s_len > 0)
+		strcpy(star, starname);
+	rc = swe_rise_trans_true_hor(tjd_ut, ipl, star, epheflag, rsmi,
 			geopos, atpress, attemp, horhgt, tret, serr);
 
 	array_init(return_value);
@@ -1983,11 +1987,11 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 	else
 	{
 		array_init(&tret_arr);
-		
 		for(i = 0; i < 10; i++)
 			add_index_double(&tret_arr, i, tret[i]);
-			
 		add_assoc_zval(return_value, "tret", &tret_arr);
+		if (starname != NULL && s_len > 0)
+			add_assoc_string(return_value, "starname", star);
 	}
 }
 
