@@ -69,7 +69,7 @@ for($i = 0; $i < 4; $i++) {
   else
     $tr = $rv['tret'][0];
   $strans[$i] = array(
-    'who' => $rv['starname'],
+    'who' => $rv['star'],
     'what' => $flagnam[$i],
     'when' => $tr
   );
