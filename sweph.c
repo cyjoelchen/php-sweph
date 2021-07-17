@@ -509,7 +509,7 @@ PHP_MINFO_FUNCTION(sweph)
  * exports from sweph.c 
  ****************************/
  
-/*
+/* {{{ pod
 =pod
 
 =head1 function swe_calc (tjd_ut, ipl, iflag)
@@ -532,7 +532,7 @@ calculate position of planet ipl with time in Ephemeris Time (TDT)
 
 
 =cut
- */
+ }}} */
 PHP_FUNCTION(swe_calc)
 {
 	char *arg = NULL;
@@ -558,7 +558,7 @@ PHP_FUNCTION(swe_calc)
 	add_assoc_long(return_value, "rc", rc);
 }
 
-/*
+/* {{{ pod
 =pod
 
 =head1 function swe_calc_ut (tjd_ut, ipl, iflag)
@@ -581,7 +581,7 @@ calculate position of planet ipl with time in Universal Time UT
 
 
 =cut
- */
+ }}} */
 PHP_FUNCTION(swe_calc_ut)
 {
 	char *arg = NULL;
@@ -607,7 +607,7 @@ PHP_FUNCTION(swe_calc_ut)
 	add_assoc_long(return_value, "rc", rc);
 }
 
-/*
+/* {{{ pod
 =pod
 
 =head1 function swe_calc_pctr (tjd_et, ipl, iplctr, iflag)
@@ -630,7 +630,7 @@ calculate position of planet ipl  relative to a center object iplctr
 
 
 =cut
- */
+ }}} */
 PHP_FUNCTION(swe_calc_pctr)
 {
 	char *arg = NULL;
