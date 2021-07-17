@@ -657,14 +657,31 @@ PHP_FUNCTION(swe_calc_pctr)
 }
 
 #define MAX_FIXSTAR_NAME (2 * SE_MAX_STNAME + 1)
-/*
- * int swe_fixstar(char *star, double tjd_et, int32 iflag, double *xx, char *serr)
- * Parameters: star, tjd_et, iflag
- * Return array: [0..5]		position and speed vector xx
- * 	             ['star']	returned star name, usually different from input
- * 	             ['serr']	optional error message
- * 	             ['rc']		return flag, < 0 in case of error
- */
+/* {{{ pod
+=pod
+
+=head1 function swe_fixstar (star, tjd_et, iflag)
+
+calculate position of a star with time in Ephemeris Time (TDT)
+
+=head3 Parameters
+
+  star, tjd_et, iflag
+
+=head3 return array
+
+  [0..5]		position and speed vector xx
+  ['star']		returned star name, usually different from input
+  ['serr']		optional error message
+  ['rc']		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_fixstar(char *star, double tjd_et, int32 iflag, double *xx, char *serr);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_fixstar)
 {
 	char *arg = NULL;
@@ -696,14 +713,31 @@ PHP_FUNCTION(swe_fixstar)
 	add_assoc_long(return_value, "rc", rc);
 }
 
-/*
- * int swe_fixstar_ut(char *star, double tjd_ut int32 iflag, double *xx, char *serr)
- * Parameters: star, tjd_ut, iflag
- * Return array: [0..5]		position and speed vector xx
- * 	             ['star']	returned star name, usually different from input
- * 	             ['serr']	optional error message
- * 	             ['rc']		return flag, < 0 in case of error
- */
+/* {{{ pod
+=pod
+
+=head1 function swe_fixstar_ut (star, tjd_ut, iflag)
+
+calculate position of a star with time in Universal Time (UT)
+
+=head3 Parameters
+
+  star, tjd_ut, iflag
+
+=head3 return array
+
+  [0..5]		position and speed vector xx
+  ['star']		returned star name, usually different from input
+  ['serr']		optional error message
+  ['rc']		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_fixstar(char *star, double tjd_et, int32 iflag, double *xx, char *serr);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_fixstar_ut)
 {
 	char *arg = NULL;
