@@ -516,17 +516,17 @@ PHP_MINFO_FUNCTION(sweph)
 
 calculate position of planet ipl with time in Ephemeris Time (TDT)
 
-=head2 Parameters
+=head3 Parameters
 
   tjd_et, ipl, iflag
 
-=head2 return array
+=head3 return array
 
   [0..5]		position and speed vector xx
   ['serr']		optional error message
   ['rc']		return flag, < 0 in case of error
 
-=head2 C declaration
+=head3 C declaration
 
   int swe_calc ( double tjd_et, int ipl, int iflag, double* xx, char* serr);
 
@@ -565,17 +565,17 @@ PHP_FUNCTION(swe_calc)
 
 calculate position of planet ipl with time in Universal Time UT
 
-=head2 Parameters
+=head3 Parameters
 
   tjd_ut, ipl, iflag
 
-=head2 return array
+=head3 return array
 
   [0..5]		position and speed vector xx
   ['serr']		optional error message
   ['rc']		return flag, < 0 in case of error
 
-=head2 C declaration
+=head3 C declaration
 
   int swe_calc_ut ( double tjd_ut, int ipl, int iflag, double* xx, char* serr);
 
@@ -614,17 +614,17 @@ PHP_FUNCTION(swe_calc_ut)
 
 calculate position of planet ipl  relative to a center object iplctr
 
-=head2 Parameters
+=head3 Parameters
 
   tjd_et, ipl, iplctr, iflag
 
-=head2 return array
+=head3 return array
 
   [0..5]		position and speed vector xx
   ['serr']		optional error message
   ['rc']		return flag, < 0 in case of error
 
-=head2 C declaration
+=head3 C declaration
 
   int swe_calc_pctr ( double tjd_et, int ipl, int iplctr, int iflag, double* xx, char* serr);
 
