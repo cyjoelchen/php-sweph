@@ -771,6 +771,24 @@ PHP_FUNCTION(swe_fixstar_ut)
  * void swe_close()
  * no parameter, no return value.
  */
+/* {{{ pod
+=pod
+
+=head1 function swe_close()
+
+close SE and rlease resources
+
+=head3 Parameters : none
+
+=head3 return value: none
+
+=head3 C declaration
+
+  void swe_close()
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_close)
 {
 	if(ZEND_NUM_ARGS() != 0) WRONG_PARAM_COUNT;
