@@ -509,7 +509,13 @@ PHP_MINFO_FUNCTION(sweph)
  * exports from sweph.c 
  ****************************/
  
-/* int swe_calc ( double tjd_et, int ipl, int iflag, double* xx, char* serr); */
+/**
+ * int swe_calc ( double tjd_et, int ipl, int iflag, double* xx, char* serr); 
+ * Parameters: tjd_et, ipl, iflag
+ * Return array: [0..5]		position and speed vector xx
+ * 	             ['serr']	optional error message
+ * 	             ['rc']		return flag, < 0 in case of error
+ */
 PHP_FUNCTION(swe_calc)
 {
 	char *arg = NULL;
@@ -535,7 +541,13 @@ PHP_FUNCTION(swe_calc)
 	add_assoc_long(return_value, "rc", rc);
 }
 
-/* int swe_calc_ut ( double tjd_ut, int ipl, int iflag, double* xx, char* serr); */
+/**
+ * int swe_calc_ut ( double tjd_ut, int ipl, int iflag, double* xx, char* serr);
+ * Parameters: tjd_ut, ipl, iflag
+ * Return array: [0..5]		position and speed vector xx
+ * 	             ['serr']	optional error message
+ * 	             ['rc']		return flag, < 0 in case of error
+ */
 PHP_FUNCTION(swe_calc_ut)
 {
 	char *arg = NULL;
@@ -561,7 +573,12 @@ PHP_FUNCTION(swe_calc_ut)
 	add_assoc_long(return_value, "rc", rc);
 }
 
-/* int swe_calc_pctr ( double tjd_et, int ipl, int iplctr, int iflag, double* xx, char* serr); */
+/* int swe_calc_pctr ( double tjd_et, int ipl, int iplctr, int iflag, double* xx, char* serr);
+ * Parameters: tjd_ut, ipl, iplctr, iflag
+ * Return array: [0..5]		position and speed vector xx
+ * 	             ['serr']	optional error message
+ * 	             ['rc']		return flag, < 0 in case of error
+ */
 PHP_FUNCTION(swe_calc_pctr)
 {
 	char *arg = NULL;
@@ -588,6 +605,14 @@ PHP_FUNCTION(swe_calc_pctr)
 }
 
 #define MAX_FIXSTAR_NAME (2 * SE_MAX_STNAME + 1)
+/*
+ * int swe_fixstar(char *star, double tjd_et, int32 iflag, double *xx, char *serr)
+ * Parameters: star, tjd_et, iflag
+ * Return array: [0..5]		position and speed vector xx
+ * 	             ['star']	returned star name, usually different from input
+ * 	             ['serr']	optional error message
+ * 	             ['rc']		return flag, < 0 in case of error
+ */
 PHP_FUNCTION(swe_fixstar)
 {
 	char *arg = NULL;
@@ -619,6 +644,14 @@ PHP_FUNCTION(swe_fixstar)
 	add_assoc_long(return_value, "rc", rc);
 }
 
+/*
+ * int swe_fixstar_ut(char *star, double tjd_ut int32 iflag, double *xx, char *serr)
+ * Parameters: star, tjd_ut, iflag
+ * Return array: [0..5]		position and speed vector xx
+ * 	             ['star']	returned star name, usually different from input
+ * 	             ['serr']	optional error message
+ * 	             ['rc']		return flag, < 0 in case of error
+ */
 PHP_FUNCTION(swe_fixstar_ut)
 {
 	char *arg = NULL;
@@ -648,6 +681,10 @@ PHP_FUNCTION(swe_fixstar_ut)
 	add_assoc_long(return_value, "rc", rc);
 }
 
+/**
+ * void swe_close()
+ * no parameter, no return value.
+ */
 PHP_FUNCTION(swe_close)
 {
 	if(ZEND_NUM_ARGS() != 0) WRONG_PARAM_COUNT;
@@ -656,6 +693,11 @@ PHP_FUNCTION(swe_close)
 	RETURN_NULL();
 }
 
+/**
+ *	void swe_set_ephe_path(char *path);
+ *	Parameters: path	(where ephemeris files reside)
+ *	Return value: none
+ */
 PHP_FUNCTION(swe_set_ephe_path)
 {
 	char *arg = emalloc(100);
@@ -672,6 +714,11 @@ PHP_FUNCTION(swe_set_ephe_path)
 	RETURN_NULL();
 }
 
+/**
+ * void swe_set_jpl_file(char *fname);
+ * Parameters: fname	(file name of JPL file, used with flag SEFLG_JPLEPH
+ * Return value: none
+ */
 PHP_FUNCTION(swe_set_jpl_file)
 {
 	char *arg = NULL;
@@ -688,6 +735,12 @@ PHP_FUNCTION(swe_set_jpl_file)
 	RETURN_NULL();
 }
 
+/**
+ * (char *) swe_get_planet_name(int ipl, char *spname);
+ * Parameters: ipl
+ * Return value: string 	(object name)
+ * in case of error: an error message instead of a name.
+ */
 PHP_FUNCTION(swe_get_planet_name)
 {
 	long ipl;
@@ -704,6 +757,11 @@ PHP_FUNCTION(swe_get_planet_name)
 	RETURN_STRING(name);
 }
 
+/**
+ * (void) swe_set_topo(double geolon, double geolat, double geoalt)
+ * Parameters: geolon, geolat, geoalt 
+ * Return value: none
+ */
 PHP_FUNCTION(swe_set_topo)
 {
 	int rc;
@@ -1992,7 +2050,7 @@ PHP_FUNCTION(swe_rise_trans)
 			add_index_double(&tret_arr, i, tret[i]);
 		add_assoc_zval(return_value, "tret", &tret_arr);
 		if (starname != NULL && s_len > 0)
-			add_assoc_string(return_value, "starname", star);
+			add_assoc_string(return_value, "star", star);
 	}
 }
 
@@ -2036,7 +2094,7 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 			add_index_double(&tret_arr, i, tret[i]);
 		add_assoc_zval(return_value, "tret", &tret_arr);
 		if (starname != NULL && s_len > 0)
-			add_assoc_string(return_value, "starname", star);
+			add_assoc_string(return_value, "star", star);
 	}
 }
 
