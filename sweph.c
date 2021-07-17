@@ -767,18 +767,14 @@ PHP_FUNCTION(swe_fixstar_ut)
 	add_assoc_long(return_value, "rc", rc);
 }
 
-/**
- * void swe_close()
- * no parameter, no return value.
- */
 /* {{{ pod
 =pod
 
 =head1 function swe_close()
 
-close SE and rlease resources
+close SE and release resources
 
-=head3 Parameters : none
+=head3 Parameters: none
 
 =head3 return value: none
 
@@ -797,11 +793,24 @@ PHP_FUNCTION(swe_close)
 	RETURN_NULL();
 }
 
-/**
- *	void swe_set_ephe_path(char *path);
- *	Parameters: path	(where ephemeris files reside)
- *	Return value: none
- */
+/* {{{ pod
+=pod
+
+=head1 function swe_set_ephe_path(path)
+
+Define the path where SE ephemeris files reside
+
+=head3 Parameters: path    
+
+=head3 return value: none
+
+=head3 C declaration
+
+  void swe_set_ephe_path(char *path);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_set_ephe_path)
 {
 	char *arg = emalloc(100);
@@ -818,11 +827,24 @@ PHP_FUNCTION(swe_set_ephe_path)
 	RETURN_NULL();
 }
 
-/**
- * void swe_set_jpl_file(char *fname);
- * Parameters: fname	(file name of JPL file, used with flag SEFLG_JPLEPH
- * Return value: none
- */
+/* {{{ pod
+=pod
+
+=head1 function swe_set_jpl_file(fname)
+
+Define the file name for a JPL ephemeris file, used with flag SEFLG_JPLEPH
+
+=head3 Parameters: fname    
+
+=head3 return value: none
+
+=head3 C declaration
+
+void swe_set_jpl_file(char *fname);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_set_jpl_file)
 {
 	char *arg = NULL;
@@ -839,12 +861,26 @@ PHP_FUNCTION(swe_set_jpl_file)
 	RETURN_NULL();
 }
 
-/**
- * (char *) swe_get_planet_name(int ipl, char *spname);
- * Parameters: ipl
- * Return value: string 	(object name)
- * in case of error: an error message instead of a name.
- */
+/* {{{ pod
+=pod
+
+=head1 function swe_get_planet_name (ipl)
+
+get the name of a planet, asteroid or fictitious object
+
+=head3 Parameters: ipl    
+
+=head3 return value: string (object name)
+
+In case of error, an error message is returned instead of a planet name.
+
+=head3 C declaration
+
+(char *) swe_get_planet_name(int ipl, char *spname);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_get_planet_name)
 {
 	long ipl;
@@ -861,11 +897,24 @@ PHP_FUNCTION(swe_get_planet_name)
 	RETURN_STRING(name);
 }
 
-/**
- * (void) swe_set_topo(double geolon, double geolat, double geoalt)
- * Parameters: geolon, geolat, geoalt 
- * Return value: none
- */
+/* {{{ pod
+=pod
+
+=head1 function swe_set_topo(geolon, geolat, geoalt)
+
+Set topocentric reference places, used with flag SEFLG_TOPOCTR and some function
+
+=head3 Parameters: geolon, geolat, geoalt    
+
+=head3 return value: none
+
+=head3 C declaration
+
+  void swe_set_topo(double geolon, double geolat, double geoalt)
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_set_topo)
 {
 	int rc;
