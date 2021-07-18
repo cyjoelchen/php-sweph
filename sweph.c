@@ -2088,7 +2088,7 @@ PHP_FUNCTION(swe_houses_armc_ex2)
 /* {{{ pod
 =pod
 
-=head1 function swe_houses_pos(armc, geolat, eps, hsys, xpin0, xpin1)
+=head1 function swe_house_pos(armc, geolat, eps, hsys, xpin0, xpin1)
 
 calculated house position of object for given armc, latitude, obliquity and house system
 
