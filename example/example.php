@@ -25,7 +25,7 @@ for($i = SE_SUN; $i <= SE_VESTA; $i++)
         'speed' => $xx[3]
     );
 }
-echo "planets: \n" . json_encode($planets, $options = JSON_PRETTY_PRINT) . "\n";
+echo "planets: \n" . json_encode($planets, JSON_PRETTY_PRINT) . "\n";
 
 # calc house cusps
 define("GEO_LNG", 121.5);
@@ -40,5 +40,4 @@ for($i = 1; $i <= 12; $i ++)
     $houses[$i] = array('lng' => $yy['cusps'][$i]);
 }
 
-echo "houses: \n" . json_encode($houses, $options = JSON_PRETTY_PRINT) . "\n";
-
+echo "houses: \n" . json_encode($houses, JSON_PRETTY_PRINT) . "\n";
