@@ -1077,20 +1077,19 @@ PHP_FUNCTION(swe_get_ayanamsa_ex)
 
 =head1 function swe_get_ayanamsa_ut(tjd_ut)
 
-Get ayanamsa value in current sidereal mode
+Compute the ayanamsa without nutation.
 
-=head3 Parameters:
+=head3 Parameters
 
-  tjd_ut
+    float         tjd_ut      Julian day in Universal Time.
 
-=head3 return value:
-
-  ayanamsa value
+=head3 return float
 
 =head3 C declaration
 
 double swe_get_ayanamsa_ut(double tjd_ut);
 
+<<<<<<< HEAD
 
 =cut
  }}} */
