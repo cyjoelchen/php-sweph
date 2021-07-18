@@ -1573,7 +1573,7 @@ PHP_FUNCTION(swe_jdut1_to_utc)
 /* {{{ pod
 =pod
 
-=head1 function swe_julday (year, month, day, hour, min, dsec, gregflag)
+=head1 function swe_utc_to_jd(year, month, day, hour, min, dsec, gregflag)
 
 Converts a calendar date to julian day number tjd, no validity check for date.
 
