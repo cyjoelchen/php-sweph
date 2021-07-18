@@ -1640,9 +1640,9 @@ PHP_FUNCTION(swe_utc_to_jd)
 /* {{{ pod
 =pod
 
-=head1 function swe_utc_time_zone (iyear, imonth, iday, ihour, imin, dsec, d_timezone)
+=head1 function swe_utc_time_zone(iyear, imonth, iday, ihour, imin, dsec, d_timezone)
 
-Converts a calendar date to in a zone with time offset d_timezone into a calendard date in UT (UT1).
+Converts a calendar date in a zone with time offset d_timezone into a calendar date in UT (UT1).
 
 =head3 Parameters
 
