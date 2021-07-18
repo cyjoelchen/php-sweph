@@ -174,7 +174,7 @@ zend_module_entry swephp_module_entry = {
 };
 /* }}} */
 
-#ifdef COMPILE_DL_SWEPH
+#ifdef COMPILE_DL_SWEPHP
 ZEND_GET_MODULE(swephp)
 #endif
 
