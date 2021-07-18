@@ -974,7 +974,6 @@ void swe_set_sid_mode(int32 sid_mode, double t0, double ayan_t0)
 
 =cut
 }}} */
->>>>>>> 90e4f46... Document & test swe_set_sid_mode().
 PHP_FUNCTION(swe_set_sid_mode)
 {
 	long sid_mode;
