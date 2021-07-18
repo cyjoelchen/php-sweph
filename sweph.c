@@ -530,15 +530,15 @@ calculate position of planet ipl with time in Ephemeris Time (TDT)
 
 =head3 Parameters
 
-  float         tjd_et      Julian day in Ephemeris Time.
+  double        tjd_et      Julian day in Ephemeris Time.
   int           ipl         Planet/body/object number or constant.
   int           iflag       Flag bits for computation requirements.
 
 =head3 return array
 
-  [0..5]		position and speed vector xx
-  ['serr']		optional error message
-  ['rc']		return flag, < 0 in case of error
+  [0..5]		double	position and speed vector xx
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
 
 =head3 C declaration
 
@@ -581,7 +581,7 @@ calculate position of planet ipl with time in Universal Time UT
 
 =head3 Parameters
 
-  float         tjd_ut      Julian day in Universal Time.
+  double        tjd_ut      Julian day in Universal Time.
   int           ipl         Planet/body/object number or constant.
   int           iflag       Flag bits for computation requirements.
 
@@ -632,16 +632,16 @@ calculate position of planet ipl relative to a center object iplctr
 
 =head3 Parameters
 
-  float         tjd_et      Julian day in Ephemeris Time.
+  double        tjd_et      Julian day in Ephemeris Time.
   int           ipl         Target planet/body/object number or constant.
   int           iplctr      Center planet/body/object number or constant.
   int           iflag       Flag bits for computation requirements.
 
 =head3 return array
 
-  [0..5]		position and speed vector xx
-  ['serr']		optional error message
-  ['rc']		return flag, < 0 in case of error
+  [0..5]		double	position and speed vector xx
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
 
 =head3 C declaration
 
@@ -686,15 +686,15 @@ calculate position of a star with time in Ephemeris Time (TDT)
 =head3 Parameters
 
   string        star        Name of fixed star to be searched, returned name of found star.
-  float         tjd_et      Julian day in Ephemeris Time.
+  double        tjd_et      Julian day in Ephemeris Time.
   int           iflag       Flag bits for computation requirements.
 
 =head3 return array
 
-  [0..5]		position and speed vector xx
-  ['star']		returned star name, usually different from input
-  ['serr']		optional error message
-  ['rc']		return flag, < 0 in case of error
+  [0..5]		double	position and speed vector xx
+  ['star']		string	returned star name, usually different from input
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
 
 =head3 C declaration
 
@@ -743,15 +743,15 @@ calculate position of a star with time in Universal Time (UT)
 =head3 Parameters
 
   string        star        Name of fixed star to be searched, returned name of found star.
-  float         tjd_ut      Julian day in Universal Time.
+  double        tjd_ut      Julian day in Universal Time.
   int           iflag       Flag bits for computation requirements.
 
 =head3 return array
 
-  [0..5]		position and speed vector xx
-  ['star']		returned star name, usually different from input
-  ['serr']		optional error message
-  ['rc']		return flag, < 0 in case of error
+  [0..5]		double	position and speed vector xx
+  ['star']		string	returned star name, usually different from input
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
 
 =head3 C declaration
 
@@ -929,9 +929,9 @@ Set topocentric reference places, used with flag SEFLG_TOPOCTR and some function
 
 =head3 Parameters
 
-    float       geolon      Longitude of location in degrees.
-    float       geolat      Latitude of location in degrees.
-    float       geoalt      Altitude of location in meters.
+    double       geolon      Longitude of location in degrees.
+    double       geolat      Latitude of location in degrees.
+    double       geoalt      Altitude of location in meters.
 
 =head3 return (none)
 
@@ -966,8 +966,8 @@ Set one of the numerous sidereal modes, used with flag SEFLG_SIDEREAL and some f
 =head3 Parameters
 
     int         sid_mode      Number of constant of ayanamsa to use.
-    float       t0            Reference date if using SE_SIDM_USER flag, 0 otherwise.
-    float       ayan_t0       Initial value of ayanamsa if using SE_SIDM_USER flag, 0 otherwise.
+    double      t0            Reference date if using SE_SIDM_USER flag, 0 otherwise.
+    double      ayan_t0       Initial value of ayanamsa if using SE_SIDM_USER flag, 0 otherwise.
 
 =head3 return (none)
 
@@ -1002,9 +1002,9 @@ Compute the ayanamsa without nutation.
 
 =head3 Parameters
 
-    float         tjd_et      Julian day in Ephemeris Time.
+    double         tjd_et      Julian day in Ephemeris Time.
 
-=head3 return float
+=head3 return double
 
 =head3 C declaration
 
@@ -1035,13 +1035,13 @@ Compute the ayanamsa with or without nutation, depending on flag.
 
 =head3 Parameters
 
-    float       tjd_et      Julian day in Ephemeris Time.
+    double      tjd_et      Julian day in Ephemeris Time.
     int         iflag       Flag bits for computation requirements.
 
 =head3 return array
 
     [
-        'daya' => (float) Value of ayanamsa.
+        'daya' => (double) Value of ayanamsa.
         'serr' => (string) Error message or empty string.
     ]
 
@@ -1085,9 +1085,11 @@ Compute the ayanamsa without nutation.
 
 =head3 Parameters
 
-    float         tjd_ut      Julian day in Universal Time.
+    double         tjd_ut      Julian day in Universal Time.
 
-=head3 return float
+=head3 return
+	
+	double
 
 =head3 C declaration
 
@@ -1120,14 +1122,14 @@ Get ayanamsa value in current sidereal mode, time in UT
 
 =head3 Parameters
 
-    float       tjd_ut      Julian day in Universal Time.
+    double      tjd_ut      Julian day in Universal Time.
     int         iflag       Flag bits for computation requirements.
 
 =head3 return array
 
-  ['daya']		ayanamsa value
-  ['serr']		optional error message
-  ['rc']		return flag, < 0 in case of error
+  ['daya']		double	ayanamsa value
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
 
 =head3 C declaration
 
@@ -1234,7 +1236,7 @@ Path to the SE PHP extension library file
 
 =head3 return 
 
-	path to currently used library
+	string	path to currently used library
 
 =head3 C declaration
 
@@ -1270,14 +1272,14 @@ It delivers information about the last used file, depending on parameter ifno:
 
 =head3 Parameters 
   
-    ifno
+    int		ifno
 
 =head3 return array
 
-  ['path']
-  ['tfstart']
-  ['tfend']
-  ['denum']
+  ['path']		string
+  ['tfstart']	double
+  ['tfend']		double
+  ['denum']		int
 
   In case of error, NULL is returned.
 
@@ -1320,7 +1322,7 @@ PHP_FUNCTION(swe_get_current_file_data)
 /* {{{ pod
 =pod
 
-=head1 function swe_date_conversion (y, m, d, utime, cal_flag)
+=head1 function swe_date_conversion (year, month, day, hour, cal_flag)
 
 Converts a calendar date to julian day number tjd, with validity check for date.
 Parameter cal_flag is a character, j or g, and not the same as the constants SE_GREG_CAL and
@@ -1328,11 +1330,11 @@ SE_JUL_CAL used in swe_juldate() and swe_revjul()
 
 =head3 Parameters
 
-  y			year
-  m			month (1..12)
-  d			day (1..31)
-  utime		UT (0.0 .. 23.99999) clock time as double
-  cal_flag	character g or j, or string beginning with one of these letters
+  int		year
+  int		month		(1..12)
+  int		day			(1..31)
+  double	hour		UT (0.0 .. 23.99999) clock time as double
+  string	'j' or 'g' or string beginning with one of these letters
 
 =head3 return value
   
@@ -1381,11 +1383,11 @@ Converts a calendar date to julian day number tjd, no validity check for date.
 
 =head3 Parameters
 
-  year		year
-  month		month (1..12)
-  day		day (1..31)
-  hour		UT (0.0 .. 23.99999) clock time as double
-  gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+  int		year		
+  int		month		(1..12)
+  int		day			(1..31)
+  double	hour		UT (0.0 .. 23.99999) clock time as double
+  int		gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
 
 =head3 return value
   
@@ -1423,15 +1425,15 @@ Converts julian day number to calendar date
 
 =head3 Parameters
 
-  jd		julian day number
-  gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+  double	jd		julian day number
+  int		gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
 
 =head3 return array
 
-  ['year']
-  ['month']
-  ['day']
-  ['hour']
+  ['year']		int
+  ['month']		int
+  ['day']		int
+  ['hour']		double
 
 =head3 C declaration
 
@@ -1471,16 +1473,16 @@ Converts julian day number / time in Ephemeris time to date and time in UTC
 
 =head3 Parameters
 
-  tjd_et		julian day number
-  gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+  double	tjd_et		julian day number
+  int		gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
 
 =head3 return array
 
-  ['year']
-  ['month']
-  ['day']
-  ['hour']
-  ['min']
+  ['year']	int
+  ['month']	int
+  ['day']	int
+  ['hour']	int
+  ['min']	int
   ['sec']	double
 
 =head3 C declaration
@@ -1571,32 +1573,32 @@ PHP_FUNCTION(swe_jdut1_to_utc)
 /* {{{ pod
 =pod
 
-=head1 function swe_julday (iyear, imonth, iday, ihour, imin, dsec, gregflag)
+=head1 function swe_julday (year, month, day, hour, min, dsec, gregflag)
 
 Converts a calendar date to julian day number tjd, no validity check for date.
 
 =head3 Parameters
 
-  iyear		year
-  imonth	month (1..12)
-  iday		day (1..31)
-  ihour		hour (0..23)
-  imin		minute (0..59)
-  dsec		second (0.0 .. 59.99999)
-  gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+  int		year
+  int		month	(1..12)
+  int		day		(1..31)
+  int		hour	(0..23)
+  int		min		(0..59)
+  double	dsec	(0.0 .. 59.99999)
+  int		gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
 
 =head3 return array
 
   In case of success
 
-  [0]	jd_et	jd in ET (TDT)
-  [1]	jd_ut	jd in UT (UT1)
-  ['rc']	0
+  [0]		double	jd_et	jd in ET (TDT)
+  [1]		double	jd_ut	jd in UT (UT1)
+  ['rc']	int		0
 
   In case of error
 
-  ['serr']
-  ['rc']	-1
+  ['serr']	string
+  ['rc']	int		-1
 
 
 =head3 C declaration
@@ -1644,21 +1646,21 @@ Converts a calendar date to in a zone with time offset d_timezone into a calenda
 
 =head3 Parameters
 
-  iyear		year
-  imonth	month (1..12)
-  iday		day (1..31)
-  ihour		hour (0..23)
-  imin		minute (0..59)
-  dsec		second (0.0 .. 59.99999)
-  d_timezone	offset of time zone to UT, in hours as double
+  int		year
+  int		month	(1..12)
+  int		day		(1..31)
+  int		hour	(0..23)
+  int		min		(0..59)
+  double	dsec	(0.0 .. 59.99999)
+  double	d_timezone	offset of time zone to UT, in hours as double
 
 =head3 return array
 
-  ['year']
-  ['month']
-  ['day']
-  ['hour']
-  ['min']
+  ['year']	int
+  ['month']	int
+  ['day']	int
+  ['hour']	int
+  ['min']	int
   ['sec']	double
 
 =head3 C declaration
@@ -1702,6 +1704,33 @@ PHP_FUNCTION(swe_utc_time_zone)
 /**************************** 
  * exports from swehouse.c 
  ****************************/
+
+/* {{{ pod
+=pod
+
+=head1 function swe_houses(tjd_ut, geolat, geolon, hsys)
+
+calculated house cusps for given date/time, location and house system
+
+=head3 Parameters
+
+  double        tjd_ut      Julian day in Universal Time.
+  double		geolat		latitude -90.00 .. 90.00 (north postive, south negative)
+  double		geolon		longitude -180.00 .. 180.00 (east postive, sowest negative)
+  string		hsys		first letter indicates house system, default 'P' for Placidus
+
+=head3 return array
+
+  ['cusps']	array of 13 or 37 doubles
+  ['ascmc']	array of 10 doubles
+  ['rc']	int	return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_houses( double tjd_ut, double geolat, double geolon, int hsys, double *cusps, double *ascmc);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_houses)
 {
 	char *arg = NULL;
@@ -1746,6 +1775,33 @@ PHP_FUNCTION(swe_houses)
 	add_assoc_long(return_value, "rc", rc);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_houses_ex(tjd_ut, iflag, geolat, geolon, hsys)
+
+calculated house cusps for given date/time, location and house system
+
+=head3 Parameters
+
+  double        tjd_ut      Julian day in Universal Time.
+  int			iflag
+  double		geolat		latitude -90.00 .. 90.00 (north postive, south negative)
+  double		geolon		longitude -180.00 .. 180.00 (east postive, sowest negative)
+  string		hsys		first letter indicates house system, default 'P' for Placidus
+
+=head3 return array
+
+  ['cusps']	array of 13 or 37 doubles
+  ['ascmc']	array of 10 doubles
+  ['rc']	int	return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_houses_ex( double tjd_ut, int iflag, double geolat, double geolon, int hsys, double *cusps, double *ascmc);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_houses_ex)
 {
 	char *arg = NULL;
@@ -1790,6 +1846,36 @@ PHP_FUNCTION(swe_houses_ex)
 	add_assoc_long(return_value, "rc", rc);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_houses_ex2(tjd_ut, iflag, geolat, geolon, hsys)
+
+calculated house cusps for given date/time, location and house system
+
+=head3 Parameters
+
+  double        tjd_ut      Julian day in Universal Time.
+  int			iflag
+  double		geolat		latitude -90.00 .. 90.00 (north postive, south negative)
+  double		geolon		longitude -180.00 .. 180.00 (east postive, sowest negative)
+  string		hsys		first letter indicates house system, default 'P' for Placidus
+
+=head3 return array
+
+  ['cusps']			array of 13 or 37 doubles
+  ['ascmc']			array of 10 doubles
+  ['cusp_speed']	array of 13 or 37 doubles
+  ['ascmc_speed']	array of 10 doubles
+  ['rc']			int	return flag, < 0 in case of error
+  ['serr']			string
+
+=head3 C declaration
+
+  int swe_houses_ex2( double tjd_ut, int iflag, double geolat, double geolon, int hsys, double *cusps, double *ascmc, double *cusp_speed, double *ascmc_speed, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_houses_ex2)
 {
 	char *arg = NULL;
@@ -1846,6 +1932,32 @@ PHP_FUNCTION(swe_houses_ex2)
 	add_assoc_string(return_value, "serr", serr);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_houses_armc(armc, geolat, eps, hsys)
+
+calculated house cusps for given armc, location and house system
+
+=head3 Parameters
+
+  double        armc      	0.00 .. 360.00
+  double		geolat		latitude -90.00 .. 90.00 (north postive, south negative)
+  double		eps			obliquity of the ecliptic
+  string		hsys		first letter indicates house system, default 'P' for Placidus
+
+=head3 return array
+
+  ['cusps']	array of 13 or 37 doubles
+  ['ascmc']	array of 10 doubles
+  ['rc']	int	return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_houses_armc( double armc, double geolat, double eps, int hsys, double *cusps, double *ascmc);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_houses_armc)
 {
 	char *arg = NULL;
@@ -1889,6 +2001,35 @@ PHP_FUNCTION(swe_houses_armc)
 	add_assoc_long(return_value, "rc", rc);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_houses_armc_ex2(armc, geolat, eps, hsys)
+
+calculated house cusps for given armc, location and house system
+
+=head3 Parameters
+
+  double        armc      	0.00 .. 360.00
+  double		geolat		latitude -90.00 .. 90.00 (north postive, south negative)
+  double		eps			obliquity of the ecliptic
+  string		hsys		first letter indicates house system, default 'P' for Placidus
+
+=head3 return array
+
+  ['cusps']			array of 13 or 37 doubles
+  ['ascmc']			array of 10 doubles
+  ['cusp_speed']	array of 13 or 37 doubles
+  ['ascmc_speed']	array of 10 doubles
+  ['rc']			int	return flag, < 0 in case of error
+  ['serr']			string
+
+=head3 C declaration
+
+  int swe_houses_armc_ex2( double armc, double geolat, double eps, int hsys, double *cusps, double *ascmc, double *cusp_speed, double *ascmc_speed, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_houses_armc_ex2)
 {
 	char *arg = NULL;
