@@ -530,7 +530,9 @@ calculate position of planet ipl with time in Ephemeris Time (TDT)
 
 =head3 Parameters
 
-  tjd_et, ipl, iflag
+  float         tjd_et      Julian day in Ephemeris Time.
+  int           ipl         Planet/body/object number or constant.
+  int           iflag       Flag bits for computation requirements.
 
 =head3 return array
 
@@ -578,7 +580,9 @@ calculate position of planet ipl with time in Universal Time UT
 
 =head3 Parameters
 
-  tjd_ut, ipl, iflag
+  float         tjd_ut      Julian day in Universal Time.
+  int           ipl         Planet/body/object number or constant.
+  int           iflag       Flag bits for computation requirements.
 
 =head3 return array
 
@@ -626,7 +630,10 @@ calculate position of planet ipl relative to a center object iplctr
 
 =head3 Parameters
 
-  tjd_et, ipl, iplctr, iflag
+  float         tjd_et      Julian day in Ephemeris Time.
+  int           ipl         Target planet/body/object number or constant.
+  int           iplctr      Center planet/body/object number or constant.
+  int           iflag       Flag bits for computation requirements.
 
 =head3 return array
 
@@ -675,7 +682,9 @@ calculate position of a star with time in Ephemeris Time (TDT)
 
 =head3 Parameters
 
-  star, tjd_et, iflag
+  string        star        Name of fixed star to be searched, returned name of found star.
+  float         tjd_et      Julian day in Ephemeris Time.
+  int           iflag       Flag bits for computation requirements.
 
 =head3 return array
 
@@ -730,7 +739,9 @@ calculate position of a star with time in Universal Time (UT)
 
 =head3 Parameters
 
-  star, tjd_ut, iflag
+  string        star        Name of fixed star to be searched, returned name of found star.
+  float         tjd_ut      Julian day in Universal Time.
+  int           iflag       Flag bits for computation requirements.
 
 =head3 return array
 
@@ -781,9 +792,9 @@ PHP_FUNCTION(swe_fixstar_ut)
 
 close SE and release resources
 
-=head3 Parameters: none
+=head3 Parameters (none)
 
-=head3 return value: none
+=head3 return (none)
 
 =head3 C declaration
 
@@ -806,11 +817,11 @@ PHP_FUNCTION(swe_close)
 
 Define the path where SE ephemeris files reside
 
-=head3 Parameters:
+=head3 Parameters
 
-  path    
+    string      path        Single directory name or a list of directories, searched in sequence.
 
-=head3 return value: none
+=head3 return (none)
 
 =head3 C declaration
 
@@ -841,11 +852,11 @@ PHP_FUNCTION(swe_set_ephe_path)
 
 Define the file name for a JPL ephemeris file, used with flag SEFLG_JPLEPH
 
-=head3 Parameters:
+=head3 Parameters
 
-  fname    
+    string      fname       File name of JPL ephemeris (must be sibling of ephemeris files).
 
-=head3 return value: none
+=head3 return (none)
 
 =head3 C declaration
 
@@ -876,13 +887,11 @@ PHP_FUNCTION(swe_set_jpl_file)
 
 get the name of a planet, asteroid or fictitious object
 
-=head3 Parameters:
+=head3 Parameters
 
-  ipl    
+    int         ipl         Planet/body/object number or constant.
 
-=head3 return value:
-
-  string (object name)
+=head3 return string
 
 In case of error, an error message is returned instead of a planet name.
 
@@ -915,11 +924,13 @@ PHP_FUNCTION(swe_get_planet_name)
 
 Set topocentric reference places, used with flag SEFLG_TOPOCTR and some function
 
-=head3 Parameters:
+=head3 Parameters
 
-  geolon, geolat, geoalt    
+    float       geolon      Longitude of location in degrees.
+    float       geolat      Latitude of location in degrees.
+    float       geoalt      Altitude of location in meters.
 
-=head3 return value: none
+=head3 return (none)
 
 =head3 C declaration
 
@@ -1179,6 +1190,26 @@ PHP_FUNCTION(swe_get_ayanamsa_name)
 	RETURN_STRING(swe_get_ayanamsa_name((int)isidmode));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_version()
+
+find out version number of your Swiss Ephemeris version
+
+=head3 Parameters (none)
+
+=head3 return string
+
+Version information of the Swiss Ephemeris library,
+different from the version of this PHP extension.
+
+=head3 C declaration
+
+char *swe_version(char* svers);
+
+=cut
+}}} */
 PHP_FUNCTION(swe_version)
 {
 	char name[AS_MAXCH];
