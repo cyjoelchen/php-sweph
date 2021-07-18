@@ -508,7 +508,19 @@ PHP_MINFO_FUNCTION(sweph)
 /**************************** 
  * exports from sweph.c 
  ****************************/
- 
+/* {{{ about pod documentation comments
+=pod
+
+=head1 About pod documentation comments
+
+Pod means Plain Old Documentation and comes from the world of Perl, a programming language similar to PHP.
+To extract the documenation from this file, type
+
+perldoc sweph.c
+
+see also https://perldoc.perl.org/perlpod
+=cut
+ }}} */
 /* {{{ pod
 =pod
 
@@ -930,6 +942,24 @@ PHP_FUNCTION(swe_set_topo)
 	RETURN_NULL();
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_set_sid_mode(sid_mode, &t0, &ayan_t0)
+
+Set one of the numerous sidereal modes, used with flag SEFLG_SIDEREAL and some functions
+
+=head3 Parameters: sid_mode, t0, ayan_t0    
+
+=head3 return value: none
+
+=head3 C declaration
+
+  void swe_set_sid_mode(int32 sid_mode, double t0, double ayan_t0);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_set_sid_mode)
 {
 	long sid_mode;
@@ -946,6 +976,24 @@ PHP_FUNCTION(swe_set_sid_mode)
 	RETURN_NULL();
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_get_ayanamsa (tjd_et)
+
+Get ayanamsa value in current sidereal mode
+
+=head3 Parameters: tjd_et
+
+=head3 return value: ayanamsa value
+
+=head3 C declaration
+
+double swe_get_ayanamsa(double tjd_et);                                                             
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_get_ayanamsa)
 {
 	double tjd_et;
@@ -960,10 +1008,33 @@ PHP_FUNCTION(swe_get_ayanamsa)
 	RETURN_DOUBLE(swe_get_ayanamsa(tjd_et));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_get_ayanamsa_ex_ut (tjd_et, iflag)
+
+Get ayanamsa value in current sidereal mode
+
+=head3 Parameters: tjd_et, iflag
+
+=head3 return array
+
+  ['daya']		ayanamsa value
+  ['serr']		optional error message
+  ['rc']		return flag, < 0 in case of error
+
+=head3 C declaration
+
+int32 swe_get_ayanamsa_ex(double tjd_et, int32 iflag, double *daya, char *serr);                    
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_get_ayanamsa_ex)
 {
 	double tjd_et, daya;
 	long iflag;
+	int rc;
 	char serr[AS_MAXCH];
 
 	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
@@ -973,14 +1044,33 @@ PHP_FUNCTION(swe_get_ayanamsa_ex)
 		return;
 	}
 
-	swe_get_ayanamsa_ex(tjd_et, iflag, &daya, serr);
+	rc = swe_get_ayanamsa_ex(tjd_et, iflag, &daya, serr);
 
     array_init(return_value);
 
     add_assoc_double(return_value, "daya", daya);
+    add_assoc_long(return_value, "rc", rc);
     add_assoc_string(return_value, "serr", serr);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_get_ayanamsa_ut(tjd_ut)
+
+Get ayanamsa value in current sidereal mode
+
+=head3 Parameters: tjd_ut
+
+=head3 return value: ayanamsa value
+
+=head3 C declaration
+
+double swe_get_ayanamsa_ut(double tjd_ut);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_get_ayanamsa_ut)
 {
 	double tjd_ut;
@@ -995,10 +1085,33 @@ PHP_FUNCTION(swe_get_ayanamsa_ut)
 	RETURN_DOUBLE(swe_get_ayanamsa_ut(tjd_ut));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_get_ayanamsa_ex_ut (tjd_ut, iflag)
+
+Get ayanamsa value in current sidereal mode
+
+=head3 Parameters: tjd_ut, iflag
+
+=head3 return array
+
+  ['daya']		ayanamsa value
+  ['serr']		optional error message
+  ['rc']		return flag, < 0 in case of error
+
+=head3 C declaration
+
+int32 swe_get_ayanamsa_ex_ut(double tjd_ut, int32 iflag, double *daya, char *serr);                 
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_get_ayanamsa_ex_ut)
 {
 	double tjd_ut, daya;
 	long iflag;
+	int rc;
 	char serr[AS_MAXCH];
 
 	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
@@ -1008,14 +1121,16 @@ PHP_FUNCTION(swe_get_ayanamsa_ex_ut)
 		return;
 	}
 
-	swe_get_ayanamsa_ex_ut(tjd_ut, iflag, &daya, serr);
+	rc = swe_get_ayanamsa_ex_ut(tjd_ut, iflag, &daya, serr);
 
     array_init(return_value);
 
     add_assoc_double(return_value, "daya", daya);
+    add_assoc_long(return_value, "rc", rc);
     add_assoc_string(return_value, "serr", serr);
 }
 
+const char *swe_get_ayanamsa_name(int32 isidmode);
 PHP_FUNCTION(swe_get_ayanamsa_name)
 {
 	long isidmode;
