@@ -75,4 +75,3 @@ for($i = 0; $i < 4; $i++) {
   );
 }
 echo "rise $starname: \n" . json_encode($strans, $options = JSON_PRETTY_PRINT) . "\n";
-?>
