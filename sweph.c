@@ -1419,7 +1419,7 @@ PHP_FUNCTION(swe_julday)
 
 =head1 function swe_revjul (jd, gregflag)
 
-Converts a calendar date to julian day number tjd, no validity check for date.
+Converts julian day number to calendar date
 
 =head3 Parameters
 
@@ -1462,13 +1462,34 @@ PHP_FUNCTION(swe_revjul)
 	add_assoc_double(return_value, "hour", hour);
 }
 
-/*
-New function since 1.76:
-ext_def(void) swe_jdet_to_utc(
-        double tjd_et, int32 gregflag, 
- int32 *iyear, int32 *imonth, int32 *iday, 
- int32 *ihour, int32 *imin, double *dsec);
-*/
+/* {{{ pod
+=pod
+
+=head1 function swe_jdet_to_utc (tjd_et, gregflag)
+
+Converts julian day number / time in Ephemeris time to date and time in UTC 
+
+=head3 Parameters
+
+  tjd_et		julian day number
+  gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+
+=head3 return array
+
+  ['year']
+  ['month']
+  ['day']
+  ['hour']
+  ['min']
+  ['sec']	double
+
+=head3 C declaration
+
+  void swe_jdet_to_utc (double tjd_et, int32 gregflag, int32 *iyear, int32 *imonth, int32 *iday, int32 *ihour, int32 *imin, double *dsec);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_jdet_to_utc)
 {
 	double tjd_et;
@@ -1494,13 +1515,34 @@ PHP_FUNCTION(swe_jdet_to_utc)
 	add_assoc_double(return_value, "sec", dsec);
 }
 
-/*
-New function since 1.76:
-ext_def(void) swe_jdut1_to_utc(
-        double tjd_ut, int32 gregflag, 
- int32 *iyear, int32 *imonth, int32 *iday, 
- int32 *ihour, int32 *imin, double *dsec);
-*/
+/* {{{ pod
+=pod
+
+=head1 function swe_jdut1_to_utc (tjd_ut, gregflag)
+
+Converts julian day number / time in UT to date and time in UTC 
+
+=head3 Parameters
+
+  tjd_ut		julian day number and time in UT
+  gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+
+=head3 return array
+
+  ['year']
+  ['month']
+  ['day']
+  ['hour']
+  ['min']
+  ['sec']	double
+
+=head3 C declaration
+
+  void swe_jdut1_to_utc (double tjd_ut, int32 gregflag, int32 *iyear, int32 *imonth, int32 *iday, int32 *ihour, int32 *imin, double *dsec);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_jdut1_to_utc)
 {
 	double tjd_et;
@@ -1526,13 +1568,44 @@ PHP_FUNCTION(swe_jdut1_to_utc)
 	add_assoc_double(return_value, "sec", dsec);
 }
 
-/*
-New function since 1.76:
-ext_def(int32) swe_utc_to_jd(
-        int32 iyear, int32 imonth, int32 iday, 
- int32 ihour, int32 imin, double dsec, 
- int32 gregflag, double *dret, char *serr);
-*/
+/* {{{ pod
+=pod
+
+=head1 function swe_julday (iyear, imonth, iday, ihour, imin, dsec, gregflag)
+
+Converts a calendar date to julian day number tjd, no validity check for date.
+
+=head3 Parameters
+
+  iyear		year
+  imonth	month (1..12)
+  iday		day (1..31)
+  ihour		hour (0..23)
+  imin		minute (0..59)
+  dsec		second (0.0 .. 59.99999)
+  gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+
+=head3 return array
+
+  In case of success
+
+  [0]	jd_et	jd in ET (TDT)
+  [1]	jd_ut	jd in UT (UT1)
+  ['rc']	0
+
+  In case of error
+
+  ['serr']
+  ['rc']	-1
+
+
+=head3 C declaration
+
+  int swe_utc_to_jd( int32 iyear, int32 imonth, int32 iday, int32 ihour, int32 imin, double dsec, int32 gregflag, double *dret, char *serr);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_utc_to_jd)
 {
 	long gregflag;
@@ -1553,21 +1626,48 @@ PHP_FUNCTION(swe_utc_to_jd)
 			dsec, (int32)gregflag, dret, serr);
 			
 	array_init(return_value);
-	add_index_double(return_value, 0, dret[0]);
-	add_index_double(return_value, 1, dret[1]);
 	add_assoc_long(return_value, "rc", rc);
-	add_assoc_string(return_value, "serr", serr);
+	if (rc < 0) {
+		add_assoc_string(return_value, "serr", serr);
+	} else {
+		add_index_double(return_value, 0, dret[0]);
+		add_index_double(return_value, 1, dret[1]);
+    }
 }
 
-/*
-New function since 1.77:
-ext_def(void) swe_utc_time_zone(
-        int32 iyear, int32 imonth, int32 iday,
-	int32 ihour, int32 imin, double dsec,
-	double d_timezone,
-	int32 *iyear_out, int32 *imonth_out, int32 *iday_out,
-	int32 *ihour_out, int32 *imin_out, double *dsec_out);
-*/
+/* {{{ pod
+=pod
+
+=head1 function swe_utc_time_zone (iyear, imonth, iday, ihour, imin, dsec, d_timezone)
+
+Converts a calendar date to in a zone with time offset d_timezone into a calendard date in UT (UT1).
+
+=head3 Parameters
+
+  iyear		year
+  imonth	month (1..12)
+  iday		day (1..31)
+  ihour		hour (0..23)
+  imin		minute (0..59)
+  dsec		second (0.0 .. 59.99999)
+  d_timezone	offset of time zone to UT, in hours as double
+
+=head3 return array
+
+  ['year']
+  ['month']
+  ['day']
+  ['hour']
+  ['min']
+  ['sec']	double
+
+=head3 C declaration
+
+  void swe_utc_time_zone( int32 iyear, int32 imonth, int32 iday, int32 ihour, int32 imin, double dsec, double d_timezone, int32 *iyear_out, int32 *imonth_out, int32 *iday_out, int32 *ihour_out, int32 *imin_out, double *dsec_out); 
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_utc_time_zone)
 {
 	long iyear, imonth, iday;
