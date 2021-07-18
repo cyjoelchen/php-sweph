@@ -1,5 +1,5 @@
 --TEST--
-swe_version() Basic test
+Basic test
 --SKIPIF--
 <?php
 if (!extension_loaded(‘sweph’)) {

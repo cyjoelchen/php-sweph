@@ -5,8 +5,8 @@ phpize && \
 make && \
 make install && \
 echo "extension=sweph.so" > /usr/local/etc/php/conf.d/sweph.ini &&
+yes n | make test && \
 phpize --clean && \
 rm sweph/src/libswe.a && \
 rm sweph/src/*.o && \
 rmdir include
-

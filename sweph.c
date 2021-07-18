@@ -508,14 +508,44 @@ PHP_MINFO_FUNCTION(sweph)
 /**************************** 
  * exports from sweph.c 
  ****************************/
- 
-/**
- * int swe_calc ( double tjd_et, int ipl, int iflag, double* xx, char* serr); 
- * Parameters: tjd_et, ipl, iflag
- * Return array: [0..5]		position and speed vector xx
- * 	             ['serr']	optional error message
- * 	             ['rc']		return flag, < 0 in case of error
- */
+/* {{{ about pod documentation comments
+=pod
+
+=head1 About pod documentation comments
+
+Pod means Plain Old Documentation and comes from the world of Perl, a programming language similar to PHP.
+To extract the documenation from this file, type
+
+perldoc sweph.c
+
+see also https://perldoc.perl.org/perlpod
+=cut
+ }}} */
+/* {{{ pod
+=pod
+
+=head1 function swe_calc(tjd_ut, ipl, iflag)
+
+calculate position of planet ipl with time in Ephemeris Time (TDT)
+
+=head3 Parameters
+
+  double        tjd_et      Julian day in Ephemeris Time.
+  int           ipl         Planet/body/object number or constant.
+  int           iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+  [0..5]        double	position and speed vector xx
+  ['serr']      string	optional error message
+  ['rc']        int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_calc ( double tjd_et, int ipl, int iflag, double* xx, char* serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_calc)
 {
 	char *arg = NULL;
@@ -524,6 +554,7 @@ PHP_FUNCTION(swe_calc)
 	double tjd_et, xx[6];
 	char serr[AS_MAXCH]; 
 	int i;
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
@@ -541,13 +572,31 @@ PHP_FUNCTION(swe_calc)
 	add_assoc_long(return_value, "rc", rc);
 }
 
-/**
- * int swe_calc_ut ( double tjd_ut, int ipl, int iflag, double* xx, char* serr);
- * Parameters: tjd_ut, ipl, iflag
- * Return array: [0..5]		position and speed vector xx
- * 	             ['serr']	optional error message
- * 	             ['rc']		return flag, < 0 in case of error
- */
+/* {{{ pod
+=pod
+
+=head1 function swe_calc_ut(tjd_ut, ipl, iflag)
+
+calculate position of planet ipl with time in Universal Time UT
+
+=head3 Parameters
+
+  double        tjd_ut      Julian day in Universal Time.
+  int           ipl         Planet/body/object number or constant.
+  int           iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+  [0..5]		position and speed vector xx
+  ['serr']		optional error message
+  ['rc']		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_calc_ut ( double tjd_ut, int ipl, int iflag, double* xx, char* serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_calc_ut)
 {
 	char *arg = NULL;
@@ -556,6 +605,7 @@ PHP_FUNCTION(swe_calc_ut)
 	double tjd_ut, xx[6];
 	char serr[AS_MAXCH]; 
 	int i;
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
@@ -573,12 +623,32 @@ PHP_FUNCTION(swe_calc_ut)
 	add_assoc_long(return_value, "rc", rc);
 }
 
-/* int swe_calc_pctr ( double tjd_et, int ipl, int iplctr, int iflag, double* xx, char* serr);
- * Parameters: tjd_ut, ipl, iplctr, iflag
- * Return array: [0..5]		position and speed vector xx
- * 	             ['serr']	optional error message
- * 	             ['rc']		return flag, < 0 in case of error
- */
+/* {{{ pod
+=pod
+
+=head1 function swe_calc_pctr(tjd_et, ipl, iplctr, iflag)
+
+calculate position of planet ipl relative to a center object iplctr
+
+=head3 Parameters
+
+  double        tjd_et      Julian day in Ephemeris Time.
+  int           ipl         Target planet/body/object number or constant.
+  int           iplctr      Center planet/body/object number or constant.
+  int           iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+  [0..5]		double	position and speed vector xx
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_calc_pctr ( double tjd_et, int ipl, int iplctr, int iflag, double* xx, char* serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_calc_pctr)
 {
 	char *arg = NULL;
@@ -587,6 +657,7 @@ PHP_FUNCTION(swe_calc_pctr)
 	double tjd_et, xx[6];
 	char serr[AS_MAXCH]; 
 	int i;
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 		
@@ -605,14 +676,32 @@ PHP_FUNCTION(swe_calc_pctr)
 }
 
 #define MAX_FIXSTAR_NAME (2 * SE_MAX_STNAME + 1)
-/*
- * int swe_fixstar(char *star, double tjd_et, int32 iflag, double *xx, char *serr)
- * Parameters: star, tjd_et, iflag
- * Return array: [0..5]		position and speed vector xx
- * 	             ['star']	returned star name, usually different from input
- * 	             ['serr']	optional error message
- * 	             ['rc']		return flag, < 0 in case of error
- */
+/* {{{ pod
+=pod
+
+=head1 function swe_fixstar(star, tjd_et, iflag)
+
+calculate position of a star with time in Ephemeris Time (TDT)
+
+=head3 Parameters
+
+  string        star        Name of fixed star to be searched, returned name of found star.
+  double        tjd_et      Julian day in Ephemeris Time.
+  int           iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+  [0..5]		double	position and speed vector xx
+  ['star']		string	returned star name, usually different from input
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_fixstar(char *star, double tjd_et, int32 iflag, double *xx, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_fixstar)
 {
 	char *arg = NULL;
@@ -644,14 +733,32 @@ PHP_FUNCTION(swe_fixstar)
 	add_assoc_long(return_value, "rc", rc);
 }
 
-/*
- * int swe_fixstar_ut(char *star, double tjd_ut int32 iflag, double *xx, char *serr)
- * Parameters: star, tjd_ut, iflag
- * Return array: [0..5]		position and speed vector xx
- * 	             ['star']	returned star name, usually different from input
- * 	             ['serr']	optional error message
- * 	             ['rc']		return flag, < 0 in case of error
- */
+/* {{{ pod
+=pod
+
+=head1 function swe_fixstar_ut(star, tjd_ut, iflag)
+
+calculate position of a star with time in Universal Time (UT)
+
+=head3 Parameters
+
+  string        star        Name of fixed star to be searched, returned name of found star.
+  double        tjd_ut      Julian day in Universal Time.
+  int           iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+  [0..5]		double	position and speed vector xx
+  ['star']		string	returned star name, usually different from input
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_fixstar(char *star, double tjd_et, int32 iflag, double *xx, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_fixstar_ut)
 {
 	char *arg = NULL;
@@ -681,10 +788,23 @@ PHP_FUNCTION(swe_fixstar_ut)
 	add_assoc_long(return_value, "rc", rc);
 }
 
-/**
- * void swe_close()
- * no parameter, no return value.
- */
+/* {{{ pod
+=pod
+
+=head1 function swe_close()
+
+close SE and release resources
+
+=head3 Parameters (none)
+
+=head3 return (none)
+
+=head3 C declaration
+
+void swe_close()
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_close)
 {
 	if(ZEND_NUM_ARGS() != 0) WRONG_PARAM_COUNT;
@@ -693,11 +813,25 @@ PHP_FUNCTION(swe_close)
 	RETURN_NULL();
 }
 
-/**
- *	void swe_set_ephe_path(char *path);
- *	Parameters: path	(where ephemeris files reside)
- *	Return value: none
- */
+/* {{{ pod
+=pod
+
+=head1 function swe_set_ephe_path(path)
+
+Define the path where SE ephemeris files reside
+
+=head3 Parameters
+
+    string      path        Single directory name or a list of directories, searched in sequence.
+
+=head3 return (none)
+
+=head3 C declaration
+
+void swe_set_ephe_path(char *path);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_set_ephe_path)
 {
 	char *arg = emalloc(100);
@@ -714,11 +848,25 @@ PHP_FUNCTION(swe_set_ephe_path)
 	RETURN_NULL();
 }
 
-/**
- * void swe_set_jpl_file(char *fname);
- * Parameters: fname	(file name of JPL file, used with flag SEFLG_JPLEPH
- * Return value: none
- */
+/* {{{ pod
+=pod
+
+=head1 function swe_set_jpl_file(fname)
+
+Define the file name for a JPL ephemeris file, used with flag SEFLG_JPLEPH
+
+=head3 Parameters
+
+    string      fname       File name of JPL ephemeris (must be sibling of ephemeris files).
+
+=head3 return (none)
+
+=head3 C declaration
+
+void swe_set_jpl_file(char *fname);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_set_jpl_file)
 {
 	char *arg = NULL;
@@ -735,12 +883,27 @@ PHP_FUNCTION(swe_set_jpl_file)
 	RETURN_NULL();
 }
 
-/**
- * (char *) swe_get_planet_name(int ipl, char *spname);
- * Parameters: ipl
- * Return value: string 	(object name)
- * in case of error: an error message instead of a name.
- */
+/* {{{ pod
+=pod
+
+=head1 function swe_get_planet_name(ipl)
+
+get the name of a planet, asteroid or fictitious object
+
+=head3 Parameters
+
+    int         ipl         Planet/body/object number or constant.
+
+=head3 return string
+
+In case of error, an error message is returned instead of a planet name.
+
+=head3 C declaration
+
+(char *) swe_get_planet_name(int ipl, char *spname);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_get_planet_name)
 {
 	long ipl;
@@ -757,11 +920,27 @@ PHP_FUNCTION(swe_get_planet_name)
 	RETURN_STRING(name);
 }
 
-/**
- * (void) swe_set_topo(double geolon, double geolat, double geoalt)
- * Parameters: geolon, geolat, geoalt 
- * Return value: none
- */
+/* {{{ pod
+=pod
+
+=head1 function swe_set_topo(geolon, geolat, geoalt)
+
+Set topocentric reference places, used with flag SEFLG_TOPOCTR and some function
+
+=head3 Parameters
+
+    double       geolon      Longitude of location in degrees.
+    double       geolat      Latitude of location in degrees.
+    double       geoalt      Altitude of location in meters.
+
+=head3 return (none)
+
+=head3 C declaration
+
+void swe_set_topo(double geolon, double geolat, double geoalt)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_set_topo)
 {
 	int rc;
@@ -777,6 +956,27 @@ PHP_FUNCTION(swe_set_topo)
 	RETURN_NULL();
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_set_sid_mode(sid_mode, &t0, &ayan_t0)
+
+Set one of the numerous sidereal modes, used with flag SEFLG_SIDEREAL and some functions
+
+=head3 Parameters
+
+    int         sid_mode      Number of constant of ayanamsa to use.
+    double      t0            Reference date if using SE_SIDM_USER flag, 0 otherwise.
+    double      ayan_t0       Initial value of ayanamsa if using SE_SIDM_USER flag, 0 otherwise.
+
+=head3 return (none)
+
+=head3 C declaration
+
+void swe_set_sid_mode(int32 sid_mode, double t0, double ayan_t0)
+
+=cut
+}}} */
 PHP_FUNCTION(swe_set_sid_mode)
 {
 	long sid_mode;
@@ -793,6 +993,25 @@ PHP_FUNCTION(swe_set_sid_mode)
 	RETURN_NULL();
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_get_ayanamsa (tjd_et)
+
+Compute the ayanamsa without nutation.
+
+=head3 Parameters
+
+    double         tjd_et      Julian day in Ephemeris Time.
+
+=head3 return double
+
+=head3 C declaration
+
+double swe_get_ayanamsa(double tjd_et);
+
+=cut
+}}} */
 PHP_FUNCTION(swe_get_ayanamsa)
 {
 	double tjd_et;
@@ -807,11 +1026,38 @@ PHP_FUNCTION(swe_get_ayanamsa)
 	RETURN_DOUBLE(swe_get_ayanamsa(tjd_et));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_get_ayanamsa_ex(tjd_et, iflag)
+
+Compute the ayanamsa with or without nutation, depending on flag.
+
+=head3 Parameters
+
+    double      tjd_et      Julian day in Ephemeris Time.
+    int         iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+    [
+        'daya' => (double) Value of ayanamsa.
+        'serr' => (string) Error message or empty string.
+    ]
+
+=head3 C declaration
+
+int32 swe_get_ayanamsa_ex(double tjd_et, int32 iflag, double *daya, char *serr);
+
+=cut
+}}} */
 PHP_FUNCTION(swe_get_ayanamsa_ex)
 {
 	double tjd_et, daya;
 	long iflag;
+	int rc;
 	char serr[AS_MAXCH];
+	*serr = '\0';
 
 	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
@@ -820,14 +1066,39 @@ PHP_FUNCTION(swe_get_ayanamsa_ex)
 		return;
 	}
 
-	swe_get_ayanamsa_ex(tjd_et, iflag, &daya, serr);
+	rc = swe_get_ayanamsa_ex(tjd_et, iflag, &daya, serr);
 
     array_init(return_value);
 
     add_assoc_double(return_value, "daya", daya);
-    add_assoc_string(return_value, "serr", serr);
+    add_assoc_long(return_value, "rc", rc);
+	if (rc < 0)
+		add_assoc_string(return_value, "serr", serr);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_get_ayanamsa_ut(tjd_ut)
+
+Compute the ayanamsa without nutation.
+
+=head3 Parameters
+
+    double         tjd_ut      Julian day in Universal Time.
+
+=head3 return
+	
+	double
+
+=head3 C declaration
+
+double swe_get_ayanamsa_ut(double tjd_ut);
+
+<<<<<<< HEAD
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_get_ayanamsa_ut)
 {
 	double tjd_ut;
@@ -842,11 +1113,38 @@ PHP_FUNCTION(swe_get_ayanamsa_ut)
 	RETURN_DOUBLE(swe_get_ayanamsa_ut(tjd_ut));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_get_ayanamsa_ex_ut (tjd_ut, iflag)
+
+Get ayanamsa value in current sidereal mode, time in UT
+
+=head3 Parameters
+
+    double      tjd_ut      Julian day in Universal Time.
+    int         iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+  ['daya']		double	ayanamsa value
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+int32 swe_get_ayanamsa_ex_ut(double tjd_ut, int32 iflag, double *daya, char *serr);                 
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_get_ayanamsa_ex_ut)
 {
 	double tjd_ut, daya;
 	long iflag;
+	int rc;
 	char serr[AS_MAXCH];
+	*serr = '\0';
 
 	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
@@ -855,14 +1153,36 @@ PHP_FUNCTION(swe_get_ayanamsa_ex_ut)
 		return;
 	}
 
-	swe_get_ayanamsa_ex_ut(tjd_ut, iflag, &daya, serr);
+	rc = swe_get_ayanamsa_ex_ut(tjd_ut, iflag, &daya, serr);
 
     array_init(return_value);
 
     add_assoc_double(return_value, "daya", daya);
-    add_assoc_string(return_value, "serr", serr);
+    add_assoc_long(return_value, "rc", rc);
+	if (rc < 0)
+		add_assoc_string(return_value, "serr", serr);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_get_ayanamsa_name (isidmode)
+
+Get ayanamsa name for this  sidereal mode
+
+=head3 Parameters
+
+    int         isidmode      Number or constant of sidereal mode.
+
+=head3 return string
+
+=head3 C declaration
+
+const char *swe_get_ayanamsa_name(int32 isidmode);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_get_ayanamsa_name)
 {
 	long isidmode;
@@ -876,6 +1196,26 @@ PHP_FUNCTION(swe_get_ayanamsa_name)
 	RETURN_STRING(swe_get_ayanamsa_name((int)isidmode));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_version()
+
+find out version number of your Swiss Ephemeris version
+
+=head3 Parameters (none)
+
+=head3 return string
+
+Version information of the Swiss Ephemeris library,
+different from the version of this PHP extension.
+
+=head3 C declaration
+
+char *swe_version(char* svers);
+
+=cut
+}}} */
 PHP_FUNCTION(swe_version)
 {
 	char name[AS_MAXCH];
@@ -885,6 +1225,25 @@ PHP_FUNCTION(swe_version)
 	RETURN_STRING(swe_version(name));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_get_library_path()
+
+Path to the SE PHP extension library file
+
+=head3 Parameters (none)
+
+=head3 return 
+
+	string	path to currently used library
+
+=head3 C declaration
+
+char *swe_get_library_path(char *spath);
+
+=cut
+}}} */
 PHP_FUNCTION(swe_get_library_path)
 {
     char path[AS_MAXCH];
@@ -894,7 +1253,42 @@ PHP_FUNCTION(swe_get_library_path)
     RETURN_STRING(swe_get_library_path(path));
 }
 
-/* char * swe_get_current_file_data(int ifno, double *tfstart, double *tfend, int *denum); */
+/* {{{ pod
+=pod
+
+=head1 function swe_get_current_file_data (ifno)
+
+This is a function mostly for debug purposes. It is also useful to find out the time range offered by
+an asteroid file. The function should only be used directly AFTER a successful call to swe_calc() or
+swe_fixstar.
+
+It delivers information about the last used file, depending on parameter ifno:
+
+  ifno = 0     planet file sepl_xxx, used for Sun .. Pluto, or jpl file
+  ifno = 1     moon file semo_xxx
+  ifno = 2     main asteroid file seas_xxx  if such an object was computed
+  ifno = 3     other asteroid or planetary moon file, if such object was computed
+  ifno = 4     star file
+
+=head3 Parameters 
+  
+    int		ifno
+
+=head3 return array
+
+  ['path']		string
+  ['tfstart']	double
+  ['tfend']		double
+  ['denum']		int
+
+  In case of error, NULL is returned.
+
+=head3 C declaration
+
+ char * swe_get_current_file_data(int ifno, double *tfstart, double *tfend, int *denum);
+
+=cut
+}}} */
 PHP_FUNCTION(swe_get_current_file_data)
 {
 	int ifno;
@@ -913,10 +1307,11 @@ PHP_FUNCTION(swe_get_current_file_data)
 	if (a == NULL) {
 		RETURN_NULL();
 	} else {
+		array_init(return_value);
+		add_assoc_string(return_value, "path", a);
 		add_assoc_double(return_value, "tfstart", tfstart);
 		add_assoc_double(return_value, "tfend", tfend);
 		add_assoc_long(return_value, "denum", denum);
-		RETURN_STRING(a);
     }
 }
 
@@ -924,6 +1319,34 @@ PHP_FUNCTION(swe_get_current_file_data)
  * exports from swedate.c 
  ****************************/
 
+/* {{{ pod
+=pod
+
+=head1 function swe_date_conversion (year, month, day, hour, cal_flag)
+
+Converts a calendar date to julian day number tjd, with validity check for date.
+Parameter cal_flag is a character, j or g, and not the same as the constants SE_GREG_CAL and
+SE_JUL_CAL used in swe_juldate() and swe_revjul()
+
+=head3 Parameters
+
+  int		year
+  int		month		(1..12)
+  int		day			(1..31)
+  double	hour		UT (0.0 .. 23.99999) clock time as double
+  string	'j' or 'g' or string beginning with one of these letters
+
+=head3 return value
+  
+  converted tjd, or in case of illegal input date, NULL.
+
+=head3 C declaration
+
+  int swe_date_conversion( int y , int m , int d , double utime, char c, double *tjd);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_date_conversion)
 {
 	size_t arg_len;
@@ -950,7 +1373,33 @@ PHP_FUNCTION(swe_date_conversion)
 		RETURN_NULL();
 }
 
-/* double swe_julday(int year, int month, int day, double hour, int gregflag); */
+
+/* {{{ pod
+=pod
+
+=head1 function swe_julday (y, m, d, hour, gregflag)
+
+Converts a calendar date to julian day number tjd, no validity check for date.
+
+=head3 Parameters
+
+  int		year		
+  int		month		(1..12)
+  int		day			(1..31)
+  double	hour		UT (0.0 .. 23.99999) clock time as double
+  int		gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+
+=head3 return value
+  
+  converted tjd
+
+=head3 C declaration
+
+  double swe_julday(int year, int month, int day, double hour, int gregflag); 
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_julday)
 {
 	int rc;
@@ -967,6 +1416,32 @@ PHP_FUNCTION(swe_julday)
 	RETURN_DOUBLE(swe_julday((int)year, (int)month, (int)day, hour, (int)gregflag));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_revjul (jd, gregflag)
+
+Converts julian day number to calendar date
+
+=head3 Parameters
+
+  double	jd		julian day number
+  int		gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+
+=head3 return array
+
+  ['year']		int
+  ['month']		int
+  ['day']		int
+  ['hour']		double
+
+=head3 C declaration
+
+  void swe_revjul ( double jd, int gregflag, int *jyear, int *jmon, int *jday, double *jut);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_revjul)
 {
 	int year, month, day, gregflag;
@@ -989,13 +1464,34 @@ PHP_FUNCTION(swe_revjul)
 	add_assoc_double(return_value, "hour", hour);
 }
 
-/*
-New function since 1.76:
-ext_def(void) swe_jdet_to_utc(
-        double tjd_et, int32 gregflag, 
- int32 *iyear, int32 *imonth, int32 *iday, 
- int32 *ihour, int32 *imin, double *dsec);
-*/
+/* {{{ pod
+=pod
+
+=head1 function swe_jdet_to_utc (tjd_et, gregflag)
+
+Converts julian day number / time in Ephemeris time to date and time in UTC 
+
+=head3 Parameters
+
+  double	tjd_et		julian day number
+  int		gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+
+=head3 return array
+
+  ['year']	int
+  ['month']	int
+  ['day']	int
+  ['hour']	int
+  ['min']	int
+  ['sec']	double
+
+=head3 C declaration
+
+  void swe_jdet_to_utc (double tjd_et, int32 gregflag, int32 *iyear, int32 *imonth, int32 *iday, int32 *ihour, int32 *imin, double *dsec);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_jdet_to_utc)
 {
 	double tjd_et;
@@ -1021,13 +1517,34 @@ PHP_FUNCTION(swe_jdet_to_utc)
 	add_assoc_double(return_value, "sec", dsec);
 }
 
-/*
-New function since 1.76:
-ext_def(void) swe_jdut1_to_utc(
-        double tjd_ut, int32 gregflag, 
- int32 *iyear, int32 *imonth, int32 *iday, 
- int32 *ihour, int32 *imin, double *dsec);
-*/
+/* {{{ pod
+=pod
+
+=head1 function swe_jdut1_to_utc (tjd_ut, gregflag)
+
+Converts julian day number / time in UT to date and time in UTC 
+
+=head3 Parameters
+
+  tjd_ut		julian day number and time in UT
+  gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+
+=head3 return array
+
+  ['year']
+  ['month']
+  ['day']
+  ['hour']
+  ['min']
+  ['sec']	double
+
+=head3 C declaration
+
+  void swe_jdut1_to_utc (double tjd_ut, int32 gregflag, int32 *iyear, int32 *imonth, int32 *iday, int32 *ihour, int32 *imin, double *dsec);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_jdut1_to_utc)
 {
 	double tjd_et;
@@ -1053,13 +1570,44 @@ PHP_FUNCTION(swe_jdut1_to_utc)
 	add_assoc_double(return_value, "sec", dsec);
 }
 
-/*
-New function since 1.76:
-ext_def(int32) swe_utc_to_jd(
-        int32 iyear, int32 imonth, int32 iday, 
- int32 ihour, int32 imin, double dsec, 
- int32 gregflag, double *dret, char *serr);
-*/
+/* {{{ pod
+=pod
+
+=head1 function swe_julday (year, month, day, hour, min, dsec, gregflag)
+
+Converts a calendar date to julian day number tjd, no validity check for date.
+
+=head3 Parameters
+
+  int		year
+  int		month	(1..12)
+  int		day		(1..31)
+  int		hour	(0..23)
+  int		min		(0..59)
+  double	dsec	(0.0 .. 59.99999)
+  int		gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+
+=head3 return array
+
+  In case of success
+
+  [0]		double	jd_et	jd in ET (TDT)
+  [1]		double	jd_ut	jd in UT (UT1)
+  ['rc']	int		0
+
+  In case of error
+
+  ['serr']	string
+  ['rc']	int		-1
+
+
+=head3 C declaration
+
+  int swe_utc_to_jd( int32 iyear, int32 imonth, int32 iday, int32 ihour, int32 imin, double dsec, int32 gregflag, double *dret, char *serr);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_utc_to_jd)
 {
 	long gregflag;
@@ -1068,6 +1616,7 @@ PHP_FUNCTION(swe_utc_to_jd)
 	double dsec, dret[2];
 	char serr[AS_MAXCH];
 	int32 rc;
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 7) WRONG_PARAM_COUNT;
 
@@ -1079,21 +1628,48 @@ PHP_FUNCTION(swe_utc_to_jd)
 			dsec, (int32)gregflag, dret, serr);
 			
 	array_init(return_value);
-	add_index_double(return_value, 0, dret[0]);
-	add_index_double(return_value, 1, dret[1]);
 	add_assoc_long(return_value, "rc", rc);
-	add_assoc_string(return_value, "serr", serr);
+	if (rc < 0) {
+		add_assoc_string(return_value, "serr", serr);
+	} else {
+		add_index_double(return_value, 0, dret[0]);
+		add_index_double(return_value, 1, dret[1]);
+    }
 }
 
-/*
-New function since 1.77:
-ext_def(void) swe_utc_time_zone(
-        int32 iyear, int32 imonth, int32 iday,
-	int32 ihour, int32 imin, double dsec,
-	double d_timezone,
-	int32 *iyear_out, int32 *imonth_out, int32 *iday_out,
-	int32 *ihour_out, int32 *imin_out, double *dsec_out);
-*/
+/* {{{ pod
+=pod
+
+=head1 function swe_utc_time_zone (iyear, imonth, iday, ihour, imin, dsec, d_timezone)
+
+Converts a calendar date to in a zone with time offset d_timezone into a calendard date in UT (UT1).
+
+=head3 Parameters
+
+  int		year
+  int		month	(1..12)
+  int		day		(1..31)
+  int		hour	(0..23)
+  int		min		(0..59)
+  double	dsec	(0.0 .. 59.99999)
+  double	d_timezone	offset of time zone to UT, in hours as double
+
+=head3 return array
+
+  ['year']	int
+  ['month']	int
+  ['day']	int
+  ['hour']	int
+  ['min']	int
+  ['sec']	double
+
+=head3 C declaration
+
+  void swe_utc_time_zone( int32 iyear, int32 imonth, int32 iday, int32 ihour, int32 imin, double dsec, double d_timezone, int32 *iyear_out, int32 *imonth_out, int32 *iday_out, int32 *ihour_out, int32 *imin_out, double *dsec_out); 
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_utc_time_zone)
 {
 	long iyear, imonth, iday;
@@ -1128,6 +1704,33 @@ PHP_FUNCTION(swe_utc_time_zone)
 /**************************** 
  * exports from swehouse.c 
  ****************************/
+
+/* {{{ pod
+=pod
+
+=head1 function swe_houses(tjd_ut, geolat, geolon, hsys)
+
+calculated house cusps for given date/time, location and house system
+
+=head3 Parameters
+
+  double        tjd_ut      Julian day in Universal Time.
+  double		geolat		latitude -90.00 .. 90.00 (north postive, south negative)
+  double		geolon		longitude -180.00 .. 180.00 (east postive, sowest negative)
+  string		hsys		first letter indicates house system, default 'P' for Placidus
+
+=head3 return array
+
+  ['cusps']	array of 13 or 37 doubles
+  ['ascmc']	array of 10 doubles
+  ['rc']	int	return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_houses( double tjd_ut, double geolat, double geolon, int hsys, double *cusps, double *ascmc);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_houses)
 {
 	char *arg = NULL;
@@ -1172,6 +1775,33 @@ PHP_FUNCTION(swe_houses)
 	add_assoc_long(return_value, "rc", rc);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_houses_ex(tjd_ut, iflag, geolat, geolon, hsys)
+
+calculated house cusps for given date/time, location and house system
+
+=head3 Parameters
+
+  double        tjd_ut      Julian day in Universal Time.
+  int			iflag
+  double		geolat		latitude -90.00 .. 90.00 (north postive, south negative)
+  double		geolon		longitude -180.00 .. 180.00 (east postive, sowest negative)
+  string		hsys		first letter indicates house system, default 'P' for Placidus
+
+=head3 return array
+
+  ['cusps']	array of 13 or 37 doubles
+  ['ascmc']	array of 10 doubles
+  ['rc']	int	return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_houses_ex( double tjd_ut, int iflag, double geolat, double geolon, int hsys, double *cusps, double *ascmc);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_houses_ex)
 {
 	char *arg = NULL;
@@ -1216,6 +1846,36 @@ PHP_FUNCTION(swe_houses_ex)
 	add_assoc_long(return_value, "rc", rc);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_houses_ex2(tjd_ut, iflag, geolat, geolon, hsys)
+
+calculated house cusps for given date/time, location and house system
+
+=head3 Parameters
+
+  double        tjd_ut      Julian day in Universal Time.
+  int			iflag
+  double		geolat		latitude -90.00 .. 90.00 (north postive, south negative)
+  double		geolon		longitude -180.00 .. 180.00 (east postive, sowest negative)
+  string		hsys		first letter indicates house system, default 'P' for Placidus
+
+=head3 return array
+
+  ['cusps']			array of 13 or 37 doubles
+  ['ascmc']			array of 10 doubles
+  ['cusp_speed']	array of 13 or 37 doubles
+  ['ascmc_speed']	array of 10 doubles
+  ['rc']			int	return flag, < 0 in case of error
+  ['serr']			string
+
+=head3 C declaration
+
+  int swe_houses_ex2( double tjd_ut, int iflag, double geolat, double geolon, int hsys, double *cusps, double *ascmc, double *cusp_speed, double *ascmc_speed, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_houses_ex2)
 {
 	char *arg = NULL;
@@ -1228,6 +1888,7 @@ PHP_FUNCTION(swe_houses_ex2)
 	long iflag;
 	zval cusps_arr, ascmc_arr, cusp_speed_arr, ascmc_speed_arr;
 	char serr[AS_MAXCH];
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
@@ -1271,6 +1932,32 @@ PHP_FUNCTION(swe_houses_ex2)
 	add_assoc_string(return_value, "serr", serr);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_houses_armc(armc, geolat, eps, hsys)
+
+calculated house cusps for given armc, latitude, obliquity and house system
+
+=head3 Parameters
+
+  double        armc      	0.00 .. 360.00
+  double		geolat		latitude -90.00 .. 90.00 (north postive, south negative)
+  double		eps			obliquity of the ecliptic
+  string		hsys		first letter indicates house system, default 'P' for Placidus
+
+=head3 return array
+
+  ['cusps']	array of 13 or 37 doubles
+  ['ascmc']	array of 10 doubles
+  ['rc']	int	return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_houses_armc( double armc, double geolat, double eps, int hsys, double *cusps, double *ascmc);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_houses_armc)
 {
 	char *arg = NULL;
@@ -1314,6 +2001,35 @@ PHP_FUNCTION(swe_houses_armc)
 	add_assoc_long(return_value, "rc", rc);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_houses_armc_ex2(armc, geolat, eps, hsys)
+
+calculated house cusps for given armc, latitude, obliquity and house system
+
+=head3 Parameters
+
+  double        armc      	0.00 .. 360.00
+  double		geolat		latitude -90.00 .. 90.00 (north postive, south negative)
+  double		eps			obliquity of the ecliptic
+  string		hsys		first letter indicates house system, default 'P' for Placidus
+
+=head3 return array
+
+  ['cusps']			array of 13 or 37 doubles
+  ['ascmc']			array of 10 doubles
+  ['cusp_speed']	array of 13 or 37 doubles
+  ['ascmc_speed']	array of 10 doubles
+  ['rc']			int	return flag, < 0 in case of error
+  ['serr']			string
+
+=head3 C declaration
+
+  int swe_houses_armc_ex2( double armc, double geolat, double eps, int hsys, double *cusps, double *ascmc, double *cusp_speed, double *ascmc_speed, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_houses_armc_ex2)
 {
 	char *arg = NULL;
@@ -1325,6 +2041,7 @@ PHP_FUNCTION(swe_houses_armc_ex2)
 	int i, iflag, houses;
 	zval cusps_arr, ascmc_arr, cusp_speed_arr, ascmc_speed_arr;
 	char serr[AS_MAXCH];
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -1368,6 +2085,36 @@ PHP_FUNCTION(swe_houses_armc_ex2)
 	add_assoc_string(return_value, "serr", serr);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_houses_pos(armc, geolat, eps, hsys, xpin0, xpin1)
+
+calculated house position of object for given armc, latitude, obliquity and house system
+
+=head3 Parameters
+
+  double        armc      	0.00 .. 360.00
+  double		geolat		latitude -90.00 .. 90.00 (north postive, south negative)
+  double		eps			obliquity of the ecliptic
+  string		hsys		first letter indicates house system, default 'P' for Placidus
+  double		xpin0		longitude of object
+  double		xpin1		latitude of object
+
+=head3 return value
+
+	double		house position
+
+	or, in case of error
+
+	string		error message
+
+=head3 C declaration
+
+  double swe_house_pos(double armc, double geolat, double eps, int hsys, double *xpin, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_house_pos)
 {
 	char *arg = NULL;
@@ -1376,6 +2123,7 @@ PHP_FUNCTION(swe_house_pos)
 	double armc, geolat, eps, xpin[2], rc;
 	char serr[AS_MAXCH]; 
 	int i;
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
@@ -1400,10 +2148,29 @@ PHP_FUNCTION(swe_house_pos)
 	}	
 }
 
-/*
-New function since 1.80:
-ext_def(char *) swe_house_name(int hsys);
-*/
+/* {{{ pod
+=pod
+
+=head1 function swe_houses_name(hsys)
+
+Get the name of a house system
+
+=head3 Parameters
+
+  string		hsys		first letter indicates house system, default 'P' for Placidus
+
+=head3 return value
+
+	string		name of house system
+
+	or fail if system unknown.
+
+=head3 C declaration
+
+  char *swe_house_name(int hsys)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_house_name)
 {
 	size_t hsys_len;
@@ -1426,6 +2193,7 @@ PHP_FUNCTION(swe_house_name)
 /**************************** 
  * exports from sweecl.c 
  ****************************/
+
 PHP_FUNCTION(swe_gauquelin_sector)
 {
 	char *arg = NULL;
@@ -1435,6 +2203,7 @@ PHP_FUNCTION(swe_gauquelin_sector)
 	double t_ut, geopos[3], atpress, attemp, dgsect;
 	char serr[AS_MAXCH]; 
 	int i;
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
 
@@ -1464,6 +2233,7 @@ PHP_FUNCTION(swe_sol_eclipse_where)
 	char serr[AS_MAXCH]; 
 	int i;
 	zval geopos_arr, attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
@@ -1505,6 +2275,7 @@ PHP_FUNCTION(swe_lun_occult_where)
 	char serr[AS_MAXCH], *starname = NULL; 
 	int i;
 	zval geopos_arr, attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -1545,6 +2316,7 @@ PHP_FUNCTION(swe_sol_eclipse_how)
 	char serr[AS_MAXCH]; 
 	int i;
 	zval geopos_arr, attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
@@ -1580,6 +2352,7 @@ PHP_FUNCTION(swe_sol_eclipse_when_loc)
 	int i;
 	int backward;
 	zval tret_arr, attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
@@ -1621,6 +2394,7 @@ PHP_FUNCTION(swe_lun_occult_when_loc)
 	int i;
 	int backward;
 	zval tret_arr, attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
@@ -1662,6 +2436,7 @@ PHP_FUNCTION(swe_sol_eclipse_when_glob)
 	char serr[AS_MAXCH]; 
 	int i, backward;
 	zval tret_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -1698,6 +2473,7 @@ PHP_FUNCTION(swe_lun_occult_when_glob)
 	char serr[AS_MAXCH], *starname = NULL; 
 	int i, backward;
 	zval tret_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
@@ -1735,6 +2511,7 @@ PHP_FUNCTION(swe_lun_eclipse_how)
 	char serr[AS_MAXCH], *starname = NULL; 
 	int i, backward;
 	zval attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
@@ -1770,6 +2547,7 @@ PHP_FUNCTION(swe_lun_eclipse_when)
 	char serr[AS_MAXCH]; 
 	int i, backward;
 	zval tret_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -1805,6 +2583,7 @@ PHP_FUNCTION(swe_lun_eclipse_when_loc)
 	char serr[AS_MAXCH], *starname = NULL;
 	int i, backward;
 	zval tret_arr, attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
@@ -1845,6 +2624,7 @@ PHP_FUNCTION(swe_pheno)
 	char serr[AS_MAXCH]; 
 	int i;
 	zval attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
@@ -1880,6 +2660,7 @@ PHP_FUNCTION(swe_pheno_ut)
 	char serr[AS_MAXCH]; 
 	int i;
 	zval attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
@@ -2019,6 +2800,7 @@ PHP_FUNCTION(swe_rise_trans)
 	char star[AS_MAXCH];
 	int i;
 	zval tret_arr;
+	*serr = '\0';
 	*star = '\0';
 
 	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
@@ -2064,6 +2846,7 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 	char star[AS_MAXCH];
 	int i;
 	zval tret_arr;
+	*serr = '\0';
 	*star = '\0';
 
 	if(ZEND_NUM_ARGS() != 11) WRONG_PARAM_COUNT;
@@ -2107,6 +2890,7 @@ PHP_FUNCTION(swe_nod_aps)
 	char serr[AS_MAXCH]; 
 	int i;
 	zval xnasc_arr, xndsc_arr, xperi_arr, xaphe_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -2158,6 +2942,7 @@ PHP_FUNCTION(swe_nod_aps_ut)
 	char serr[AS_MAXCH]; 
 	int i;
 	zval xnasc_arr, xndsc_arr, xperi_arr, xaphe_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -2223,6 +3008,7 @@ PHP_FUNCTION(swe_deltat_ex)
 	double tjd_ut, tjd_et;
 	long ephe_flag;
 	char serr[AS_MAXCH];
+	*serr = '\0';
 
 	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
@@ -2245,6 +3031,7 @@ PHP_FUNCTION(swe_time_equ)
 	double tjd, te;
 	int rc;
 	char serr[AS_MAXCH]; 
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
@@ -2267,6 +3054,7 @@ PHP_FUNCTION(swe_lmt_to_lat)
 	double tjd_lat;
 	int rc;
 	char serr[AS_MAXCH]; 
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
@@ -2288,6 +3076,7 @@ PHP_FUNCTION(swe_lat_to_lmt)
 	double tjd_lmt, tjd_lat, geolon;
 	int rc;
 	char serr[AS_MAXCH]; 
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
