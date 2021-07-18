@@ -1,3 +1,5 @@
 # IntelliJ / PhpStorm project directory.
 .DS_Store
 .idea
+pod2htmd.tmp
+
