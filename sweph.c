@@ -1228,11 +1228,13 @@ PHP_FUNCTION(swe_version)
 
 =head1 function swe_get_library_path()
 
-Path to the SE PHP extension file (sweph.so).
+Path to the SE PHP extension library file
 
 =head3 Parameters (none)
 
-=head3 return string
+=head3 return 
+
+	path to currently used library
 
 =head3 C declaration
 
@@ -1249,7 +1251,42 @@ PHP_FUNCTION(swe_get_library_path)
     RETURN_STRING(swe_get_library_path(path));
 }
 
-/* char * swe_get_current_file_data(int ifno, double *tfstart, double *tfend, int *denum); */
+/* {{{ pod
+=pod
+
+=head1 function swe_get_current_file_data (ifno)
+
+This is a function mostly for debug purposes. It is also useful to find out the time range offered by
+an asteroid file. The function should only be used directly AFTER a successful call to swe_calc() or
+swe_fixstar.
+
+It delivers information about the last used file, depending on parameter ifno:
+
+  ifno = 0     planet file sepl_xxx, used for Sun .. Pluto, or jpl file
+  ifno = 1     moon file semo_xxx
+  ifno = 2     main asteroid file seas_xxx  if such an object was computed
+  ifno = 3     other asteroid or planetary moon file, if such object was computed
+  ifno = 4     star file
+
+=head3 Parameters 
+  
+    ifno
+
+=head3 return array
+
+  ['path']
+  ['tfstart']
+  ['tfend']
+  ['denum']
+
+  In case of error, NULL is returned.
+
+=head3 C declaration
+
+ char * swe_get_current_file_data(int ifno, double *tfstart, double *tfend, int *denum);
+
+=cut
+}}} */
 PHP_FUNCTION(swe_get_current_file_data)
 {
 	int ifno;
@@ -1268,10 +1305,11 @@ PHP_FUNCTION(swe_get_current_file_data)
 	if (a == NULL) {
 		RETURN_NULL();
 	} else {
+		array_init(return_value);
+		add_assoc_string(return_value, "path", a);
 		add_assoc_double(return_value, "tfstart", tfstart);
 		add_assoc_double(return_value, "tfend", tfend);
 		add_assoc_long(return_value, "denum", denum);
-		RETURN_STRING(a);
     }
 }
 
@@ -1279,6 +1317,34 @@ PHP_FUNCTION(swe_get_current_file_data)
  * exports from swedate.c 
  ****************************/
 
+/* {{{ pod
+=pod
+
+=head1 function swe_date_conversion (y, m, d, utime, cal_flag)
+
+Converts a calendar date to julian day number tjd, with validity check for date.
+Parameter cal_flag is a character, j or g, and not the same as the constants SE_GREG_CAL and
+SE_JUL_CAL used in swe_juldate() and swe_revjul()
+
+=head3 Parameters
+
+  y			year
+  m			month (1..12)
+  d			day (1..31)
+  utime		UT (0.0 .. 23.99999) clock time as double
+  cal_flag	character g or j, or string beginning with one of these letters
+
+=head3 return value
+  
+  converted tjd, or in case of illegal input date, NULL.
+
+=head3 C declaration
+
+  int swe_date_conversion( int y , int m , int d , double utime, char c, double *tjd);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_date_conversion)
 {
 	size_t arg_len;
@@ -1305,7 +1371,33 @@ PHP_FUNCTION(swe_date_conversion)
 		RETURN_NULL();
 }
 
-/* double swe_julday(int year, int month, int day, double hour, int gregflag); */
+
+/* {{{ pod
+=pod
+
+=head1 function swe_julday (y, m, d, hour, gregflag)
+
+Converts a calendar date to julian day number tjd, no validity check for date.
+
+=head3 Parameters
+
+  year		year
+  month		month (1..12)
+  day		day (1..31)
+  hour		UT (0.0 .. 23.99999) clock time as double
+  gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+
+=head3 return value
+  
+  converted tjd
+
+=head3 C declaration
+
+  double swe_julday(int year, int month, int day, double hour, int gregflag); 
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_julday)
 {
 	int rc;
@@ -1322,6 +1414,32 @@ PHP_FUNCTION(swe_julday)
 	RETURN_DOUBLE(swe_julday((int)year, (int)month, (int)day, hour, (int)gregflag));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_revjul (jd, gregflag)
+
+Converts a calendar date to julian day number tjd, no validity check for date.
+
+=head3 Parameters
+
+  jd		julian day number
+  gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+
+=head3 return array
+
+  ['year']
+  ['month']
+  ['day']
+  ['hour']
+
+=head3 C declaration
+
+  void swe_revjul ( double jd, int gregflag, int *jyear, int *jmon, int *jday, double *jut);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_revjul)
 {
 	int year, month, day, gregflag;
