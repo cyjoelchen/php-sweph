@@ -15,13 +15,13 @@ Follow the steps. Make sure `php-dev` has installed already.
     sudo make install
 ```
 
-Add `extension=sweph.so` to php.ini. In my case (nginx + php-fpm), it's located in `/etc/php/7.0/fpm/php.ini`. Reload php-fpm to make it take effect.
+Add `extension=swephp.so` to php.ini. In my case (nginx + php-fpm), it's located in `/etc/php/7.0/fpm/php.ini`. Reload php-fpm to make it take effect.
 
-Now you should able to see sweph section from `phpinfo()`.
+Now you should able to see swephp section from `phpinfo()`.
 
- sweph support | enabled 
+ swephp support | enabled 
 ---|---
- extension version | 2.0 Rev: 29
+ extension version | 3.0 Rev: 00
  library (libswe.a) version | 2.10.01a
  default ephemeris file path | .:/users/ephe2/:/users/ephe/ 
 
