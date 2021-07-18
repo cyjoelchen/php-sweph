@@ -9,7 +9,7 @@ if (!extension_loaded('sweph')) {
 --FILE--
 <?php
 swe_set_ephe_path(null);
-var_dump(swe_get_library_path());
+var_dump(strrev(substr(strrev(swe_get_library_path()), 0, 17)));
 ?>
 --EXPECT--
-string(32) "/root/php-sweph/modules/sweph.so"
+string(17) "/modules/sweph.so"
