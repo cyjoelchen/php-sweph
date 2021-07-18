@@ -812,7 +812,9 @@ PHP_FUNCTION(swe_close)
 
 Define the path where SE ephemeris files reside
 
-=head3 Parameters: path    
+=head3 Parameters:
+
+  path    
 
 =head3 return value: none
 
@@ -846,7 +848,9 @@ PHP_FUNCTION(swe_set_ephe_path)
 
 Define the file name for a JPL ephemeris file, used with flag SEFLG_JPLEPH
 
-=head3 Parameters: fname    
+=head3 Parameters:
+
+  fname    
 
 =head3 return value: none
 
@@ -880,9 +884,13 @@ PHP_FUNCTION(swe_set_jpl_file)
 
 get the name of a planet, asteroid or fictitious object
 
-=head3 Parameters: ipl    
+=head3 Parameters:
 
-=head3 return value: string (object name)
+  ipl    
+
+=head3 return value:
+
+  string (object name)
 
 In case of error, an error message is returned instead of a planet name.
 
@@ -916,7 +924,9 @@ PHP_FUNCTION(swe_get_planet_name)
 
 Set topocentric reference places, used with flag SEFLG_TOPOCTR and some function
 
-=head3 Parameters: geolon, geolat, geoalt    
+=head3 Parameters:
+
+  geolon, geolat, geoalt    
 
 =head3 return value: none
 
@@ -949,7 +959,9 @@ PHP_FUNCTION(swe_set_topo)
 
 Set one of the numerous sidereal modes, used with flag SEFLG_SIDEREAL and some functions
 
-=head3 Parameters: sid_mode, t0, ayan_t0    
+=head3 Parameters:
+
+  sid_mode, t0, ayan_t0    
 
 =head3 return value: none
 
@@ -983,9 +995,13 @@ PHP_FUNCTION(swe_set_sid_mode)
 
 Get ayanamsa value in current sidereal mode
 
-=head3 Parameters: tjd_et
+=head3 Parameters:
 
-=head3 return value: ayanamsa value
+  tjd_et
+
+=head3 return value:
+
+  ayanamsa value
 
 =head3 C declaration
 
@@ -1013,9 +1029,11 @@ PHP_FUNCTION(swe_get_ayanamsa)
 
 =head1 function swe_get_ayanamsa_ex_ut (tjd_et, iflag)
 
-Get ayanamsa value in current sidereal mode
+Get ayanamsa value in current sidereal mode, time in UT
 
-=head3 Parameters: tjd_et, iflag
+=head3 Parameters:
+
+  tjd_et, iflag
 
 =head3 return array
 
@@ -1060,9 +1078,13 @@ PHP_FUNCTION(swe_get_ayanamsa_ex)
 
 Get ayanamsa value in current sidereal mode
 
-=head3 Parameters: tjd_ut
+=head3 Parameters:
 
-=head3 return value: ayanamsa value
+  tjd_ut
+
+=head3 return value:
+
+  ayanamsa value
 
 =head3 C declaration
 
@@ -1090,9 +1112,11 @@ PHP_FUNCTION(swe_get_ayanamsa_ut)
 
 =head1 function swe_get_ayanamsa_ex_ut (tjd_ut, iflag)
 
-Get ayanamsa value in current sidereal mode
+Get ayanamsa value in current sidereal mode, time in UT
 
-=head3 Parameters: tjd_ut, iflag
+=head3 Parameters:
+
+  tjd_ut, iflag
 
 =head3 return array
 
@@ -1130,7 +1154,28 @@ PHP_FUNCTION(swe_get_ayanamsa_ex_ut)
     add_assoc_string(return_value, "serr", serr);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_get_ayanamsa_name (isidmode)
+
+Get ayanamsa name for this  sidereal mode
+
+=head3 Parameters:
+
+  isidmode
+
+=head3 return value:
+
+  ayanamsa name
+
+=head3 C declaration
+
 const char *swe_get_ayanamsa_name(int32 isidmode);
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_get_ayanamsa_name)
 {
 	long isidmode;
