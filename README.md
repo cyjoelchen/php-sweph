@@ -45,6 +45,18 @@ You are all set!
     swe_vis_limit_mag
 ```
 
+## Inline documentation
+The source code for thzis extension contains inline documentation in POD style,
+which comes from the Perl programming language.
+
+You can view the inline documentation, if you have Perl installed, with this command:
+
+perldoc swephp.c
+
+To create a html documentation page, use this command:
+
+pod2html swephp.c > php-sweph-doc.html
+
 ## Example
 
 ```php
