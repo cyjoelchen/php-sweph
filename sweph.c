@@ -960,19 +960,21 @@ PHP_FUNCTION(swe_set_topo)
 
 Set one of the numerous sidereal modes, used with flag SEFLG_SIDEREAL and some functions
 
-=head3 Parameters:
+=head3 Parameters
 
-  sid_mode, t0, ayan_t0    
+    int         sid_mode      Number of constant of ayanamsa to use.
+    float       t0            Reference date if using SE_SIDM_USER flag, 0 otherwise.
+    float       ayan_t0       Initial value of ayanamsa if using SE_SIDM_USER flag, 0 otherwise.
 
-=head3 return value: none
+=head3 return (none)
 
 =head3 C declaration
 
-  void swe_set_sid_mode(int32 sid_mode, double t0, double ayan_t0);
-
+void swe_set_sid_mode(int32 sid_mode, double t0, double ayan_t0)
 
 =cut
- }}} */
+}}} */
+>>>>>>> 90e4f46... Document & test swe_set_sid_mode().
 PHP_FUNCTION(swe_set_sid_mode)
 {
 	long sid_mode;
