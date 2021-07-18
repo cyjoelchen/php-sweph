@@ -1162,13 +1162,11 @@ PHP_FUNCTION(swe_get_ayanamsa_ex_ut)
 
 Get ayanamsa name for this  sidereal mode
 
-=head3 Parameters:
+=head3 Parameters
 
-  isidmode
+    int         isidmode      Number or constant of sidereal mode.
 
-=head3 return value:
-
-  ayanamsa name
+=head3 return string
 
 =head3 C declaration
 
