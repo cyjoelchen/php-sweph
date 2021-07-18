@@ -1027,27 +1027,28 @@ PHP_FUNCTION(swe_get_ayanamsa)
 /* {{{ pod
 =pod
 
-=head1 function swe_get_ayanamsa_ex_ut (tjd_et, iflag)
+=head1 function swe_get_ayanamsa_ex(tjd_et, iflag)
 
-Get ayanamsa value in current sidereal mode, time in UT
+Compute the ayanamsa with or without nutation, depending on flag.
 
-=head3 Parameters:
+=head3 Parameters
 
-  tjd_et, iflag
+    float       tjd_et      Julian day in Ephemeris Time.
+    int         iflag       Flag bits for computation requirements.
 
 =head3 return array
 
-  ['daya']		ayanamsa value
-  ['serr']		optional error message
-  ['rc']		return flag, < 0 in case of error
+    [
+        'daya' => (float) Value of ayanamsa.
+        'serr' => (string) Error message or empty string.
+    ]
 
 =head3 C declaration
 
-int32 swe_get_ayanamsa_ex(double tjd_et, int32 iflag, double *daya, char *serr);                    
-
+int32 swe_get_ayanamsa_ex(double tjd_et, int32 iflag, double *daya, char *serr);
 
 =cut
- }}} */
+}}} */
 PHP_FUNCTION(swe_get_ayanamsa_ex)
 {
 	double tjd_et, daya;
