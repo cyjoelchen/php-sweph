@@ -524,7 +524,7 @@ see also https://perldoc.perl.org/perlpod
 /* {{{ pod
 =pod
 
-=head1 function swe_calc (tjd_ut, ipl, iflag)
+=head1 function swe_calc(tjd_ut, ipl, iflag)
 
 calculate position of planet ipl with time in Ephemeris Time (TDT)
 
@@ -541,7 +541,6 @@ calculate position of planet ipl with time in Ephemeris Time (TDT)
 =head3 C declaration
 
   int swe_calc ( double tjd_et, int ipl, int iflag, double* xx, char* serr);
-
 
 =cut
  }}} */
@@ -573,7 +572,7 @@ PHP_FUNCTION(swe_calc)
 /* {{{ pod
 =pod
 
-=head1 function swe_calc_ut (tjd_ut, ipl, iflag)
+=head1 function swe_calc_ut(tjd_ut, ipl, iflag)
 
 calculate position of planet ipl with time in Universal Time UT
 
@@ -590,7 +589,6 @@ calculate position of planet ipl with time in Universal Time UT
 =head3 C declaration
 
   int swe_calc_ut ( double tjd_ut, int ipl, int iflag, double* xx, char* serr);
-
 
 =cut
  }}} */
@@ -622,9 +620,9 @@ PHP_FUNCTION(swe_calc_ut)
 /* {{{ pod
 =pod
 
-=head1 function swe_calc_pctr (tjd_et, ipl, iplctr, iflag)
+=head1 function swe_calc_pctr(tjd_et, ipl, iplctr, iflag)
 
-calculate position of planet ipl  relative to a center object iplctr
+calculate position of planet ipl relative to a center object iplctr
 
 =head3 Parameters
 
@@ -639,7 +637,6 @@ calculate position of planet ipl  relative to a center object iplctr
 =head3 C declaration
 
   int swe_calc_pctr ( double tjd_et, int ipl, int iplctr, int iflag, double* xx, char* serr);
-
 
 =cut
  }}} */
@@ -672,7 +669,7 @@ PHP_FUNCTION(swe_calc_pctr)
 /* {{{ pod
 =pod
 
-=head1 function swe_fixstar (star, tjd_et, iflag)
+=head1 function swe_fixstar(star, tjd_et, iflag)
 
 calculate position of a star with time in Ephemeris Time (TDT)
 
@@ -690,7 +687,6 @@ calculate position of a star with time in Ephemeris Time (TDT)
 =head3 C declaration
 
   int swe_fixstar(char *star, double tjd_et, int32 iflag, double *xx, char *serr);
-
 
 =cut
  }}} */
@@ -728,7 +724,7 @@ PHP_FUNCTION(swe_fixstar)
 /* {{{ pod
 =pod
 
-=head1 function swe_fixstar_ut (star, tjd_ut, iflag)
+=head1 function swe_fixstar_ut(star, tjd_ut, iflag)
 
 calculate position of a star with time in Universal Time (UT)
 
@@ -746,7 +742,6 @@ calculate position of a star with time in Universal Time (UT)
 =head3 C declaration
 
   int swe_fixstar(char *star, double tjd_et, int32 iflag, double *xx, char *serr);
-
 
 =cut
  }}} */
@@ -792,8 +787,7 @@ close SE and release resources
 
 =head3 C declaration
 
-  void swe_close()
-
+void swe_close()
 
 =cut
  }}} */
@@ -820,8 +814,7 @@ Define the path where SE ephemeris files reside
 
 =head3 C declaration
 
-  void swe_set_ephe_path(char *path);
-
+void swe_set_ephe_path(char *path);
 
 =cut
  }}} */
@@ -858,7 +851,6 @@ Define the file name for a JPL ephemeris file, used with flag SEFLG_JPLEPH
 
 void swe_set_jpl_file(char *fname);
 
-
 =cut
  }}} */
 PHP_FUNCTION(swe_set_jpl_file)
@@ -880,7 +872,7 @@ PHP_FUNCTION(swe_set_jpl_file)
 /* {{{ pod
 =pod
 
-=head1 function swe_get_planet_name (ipl)
+=head1 function swe_get_planet_name(ipl)
 
 get the name of a planet, asteroid or fictitious object
 
@@ -897,7 +889,6 @@ In case of error, an error message is returned instead of a planet name.
 =head3 C declaration
 
 (char *) swe_get_planet_name(int ipl, char *spname);
-
 
 =cut
  }}} */
@@ -932,8 +923,7 @@ Set topocentric reference places, used with flag SEFLG_TOPOCTR and some function
 
 =head3 C declaration
 
-  void swe_set_topo(double geolon, double geolat, double geoalt)
-
+void swe_set_topo(double geolon, double geolat, double geoalt)
 
 =cut
  }}} */
