@@ -996,23 +996,20 @@ PHP_FUNCTION(swe_set_sid_mode)
 
 =head1 function swe_get_ayanamsa (tjd_et)
 
-Get ayanamsa value in current sidereal mode
+Compute the ayanamsa without nutation.
 
-=head3 Parameters:
+=head3 Parameters
 
-  tjd_et
+    float         tjd_et      Julian day in Ephemeris Time.
 
-=head3 return value:
-
-  ayanamsa value
+=head3 return float
 
 =head3 C declaration
 
-double swe_get_ayanamsa(double tjd_et);                                                             
-
+double swe_get_ayanamsa(double tjd_et);
 
 =cut
- }}} */
+}}} */
 PHP_FUNCTION(swe_get_ayanamsa)
 {
 	double tjd_et;
