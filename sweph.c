@@ -1217,6 +1217,23 @@ PHP_FUNCTION(swe_version)
 	RETURN_STRING(swe_version(name));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_get_library_path()
+
+Path to the SE PHP extension file (sweph.so).
+
+=head3 Parameters (none)
+
+=head3 return string
+
+=head3 C declaration
+
+char *swe_get_library_path(char *spath);
+
+=cut
+}}} */
 PHP_FUNCTION(swe_get_library_path)
 {
     char path[AS_MAXCH];
