@@ -2151,7 +2151,7 @@ PHP_FUNCTION(swe_house_pos)
 /* {{{ pod
 =pod
 
-=head1 function swe_houses_name(hsys)
+=head1 function swe_house_name(hsys)
 
 Get the name of a house system
 
