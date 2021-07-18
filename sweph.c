@@ -1114,9 +1114,10 @@ PHP_FUNCTION(swe_get_ayanamsa_ut)
 
 Get ayanamsa value in current sidereal mode, time in UT
 
-=head3 Parameters:
+=head3 Parameters
 
-  tjd_ut, iflag
+    float       tjd_ut      Julian day in Universal Time.
+    int         iflag       Flag bits for computation requirements.
 
 =head3 return array
 
