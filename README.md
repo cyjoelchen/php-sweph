@@ -46,7 +46,7 @@ You are all set!
 ```
 
 ## Inline documentation
-The source code for thzis extension contains inline documentation in POD style,
+The source code for this extension contains inline documentation in POD style,
 which comes from the Perl programming language.
 
 You can view the inline documentation, if you have Perl installed, with this command:
