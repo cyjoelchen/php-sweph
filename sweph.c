@@ -1068,7 +1068,8 @@ PHP_FUNCTION(swe_get_ayanamsa_ex)
 
     add_assoc_double(return_value, "daya", daya);
     add_assoc_long(return_value, "rc", rc);
-    add_assoc_string(return_value, "serr", serr);
+	if (rc < 0)
+		add_assoc_string(return_value, "serr", serr);
 }
 
 /* {{{ pod
@@ -1151,7 +1152,8 @@ PHP_FUNCTION(swe_get_ayanamsa_ex_ut)
 
     add_assoc_double(return_value, "daya", daya);
     add_assoc_long(return_value, "rc", rc);
-    add_assoc_string(return_value, "serr", serr);
+	if (rc < 0)
+		add_assoc_string(return_value, "serr", serr);
 }
 
 /* {{{ pod
