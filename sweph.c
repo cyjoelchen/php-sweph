@@ -554,6 +554,7 @@ PHP_FUNCTION(swe_calc)
 	double tjd_et, xx[6];
 	char serr[AS_MAXCH]; 
 	int i;
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
@@ -604,6 +605,7 @@ PHP_FUNCTION(swe_calc_ut)
 	double tjd_ut, xx[6];
 	char serr[AS_MAXCH]; 
 	int i;
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
@@ -655,6 +657,7 @@ PHP_FUNCTION(swe_calc_pctr)
 	double tjd_et, xx[6];
 	char serr[AS_MAXCH]; 
 	int i;
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 		
@@ -1054,6 +1057,7 @@ PHP_FUNCTION(swe_get_ayanamsa_ex)
 	long iflag;
 	int rc;
 	char serr[AS_MAXCH];
+	*serr = '\0';
 
 	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
@@ -1138,6 +1142,7 @@ PHP_FUNCTION(swe_get_ayanamsa_ex_ut)
 	long iflag;
 	int rc;
 	char serr[AS_MAXCH];
+	*serr = '\0';
 
 	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
@@ -1418,6 +1423,7 @@ PHP_FUNCTION(swe_utc_to_jd)
 	double dsec, dret[2];
 	char serr[AS_MAXCH];
 	int32 rc;
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 7) WRONG_PARAM_COUNT;
 
@@ -1578,6 +1584,7 @@ PHP_FUNCTION(swe_houses_ex2)
 	long iflag;
 	zval cusps_arr, ascmc_arr, cusp_speed_arr, ascmc_speed_arr;
 	char serr[AS_MAXCH];
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
@@ -1675,6 +1682,7 @@ PHP_FUNCTION(swe_houses_armc_ex2)
 	int i, iflag, houses;
 	zval cusps_arr, ascmc_arr, cusp_speed_arr, ascmc_speed_arr;
 	char serr[AS_MAXCH];
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -1726,6 +1734,7 @@ PHP_FUNCTION(swe_house_pos)
 	double armc, geolat, eps, xpin[2], rc;
 	char serr[AS_MAXCH]; 
 	int i;
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
@@ -1785,6 +1794,7 @@ PHP_FUNCTION(swe_gauquelin_sector)
 	double t_ut, geopos[3], atpress, attemp, dgsect;
 	char serr[AS_MAXCH]; 
 	int i;
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
 
@@ -1814,6 +1824,7 @@ PHP_FUNCTION(swe_sol_eclipse_where)
 	char serr[AS_MAXCH]; 
 	int i;
 	zval geopos_arr, attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
@@ -1855,6 +1866,7 @@ PHP_FUNCTION(swe_lun_occult_where)
 	char serr[AS_MAXCH], *starname = NULL; 
 	int i;
 	zval geopos_arr, attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -1895,6 +1907,7 @@ PHP_FUNCTION(swe_sol_eclipse_how)
 	char serr[AS_MAXCH]; 
 	int i;
 	zval geopos_arr, attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
@@ -1930,6 +1943,7 @@ PHP_FUNCTION(swe_sol_eclipse_when_loc)
 	int i;
 	int backward;
 	zval tret_arr, attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
@@ -1971,6 +1985,7 @@ PHP_FUNCTION(swe_lun_occult_when_loc)
 	int i;
 	int backward;
 	zval tret_arr, attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
@@ -2012,6 +2027,7 @@ PHP_FUNCTION(swe_sol_eclipse_when_glob)
 	char serr[AS_MAXCH]; 
 	int i, backward;
 	zval tret_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -2048,6 +2064,7 @@ PHP_FUNCTION(swe_lun_occult_when_glob)
 	char serr[AS_MAXCH], *starname = NULL; 
 	int i, backward;
 	zval tret_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
@@ -2085,6 +2102,7 @@ PHP_FUNCTION(swe_lun_eclipse_how)
 	char serr[AS_MAXCH], *starname = NULL; 
 	int i, backward;
 	zval attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
@@ -2120,6 +2138,7 @@ PHP_FUNCTION(swe_lun_eclipse_when)
 	char serr[AS_MAXCH]; 
 	int i, backward;
 	zval tret_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -2155,6 +2174,7 @@ PHP_FUNCTION(swe_lun_eclipse_when_loc)
 	char serr[AS_MAXCH], *starname = NULL;
 	int i, backward;
 	zval tret_arr, attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
@@ -2195,6 +2215,7 @@ PHP_FUNCTION(swe_pheno)
 	char serr[AS_MAXCH]; 
 	int i;
 	zval attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
@@ -2230,6 +2251,7 @@ PHP_FUNCTION(swe_pheno_ut)
 	char serr[AS_MAXCH]; 
 	int i;
 	zval attr_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
@@ -2369,6 +2391,7 @@ PHP_FUNCTION(swe_rise_trans)
 	char star[AS_MAXCH];
 	int i;
 	zval tret_arr;
+	*serr = '\0';
 	*star = '\0';
 
 	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
@@ -2414,6 +2437,7 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 	char star[AS_MAXCH];
 	int i;
 	zval tret_arr;
+	*serr = '\0';
 	*star = '\0';
 
 	if(ZEND_NUM_ARGS() != 11) WRONG_PARAM_COUNT;
@@ -2457,6 +2481,7 @@ PHP_FUNCTION(swe_nod_aps)
 	char serr[AS_MAXCH]; 
 	int i;
 	zval xnasc_arr, xndsc_arr, xperi_arr, xaphe_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -2508,6 +2533,7 @@ PHP_FUNCTION(swe_nod_aps_ut)
 	char serr[AS_MAXCH]; 
 	int i;
 	zval xnasc_arr, xndsc_arr, xperi_arr, xaphe_arr;
+	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -2573,6 +2599,7 @@ PHP_FUNCTION(swe_deltat_ex)
 	double tjd_ut, tjd_et;
 	long ephe_flag;
 	char serr[AS_MAXCH];
+	*serr = '\0';
 
 	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
@@ -2595,6 +2622,7 @@ PHP_FUNCTION(swe_time_equ)
 	double tjd, te;
 	int rc;
 	char serr[AS_MAXCH]; 
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
@@ -2617,6 +2645,7 @@ PHP_FUNCTION(swe_lmt_to_lat)
 	double tjd_lat;
 	int rc;
 	char serr[AS_MAXCH]; 
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
@@ -2638,6 +2667,7 @@ PHP_FUNCTION(swe_lat_to_lmt)
 	double tjd_lmt, tjd_lat, geolon;
 	int rc;
 	char serr[AS_MAXCH]; 
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
