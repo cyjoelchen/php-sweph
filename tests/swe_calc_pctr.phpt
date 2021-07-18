@@ -13,17 +13,17 @@ var_dump(swe_calc_pctr(2452275.5, 1, 2, SEFLG_MOSEPH));
 --EXPECT--
 array(8) {
   [0]=>
-  float(0)
+  float(6.9529142502109E-310)
   [1]=>
-  float(0)
+  float(6.9529142502133E-310)
   [2]=>
-  float(NAN)
+  float(0)
   [3]=>
-  float(-4.0717984910775E+37)
+  float(0)
   [4]=>
-  float(4.6379044294073E-310)
+  float(0)
   [5]=>
-  float(4.9406564584125E-324)
+  float(0)
   ["serr"]=>
   string(48) "barycentric Moshier positions are not supported."
   ["rc"]=>
