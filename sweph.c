@@ -2193,6 +2193,7 @@ PHP_FUNCTION(swe_house_name)
 /**************************** 
  * exports from sweecl.c 
  ****************************/
+
 PHP_FUNCTION(swe_gauquelin_sector)
 {
 	char *arg = NULL;
