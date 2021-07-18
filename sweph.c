@@ -536,9 +536,9 @@ calculate position of planet ipl with time in Ephemeris Time (TDT)
 
 =head3 return array
 
-  [0..5]		double	position and speed vector xx
-  ['serr']		string	optional error message
-  ['rc']		int		return flag, < 0 in case of error
+  [0..5]        double	position and speed vector xx
+  ['serr']      string	optional error message
+  ['rc']        int		return flag, < 0 in case of error
 
 =head3 C declaration
 
@@ -1937,7 +1937,7 @@ PHP_FUNCTION(swe_houses_ex2)
 
 =head1 function swe_houses_armc(armc, geolat, eps, hsys)
 
-calculated house cusps for given armc, location and house system
+calculated house cusps for given armc, latitude, obliquity and house system
 
 =head3 Parameters
 
@@ -2006,7 +2006,7 @@ PHP_FUNCTION(swe_houses_armc)
 
 =head1 function swe_houses_armc_ex2(armc, geolat, eps, hsys)
 
-calculated house cusps for given armc, location and house system
+calculated house cusps for given armc, latitude, obliquity and house system
 
 =head3 Parameters
 
@@ -2085,6 +2085,36 @@ PHP_FUNCTION(swe_houses_armc_ex2)
 	add_assoc_string(return_value, "serr", serr);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_houses_pos(armc, geolat, eps, hsys, xpin0, xpin1)
+
+calculated house position of object for given armc, latitude, obliquity and house system
+
+=head3 Parameters
+
+  double        armc      	0.00 .. 360.00
+  double		geolat		latitude -90.00 .. 90.00 (north postive, south negative)
+  double		eps			obliquity of the ecliptic
+  string		hsys		first letter indicates house system, default 'P' for Placidus
+  double		xpin0		longitude of object
+  double		xpin1		latitude of object
+
+=head3 return value
+
+	double		house position
+
+	or, in case of error
+
+	string		error message
+
+=head3 C declaration
+
+  double swe_house_pos(double armc, double geolat, double eps, int hsys, double *xpin, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_house_pos)
 {
 	char *arg = NULL;
@@ -2118,10 +2148,29 @@ PHP_FUNCTION(swe_house_pos)
 	}	
 }
 
-/*
-New function since 1.80:
-ext_def(char *) swe_house_name(int hsys);
-*/
+/* {{{ pod
+=pod
+
+=head1 function swe_houses_name(hsys)
+
+Get the name of a house system
+
+=head3 Parameters
+
+  string		hsys		first letter indicates house system, default 'P' for Placidus
+
+=head3 return value
+
+	string		name of house system
+
+	or fail if system unknown.
+
+=head3 C declaration
+
+  char *swe_house_name(int hsys)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_house_name)
 {
 	size_t hsys_len;
