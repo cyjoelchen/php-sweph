@@ -49,6 +49,9 @@ zend_function_entry sweph_functions[] = {
 	PHP_FE(swe_fixstar, NULL)
 	PHP_FE(swe_fixstar_ut, NULL)
 	PHP_FE(swe_fixstar_mag, NULL)
+	PHP_FE(swe_fixstar2, NULL)
+	PHP_FE(swe_fixstar2_ut, NULL)
+	PHP_FE(swe_fixstar2_mag, NULL)
 	PHP_FE(swe_close, NULL)
 	PHP_FE(swe_set_ephe_path, NULL)
 	PHP_FE(swe_set_jpl_file, NULL)
@@ -723,9 +726,66 @@ PHP_FUNCTION(swe_fixstar)
 	}
 	memset(star, 0, MAX_FIXSTAR_NAME);
 	strncpy(star, star_ptr, star_len);
-	php_printf("%s", star);
+	// php_printf("%s", star);
 	rc = swe_fixstar(star, tjd_et, (int)iflag, xx, serr);
-	php_printf("%s %s %d\n", star, serr, rc);
+	// php_printf("%s %s %d\n", star, serr, rc);
+
+	array_init(return_value);
+	for(i = 0; i < 6; i++)
+		add_index_double(return_value, i, xx[i]);
+	add_assoc_string(return_value, "star", star);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_fixstar2(star, tjd_et, iflag)
+
+calculate position of a star with time in Ephemeris Time (TDT)
+
+=head3 Parameters
+
+  string        star        Name of fixed star, or string with line number in star file
+  double        tjd_et      Julian day in Ephemeris Time.
+  int           iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+  [0..5]		double	position and speed vector xx
+  ['star']		string	returned star name, usually different from input
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_fixstar2(char *star, double tjd_et, int32 iflag, double *xx, char *serr);
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_fixstar2)
+{
+	char *arg = NULL;
+	int rc;
+	long iflag;
+	double tjd_et, xx[6];
+	char *star_ptr = NULL;
+	int star_len;
+	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
+	int i;
+	
+	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sdl",
+			&star_ptr, &star_len, &tjd_et, &iflag) == FAILURE) {
+		return;
+	}
+	memset(star, 0, MAX_FIXSTAR_NAME);
+	strncpy(star, star_ptr, star_len);
+	// php_printf("%s", star);
+	rc = swe_fixstar2(star, tjd_et, (int)iflag, xx, serr);
+	// php_printf("%s %s %d\n", star, serr, rc);
 
 	array_init(return_value);
 	for(i = 0; i < 6; i++)
@@ -757,7 +817,7 @@ calculate position of a star with time in Universal Time (UT)
 
 =head3 C declaration
 
-  int swe_fixstar(char *star, double tjd_et, int32 iflag, double *xx, char *serr);
+  int swe_fixstar_ut(char *star, double tjd_ut, int32 iflag, double *xx, char *serr);
 
 =cut
  }}} */
@@ -782,6 +842,62 @@ PHP_FUNCTION(swe_fixstar_ut)
 	memset(star, 0, MAX_FIXSTAR_NAME);
 	strncpy(star, star_ptr, star_len);
 	rc = swe_fixstar_ut(star, tjd_ut, (int)iflag, xx, serr);
+
+	array_init(return_value);
+	for(i = 0; i < 6; i++)
+		add_index_double(return_value, i, xx[i]);
+	add_assoc_string(return_value, "star", star);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_fixstar2_ut(star, tjd_ut, iflag)
+
+calculate position of a star with time in Universal Time (UT)
+
+=head3 Parameters
+
+  string        star        Name of fixed star, or string with line number in star file
+  double        tjd_ut      Julian day in Universal Time.
+  int           iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+  [0..5]		double	position and speed vector xx
+  ['star']		string	returned star name, usually different from input
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_fixstar2_ut(char *star, double tjd_ut, int32 iflag, double *xx, char *serr);
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_fixstar2_ut)
+{
+	char *arg = NULL;
+	int rc;
+	long iflag;
+	double tjd_ut, xx[6];
+	char *star_ptr = NULL;
+	int star_len;
+	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
+	int i;
+	*serr = '\0';
+	
+	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sdl",
+			&star_ptr, &star_len, &tjd_ut, &iflag) == FAILURE) {
+		return;
+	}
+	memset(star, 0, MAX_FIXSTAR_NAME);
+	strncpy(star, star_ptr, star_len);
+	rc = swe_fixstar2_ut(star, tjd_ut, (int)iflag, xx, serr);
 
 	array_init(return_value);
 	for(i = 0; i < 6; i++)
@@ -835,6 +951,59 @@ PHP_FUNCTION(swe_fixstar_mag)
 	memset(star, 0, MAX_FIXSTAR_NAME);
 	strncpy(star, star_ptr, star_len);
 	rc = swe_fixstar_mag(star, &dmag, serr);
+
+	array_init(return_value);
+	if (rc >= 0) 
+		add_assoc_double(return_value, "mag", dmag);
+	add_assoc_string(return_value, "star", star);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_fixstar2_mag(star)
+
+deliver magnitude of star
+
+=head3 Parameters
+
+  string        star        Name of fixed star to be searched
+
+=head3 return array
+
+  ['mag']		double  star magnitude, in case of success
+  ['star']		string	returned star name, usually different from input
+  ['rc']		int		return flag, < 0 in case of error
+  ['serr']		string	optional error message
+
+=head3 C declaration
+
+  int swe_fixstar2_mag(char *star, double *mag, char *serr);
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_fixstar2_mag)
+{
+	char *arg = NULL;
+	int rc;
+	double dmag;
+	char *star_ptr = NULL;
+	int star_len;
+	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
+	int i;
+	*serr = '\0';
+	
+	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s",
+			&star_ptr, &star_len) == FAILURE) {
+		return;
+	}
+	memset(star, 0, MAX_FIXSTAR_NAME);
+	strncpy(star, star_ptr, star_len);
+	rc = swe_fixstar2_mag(star, &dmag, serr);
 
 	array_init(return_value);
 	if (rc >= 0) 
