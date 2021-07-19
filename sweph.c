@@ -1520,22 +1520,22 @@ PHP_FUNCTION(swe_jdet_to_utc)
 /* {{{ pod
 =pod
 
-=head1 function swe_jdut1_to_utc (tjd_ut, gregflag)
+=head1 function swe_jdut1_to_utc(tjd_ut, gregflag)
 
 Converts julian day number / time in UT to date and time in UTC 
 
 =head3 Parameters
 
-  tjd_ut		julian day number and time in UT
-  gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+  double    tjd_ut		julian day number and time in UT
+  int       gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
 
 =head3 return array
 
-  ['year']
-  ['month']
-  ['day']
-  ['hour']
-  ['min']
+  ['year']  int
+  ['month'] int
+  ['day']   int
+  ['hour']  int
+  ['min']   int
   ['sec']	double
 
 =head3 C declaration
