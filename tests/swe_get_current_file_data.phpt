@@ -15,7 +15,7 @@ var_dump(swe_get_current_file_data(1));
 --EXPECT--
 array(4) {
   ["path"]=>
-  string(11) "semo_18.se1"
+  string(24) "./sweph/ephe/semo_18.se1"
   ["tfstart"]=>
   float(2378487.5553707)
   ["tfend"]=>

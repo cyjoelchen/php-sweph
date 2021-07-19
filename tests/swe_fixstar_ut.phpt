@@ -9,26 +9,26 @@ if (!extension_loaded('swephp')) {
 --FILE--
 <?php
 swe_set_ephe_path('./sweph/ephe');
-var_dump(swe_fixstar_ut('Polaris', 2452275.5, SEFLG_MOSEPH));
+var_dump(swe_fixstar_ut('Polaris', 2452275.5, SEFLG_SWIEPH|SEFLG_SPEED));
 ?>
 --EXPECT--
 array(9) {
   [0]=>
-  float(88.604980627585)
+  float(88.604973652753)
   [1]=>
-  float(66.102793787338)
+  float(66.10279360237)
   [2]=>
-  float(27356067.781553)
+  float(27356067.783758)
   [3]=>
-  float(2.2268071927819E-5)
+  float(2.6036363444761E-5)
   [4]=>
-  float(0.00010643443692047)
+  float(0.00010662418124057)
   [5]=>
-  float(-0.008042007494204)
+  float(-0.0084652681790551)
   ["star"]=>
   string(13) "Polaris,alUMi"
   ["serr"]=>
   string(0) ""
   ["rc"]=>
-  int(4)
+  int(258)
 }

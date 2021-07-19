@@ -9,7 +9,7 @@ if (!extension_loaded('swephp')) {
 --FILE--
 <?php
 
-swe_set_ephe_path('./sweph/ephe');
+swe_set_ephe_path(null);
 
 # calc planet position
 list($y, $m, $d, $h, $mi, $s) = [2021, 7, 18, 14, 30, 00];

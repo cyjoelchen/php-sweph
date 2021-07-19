@@ -8,7 +8,7 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
-swe_set_ephe_path('./sweph/ephe');
+swe_set_ephe_path(null);
 var_dump(swe_get_ayanamsa_name(SE_SIDM_FAGAN_BRADLEY));
 ?>
 --EXPECT--
