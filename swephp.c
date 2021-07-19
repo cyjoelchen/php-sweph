@@ -3622,6 +3622,31 @@ PHP_FUNCTION(swe_deltat_ex)
 	add_assoc_string(return_value, "serr", serr);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_time_equ(tjd_et)
+
+Get the difference between local apparent and local mean time.
+
+=head3 Parameters
+
+  double        tjd_et      Julian day in Ephemeris Time.
+
+=head3 return array
+
+    [
+        'rd' => (int) Return code.
+        'td' => (double) Local Apparent Time - Local Mean Time.
+        'serr' => (string) Error string.
+    ]
+
+=head3 C declaration
+
+  int swe_time_equ(double tjd_et, double *e, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_time_equ)
 {
 	char *arg = NULL;
