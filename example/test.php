@@ -4,10 +4,11 @@
 swe_set_ephe_path("/home/ephe");
 
 # calc planet position
-list($y, $m, $d, $h, $mi, $s) = sscanf(gmdate("Y m d G i s"), "%d %d %d %d %d %d");
+list($y, $m, $d, $h, $mi, $s) = [2021, 7, 18, 14, 30, 00];
 $jul_ut = swe_julday($y, $m, $d, ($h + $mi / 60 + $s / 3600), SE_GREG_CAL);
 
 $planets['julday'] = $jul_ut;
+$planets['date'] = "$y $m $d $h:$mi:$s";
 
 for($i = SE_SUN; $i <= SE_PLUTO; $i++)
 {
@@ -29,9 +30,9 @@ for($i = SE_SUN; $i <= SE_PLUTO; $i++)
 echo "planets: \n" . json_encode($planets, $options = JSON_PRETTY_PRINT) . "\n";
 
 # calc house cusps
-define("GEO_LNG", 121.5);
-define("GEO_LAT", 25.05);   // Taipei, Taiwan: 121E30, 25N03
-$place = 'Taipei, Taiwan';
+define("GEO_LNG", 6.571680);
+define("GEO_LAT", 43.205742);
+$place = 'La Croix Valmer, France';
 
 $yy = swe_houses($jul_ut, GEO_LAT, GEO_LNG, "P"); // P = Placidus. 
 
@@ -39,7 +40,7 @@ $houses = array();
 
 for($i = 1; $i <= 12; $i ++) 
 {
-    $houses[$i] = array('lng' => $yy['cusps'][$i]);
+    $houses[$i] =  $yy['cusps'][$i];
 }
 
 echo "houses for $place: \n" . json_encode($houses, $options = JSON_PRETTY_PRINT) . "\n";
@@ -56,7 +57,7 @@ for($i = 0; $i < 4; $i++) {
     $tr = $rv['tret'][0];
   $ptrans[$i] = array(
     'what' => $flagnam[$i],
-    'when' => $tr
+    'when' => print_date($tr)
   );
 }
 echo "rise $pnam: \n" . json_encode($ptrans, $options = JSON_PRETTY_PRINT) . "\n";
@@ -68,10 +69,19 @@ for($i = 0; $i < 4; $i++) {
     $tr = 'never';
   else
     $tr = $rv['tret'][0];
+  $strans['star'] = $rv['star'];
   $strans[$i] = array(
-    'who' => $rv['star'],
     'what' => $flagnam[$i],
-    'when' => $tr
+    'when' => print_date($tr)
   );
 }
 echo "rise $starname: \n" . json_encode($strans, $options = JSON_PRETTY_PRINT) . "\n";
+
+function print_date($t)
+{
+  $r = swe_jdut1_to_utc($t, SE_GREG_CAL);
+  $sec = floor($r['sec'] * 100) / 100;
+  $date = $r['year'] . " " .  $r['month'] . " " .  $r['day']  . "  " . $r['hour'] .":".$r['min'] .":".$sec;
+  # $date = $r['year'] . " / ss";
+  return $date;
+}
