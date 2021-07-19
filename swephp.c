@@ -3571,6 +3571,35 @@ PHP_FUNCTION(swe_deltat)
 	RETURN_DOUBLE(swe_deltat(tjd_ut));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_deltat_ex(tjd, ephe_flag)
+
+Calculate delta t (difference between UT & ET) from Julian day number.
+
+If the function is called with SEFLG_SWIEPH before calling swe_set_ephe_path(),
+or with or SEFLG_JPLEPH before calling swe_set_jpl_file(),
+then the function returns a warning.
+
+=head3 Parameters
+
+  double        tjd         Julian day in Universal Time.
+  int           ephe_flag   Ephemeris flag (one of SEFLG_SWIEPH, SEFLG_JPLEPH, SEFLG_MOSEPH).
+
+=head3 return array
+
+    [
+        'tjd_et' => (double) Delta T.
+        'serr' => (string) Error string.
+    ]
+
+=head3 C declaration
+
+  double swe_deltat_ex(double tjd, int32 ephe_flag, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_deltat_ex)
 {
 	double tjd_ut, tjd_et;
