@@ -30,11 +30,9 @@ You are all set!
 
 ## missing functions
 ```
-    swe_get_orbital_elements
     swe_heliacal_angle
     swe_heliacal_pheno_ut
     swe_heliacal_ut
-    swe_orbit_max_min_true_distance
     swe_set_interpolate_nut
     swe_set_timeout
     swe_vis_limit_mag

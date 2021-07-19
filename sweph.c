@@ -114,6 +114,8 @@ zend_function_entry sweph_functions[] = {
 	PHP_FE(swe_rise_trans_true_hor, NULL)
 	PHP_FE(swe_nod_aps, NULL)
 	PHP_FE(swe_nod_aps_ut, NULL)
+	PHP_FE(swe_get_orbital_elements, NULL)
+	PHP_FE(swe_orbit_max_min_true_distance, NULL)
 		
 	/**************************** 
 	 * exports from swephlib.c 
@@ -529,7 +531,7 @@ see also https://perldoc.perl.org/perlpod
 /* {{{ pod
 =pod
 
-=head1 function swe_calc(tjd_ut, ipl, iflag)
+=head1 function swe_calc(tjd_et, ipl, iflag)
 
 calculate position of planet ipl with time in Ephemeris Time (TDT)
 
@@ -3341,6 +3343,118 @@ PHP_FUNCTION(swe_nod_aps_ut)
 		add_assoc_zval(return_value, "xnperi", &xperi_arr);
 		add_assoc_zval(return_value, "xnaphe", &xaphe_arr);
 	}
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_get_orbital_elements(tjd_1t, ipl, iflag)
+
+Calculates osculating orbital elements (Kepler elements) of a planet 
+or asteroid or the Earth-Moon barycentre. 
+The function returns error if called for the Sun, the lunar nodes, or the apsides.
+
+=head3 Parameters
+
+  double        tjd_et      Julian day in Ephemeris Time.
+  int           ipl         Planet/body/object number or constant.
+  int           iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+  [0..16]       array double, with elements
+  ['serr']      string	optional error message
+  ['rc']        int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_get_orbital_elements ( double tjd_et, int ipl, int iflag, double* xx, char* serr);
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_get_orbital_elements)
+{
+	char *arg = NULL;
+	int rc;
+	long ipl, iflag;
+	double tjd_et, dret[50];
+	char serr[AS_MAXCH]; 
+	int i;
+	*serr = '\0';
+	
+	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+			&tjd_et, &ipl, &iflag) == FAILURE) {
+		return;
+	}
+	rc = swe_get_orbital_elements(tjd_et, (int)ipl, (int)iflag, dret, serr);
+
+		/* create an array */
+	array_init(return_value);
+	for(i = 0; i < 17; i++)
+		add_index_double(return_value, i, dret[i]);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_orbit_max_min_true_distance(tjd_et, ipl, iflag)
+
+This function calculates calculates the maximum possible distance, the
+minimum possible distance, and the current true distance of planet, the EMB,
+or an asteroid. The calculation can be done either heliocentrically or
+geocentrically.
+
+=head3 Parameters
+
+  double        tjd_et      Julian day in Ephemeris Time.
+  int           ipl         Planet/body/object number or constant.
+  int           iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+  ['dmax']      double
+  ['dmin']      double
+  ['dtrue']     double
+  ['serr']      string	optional error message
+  ['rc']        int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_orbit_max_min_true_distance ( double tjd_et, int ipl, int iflag, double* xx, char* serr);
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_orbit_max_min_true_distance)
+{
+	char *arg = NULL;
+	int rc;
+	long ipl, iflag;
+	double tjd_et, dmax, dmin, dtrue;
+	char serr[AS_MAXCH]; 
+	int i;
+	*serr = '\0';
+	
+	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+			&tjd_et, &ipl, &iflag) == FAILURE) {
+		return;
+	}
+	rc = swe_orbit_max_min_true_distance(tjd_et, (int)ipl, (int)iflag, &dmax, &dmin, &dtrue, serr);
+
+		/* create an array */
+	array_init(return_value);
+	if (rc >= 0) {
+		add_assoc_double(return_value, "dmax", dmax);
+		add_assoc_double(return_value, "dmin", dmin);
+		add_assoc_double(return_value, "dtrue", dtrue);
+	}
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
 }
 
 /**************************** 
