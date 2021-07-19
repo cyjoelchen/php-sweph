@@ -1547,7 +1547,7 @@ Converts julian day number / time in UT to date and time in UTC
  }}} */
 PHP_FUNCTION(swe_jdut1_to_utc)
 {
-	double tjd_et;
+	double tjd_ut;
 	long gregflag;
 	int32 iyear, imonth, iday;
 	int32 ihour, imin;
@@ -1559,7 +1559,7 @@ PHP_FUNCTION(swe_jdut1_to_utc)
 			&tjd_et, &gregflag) == FAILURE) {
 		return;
 	}
-	swe_jdut1_to_utc(tjd_et, (int32)gregflag, &iyear, &imonth, &iday, &ihour, &imin, &dsec);
+	swe_jdut1_to_utc(tjd_ut, (int32)gregflag, &iyear, &imonth, &iday, &ihour, &imin, &dsec);
 	
 	array_init(return_value);
 	add_assoc_long(return_value, "year", iyear);
