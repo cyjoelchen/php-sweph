@@ -1338,7 +1338,7 @@ SE_JUL_CAL used in swe_juldate() and swe_revjul()
 
 =head3 return value
   
-  converted tjd, or in case of illegal input date, NULL.
+  double|null    converted tjd, or in case of illegal input date, NULL.
 
 =head3 C declaration
 
@@ -1391,7 +1391,7 @@ Converts a calendar date to julian day number tjd, no validity check for date.
 
 =head3 return value
   
-  converted tjd
+  double    converted tjd
 
 =head3 C declaration
 
@@ -1520,22 +1520,22 @@ PHP_FUNCTION(swe_jdet_to_utc)
 /* {{{ pod
 =pod
 
-=head1 function swe_jdut1_to_utc (tjd_ut, gregflag)
+=head1 function swe_jdut1_to_utc(tjd_ut, gregflag)
 
 Converts julian day number / time in UT to date and time in UTC 
 
 =head3 Parameters
 
-  tjd_ut		julian day number and time in UT
-  gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+  double    tjd_ut		julian day number and time in UT
+  int       gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
 
 =head3 return array
 
-  ['year']
-  ['month']
-  ['day']
-  ['hour']
-  ['min']
+  ['year']  int
+  ['month'] int
+  ['day']   int
+  ['hour']  int
+  ['min']   int
   ['sec']	double
 
 =head3 C declaration
@@ -1573,7 +1573,7 @@ PHP_FUNCTION(swe_jdut1_to_utc)
 /* {{{ pod
 =pod
 
-=head1 function swe_julday (year, month, day, hour, min, dsec, gregflag)
+=head1 function swe_utc_to_jd(year, month, day, hour, min, dsec, gregflag)
 
 Converts a calendar date to julian day number tjd, no validity check for date.
 
@@ -1640,9 +1640,9 @@ PHP_FUNCTION(swe_utc_to_jd)
 /* {{{ pod
 =pod
 
-=head1 function swe_utc_time_zone (iyear, imonth, iday, ihour, imin, dsec, d_timezone)
+=head1 function swe_utc_time_zone(iyear, imonth, iday, ihour, imin, dsec, d_timezone)
 
-Converts a calendar date to in a zone with time offset d_timezone into a calendard date in UT (UT1).
+Converts a calendar date in a zone with time offset d_timezone into a calendar date in UT (UT1).
 
 =head3 Parameters
 
@@ -2088,7 +2088,7 @@ PHP_FUNCTION(swe_houses_armc_ex2)
 /* {{{ pod
 =pod
 
-=head1 function swe_houses_pos(armc, geolat, eps, hsys, xpin0, xpin1)
+=head1 function swe_house_pos(armc, geolat, eps, hsys, xpin0, xpin1)
 
 calculated house position of object for given armc, latitude, obliquity and house system
 
@@ -2151,7 +2151,7 @@ PHP_FUNCTION(swe_house_pos)
 /* {{{ pod
 =pod
 
-=head1 function swe_houses_name(hsys)
+=head1 function swe_house_name(hsys)
 
 Get the name of a house system
 
