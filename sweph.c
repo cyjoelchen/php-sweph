@@ -2743,20 +2743,53 @@ PHP_FUNCTION(swe_set_lapse_rate)
 	swe_set_lapse_rate(lapse_rate);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_azalt(tjd_ut, calc_flag, geolon, geolat, geoalt, atpress, attemp, xin0, xin1)
+
+Computes azimut and height, from either ecliptic or equatorial coordinates
+
+=head3 Parameters
+
+  double        tjd_ut      
+  int           calc_flag
+  double		geolon		longitude
+  double		geolat		latitude
+  double		geoalt		altitude above sea
+  double		atpress		atmospheric pressure
+  double		attemp		atmospheric temperature
+  double		xin0		longitude of object
+  double		xin1		latitude of object
+
+=head3 return array
+
+  [0..1]			array of 2 doubles: 
+                     xaz[0] = azimuth
+					 xaz[1] = true altitude
+					 xaz[2] = apparent altitude
+
+
+=head3 C declaration
+
+  void  swe_azalt( double tjd_ut, int32  calc_flag, double *geopos, double atpress, double attemp, double *xin, double *xaz)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_azalt)
 {
 	char *arg = NULL;
 	int arg_len, rc, calc_flag;
-	double tjd_ut, geopos[3], atpress, attemp, xin[3], xaz[3];
+	double tjd_ut, geopos[3], atpress, attemp, xin[2], xaz[3];
 	int i;
 
-	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
+	if(ZEND_NUM_ARGS() != 9) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dldddddddd",
 			&tjd_ut, &calc_flag, 
 			&geopos[0], &geopos[1], &geopos[2], 
 			&atpress, &attemp,
-			&xin[0], &xin[1], &xin[2], 
+			&xin[0], &xin[1], 
 			&arg_len) == FAILURE) {
 		return;
 	}
@@ -2767,6 +2800,33 @@ PHP_FUNCTION(swe_azalt)
 		add_index_double(return_value, i, xaz[i]);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_azalt_rev(tjd_ut, iflag, xin0, xin1)
+
+computes either ecliptical or equatorial coordinates from azimuth and true altitude in degrees.
+
+=head3 Parameters
+
+  double        tjd_ut      
+  int           iflag		either SE_HOR2ECL or SE_HOR2EQU
+  double		xin0		azimut, in degrees
+  double		xin1		true altitude, in degrees
+
+=head3 return array
+
+  [0..2]			array of 3 doubles: 
+                     xout[0] = longitude
+                     xout[1] = latitude
+
+
+=head3 C declaration
+
+  void  swe_azalt_rev( double tjd_ut, int32  calc_flag, double *geopos, double *xin, double *xout) 
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_azalt_rev)
 {
 	char *arg = NULL;
@@ -2790,6 +2850,42 @@ PHP_FUNCTION(swe_azalt_rev)
 		add_index_double(return_value, i, xout[i]);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_rise_trans(tjd_ut, ipl, starname, epheflag, rsmi, geolon, geolat, geoalt, atpress, attemp)
+
+rise, set, and meridian transits of sun, moon, planets, and stars
+
+=head3 Parameters
+
+  double        tjd_ut      
+  int           ipl	        planet number
+  string        starname	(used instead of planet if not null or empty)
+  int           epheflag
+  int           rsmi        flag combination, defines what is computed
+  double		geolon		longitude
+  double		geolat		latitude
+  double		geoalt		altitude above sea
+  double		atpress		atmospheric pressure
+  double		attemp		atmospheric temperature
+
+=head3 return array
+
+  [0..9]			array of 10 doubles
+  ['star']	        string, present only if starname was used in call parameters
+  ['rc']			int	return flag, < 0 in case of error
+  
+  in case of error
+  ['rc']			int	< 0 in case of error
+  ['serr']			string
+
+=head3 C declaration
+
+  int  swe_rise_trans( double tjd_ut, int32 ipl, char *starname, int32 epheflag, int32 rsmi, double *geopos, double atpress, double attemp, double *tret, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_rise_trans)
 {
 	char *arg = NULL;
@@ -2836,6 +2932,43 @@ PHP_FUNCTION(swe_rise_trans)
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_rise_trans_true_hor(tjd_ut, ipl, starname, epheflag, rsmi, geolon, geolat, geoalt, atpress, attemp, horhgt)
+
+rise, set, and meridian transits of sun, moon, planets, and stars
+
+=head3 Parameters
+
+  double        tjd_ut      
+  int           ipl	        planet number
+  string        starname	(used instead of planet if not null or empty)
+  int           epheflag
+  int           rsmi        flag combination, defines what is computed
+  double		geolon		longitude
+  double		geolat		latitude
+  double		geoalt		altitude above sea
+  double		atpress		atmospheric pressure
+  double		attemp		atmospheric temperature
+  double		horhgt		height of horizon
+
+=head3 return array
+
+  [0..9]			array of 10 doubles
+  ['star']	        string, present only if starname was used in call parameters
+  ['rc']			int	return flag, < 0 in case of error
+  
+  in case of error
+  ['rc']			int	< 0 in case of error
+  ['serr']			string
+
+=head3 C declaration
+
+  int  swe_rise_trans_true_hor( double tjd_ut, int32 ipl, char *starname, int32 epheflag, int32 rsmi, double *geopos, double atpress, double attemp, double horhgt, double *tret, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_rise_trans_true_hor)
 {
 	char *arg = NULL;
