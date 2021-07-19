@@ -41,6 +41,10 @@ PHP_FUNCTION(swe_calc_ut);
 PHP_FUNCTION(swe_calc_pctr);
 PHP_FUNCTION(swe_fixstar);
 PHP_FUNCTION(swe_fixstar_ut);
+PHP_FUNCTION(swe_fixstar_mag);
+PHP_FUNCTION(swe_fixstar2);
+PHP_FUNCTION(swe_fixstar2_ut);
+PHP_FUNCTION(swe_fixstar2_mag);
 PHP_FUNCTION(swe_close);
 PHP_FUNCTION(swe_set_ephe_path);
 PHP_FUNCTION(swe_set_jpl_file);
@@ -107,6 +111,8 @@ PHP_FUNCTION(swe_rise_trans);
 PHP_FUNCTION(swe_rise_trans_true_hor);
 PHP_FUNCTION(swe_nod_aps);
 PHP_FUNCTION(swe_nod_aps_ut);
+PHP_FUNCTION(swe_get_orbital_elements);
+PHP_FUNCTION(swe_orbit_max_min_true_distance);
 
 /**************************** 
  * exports from swephlib.c 
@@ -122,6 +128,7 @@ PHP_FUNCTION(swe_cotrans);
 PHP_FUNCTION(swe_cotrans_sp);
 PHP_FUNCTION(swe_get_tid_acc);
 PHP_FUNCTION(swe_set_tid_acc);
+PHP_FUNCTION(swe_set_delta_t_userdef);
 PHP_FUNCTION(swe_degnorm);
 PHP_FUNCTION(swe_radnorm);
 PHP_FUNCTION(swe_rad_midp);

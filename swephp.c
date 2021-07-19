@@ -48,6 +48,10 @@ zend_function_entry swephp_functions[] = {
 	PHP_FE(swe_calc_pctr, NULL)
 	PHP_FE(swe_fixstar, NULL)
 	PHP_FE(swe_fixstar_ut, NULL)
+	PHP_FE(swe_fixstar_mag, NULL)
+	PHP_FE(swe_fixstar2, NULL)
+	PHP_FE(swe_fixstar2_ut, NULL)
+	PHP_FE(swe_fixstar2_mag, NULL)
 	PHP_FE(swe_close, NULL)
 	PHP_FE(swe_set_ephe_path, NULL)
 	PHP_FE(swe_set_jpl_file, NULL)
@@ -110,6 +114,8 @@ zend_function_entry swephp_functions[] = {
 	PHP_FE(swe_rise_trans_true_hor, NULL)
 	PHP_FE(swe_nod_aps, NULL)
 	PHP_FE(swe_nod_aps_ut, NULL)
+	PHP_FE(swe_get_orbital_elements, NULL)
+	PHP_FE(swe_orbit_max_min_true_distance, NULL)
 		
 	/**************************** 
 	 * exports from swephlib.c 
@@ -125,6 +131,7 @@ zend_function_entry swephp_functions[] = {
 	PHP_FE(swe_cotrans_sp, NULL)
 	PHP_FE(swe_get_tid_acc, NULL)
 	PHP_FE(swe_set_tid_acc, NULL)
+	PHP_FE(swe_set_delta_t_userdef, NULL)
 	PHP_FE(swe_degnorm, NULL)
 	PHP_FE(swe_radnorm, NULL)
 	PHP_FE(swe_rad_midp, NULL)
@@ -524,7 +531,7 @@ see also https://perldoc.perl.org/perlpod
 /* {{{ pod
 =pod
 
-=head1 function swe_calc(tjd_ut, ipl, iflag)
+=head1 function swe_calc(tjd_et, ipl, iflag)
 
 calculate position of planet ipl with time in Ephemeris Time (TDT)
 
@@ -721,9 +728,66 @@ PHP_FUNCTION(swe_fixstar)
 	}
 	memset(star, 0, MAX_FIXSTAR_NAME);
 	strncpy(star, star_ptr, star_len);
-	php_printf("%s", star);
+	// php_printf("%s", star);
 	rc = swe_fixstar(star, tjd_et, (int)iflag, xx, serr);
-	php_printf("%s %s %d\n", star, serr, rc);
+	// php_printf("%s %s %d\n", star, serr, rc);
+
+	array_init(return_value);
+	for(i = 0; i < 6; i++)
+		add_index_double(return_value, i, xx[i]);
+	add_assoc_string(return_value, "star", star);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_fixstar2(star, tjd_et, iflag)
+
+calculate position of a star with time in Ephemeris Time (TDT)
+
+=head3 Parameters
+
+  string        star        Name of fixed star, or string with line number in star file
+  double        tjd_et      Julian day in Ephemeris Time.
+  int           iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+  [0..5]		double	position and speed vector xx
+  ['star']		string	returned star name, usually different from input
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_fixstar2(char *star, double tjd_et, int32 iflag, double *xx, char *serr);
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_fixstar2)
+{
+	char *arg = NULL;
+	int rc;
+	long iflag;
+	double tjd_et, xx[6];
+	char *star_ptr = NULL;
+	int star_len;
+	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
+	int i;
+	
+	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sdl",
+			&star_ptr, &star_len, &tjd_et, &iflag) == FAILURE) {
+		return;
+	}
+	memset(star, 0, MAX_FIXSTAR_NAME);
+	strncpy(star, star_ptr, star_len);
+	// php_printf("%s", star);
+	rc = swe_fixstar2(star, tjd_et, (int)iflag, xx, serr);
+	// php_printf("%s %s %d\n", star, serr, rc);
 
 	array_init(return_value);
 	for(i = 0; i < 6; i++)
@@ -755,7 +819,7 @@ calculate position of a star with time in Universal Time (UT)
 
 =head3 C declaration
 
-  int swe_fixstar(char *star, double tjd_et, int32 iflag, double *xx, char *serr);
+  int swe_fixstar_ut(char *star, double tjd_ut, int32 iflag, double *xx, char *serr);
 
 =cut
  }}} */
@@ -769,6 +833,7 @@ PHP_FUNCTION(swe_fixstar_ut)
 	int star_len;
 	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
 	int i;
+	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
@@ -783,6 +848,168 @@ PHP_FUNCTION(swe_fixstar_ut)
 	array_init(return_value);
 	for(i = 0; i < 6; i++)
 		add_index_double(return_value, i, xx[i]);
+	add_assoc_string(return_value, "star", star);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_fixstar2_ut(star, tjd_ut, iflag)
+
+calculate position of a star with time in Universal Time (UT)
+
+=head3 Parameters
+
+  string        star        Name of fixed star, or string with line number in star file
+  double        tjd_ut      Julian day in Universal Time.
+  int           iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+  [0..5]		double	position and speed vector xx
+  ['star']		string	returned star name, usually different from input
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_fixstar2_ut(char *star, double tjd_ut, int32 iflag, double *xx, char *serr);
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_fixstar2_ut)
+{
+	char *arg = NULL;
+	int rc;
+	long iflag;
+	double tjd_ut, xx[6];
+	char *star_ptr = NULL;
+	int star_len;
+	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
+	int i;
+	*serr = '\0';
+	
+	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sdl",
+			&star_ptr, &star_len, &tjd_ut, &iflag) == FAILURE) {
+		return;
+	}
+	memset(star, 0, MAX_FIXSTAR_NAME);
+	strncpy(star, star_ptr, star_len);
+	rc = swe_fixstar2_ut(star, tjd_ut, (int)iflag, xx, serr);
+
+	array_init(return_value);
+	for(i = 0; i < 6; i++)
+		add_index_double(return_value, i, xx[i]);
+	add_assoc_string(return_value, "star", star);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_fixstar_mag(star)
+
+deliver magnitude of star
+
+=head3 Parameters
+
+  string        star        Name of fixed star to be searched
+
+=head3 return array
+
+  ['mag']		double  star magnitude, in case of success
+  ['star']		string	returned star name, usually different from input
+  ['rc']		int		return flag, < 0 in case of error
+  ['serr']		string	optional error message
+
+=head3 C declaration
+
+  int swe_fixstar_mag(char *star, double *mag, char *serr);
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_fixstar_mag)
+{
+	char *arg = NULL;
+	int rc;
+	double dmag;
+	char *star_ptr = NULL;
+	int star_len;
+	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
+	int i;
+	*serr = '\0';
+	
+	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s",
+			&star_ptr, &star_len) == FAILURE) {
+		return;
+	}
+	memset(star, 0, MAX_FIXSTAR_NAME);
+	strncpy(star, star_ptr, star_len);
+	rc = swe_fixstar_mag(star, &dmag, serr);
+
+	array_init(return_value);
+	if (rc >= 0) 
+		add_assoc_double(return_value, "mag", dmag);
+	add_assoc_string(return_value, "star", star);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_fixstar2_mag(star)
+
+deliver magnitude of star
+
+=head3 Parameters
+
+  string        star        Name of fixed star to be searched
+
+=head3 return array
+
+  ['mag']		double  star magnitude, in case of success
+  ['star']		string	returned star name, usually different from input
+  ['rc']		int		return flag, < 0 in case of error
+  ['serr']		string	optional error message
+
+=head3 C declaration
+
+  int swe_fixstar2_mag(char *star, double *mag, char *serr);
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_fixstar2_mag)
+{
+	char *arg = NULL;
+	int rc;
+	double dmag;
+	char *star_ptr = NULL;
+	int star_len;
+	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
+	int i;
+	*serr = '\0';
+	
+	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s",
+			&star_ptr, &star_len) == FAILURE) {
+		return;
+	}
+	memset(star, 0, MAX_FIXSTAR_NAME);
+	strncpy(star, star_ptr, star_len);
+	rc = swe_fixstar2_mag(star, &dmag, serr);
+
+	array_init(return_value);
+	if (rc >= 0) 
+		add_assoc_double(return_value, "mag", dmag);
 	add_assoc_string(return_value, "star", star);
 	add_assoc_string(return_value, "serr", serr);
 	add_assoc_long(return_value, "rc", rc);
@@ -2743,20 +2970,53 @@ PHP_FUNCTION(swe_set_lapse_rate)
 	swe_set_lapse_rate(lapse_rate);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_azalt(tjd_ut, calc_flag, geolon, geolat, geoalt, atpress, attemp, xin0, xin1)
+
+Computes azimut and height, from either ecliptic or equatorial coordinates
+
+=head3 Parameters
+
+  double        tjd_ut      
+  int           calc_flag
+  double		geolon		longitude
+  double		geolat		latitude
+  double		geoalt		altitude above sea
+  double		atpress		atmospheric pressure
+  double		attemp		atmospheric temperature
+  double		xin0		longitude of object
+  double		xin1		latitude of object
+
+=head3 return array
+
+  [0..1]			array of 2 doubles: 
+                     xaz[0] = azimuth
+					 xaz[1] = true altitude
+					 xaz[2] = apparent altitude
+
+
+=head3 C declaration
+
+  void  swe_azalt( double tjd_ut, int32  calc_flag, double *geopos, double atpress, double attemp, double *xin, double *xaz)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_azalt)
 {
 	char *arg = NULL;
 	int arg_len, rc, calc_flag;
-	double tjd_ut, geopos[3], atpress, attemp, xin[3], xaz[3];
+	double tjd_ut, geopos[3], atpress, attemp, xin[2], xaz[3];
 	int i;
 
-	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
+	if(ZEND_NUM_ARGS() != 9) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dldddddddd",
 			&tjd_ut, &calc_flag, 
 			&geopos[0], &geopos[1], &geopos[2], 
 			&atpress, &attemp,
-			&xin[0], &xin[1], &xin[2], 
+			&xin[0], &xin[1], 
 			&arg_len) == FAILURE) {
 		return;
 	}
@@ -2767,6 +3027,33 @@ PHP_FUNCTION(swe_azalt)
 		add_index_double(return_value, i, xaz[i]);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_azalt_rev(tjd_ut, iflag, xin0, xin1)
+
+computes either ecliptical or equatorial coordinates from azimuth and true altitude in degrees.
+
+=head3 Parameters
+
+  double        tjd_ut      
+  int           iflag		either SE_HOR2ECL or SE_HOR2EQU
+  double		xin0		azimut, in degrees
+  double		xin1		true altitude, in degrees
+
+=head3 return array
+
+  [0..2]			array of 3 doubles: 
+                     xout[0] = longitude
+                     xout[1] = latitude
+
+
+=head3 C declaration
+
+  void  swe_azalt_rev( double tjd_ut, int32  calc_flag, double *geopos, double *xin, double *xout) 
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_azalt_rev)
 {
 	char *arg = NULL;
@@ -2790,6 +3077,42 @@ PHP_FUNCTION(swe_azalt_rev)
 		add_index_double(return_value, i, xout[i]);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_rise_trans(tjd_ut, ipl, starname, epheflag, rsmi, geolon, geolat, geoalt, atpress, attemp)
+
+rise, set, and meridian transits of sun, moon, planets, and stars
+
+=head3 Parameters
+
+  double        tjd_ut      
+  int           ipl	        planet number
+  string        starname	(used instead of planet if not null or empty)
+  int           epheflag
+  int           rsmi        flag combination, defines what is computed
+  double		geolon		longitude
+  double		geolat		latitude
+  double		geoalt		altitude above sea
+  double		atpress		atmospheric pressure
+  double		attemp		atmospheric temperature
+
+=head3 return array
+
+  [0..9]			array of 10 doubles
+  ['star']	        string, present only if starname was used in call parameters
+  ['rc']			int	return flag, < 0 in case of error
+  
+  in case of error
+  ['rc']			int	< 0 in case of error
+  ['serr']			string
+
+=head3 C declaration
+
+  int  swe_rise_trans( double tjd_ut, int32 ipl, char *starname, int32 epheflag, int32 rsmi, double *geopos, double atpress, double attemp, double *tret, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_rise_trans)
 {
 	char *arg = NULL;
@@ -2836,6 +3159,43 @@ PHP_FUNCTION(swe_rise_trans)
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_rise_trans_true_hor(tjd_ut, ipl, starname, epheflag, rsmi, geolon, geolat, geoalt, atpress, attemp, horhgt)
+
+rise, set, and meridian transits of sun, moon, planets, and stars
+
+=head3 Parameters
+
+  double        tjd_ut      
+  int           ipl	        planet number
+  string        starname	(used instead of planet if not null or empty)
+  int           epheflag
+  int           rsmi        flag combination, defines what is computed
+  double		geolon		longitude
+  double		geolat		latitude
+  double		geoalt		altitude above sea
+  double		atpress		atmospheric pressure
+  double		attemp		atmospheric temperature
+  double		horhgt		height of horizon
+
+=head3 return array
+
+  [0..9]			array of 10 doubles
+  ['star']	        string, present only if starname was used in call parameters
+  ['rc']			int	return flag, < 0 in case of error
+  
+  in case of error
+  ['rc']			int	< 0 in case of error
+  ['serr']			string
+
+=head3 C declaration
+
+  int  swe_rise_trans_true_hor( double tjd_ut, int32 ipl, char *starname, int32 epheflag, int32 rsmi, double *geopos, double atpress, double attemp, double horhgt, double *tret, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_rise_trans_true_hor)
 {
 	char *arg = NULL;
@@ -2983,6 +3343,118 @@ PHP_FUNCTION(swe_nod_aps_ut)
 		add_assoc_zval(return_value, "xnperi", &xperi_arr);
 		add_assoc_zval(return_value, "xnaphe", &xaphe_arr);
 	}
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_get_orbital_elements(tjd_1t, ipl, iflag)
+
+Calculates osculating orbital elements (Kepler elements) of a planet 
+or asteroid or the Earth-Moon barycentre. 
+The function returns error if called for the Sun, the lunar nodes, or the apsides.
+
+=head3 Parameters
+
+  double        tjd_et      Julian day in Ephemeris Time.
+  int           ipl         Planet/body/object number or constant.
+  int           iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+  [0..16]       array double, with elements
+  ['serr']      string	optional error message
+  ['rc']        int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_get_orbital_elements ( double tjd_et, int ipl, int iflag, double* xx, char* serr);
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_get_orbital_elements)
+{
+	char *arg = NULL;
+	int rc;
+	long ipl, iflag;
+	double tjd_et, dret[50];
+	char serr[AS_MAXCH]; 
+	int i;
+	*serr = '\0';
+	
+	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+			&tjd_et, &ipl, &iflag) == FAILURE) {
+		return;
+	}
+	rc = swe_get_orbital_elements(tjd_et, (int)ipl, (int)iflag, dret, serr);
+
+		/* create an array */
+	array_init(return_value);
+	for(i = 0; i < 17; i++)
+		add_index_double(return_value, i, dret[i]);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_orbit_max_min_true_distance(tjd_et, ipl, iflag)
+
+This function calculates calculates the maximum possible distance, the
+minimum possible distance, and the current true distance of planet, the EMB,
+or an asteroid. The calculation can be done either heliocentrically or
+geocentrically.
+
+=head3 Parameters
+
+  double        tjd_et      Julian day in Ephemeris Time.
+  int           ipl         Planet/body/object number or constant.
+  int           iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+  ['dmax']      double
+  ['dmin']      double
+  ['dtrue']     double
+  ['serr']      string	optional error message
+  ['rc']        int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_orbit_max_min_true_distance ( double tjd_et, int ipl, int iflag, double* xx, char* serr);
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_orbit_max_min_true_distance)
+{
+	char *arg = NULL;
+	int rc;
+	long ipl, iflag;
+	double tjd_et, dmax, dmin, dtrue;
+	char serr[AS_MAXCH]; 
+	int i;
+	*serr = '\0';
+	
+	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+			&tjd_et, &ipl, &iflag) == FAILURE) {
+		return;
+	}
+	rc = swe_orbit_max_min_true_distance(tjd_et, (int)ipl, (int)iflag, &dmax, &dmin, &dtrue, serr);
+
+		/* create an array */
+	array_init(return_value);
+	if (rc >= 0) {
+		add_assoc_double(return_value, "dmax", dmax);
+		add_assoc_double(return_value, "dmin", dmin);
+		add_assoc_double(return_value, "dtrue", dtrue);
+	}
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
 }
 
 /**************************** 
@@ -3177,6 +3649,21 @@ PHP_FUNCTION(swe_set_tid_acc)
 		return;
 	}
 	swe_set_tid_acc(t_acc);
+	
+	RETURN_NULL();
+}
+
+PHP_FUNCTION(swe_set_delta_t_userdef)
+{
+	double dt;
+	
+	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+			&dt) == FAILURE) {
+		return;
+	}
+	swe_set_delta_t_userdef(dt);
 	
 	RETURN_NULL();
 }
