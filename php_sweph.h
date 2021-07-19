@@ -41,6 +41,7 @@ PHP_FUNCTION(swe_calc_ut);
 PHP_FUNCTION(swe_calc_pctr);
 PHP_FUNCTION(swe_fixstar);
 PHP_FUNCTION(swe_fixstar_ut);
+PHP_FUNCTION(swe_fixstar_mag);
 PHP_FUNCTION(swe_close);
 PHP_FUNCTION(swe_set_ephe_path);
 PHP_FUNCTION(swe_set_jpl_file);
