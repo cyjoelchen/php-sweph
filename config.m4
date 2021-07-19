@@ -1,5 +1,5 @@
 dnl $Id$
-dnl config.m4 for extension sweph
+dnl config.m4 for extension swephp
 
 dnl Comments in this file start with the string 'dnl'.
 dnl Remove where necessary. This file will not work
@@ -15,7 +15,7 @@ dnl Otherwise use enable:
 
 dnl PHP_ARG_ENABLE(sweph, whether to enable sweph support,
 dnl [  --enable-sweph           Enable sweph support])
-AC_MSG_RESULT(php_sweph: $PHP_SWEPH)
+AC_MSG_RESULT(php_swephp: $PHP_SWEPHP)
 
 if test "$PHP_SWEPH" != "no"; then
   if ! test -r sweph/src/libswe.a; then
@@ -45,5 +45,5 @@ if test "$PHP_SWEPH" != "no"; then
 
   # remove this... it causes runtime error when running php5
   AC_SUBST(LDFLAGS, "-L$SWEPH_DIR -lswe -lm")
-  PHP_NEW_EXTENSION(sweph, sweph.c, $ext_shared)
+  PHP_NEW_EXTENSION(swephp, swephp.c, $ext_shared)
 fi

@@ -12,8 +12,8 @@
 #ifndef PHP_SWEPH_H
 #define PHP_SWEPH_H
 
-extern zend_module_entry sweph_module_entry;
-#define phpext_sweph_ptr &sweph_module_entry
+extern zend_module_entry swephp_module_entry;
+#define phpext_swephp_ptr &swephp_module_entry
 
 #ifdef PHP_WIN32
 #define PHP_SWEPH_API __declspec(dllexport)
@@ -25,11 +25,11 @@ extern zend_module_entry sweph_module_entry;
 #include "TSRM.h"
 #endif
 
-PHP_MINIT_FUNCTION(sweph);
-PHP_MSHUTDOWN_FUNCTION(sweph);
-PHP_RINIT_FUNCTION(sweph);
-PHP_RSHUTDOWN_FUNCTION(sweph);
-PHP_MINFO_FUNCTION(sweph);
+PHP_MINIT_FUNCTION(swephp);
+PHP_MSHUTDOWN_FUNCTION(swephp);
+PHP_RINIT_FUNCTION(swephp);
+PHP_RSHUTDOWN_FUNCTION(swephp);
+PHP_MINFO_FUNCTION(swephp);
 
 /* Joel - sweph functions */
 
@@ -163,14 +163,14 @@ PHP_FUNCTION(confirm_sweph_compiled);	/* For testing, remove later. */
   	Declare any global variables you may need between the BEGIN
 	and END macros here:     
 
-ZEND_BEGIN_MODULE_GLOBALS(sweph)
+ZEND_BEGIN_MODULE_GLOBALS(swephp)
 	long  global_value;
 	char *global_string;
-ZEND_END_MODULE_GLOBALS(sweph)
+ZEND_END_MODULE_GLOBALS(swephp)
 */
 
 /* In every utility function you add that needs to use variables 
-   in php_sweph_globals, call TSRMLS_FETCH(); after declaring other 
+   in php_swephp_globals, call TSRMLS_FETCH(); after declaring other 
    variables used by that function, or better yet, pass in TSRMLS_CC
    after the last function argument and declare your utility function
    with TSRMLS_DC after the last declared argument.  Always refer to
@@ -180,9 +180,9 @@ ZEND_END_MODULE_GLOBALS(sweph)
 */
 
 #ifdef ZTS
-#define SWEPH_G(v) TSRMG(sweph_globals_id, zend_sweph_globals *, v)
+#define SWEPH_G(v) TSRMG(swephp_globals_id, zend_swephp_globals *, v)
 #else
-#define SWEPH_G(v) (sweph_globals.v)
+#define SWEPH_G(v) (swephp_globals.v)
 #endif
 
 #endif	/* PHP_SWEPH_H */

@@ -15,18 +15,40 @@ Follow the steps. Make sure `php-dev` has installed already.
     sudo make install
 ```
 
-Add `extension=sweph.so` to php.ini. In my case (nginx + php-fpm), it's located in `/etc/php/7.0/fpm/php.ini`. Reload php-fpm to make it take effect.
+Add `extension=swephp.so` to php.ini. In my case (nginx + php-fpm), it's located in `/etc/php/7.0/fpm/php.ini`. Reload php-fpm to make it take effect.
 
-Now you should able to see sweph section from `phpinfo()`.
+Now you should able to see swephp section from `phpinfo()`.
 
- sweph support | enabled 
+ swephp support | enabled 
 ---|---
- extension version | 2.0 Rev: 29
+ extension version | 3.0 Rev: 00
  library (libswe.a) version | 2.10.01a
  default ephemeris file path | .:/users/ephe2/:/users/ephe/ 
 
 You are all set!
 
+
+## missing functions
+```
+    swe_heliacal_angle
+    swe_heliacal_pheno_ut
+    swe_heliacal_ut
+    swe_set_interpolate_nut
+    swe_set_timeout
+    swe_vis_limit_mag
+```
+
+## Inline documentation
+The source code for this extension contains inline documentation in POD style,
+which comes from the Perl programming language.
+
+You can view the inline documentation, if you have Perl installed, with this command:
+
+perldoc swephp.c
+
+To create a html documentation page, use this command:
+
+pod2html swephp.c > php-sweph-doc.html
 
 ## Example
 

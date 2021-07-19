@@ -2,14 +2,14 @@
 Basic test
 --SKIPIF--
 <?php
-if (!extension_loaded('sweph')) {
+if (!extension_loaded('swephp')) {
     echo 'skip';
 }
 ?>
 --FILE--
 <?php
 swe_set_ephe_path(null);
-var_dump(strrev(substr(strrev(swe_get_library_path()), 0, 17)));
+var_dump(strrev(substr(strrev(swe_get_library_path()), 0, 18)));
 ?>
 --EXPECT--
-string(17) "/modules/sweph.so"
+string(18) "/modules/swephp.so"

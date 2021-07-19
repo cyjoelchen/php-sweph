@@ -16,7 +16,7 @@
 #include "php.h"
 #include "php_ini.h"
 #include "ext/standard/info.h"
-#include "php_sweph.h"
+#include "php_swephp.h"
 
 #include "swephexp.h"
 
@@ -28,18 +28,18 @@
 # define IS_PHP7	0
 #endif
 
-/* If you declare any globals in php_sweph.h uncomment this:
-ZEND_DECLARE_MODULE_GLOBALS(sweph)
+/* If you declare any globals in php_swephp.h uncomment this:
+ZEND_DECLARE_MODULE_GLOBALS(swephp)
 */
 
 /* True global resources - no need for thread safety here */
-static int le_sweph;
+static int le_swephp;
 
-/* {{{ sweph_functions[]
+/* {{{ swephp_functions[]
  *
- * Every user visible function must have an entry in sweph_functions[].
+ * Every user visible function must have an entry in swephp_functions[].
  */
-zend_function_entry sweph_functions[] = {
+zend_function_entry swephp_functions[] = {
 	/**************************** 
 	 * exports from sweph.c 
 	 ****************************/
@@ -160,23 +160,23 @@ zend_function_entry sweph_functions[] = {
 	PHP_FE(swe_cs2degstr, NULL)
 
 //	PHP_FE(confirm_sweph_compiled,	NULL)		/* For testing, remove later. */
-	{NULL, NULL, NULL}	/* Must be the last line in sweph_functions[] */
+	{NULL, NULL, NULL}	/* Must be the last line in swephp_functions[] */
 };
 /* }}} */
 
-/* {{{ sweph_module_entry
+/* {{{ swephp_module_entry
  */
-zend_module_entry sweph_module_entry = {
+zend_module_entry swephp_module_entry = {
 #if ZEND_MODULE_API_NO >= 20010901
 	STANDARD_MODULE_HEADER,
 #endif
-	"sweph",
-	sweph_functions,
-	PHP_MINIT(sweph),
-	NULL, //PHP_MSHUTDOWN(sweph),
-	NULL, //PHP_RINIT(sweph),		/* Replace with NULL if there's nothing to do at request start */
-	NULL, //PHP_RSHUTDOWN(sweph),	/* Replace with NULL if there's nothing to do at request end */
-	PHP_MINFO(sweph),
+	"swephp",
+	swephp_functions,
+	PHP_MINIT(swephp),
+	NULL, //PHP_MSHUTDOWN(swephp),
+	NULL, //PHP_RINIT(swephp),		/* Replace with NULL if there's nothing to do at request start */
+	NULL, //PHP_RSHUTDOWN(swephp),	/* Replace with NULL if there's nothing to do at request end */
+	PHP_MINFO(swephp),
 #if ZEND_MODULE_API_NO >= 20010901
 	SWEPH_EXTENSION_VERSION, 
 #endif
@@ -184,37 +184,37 @@ zend_module_entry sweph_module_entry = {
 };
 /* }}} */
 
-#ifdef COMPILE_DL_SWEPH
-ZEND_GET_MODULE(sweph)
+#ifdef COMPILE_DL_SWEPHP
+ZEND_GET_MODULE(swephp)
 #endif
 
 /* {{{ PHP_INI
  */
 /* Remove comments and fill if you need to have entries in php.ini
 PHP_INI_BEGIN()
-    STD_PHP_INI_ENTRY("sweph.global_value",      "42", PHP_INI_ALL, OnUpdateInt, global_value, zend_sweph_globals, sweph_globals)
-    STD_PHP_INI_ENTRY("sweph.global_string", "foobar", PHP_INI_ALL, OnUpdateString, global_string, zend_sweph_globals, sweph_globals)
+    STD_PHP_INI_ENTRY("swephp.global_value",      "42", PHP_INI_ALL, OnUpdateInt, global_value, zend_swephp_globals, swephp_globals)
+    STD_PHP_INI_ENTRY("swephp.global_string", "foobar", PHP_INI_ALL, OnUpdateString, global_string, zend_swephp_globals, swephp_globals)
 PHP_INI_END()
 */
 /* }}} */
 
-/* {{{ php_sweph_init_globals
+/* {{{ php_swephp_init_globals
  */
 /* Uncomment this function if you have INI entries
-static void php_sweph_init_globals(zend_sweph_globals *sweph_globals)
+static void php_swephp_init_globals(zend_swephp_globals *swephp_globals)
 {
-	sweph_globals->global_value = 0;
-	sweph_globals->global_string = NULL;
+	swephp_globals->global_value = 0;
+	swephp_globals->global_string = NULL;
 }
 */
 /* }}} */
 
 /* {{{ PHP_MINIT_FUNCTION
  */
-PHP_MINIT_FUNCTION(sweph)
+PHP_MINIT_FUNCTION(swephp)
 {
 	/* If you have INI entries, uncomment these lines 
-	ZEND_INIT_MODULE_GLOBALS(sweph, php_sweph_init_globals, NULL);
+	ZEND_INIT_MODULE_GLOBALS(swephp, php_swephp_init_globals, NULL);
 	REGISTER_INI_ENTRIES();
 	*/
 
@@ -466,7 +466,7 @@ PHP_MINIT_FUNCTION(sweph)
 
 /* {{{ PHP_MSHUTDOWN_FUNCTION
  */
-PHP_MSHUTDOWN_FUNCTION(sweph)
+PHP_MSHUTDOWN_FUNCTION(swephp)
 {
 	/* uncomment this line if you have INI entries
 	UNREGISTER_INI_ENTRIES();
@@ -478,7 +478,7 @@ PHP_MSHUTDOWN_FUNCTION(sweph)
 /* Remove if there's nothing to do at request start */
 /* {{{ PHP_RINIT_FUNCTION
  */
-PHP_RINIT_FUNCTION(sweph)
+PHP_RINIT_FUNCTION(swephp)
 {
 	return SUCCESS;
 }
@@ -487,7 +487,7 @@ PHP_RINIT_FUNCTION(sweph)
 /* Remove if there's nothing to do at request end */
 /* {{{ PHP_RSHUTDOWN_FUNCTION
  */
-PHP_RSHUTDOWN_FUNCTION(sweph)
+PHP_RSHUTDOWN_FUNCTION(swephp)
 {
 	return SUCCESS;
 }
@@ -495,13 +495,13 @@ PHP_RSHUTDOWN_FUNCTION(sweph)
 
 /* {{{ PHP_MINFO_FUNCTION
  */
-PHP_MINFO_FUNCTION(sweph)
+PHP_MINFO_FUNCTION(swephp)
 {
 	char version[255];
 
 	swe_version(version);
 	php_info_print_table_start();
-	php_info_print_table_header(2, "sweph support", "enabled");
+	php_info_print_table_header(2, "swephp support", "enabled");
 	php_info_print_table_row(2, "extension version", SWEPH_EXTENSION_VERSION);
 	php_info_print_table_row(2, "library (libswe.a) version", version);
 	php_info_print_table_row(2, "default ephemeris file path", SE_EPHE_PATH);
@@ -3991,9 +3991,9 @@ PHP_FUNCTION(swe_cs2degstr)
    purposes. */
 
 /* Every user-visible function in PHP should document itself in the source */
-/* {{{ proto string confirm_sweph_compiled(string arg)
+/* {{{ proto string confirm_swephp_compiled(string arg)
    Return a string to confirm that the module is compiled in */
-PHP_FUNCTION(confirm_sweph_compiled)
+PHP_FUNCTION(confirm_swephp_compiled)
 {
 	char *arg = NULL;
 	int arg_len, len;
@@ -4003,7 +4003,7 @@ PHP_FUNCTION(confirm_sweph_compiled)
 		return;
 	}
 
-	len = sprintf(string, "Congratulations! You have successfully modified ext/%.78s/config.m4. Module %.78s is now compiled into PHP.", "sweph", arg);
+	len = sprintf(string, "Congratulations! You have successfully modified ext/%.78s/config.m4. Module %.78s is now compiled into PHP.", "swephp", arg);
 	RETURN_STRINGL(string, len);
 }
 #endif
