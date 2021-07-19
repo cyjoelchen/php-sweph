@@ -3536,6 +3536,27 @@ PHP_FUNCTION(swe_orbit_max_min_true_distance)
  * exports from swephlib.c 
  ****************************/
 
+/* {{{ pod
+=pod
+
+=head1 function swe_deltat(tjd)
+
+Calculate delta t (difference between UT & ET) from Julian day number.
+
+=head3 Parameters
+
+  double        tjd         Julian day in Universal Time.
+
+=head3 return value
+
+  double        Delta T.
+
+=head3 C declaration
+
+  double swe_deltat(double tjd);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_deltat)
 {
 	double tjd_ut;
