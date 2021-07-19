@@ -1556,7 +1556,7 @@ PHP_FUNCTION(swe_jdut1_to_utc)
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
-			&tjd_et, &gregflag) == FAILURE) {
+			&tjd_ut, &gregflag) == FAILURE) {
 		return;
 	}
 	swe_jdut1_to_utc(tjd_ut, (int32)gregflag, &iyear, &imonth, &iday, &ihour, &imin, &dsec);
