@@ -8,7 +8,7 @@ echo ‘skip’;
 ?>
 --FILE--
 <?php
-swe_set_ephe_path(null);
+swe_set_ephe_path('./sweph/ephe');
 var_dump(swe_calc_pctr(2452275.5, 1, 2, SEFLG_SWIEPH|SEFLG_SPEED));
 ?>
 --EXPECT--
