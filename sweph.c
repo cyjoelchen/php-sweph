@@ -1338,7 +1338,7 @@ SE_JUL_CAL used in swe_juldate() and swe_revjul()
 
 =head3 return value
   
-  converted tjd, or in case of illegal input date, NULL.
+  double|null    converted tjd, or in case of illegal input date, NULL.
 
 =head3 C declaration
 
