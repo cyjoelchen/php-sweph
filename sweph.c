@@ -2819,7 +2819,7 @@ PHP_FUNCTION(swe_rise_trans)
 			&(geopos[0]), atpress, attemp, tret, serr);
 
 	array_init(return_value);
-	add_assoc_long(return_value, "retflag", rc);
+	add_assoc_long(return_value, "rc", rc);
 
 	if (rc == ERR)
 	{
@@ -2864,7 +2864,7 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 			geopos, atpress, attemp, horhgt, tret, serr);
 
 	array_init(return_value);
-	add_assoc_long(return_value, "retflag", rc);
+	add_assoc_long(return_value, "rc", rc);
 
 	if (rc == ERR)
 	{
