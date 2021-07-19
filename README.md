@@ -27,17 +27,6 @@ Now you should able to see swephp section from `phpinfo()`.
 
 You are all set!
 
-
-## missing functions
-```
-    swe_heliacal_angle
-    swe_heliacal_pheno_ut
-    swe_heliacal_ut
-    swe_set_interpolate_nut
-    swe_set_timeout
-    swe_vis_limit_mag
-```
-
 ## Inline documentation
 The source code for this extension contains inline documentation in POD style,
 which comes from the Perl programming language.
