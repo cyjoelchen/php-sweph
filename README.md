@@ -30,9 +30,6 @@ You are all set!
 
 ## missing functions
 ```
-    swe_fixstar2
-    swe_fixstar2_ut
-    swe_fixstar2_mag
     swe_get_orbital_elements
     swe_heliacal_angle
     swe_heliacal_pheno_ut
