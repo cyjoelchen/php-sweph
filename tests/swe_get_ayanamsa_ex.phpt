@@ -9,12 +9,12 @@ if (!extension_loaded('swephp')) {
 --FILE--
 <?php
 swe_set_ephe_path(null);
-var_dump(swe_get_ayanamsa_ex(2452275.5, SEFLG_MOSEPH));
+var_dump(swe_get_ayanamsa_ex(2452275.5, SEFLG_SWIEPH|SEFLG_SPEED));
 ?>
 --EXPECT--
 array(2) {
   ["daya"]=>
   float(24.763655434161)
   ["rc"]=>
-  int(68)
+  int(66)
 }
