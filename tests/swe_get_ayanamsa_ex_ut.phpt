@@ -8,7 +8,7 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
-swe_set_ephe_path(null);
+swe_set_ephe_path('./sweph/ephe');
 var_dump(swe_get_ayanamsa_ex_ut(2452275.499255786, SEFLG_SWIEPH|SEFLG_SPEED));
 ?>
 --EXPECT--
