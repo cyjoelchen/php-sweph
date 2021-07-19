@@ -125,6 +125,7 @@ zend_function_entry sweph_functions[] = {
 	PHP_FE(swe_cotrans_sp, NULL)
 	PHP_FE(swe_get_tid_acc, NULL)
 	PHP_FE(swe_set_tid_acc, NULL)
+	PHP_FE(swe_set_delta_t_userdef, NULL)
 	PHP_FE(swe_degnorm, NULL)
 	PHP_FE(swe_radnorm, NULL)
 	PHP_FE(swe_rad_midp, NULL)
@@ -3310,6 +3311,21 @@ PHP_FUNCTION(swe_set_tid_acc)
 		return;
 	}
 	swe_set_tid_acc(t_acc);
+	
+	RETURN_NULL();
+}
+
+PHP_FUNCTION(swe_set_delta_t_userdef)
+{
+	double dt;
+	
+	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+			&dt) == FAILURE) {
+		return;
+	}
+	swe_set_delta_t_userdef(dt);
 	
 	RETURN_NULL();
 }

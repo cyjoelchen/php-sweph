@@ -122,6 +122,7 @@ PHP_FUNCTION(swe_cotrans);
 PHP_FUNCTION(swe_cotrans_sp);
 PHP_FUNCTION(swe_get_tid_acc);
 PHP_FUNCTION(swe_set_tid_acc);
+PHP_FUNCTION(swe_set_delta_t_userdef);
 PHP_FUNCTION(swe_degnorm);
 PHP_FUNCTION(swe_radnorm);
 PHP_FUNCTION(swe_rad_midp);
