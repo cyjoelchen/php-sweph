@@ -8,7 +8,7 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
-swe_set_ephe_path(null);
+swe_set_ephe_path('./sweph/ephe');
 var_dump(swe_calc_ut(2452275.499255786, 0, SEFLG_MOSEPH));
 ?>
 --EXPECT--

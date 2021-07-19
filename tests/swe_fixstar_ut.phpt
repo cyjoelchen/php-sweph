@@ -8,7 +8,7 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
-swe_set_ephe_path(null);
+swe_set_ephe_path('./sweph/ephe');
 var_dump(swe_fixstar_ut('Polaris', 2452275.5, SEFLG_MOSEPH));
 ?>
 --EXPECT--
