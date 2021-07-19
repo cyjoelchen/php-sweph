@@ -32,6 +32,31 @@ Now you should able to see swephp section from `phpinfo()`.
 
 You are all set!
 
+## Contributing
+
+### If you have collaborator access on this project:
+
+1. Open an issue in Github, explaining the work requirements.
+2. Locally, `git pull origin master` to bring your local master branch up to date.
+3. Locally, `git checkout -b issue/<number>` to create a new working branch.
+4. After your commits are finished, `git push origin issue/<number>` to push this branch to Github.
+5. Create a PR from the Github web interface, or from the link git displays after your initial branch push.
+6. Assign a different collaborator the task of reviewing the work.
+7. Once approved, the author of the PR can merge into master and delete the branch.
+
+### If you are not a collaborator on this project:
+
+Contributions are welcome! If you'd like to contribute, please:
+
+1. Fork the project & clone locally.
+2. Create an upstream remote and sync your local copy before you branch.
+3. Create an issue for the work you plan to contribute, or select an issue you want to work on.
+4. Branch for each separate piece of work (ideally named according to the issue).
+5. Do the work, __write good commit messages__, and keep your commits small (i.e. as atomic as possible).
+6. Push to your origin repository.
+7. Create a new PR in GitHub.
+8. Respond to any code review feedback.
+
 
 ## missing functions
 ```
