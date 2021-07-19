@@ -1391,7 +1391,7 @@ Converts a calendar date to julian day number tjd, no validity check for date.
 
 =head3 return value
   
-  converted tjd
+  double    converted tjd
 
 =head3 C declaration
 
