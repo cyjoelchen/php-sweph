@@ -2,30 +2,31 @@
 Basic test
 --SKIPIF--
 <?php
-# @todo Determine why results are different in PHP CLI vs. tests.
-echo 'skip';
+if (!extension_loaded('sweph')) {
+    echo 'skip';
+}
 ?>
 --FILE--
 <?php
 swe_set_ephe_path(null);
-var_dump(swe_calc_pctr(2452275.5, 1, 2, SEFLG_MOSEPH));
+var_dump(swe_calc_pctr(2452275.5, 1, 2, SEFLG_SWIEPH|SEFLG_SPEED));
 ?>
 --EXPECT--
 array(8) {
   [0]=>
-  float(6.9529142502109E-310)
+  float(115.59455769599)
   [1]=>
-  float(6.9529142502133E-310)
+  float(2.0541309173647)
   [2]=>
-  float(0)
+  float(1.2326810399357)
   [3]=>
-  float(0)
+  float(1.5728585729521)
   [4]=>
-  float(0)
+  float(-0.050397195648784)
   [5]=>
-  float(0)
+  float(-0.018083677833651)
   ["serr"]=>
-  string(48) "barycentric Moshier positions are not supported."
+  string(0) ""
   ["rc"]=>
-  int(-1)
+  int(258)
 }
