@@ -1,18 +1,23 @@
 # PHP Extension for Swiss Ephemeris
+
 ## Introduction
 `php-sweph` is a PHP extension to Astrodienst Swiss Ephemeris library. It's statically linked with libswe.a to implement one-to-one, C-to-PHP function mapping, no external binary executable required.
 
 ## Installation
 
-Follow the steps. Make sure `php-dev` has installed already.
+This project uses tagged releases.
+As such, the `master` branch should be considered unstable and "bleeding edge".
+
+Follow the steps to build the latest version of this extension.
+Make sure `php-dev` has installed already.
 
 ```
-    git clone https://github.com/cyjoelchen/php-sweph.git
-    cd php-sweph
-    phpize
-    ./configure 
-    make
-    sudo make install
+git clone -b v2.0.29 https://github.com/cyjoelchen/php-sweph.git
+cd php-sweph
+phpize
+./configure
+make
+sudo make install
 ```
 
 Add `extension=swephp.so` to php.ini. In my case (nginx + php-fpm), it's located in `/etc/php/7.0/fpm/php.ini`. Reload php-fpm to make it take effect.
