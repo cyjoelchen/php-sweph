@@ -2,7 +2,7 @@
 Test return float/double.
 --SKIPIF--
 <?php
-if (!extension_loaded('sweph')) {
+if (!extension_loaded('swephp')) {
     echo 'skip';
 }
 ?>
