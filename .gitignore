@@ -1,6 +1,7 @@
 # IntelliJ / PhpStorm project directory.
 .DS_Store
 .idea
+*.swp
 pod2htmd.tmp
 tests/*.php
 tests/*.diff
@@ -8,11 +9,12 @@ tests/*.exp
 tests/*.out
 tests/*.log
 tests/*.sh
+tests/*.swp
 sweph/src/*.o
 sweph/src/libswe.a
 modules
-sweph.la
-sweph.lo
+sweph*.la
+sweph*.lo
 Mak*
 .libs/
 build/
