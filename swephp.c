@@ -3718,6 +3718,32 @@ PHP_FUNCTION(swe_lmt_to_lat)
 	add_assoc_string(return_value, "serr", serr);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_lat_to_lmt(tjd_lat, geolon)
+
+Converts Local Apparent Time (LAT) to Local Mean Time (LMT).
+
+=head3 Parameters
+
+  double        tjd_lat     Julian day in Local Apparent Time.
+  double        geolon      Longitude of geographic location.
+
+=head3 return array
+
+    [
+        'rd' => (int) Return code.
+        'tjd_lmt' => (double) Local Mean Time.
+        'serr' => (string) Error string.
+    ]
+
+=head3 C declaration
+
+  int32 swe_lat_to_lmt(double tjd_lat, double geolon, double *tjd_lmt, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_lat_to_lmt)
 {
 	char *arg = NULL;
