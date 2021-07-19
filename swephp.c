@@ -116,6 +116,9 @@ zend_function_entry swephp_functions[] = {
 	PHP_FE(swe_nod_aps_ut, NULL)
 	PHP_FE(swe_get_orbital_elements, NULL)
 	PHP_FE(swe_orbit_max_min_true_distance, NULL)
+	PHP_FE(swe_heliacal_ut, NULL)
+	PHP_FE(swe_heliacal_pheno_ut, NULL)
+	PHP_FE(swe_vis_limit_mag, NULL)
 		
 	/**************************** 
 	 * exports from swephlib.c 
@@ -2968,6 +2971,78 @@ PHP_FUNCTION(swe_set_lapse_rate)
 		return;
 	}
 	swe_set_lapse_rate(lapse_rate);
+}
+
+PHP_FUNCTION(swe_heliacal_ut)
+{
+	char *arg = NULL;
+	int arg_len, rc, ipl, iflag;
+	double tjdstart, dgeo[3], datm[4], dobs[6], dret[3];
+	char serr[AS_MAXCH], *objectname = NULL; 
+	int i, olen, event_type, helflag;
+	*serr = '\0';
+	if(ZEND_NUM_ARGS() != 17) WRONG_PARAM_COUNT;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsll",
+			&tjdstart, &dgeo[0], &dgeo[1], &dgeo[2], &datm[0], &datm[1], &datm[2], &datm[3],  &dobs[0], &dobs[1], &dobs[2], &dobs[3], &dobs[4], &dobs[5],  &objectname, &olen, &event_type, &helflag,  &arg_len) == FAILURE) {
+		return;
+	}
+	rc = swe_heliacal_ut(tjdstart, dgeo, datm, dobs, objectname, event_type, helflag, dret, serr);
+	array_init(return_value);
+	add_assoc_long(return_value, "rc", rc);
+	if (rc == ERR) {
+		add_assoc_string(return_value, "serr", serr);			
+	} else {
+		for(i = 0; i < 3 ; i++)
+			add_index_double(return_value, i, dret[i]);
+	}
+}
+
+PHP_FUNCTION(swe_heliacal_pheno_ut)
+{
+	char *arg = NULL;
+	int arg_len, rc, ipl, iflag;
+	double tjdstart, dgeo[3], datm[4], dobs[6], darr[50];
+	char serr[AS_MAXCH], *objectname = NULL; 
+	int i, olen, event_type, helflag;
+	*serr = '\0';
+	if(ZEND_NUM_ARGS() != 17) WRONG_PARAM_COUNT;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsll",
+			&tjdstart, &dgeo[0], &dgeo[1], &dgeo[2], &datm[0], &datm[1], &datm[2], &datm[3],  &dobs[0], &dobs[1], &dobs[2], &dobs[3], &dobs[4], &dobs[5],  &objectname, &olen, &event_type, &helflag,  &arg_len) == FAILURE) {
+		return;
+	}
+	rc = swe_heliacal_pheno_ut(tjdstart, dgeo, datm, dobs, objectname, event_type, helflag, darr, serr);
+	array_init(return_value);
+	add_assoc_long(return_value, "rc", rc);
+	if (rc == ERR) {
+		add_assoc_string(return_value, "serr", serr);			
+	} else {
+		for(i = 0; i <= 29 ; i++)
+			add_index_double(return_value, i, darr[i]);
+	}
+}
+
+PHP_FUNCTION(swe_vis_limit_mag)
+{
+	char *arg = NULL;
+	int arg_len, rc, ipl, iflag;
+	double tjdstart, dgeo[3], datm[4], dobs[6], darr[8];
+	char serr[AS_MAXCH], *objectname = NULL; 
+	int i, olen, helflag;
+	*serr = '\0';
+	if(ZEND_NUM_ARGS() != 17) WRONG_PARAM_COUNT;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsl",
+			&tjdstart, &dgeo[0], &dgeo[1], &dgeo[2], &datm[0], &datm[1], &datm[2], &datm[3],  &dobs[0], &dobs[1], &dobs[2], &dobs[3], &dobs[4], &dobs[5],  &objectname, &olen, &helflag,  &arg_len) == FAILURE) {
+		return;
+	}
+	rc = swe_vis_limit_mag(tjdstart, dgeo, datm, dobs, objectname, helflag, darr, serr);
+	array_init(return_value);
+	add_assoc_long(return_value, "rc", rc);
+	if (rc == ERR) {
+		add_assoc_string(return_value, "serr", serr);			
+	} else {
+		for(i = 0; i < 8 ; i++)
+			add_index_double(return_value, i, darr[i]);
+	}
 }
 
 /* {{{ pod

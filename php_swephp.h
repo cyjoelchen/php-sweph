@@ -113,6 +113,9 @@ PHP_FUNCTION(swe_nod_aps);
 PHP_FUNCTION(swe_nod_aps_ut);
 PHP_FUNCTION(swe_get_orbital_elements);
 PHP_FUNCTION(swe_orbit_max_min_true_distance);
+PHP_FUNCTION(swe_heliacal_ut);
+PHP_FUNCTION(swe_heliacal_pheno_ut);
+PHP_FUNCTION(swe_vis_limit_mag);
 
 /**************************** 
  * exports from swephlib.c 
