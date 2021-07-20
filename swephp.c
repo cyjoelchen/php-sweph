@@ -2743,7 +2743,7 @@ PHP_FUNCTION(swe_lun_occult_when_glob)
 {
 	char *arg = NULL;
 	int rc, ipl, ifl, ifltype;
-	size_t arg_len, s_len;
+	size_t arg_len, s_len = 0;
 	double tjd_start, tret[10];
 	char serr[AS_MAXCH], *starname = NULL; 
 	char star[AS_MAXCH];
@@ -2753,17 +2753,16 @@ PHP_FUNCTION(swe_lun_occult_when_glob)
 	*star = '\0';
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
-
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlslll",
 			&tjd_start, &ipl, &starname, s_len, &ifl, &ifltype, 
 			&backward, &arg_len) == FAILURE) {
 		return;
 	}
+return;
     if (starname != NULL && s_len > 0)
 		strcpy(star, starname);
-	rc = swe_lun_occult_when_glob(tjd_start, ipl, starname, ifl, ifltype,
-			tret, backward, serr);
-
+	// rc = swe_lun_occult_when_glob(tjd_start, ipl, star, ifl, ifltype, tret, backward, serr);
+    rc = ERR;
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
 
