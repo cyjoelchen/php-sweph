@@ -3967,6 +3967,25 @@ PHP_FUNCTION(swe_get_tid_acc)
 	RETURN_DOUBLE(swe_get_tid_acc());
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_set_tid_acc(t_acc)
+
+Set tidal acceleration used in swe_deltat().
+
+=head3 Parameters
+
+    double      Tidal acceleration.
+
+=head3 return (none)
+
+=head3 C declaration
+
+  void swe_set_tid_acc(double t_acc);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_set_tid_acc)
 {
 	double t_acc;
