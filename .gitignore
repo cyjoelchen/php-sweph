@@ -28,4 +28,4 @@ run-test*
 config*
 install-sh
 ltmain.sh
-
+fixtest

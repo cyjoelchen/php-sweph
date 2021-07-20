@@ -2496,6 +2496,47 @@ PHP_FUNCTION(swe_sol_eclipse_where)
 	}
 }
 
+
+/* {{{ pod
+=pod
+
+=head1 function swe_lun_occult_where($tjd_ut, $ipl, $star, $iflag);
+
+Finds the place on earth where the occultation is maximal at a given
+time. 
+
+Get the name of a house system
+
+=head3 Parameters
+
+  tjd_ut	double   Julian day number, Universal Time
+  ipl    	int		 Planet occulted
+  star		string   Star name, if a star occultation is searched
+  iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
+
+=head3 return array
+
+      retflag => (int)            ERR or eclipse type
+      serr    => (string)         Error string, on error only
+      star    => (string)         Corrected star name
+      geopos  => array of 2 doubles, geogr. position where eclipse is maximal
+      attr    => array of 8 double:
+		attr[0] fraction of object's diameter covered by moon (magnitude)
+		attr[1] ratio of lunar diameter to object's diameter
+		attr[2] fraction of object's disc covered by moon (obscuration)
+		attr[3] diameter of core shadow in km
+		attr[4] azimuth of object at tjd
+		attr[5] true altitude of object above horizon at tjd
+		attr[6] apparent altitude of object above horizon at tjd
+		attr[7] angular distance of moon from object in degrees
+
+
+=head3 C declaration
+
+  int swe_lun_occult_where(double tjd, int32 ipl, char *starname, int32 ifl, double *geopos, double *attr, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_lun_occult_where)
 {
 	char *arg = NULL;
@@ -2503,9 +2544,11 @@ PHP_FUNCTION(swe_lun_occult_where)
 	size_t arg_len;
 	double tjd_ut, geopos[2], attr[20];
 	char serr[AS_MAXCH], *starname = NULL; 
+	char star[AS_MAXCH];
 	int i;
 	zval geopos_arr, attr_arr;
 	*serr = '\0';
+	*star = '\0';
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -2513,7 +2556,9 @@ PHP_FUNCTION(swe_lun_occult_where)
 			&tjd_ut, &ipl, &starname, &arg_len, &ifl) == FAILURE) {
 		return;
 	}
-	rc = swe_lun_occult_where(tjd_ut, ipl, starname, ifl, geopos, attr, serr);
+    if (starname != NULL && arg_len > 0)
+		strcpy(star, starname);
+	rc = swe_lun_occult_where(tjd_ut, ipl, star, ifl, geopos, attr, serr);
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
@@ -2525,16 +2570,15 @@ PHP_FUNCTION(swe_lun_occult_where)
 	else
 	{
 		array_init(&geopos_arr);
-		
 		for(i = 0; i < 2; i++)
 			add_index_double(&geopos_arr, i, geopos[i]);
-	
 		array_init(&attr_arr);
-		for(i = 0; i < 20; i++)
+		for(i = 0; i < 8; i++)
 			add_index_double(&attr_arr, i, attr[i]);
-		
 		add_assoc_zval(return_value, "geopos", &geopos_arr);
 		add_assoc_zval(return_value, "attr", &attr_arr);
+		if (starname != NULL && arg_len > 0)
+			add_assoc_string(return_value, "star", star);
 	}
 }
 
@@ -2698,38 +2742,36 @@ PHP_FUNCTION(swe_lun_occult_when_glob)
 {
 	char *arg = NULL;
 	int rc, ipl, ifl, ifltype;
-	size_t arg_len;
+	size_t arg_len, s_len = 0;
 	double tjd_start, tret[10];
 	char serr[AS_MAXCH], *starname = NULL; 
+	char star[AS_MAXCH];
 	int i, backward;
 	zval tret_arr;
 	*serr = '\0';
+	*star = '\0';
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
-
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlslll",
-			&tjd_start, &ipl, &starname, &ifl, &ifltype, 
+			&tjd_start, &ipl, &starname, &s_len, &ifl, &ifltype, 
 			&backward, &arg_len) == FAILURE) {
 		return;
 	}
-	rc = swe_lun_occult_when_glob(tjd_start, ipl, starname, ifl, ifltype,
-			tret, backward, serr);
-
+    if (starname != NULL && s_len > 0 && s_len < AS_MAXCH)
+		strcpy(star, starname);
+	rc = swe_lun_occult_when_glob(tjd_start, ipl, star, ifl, ifltype, tret, backward, serr);
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
 
-	if (rc == ERR)
-	{
+	if (rc < 0) {
 		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
+	} else {
 		array_init(&tret_arr);
-		
 		for(i = 0; i < 10; i++)
 			add_index_double(&tret_arr, i, tret[i]);
-			
 		add_assoc_zval(return_value, "tret", &tret_arr);
+		if (starname != NULL && s_len > 0)
+			add_assoc_string(return_value, "star", star);
 	}
 }
 
@@ -3536,6 +3578,27 @@ PHP_FUNCTION(swe_orbit_max_min_true_distance)
  * exports from swephlib.c 
  ****************************/
 
+/* {{{ pod
+=pod
+
+=head1 function swe_deltat(tjd)
+
+Calculate delta t (difference between UT & ET) from Julian day number.
+
+=head3 Parameters
+
+  double        tjd         Julian day in Universal Time.
+
+=head3 return value
+
+  double        Delta T.
+
+=head3 C declaration
+
+  double swe_deltat(double tjd);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_deltat)
 {
 	double tjd_ut;
@@ -3550,6 +3613,35 @@ PHP_FUNCTION(swe_deltat)
 	RETURN_DOUBLE(swe_deltat(tjd_ut));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_deltat_ex(tjd, ephe_flag)
+
+Calculate delta t (difference between UT & ET) from Julian day number.
+
+If the function is called with SEFLG_SWIEPH before calling swe_set_ephe_path(),
+or with or SEFLG_JPLEPH before calling swe_set_jpl_file(),
+then the function returns a warning.
+
+=head3 Parameters
+
+  double        tjd         Julian day in Universal Time.
+  int           ephe_flag   Ephemeris flag (one of SEFLG_SWIEPH, SEFLG_JPLEPH, SEFLG_MOSEPH).
+
+=head3 return array
+
+    [
+        'tjd_et' => (double) Delta T.
+        'serr' => (string) Error string.
+    ]
+
+=head3 C declaration
+
+  double swe_deltat_ex(double tjd, int32 ephe_flag, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_deltat_ex)
 {
 	double tjd_ut, tjd_et;
@@ -3572,6 +3664,31 @@ PHP_FUNCTION(swe_deltat_ex)
 	add_assoc_string(return_value, "serr", serr);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_time_equ(tjd_et)
+
+Get the difference between local apparent and local mean time.
+
+=head3 Parameters
+
+  double        tjd_et      Julian day in Ephemeris Time.
+
+=head3 return array
+
+    [
+        'rd' => (int) Return code.
+        'td' => (double) Local Apparent Time - Local Mean Time.
+        'serr' => (string) Error string.
+    ]
+
+=head3 C declaration
+
+  int swe_time_equ(double tjd_et, double *e, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_time_equ)
 {
 	char *arg = NULL;
@@ -3594,6 +3711,32 @@ PHP_FUNCTION(swe_time_equ)
 	add_assoc_string(return_value, "serr", serr);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_lmt_to_lat(tjd_lmt, geolon)
+
+Converts Local Mean Time (LMT) to Local Apparent Time (LAT).
+
+=head3 Parameters
+
+  double        tjd_lmt     Julian day in Local Mean Time.
+  double        geolon      Longitude of geographic location.
+
+=head3 return array
+
+    [
+        'rd' => (int) Return code.
+        'tjd_lat' => (double) Local Apparent Time.
+        'serr' => (string) Error string.
+    ]
+
+=head3 C declaration
+
+  int32 swe_lmt_to_lat(double tjd_lmt, double geolon, double *tjd_lat, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_lmt_to_lat)
 {
 	char *arg = NULL;
@@ -3617,6 +3760,32 @@ PHP_FUNCTION(swe_lmt_to_lat)
 	add_assoc_string(return_value, "serr", serr);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_lat_to_lmt(tjd_lat, geolon)
+
+Converts Local Apparent Time (LAT) to Local Mean Time (LMT).
+
+=head3 Parameters
+
+  double        tjd_lat     Julian day in Local Apparent Time.
+  double        geolon      Longitude of geographic location.
+
+=head3 return array
+
+    [
+        'rd' => (int) Return code.
+        'tjd_lmt' => (double) Local Mean Time.
+        'serr' => (string) Error string.
+    ]
+
+=head3 C declaration
+
+  int32 swe_lat_to_lmt(double tjd_lat, double geolon, double *tjd_lmt, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_lat_to_lmt)
 {
 	char *arg = NULL;
@@ -3639,6 +3808,29 @@ PHP_FUNCTION(swe_lat_to_lmt)
 	add_assoc_string(return_value, "serr", serr);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_sidtime0(tjd_ut, eps, nut)
+
+Get sidereal time with user-specified ecliptic obliquity and nutation.
+
+=head3 Parameters
+
+  double        tjd_ut      Julian day in Universal Time.
+  double        eps         Obliquity of ecliptic, in degrees.
+  double        nut         Nutation in longitude, in degrees.
+
+=head3 return value
+
+    double      Sidereal time in degrees.
+
+=head3 C declaration
+
+  double swe_sidtime0(double tjd_ut, double eps, double nut);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_sidtime0)
 {
 	double tjd_ut, eps, nut, rc;
@@ -3652,6 +3844,27 @@ PHP_FUNCTION(swe_sidtime0)
 	RETURN_DOUBLE(swe_sidtime0(tjd_ut, eps, nut));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_sidtime(tjd_ut)
+
+Get sidereal time (ecliptic obliquity and nutation calculated internally).
+
+=head3 Parameters
+
+  double        tjd_ut      Julian day in Universal Time.
+
+=head3 return value
+
+    double      Sidereal time in degrees.
+
+=head3 C declaration
+
+  double swe_sidtime(double tjd_ut);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_sidtime)
 {
 	double tjd_ut, rc;
@@ -3666,6 +3879,35 @@ PHP_FUNCTION(swe_sidtime)
 	RETURN_DOUBLE(swe_sidtime(tjd_ut));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_cotrans(lng, lat, dist, eps)
+
+Transform coordinates from ecliptic to equatorial, or vice-versa.
+Convert equatorial to ecliptic if eps is positive.
+Convert ecliptic to equatorial if eps is negative.
+
+=head3 Parameters
+
+  double        lng     Longitude/right ascension position.
+  double        lat     Latitude/declination position.
+  double        dist    Distance (ignored).
+
+=head3 return array
+
+    [
+        0 => (double) Converted longitude/right ascension position.
+        1 => (double) Converted latitude/declination position.
+        2 => (double) distance (unchanged).
+    ]
+
+=head3 C declaration
+
+  void swe_cotrans(double *xpo, double *xpn, double eps);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_cotrans)
 {
 	int i;
@@ -3686,6 +3928,41 @@ PHP_FUNCTION(swe_cotrans)
 		add_index_double(return_value, i, xpn[i]);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_cotrans_sp(lng, lat, dist, lngs, lats, dists, eps)
+
+Transform position and speed coordinates from ecliptic to equatorial, or vice-versa.
+Convert equatorial to ecliptic if eps is positive.
+Convert ecliptic to equatorial if eps is negative.
+
+=head3 Parameters
+
+  double        lng     Longitude/right ascension.
+  double        lat     Latitude/declination.
+  double        dist    Distance (ignored).
+  double        lngs    Longitude/right ascension velocity.
+  double        lat     Latitude/declination velocity.
+  double        dists   Distance velocity (ignored).
+
+=head3 return array
+
+    [
+        0 => (double) Converted longitude/right ascension value.
+        1 => (double) Converted latitude/declination value.
+        2 => (double) distance (unchanged).
+        3 => (double) Converted longitude/right ascension velocity.
+        4 => (double) Converted latitude/declination velocity.
+        5 => (double) distance velocity (unchanged).
+    ]
+
+=head3 C declaration
+
+  void swe_cotrans_sp(double *xpo, double *xpn, double eps);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_cotrans_sp)
 {
 	int i;
@@ -3706,6 +3983,25 @@ PHP_FUNCTION(swe_cotrans_sp)
 		add_index_double(return_value, i, xpn[i]);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_get_tid_acc()
+
+Get tidal acceleration used in swe_deltat().
+
+=head3 Parameters (none)
+
+=head3 return value
+
+    double      Tidal acceleration value.
+
+=head3 C declaration
+
+  double swe_get_tid_acc(void);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_get_tid_acc)
 {
 	if(ZEND_NUM_ARGS() != 0) WRONG_PARAM_COUNT;
@@ -3713,6 +4009,25 @@ PHP_FUNCTION(swe_get_tid_acc)
 	RETURN_DOUBLE(swe_get_tid_acc());
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_set_tid_acc(t_acc)
+
+Set tidal acceleration used in swe_deltat().
+
+=head3 Parameters
+
+    double      Tidal acceleration.
+
+=head3 return (none)
+
+=head3 C declaration
+
+  void swe_set_tid_acc(double t_acc);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_set_tid_acc)
 {
 	double t_acc;
@@ -3728,6 +4043,25 @@ PHP_FUNCTION(swe_set_tid_acc)
 	RETURN_NULL();
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_set_delta_t_userdef(t_acc)
+
+Set fixed Delta T value to be returned by swe_deltat().
+
+=head3 Parameters
+
+    double      Delta T.
+
+=head3 return (none)
+
+=head3 C declaration
+
+  void swe_set_delta_t_userdef(double t_acc);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_set_delta_t_userdef)
 {
 	double dt;
@@ -3743,6 +4077,27 @@ PHP_FUNCTION(swe_set_delta_t_userdef)
 	RETURN_NULL();
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_degnorm(deg)
+
+Normalize degrees to the range >= 0 & < 360.
+
+=head3 Parameters
+
+    double      Degree.
+
+=head3 return value
+
+    double      Normalized degree.
+
+=head3 C declaration
+
+  double swe_degnorm(double x);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_degnorm)
 {
 	double x, rc;
@@ -3756,6 +4111,27 @@ PHP_FUNCTION(swe_degnorm)
 	RETURN_DOUBLE(swe_degnorm(x));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_radnorm(rad)
+
+Normalize radians to the range >= 0 & < 2 PI.
+
+=head3 Parameters
+
+    double      Radians.
+
+=head3 return value
+
+    double      Normalized radians.
+
+=head3 C declaration
+
+  double swe_radnorm(double x);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_radnorm)
 {
 	double x;
