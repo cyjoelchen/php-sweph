@@ -3848,16 +3848,16 @@ Convert ecliptic to equatorial if eps is negative.
 
 =head3 Parameters
 
-  double        lng     Longitude/right ascension.
-  double        lat     Latitude/declination.
-  double        dist    Distance.
+  double        lng     Longitude/right ascension position.
+  double        lat     Latitude/declination position.
+  double        dist    Distance (ignored).
 
 =head3 return array
 
     [
-        0 => (double) Converted longitude/right ascension value.
-        1 => (double) Converted latitude/declination value.
-        2 => (double) Converted distance.
+        0 => (double) Converted longitude/right ascension position.
+        1 => (double) Converted latitude/declination position.
+        2 => (double) Converted distance (unchanged).
     ]
 
 =head3 C declaration
@@ -3899,20 +3899,20 @@ Convert ecliptic to equatorial if eps is negative.
 
   double        lng     Longitude/right ascension.
   double        lat     Latitude/declination.
-  double        dist    Distance.
+  double        dist    Distance (ignored).
   double        lngs    Longitude/right ascension velocity.
   double        lat     Latitude/declination velocity.
-  double        dists   Distance velocity.
+  double        dists   Distance (ignored).
 
 =head3 return array
 
     [
         0 => (double) Converted longitude/right ascension value.
         1 => (double) Converted latitude/declination value.
-        2 => (double) Converted distance.
+        2 => (double) Converted distance (unchanged).
         3 => (double) Converted longitude/right ascension velocity.
         4 => (double) Converted latitude/declination velocity.
-        5 => (double) Converted distance velocity.
+        5 => (double) Converted distance (unchanged).
     ]
 
 =head3 C declaration
