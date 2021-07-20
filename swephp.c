@@ -3802,6 +3802,27 @@ PHP_FUNCTION(swe_sidtime0)
 	RETURN_DOUBLE(swe_sidtime0(tjd_ut, eps, nut));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_sidtime(tjd_ut)
+
+Get sidereal time (ecliptic obliquity and nutation calculated internally).
+
+=head3 Parameters
+
+  double        tjd_ut      Julian day in Universal Time.
+
+=head3 return value
+
+    double      Sidereal time in degrees.
+
+=head3 C declaration
+
+  double swe_sidtime(double tjd_ut);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_sidtime)
 {
 	double tjd_ut, rc;
