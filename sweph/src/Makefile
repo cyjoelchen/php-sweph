@@ -27,7 +27,7 @@ SWEOBJ = swedate.o swehouse.o swejpl.o swemmoon.o swemplan.o sweph.o\
 	 swephlib.o swecl.o swehel.o
 
 swetest: swetest.o libswe.a
-	$(CC) $(OP) -o swetest swetest.o -L. -lswe -lm -ldl
+	$(CC) $(OP) -o swetest swetest.o -L. libswe.a -lm -ldl
 
 swevents: swevents.o libswe.a
 	$(CC) $(OP) -o swevents swevents.o -L. -lswe -lm -ldl
