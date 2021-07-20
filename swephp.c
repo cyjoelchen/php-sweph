@@ -4001,6 +4001,25 @@ PHP_FUNCTION(swe_set_tid_acc)
 	RETURN_NULL();
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_set_delta_t_userdef(t_acc)
+
+Set fixed Delta T value to be returned by swe_deltat().
+
+=head3 Parameters
+
+    double      Delta T.
+
+=head3 return (none)
+
+=head3 C declaration
+
+  void swe_set_delta_t_userdef(double t_acc);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_set_delta_t_userdef)
 {
 	double dt;
