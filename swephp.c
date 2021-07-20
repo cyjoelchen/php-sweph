@@ -3766,6 +3766,29 @@ PHP_FUNCTION(swe_lat_to_lmt)
 	add_assoc_string(return_value, "serr", serr);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_sidtime0(tjd_ut, eps, nut)
+
+Get sidereal time with user-specified ecliptic obliquity and nutation.
+
+=head3 Parameters
+
+  double        tjd_ut      Julian day in Universal Time.
+  double        eps         Obliquity of ecliptic, in degrees.
+  double        nut         Nutation in longitude, in degrees.
+
+=head3 return value
+
+    double      Sidereal time in degrees.
+
+=head3 C declaration
+
+  double swe_sidtime0(double tjd_ut, double eps, double nut);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_sidtime0)
 {
 	double tjd_ut, eps, nut, rc;
