@@ -3837,6 +3837,35 @@ PHP_FUNCTION(swe_sidtime)
 	RETURN_DOUBLE(swe_sidtime(tjd_ut));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_cotrans(lng, lat, dist, eps)
+
+Transform coordinates from ecliptic to equatorial, or vice-versa.
+Convert equatorial to ecliptic if eps is positive.
+Convert ecliptic to equatorial if eps is negative.
+
+=head3 Parameters
+
+  double        lng     Longitude/right ascension.
+  double        lat     Latitude/declination.
+  double        dist    Distance.
+
+=head3 return array
+
+    [
+        0 => (double) Converted longitude/right ascension value.
+        1 => (double) Converted latitude/declination value.
+        2 => (double) Converted distance.
+    ]
+
+=head3 C declaration
+
+  void swe_cotrans(double *xpo, double *xpn, double eps);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_cotrans)
 {
 	int i;
