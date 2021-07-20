@@ -2746,9 +2746,11 @@ PHP_FUNCTION(swe_lun_occult_when_glob)
 	size_t arg_len;
 	double tjd_start, tret[10];
 	char serr[AS_MAXCH], *starname = NULL; 
+	char star[AS_MAXCH];
 	int i, backward;
 	zval tret_arr;
 	*serr = '\0';
+	*star = '\0';
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
@@ -2757,24 +2759,23 @@ PHP_FUNCTION(swe_lun_occult_when_glob)
 			&backward, &arg_len) == FAILURE) {
 		return;
 	}
+    if (starname != NULL && arg_len > 0)
+		strcpy(star, starname);
 	rc = swe_lun_occult_when_glob(tjd_start, ipl, starname, ifl, ifltype,
 			tret, backward, serr);
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
 
-	if (rc == ERR)
-	{
+	if (rc < 0) {
 		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
+	} else {
 		array_init(&tret_arr);
-		
 		for(i = 0; i < 10; i++)
 			add_index_double(&tret_arr, i, tret[i]);
-			
 		add_assoc_zval(return_value, "tret", &tret_arr);
+		if (starname != NULL && arg_len > 0)
+			add_assoc_string(return_value, "star", star);
 	}
 }
 
