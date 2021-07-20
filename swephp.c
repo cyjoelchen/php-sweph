@@ -3941,6 +3941,25 @@ PHP_FUNCTION(swe_cotrans_sp)
 		add_index_double(return_value, i, xpn[i]);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_get_tid_acc()
+
+Get tidal acceleration used in swe_deltat().
+
+=head3 Parameters (none)
+
+=head3 return value
+
+    double      Tidal acceleration value.
+
+=head3 C declaration
+
+  double swe_get_tid_acc(void);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_get_tid_acc)
 {
 	if(ZEND_NUM_ARGS() != 0) WRONG_PARAM_COUNT;
