@@ -3909,7 +3909,7 @@ Convert ecliptic to equatorial if eps is negative.
     [
         0 => (double) Converted longitude/right ascension value.
         1 => (double) Converted latitude/declination value.
-        2 => (double) Converted distance (unchanged).
+        2 => (double) distance (unchanged).
         3 => (double) Converted longitude/right ascension velocity.
         4 => (double) Converted latitude/declination velocity.
         5 => (double) distance velocity (unchanged).
