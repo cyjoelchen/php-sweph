@@ -13,7 +13,7 @@
 
 <ul id="index">
   <li><a href="#About-pod-documentation-comments">About pod documentation comments</a></li>
-  <li><a href="#function-swe_calc-tjd_ut-ipl-iflag">function swe_calc(tjd_ut, ipl, iflag)</a>
+  <li><a href="#function-swe_calc-tjd_et-ipl-iflag">function swe_calc(tjd_et, ipl, iflag)</a>
     <ul>
       <li>
         <ul>
@@ -57,7 +57,7 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_fixstar_ut-star-tjd_ut-iflag">function swe_fixstar_ut(star, tjd_ut, iflag)</a>
+  <li><a href="#function-swe_fixstar2-star-tjd_et-iflag">function swe_fixstar2(star, tjd_et, iflag)</a>
     <ul>
       <li>
         <ul>
@@ -68,13 +68,57 @@
       </li>
     </ul>
   </li>
+  <li><a href="#function-swe_fixstar_ut-star-tjd_ut-iflag">function swe_fixstar_ut(star, tjd_ut, iflag)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters5">Parameters</a></li>
+          <li><a href="#return-array5">return array</a></li>
+          <li><a href="#C-declaration5">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_fixstar2_ut-star-tjd_ut-iflag">function swe_fixstar2_ut(star, tjd_ut, iflag)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters6">Parameters</a></li>
+          <li><a href="#return-array6">return array</a></li>
+          <li><a href="#C-declaration6">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_fixstar_mag-star">function swe_fixstar_mag(star)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters7">Parameters</a></li>
+          <li><a href="#return-array7">return array</a></li>
+          <li><a href="#C-declaration7">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_fixstar2_mag-star">function swe_fixstar2_mag(star)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters8">Parameters</a></li>
+          <li><a href="#return-array8">return array</a></li>
+          <li><a href="#C-declaration8">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
   <li><a href="#function-swe_close">function swe_close()</a>
     <ul>
       <li>
         <ul>
           <li><a href="#Parameters-none">Parameters (none)</a></li>
           <li><a href="#return-none">return (none)</a></li>
-          <li><a href="#C-declaration5">C declaration</a></li>
+          <li><a href="#C-declaration9">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -83,9 +127,9 @@
     <ul>
       <li>
         <ul>
-          <li><a href="#Parameters5">Parameters</a></li>
+          <li><a href="#Parameters9">Parameters</a></li>
           <li><a href="#return-none1">return (none)</a></li>
-          <li><a href="#C-declaration6">C declaration</a></li>
+          <li><a href="#C-declaration10">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -94,9 +138,9 @@
     <ul>
       <li>
         <ul>
-          <li><a href="#Parameters6">Parameters</a></li>
+          <li><a href="#Parameters10">Parameters</a></li>
           <li><a href="#return-none2">return (none)</a></li>
-          <li><a href="#C-declaration7">C declaration</a></li>
+          <li><a href="#C-declaration11">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -105,9 +149,9 @@
     <ul>
       <li>
         <ul>
-          <li><a href="#Parameters7">Parameters</a></li>
+          <li><a href="#Parameters11">Parameters</a></li>
           <li><a href="#return-string">return string</a></li>
-          <li><a href="#C-declaration8">C declaration</a></li>
+          <li><a href="#C-declaration12">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -116,9 +160,9 @@
     <ul>
       <li>
         <ul>
-          <li><a href="#Parameters8">Parameters</a></li>
+          <li><a href="#Parameters12">Parameters</a></li>
           <li><a href="#return-none3">return (none)</a></li>
-          <li><a href="#C-declaration9">C declaration</a></li>
+          <li><a href="#C-declaration13">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -127,9 +171,9 @@
     <ul>
       <li>
         <ul>
-          <li><a href="#Parameters9">Parameters</a></li>
+          <li><a href="#Parameters13">Parameters</a></li>
           <li><a href="#return-none4">return (none)</a></li>
-          <li><a href="#C-declaration10">C declaration</a></li>
+          <li><a href="#C-declaration14">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -138,9 +182,9 @@
     <ul>
       <li>
         <ul>
-          <li><a href="#Parameters10">Parameters</a></li>
+          <li><a href="#Parameters14">Parameters</a></li>
           <li><a href="#return-double">return double</a></li>
-          <li><a href="#C-declaration11">C declaration</a></li>
+          <li><a href="#C-declaration15">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -149,9 +193,9 @@
     <ul>
       <li>
         <ul>
-          <li><a href="#Parameters11">Parameters</a></li>
-          <li><a href="#return-array5">return array</a></li>
-          <li><a href="#C-declaration12">C declaration</a></li>
+          <li><a href="#Parameters15">Parameters</a></li>
+          <li><a href="#return-array9">return array</a></li>
+          <li><a href="#C-declaration16">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -160,9 +204,9 @@
     <ul>
       <li>
         <ul>
-          <li><a href="#Parameters12">Parameters</a></li>
+          <li><a href="#Parameters16">Parameters</a></li>
           <li><a href="#return">return</a></li>
-          <li><a href="#C-declaration13">C declaration</a></li>
+          <li><a href="#C-declaration17">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -171,9 +215,9 @@
     <ul>
       <li>
         <ul>
-          <li><a href="#Parameters13">Parameters</a></li>
-          <li><a href="#return-array6">return array</a></li>
-          <li><a href="#C-declaration14">C declaration</a></li>
+          <li><a href="#Parameters17">Parameters</a></li>
+          <li><a href="#return-array10">return array</a></li>
+          <li><a href="#C-declaration18">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -182,9 +226,9 @@
     <ul>
       <li>
         <ul>
-          <li><a href="#Parameters14">Parameters</a></li>
+          <li><a href="#Parameters18">Parameters</a></li>
           <li><a href="#return-string1">return string</a></li>
-          <li><a href="#C-declaration15">C declaration</a></li>
+          <li><a href="#C-declaration19">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -195,7 +239,7 @@
         <ul>
           <li><a href="#Parameters-none1">Parameters (none)</a></li>
           <li><a href="#return-string2">return string</a></li>
-          <li><a href="#C-declaration16">C declaration</a></li>
+          <li><a href="#C-declaration20">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -206,7 +250,7 @@
         <ul>
           <li><a href="#Parameters-none2">Parameters (none)</a></li>
           <li><a href="#return1">return</a></li>
-          <li><a href="#C-declaration17">C declaration</a></li>
+          <li><a href="#C-declaration21">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -215,9 +259,9 @@
     <ul>
       <li>
         <ul>
-          <li><a href="#Parameters15">Parameters</a></li>
-          <li><a href="#return-array7">return array</a></li>
-          <li><a href="#C-declaration18">C declaration</a></li>
+          <li><a href="#Parameters19">Parameters</a></li>
+          <li><a href="#return-array11">return array</a></li>
+          <li><a href="#C-declaration22">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -226,9 +270,9 @@
     <ul>
       <li>
         <ul>
-          <li><a href="#Parameters16">Parameters</a></li>
+          <li><a href="#Parameters20">Parameters</a></li>
           <li><a href="#return-value">return value</a></li>
-          <li><a href="#C-declaration19">C declaration</a></li>
+          <li><a href="#C-declaration23">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -237,58 +281,14 @@
     <ul>
       <li>
         <ul>
-          <li><a href="#Parameters17">Parameters</a></li>
-          <li><a href="#return-value1">return value</a></li>
-          <li><a href="#C-declaration20">C declaration</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><a href="#function-swe_revjul-jd-gregflag">function swe_revjul (jd, gregflag)</a>
-    <ul>
-      <li>
-        <ul>
-          <li><a href="#Parameters18">Parameters</a></li>
-          <li><a href="#return-array8">return array</a></li>
-          <li><a href="#C-declaration21">C declaration</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><a href="#function-swe_jdet_to_utc-tjd_et-gregflag">function swe_jdet_to_utc (tjd_et, gregflag)</a>
-    <ul>
-      <li>
-        <ul>
-          <li><a href="#Parameters19">Parameters</a></li>
-          <li><a href="#return-array9">return array</a></li>
-          <li><a href="#C-declaration22">C declaration</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><a href="#function-swe_jdut1_to_utc-tjd_ut-gregflag">function swe_jdut1_to_utc(tjd_ut, gregflag)</a>
-    <ul>
-      <li>
-        <ul>
-          <li><a href="#Parameters20">Parameters</a></li>
-          <li><a href="#return-array10">return array</a></li>
-          <li><a href="#C-declaration23">C declaration</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><a href="#function-swe_utc_to_jd-year-month-day-hour-min-dsec-gregflag">function swe_utc_to_jd(year, month, day, hour, min, dsec, gregflag)</a>
-    <ul>
-      <li>
-        <ul>
           <li><a href="#Parameters21">Parameters</a></li>
-          <li><a href="#return-array11">return array</a></li>
+          <li><a href="#return-value1">return value</a></li>
           <li><a href="#C-declaration24">C declaration</a></li>
         </ul>
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_utc_time_zone-iyear-imonth-iday-ihour-imin-dsec-d_timezone">function swe_utc_time_zone(iyear, imonth, iday, ihour, imin, dsec, d_timezone)</a>
+  <li><a href="#function-swe_revjul-jd-gregflag">function swe_revjul (jd, gregflag)</a>
     <ul>
       <li>
         <ul>
@@ -299,7 +299,7 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_houses-tjd_ut-geolat-geolon-hsys">function swe_houses(tjd_ut, geolat, geolon, hsys)</a>
+  <li><a href="#function-swe_jdet_to_utc-tjd_et-gregflag">function swe_jdet_to_utc (tjd_et, gregflag)</a>
     <ul>
       <li>
         <ul>
@@ -310,7 +310,7 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_houses_ex-tjd_ut-iflag-geolat-geolon-hsys">function swe_houses_ex(tjd_ut, iflag, geolat, geolon, hsys)</a>
+  <li><a href="#function-swe_jdut1_to_utc-tjd_ut-gregflag">function swe_jdut1_to_utc(tjd_ut, gregflag)</a>
     <ul>
       <li>
         <ul>
@@ -321,7 +321,7 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_houses_ex2-tjd_ut-iflag-geolat-geolon-hsys">function swe_houses_ex2(tjd_ut, iflag, geolat, geolon, hsys)</a>
+  <li><a href="#function-swe_utc_to_jd-year-month-day-hour-min-dsec-gregflag">function swe_utc_to_jd(year, month, day, hour, min, dsec, gregflag)</a>
     <ul>
       <li>
         <ul>
@@ -332,7 +332,7 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_houses_armc-armc-geolat-eps-hsys">function swe_houses_armc(armc, geolat, eps, hsys)</a>
+  <li><a href="#function-swe_utc_time_zone-iyear-imonth-iday-ihour-imin-dsec-d_timezone">function swe_utc_time_zone(iyear, imonth, iday, ihour, imin, dsec, d_timezone)</a>
     <ul>
       <li>
         <ul>
@@ -343,7 +343,7 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_houses_armc_ex2-armc-geolat-eps-hsys">function swe_houses_armc_ex2(armc, geolat, eps, hsys)</a>
+  <li><a href="#function-swe_houses-tjd_ut-geolat-geolon-hsys">function swe_houses(tjd_ut, geolat, geolon, hsys)</a>
     <ul>
       <li>
         <ul>
@@ -354,13 +354,57 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_house_pos-armc-geolat-eps-hsys-xpin0-xpin1">function swe_house_pos(armc, geolat, eps, hsys, xpin0, xpin1)</a>
+  <li><a href="#function-swe_houses_ex-tjd_ut-iflag-geolat-geolon-hsys">function swe_houses_ex(tjd_ut, iflag, geolat, geolon, hsys)</a>
     <ul>
       <li>
         <ul>
           <li><a href="#Parameters28">Parameters</a></li>
-          <li><a href="#return-value2">return value</a></li>
+          <li><a href="#return-array18">return array</a></li>
           <li><a href="#C-declaration31">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_houses_ex2-tjd_ut-iflag-geolat-geolon-hsys">function swe_houses_ex2(tjd_ut, iflag, geolat, geolon, hsys)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters29">Parameters</a></li>
+          <li><a href="#return-array19">return array</a></li>
+          <li><a href="#C-declaration32">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_houses_armc-armc-geolat-eps-hsys">function swe_houses_armc(armc, geolat, eps, hsys)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters30">Parameters</a></li>
+          <li><a href="#return-array20">return array</a></li>
+          <li><a href="#C-declaration33">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_houses_armc_ex2-armc-geolat-eps-hsys">function swe_houses_armc_ex2(armc, geolat, eps, hsys)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters31">Parameters</a></li>
+          <li><a href="#return-array21">return array</a></li>
+          <li><a href="#C-declaration34">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_house_pos-armc-geolat-eps-hsys-xpin0-xpin1">function swe_house_pos(armc, geolat, eps, hsys, xpin0, xpin1)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters32">Parameters</a></li>
+          <li><a href="#return-value2">return value</a></li>
+          <li><a href="#C-declaration35">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -369,9 +413,240 @@
     <ul>
       <li>
         <ul>
-          <li><a href="#Parameters29">Parameters</a></li>
+          <li><a href="#Parameters33">Parameters</a></li>
           <li><a href="#return-value3">return value</a></li>
-          <li><a href="#C-declaration32">C declaration</a></li>
+          <li><a href="#C-declaration36">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_lun_occult_where-tjd_ut-ipl-star-iflag">function swe_lun_occult_where($tjd_ut, $ipl, $star, $iflag);</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters34">Parameters</a></li>
+          <li><a href="#return-array22">return array</a></li>
+          <li><a href="#C-declaration37">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_azalt-tjd_ut-calc_flag-geolon-geolat-geoalt-atpress-attemp-xin0-xin1">function swe_azalt(tjd_ut, calc_flag, geolon, geolat, geoalt, atpress, attemp, xin0, xin1)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters35">Parameters</a></li>
+          <li><a href="#return-array23">return array</a></li>
+          <li><a href="#C-declaration38">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_azalt_rev-tjd_ut-iflag-xin0-xin1">function swe_azalt_rev(tjd_ut, iflag, xin0, xin1)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters36">Parameters</a></li>
+          <li><a href="#return-array24">return array</a></li>
+          <li><a href="#C-declaration39">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_rise_trans-tjd_ut-ipl-starname-epheflag-rsmi-geolon-geolat-geoalt-atpress-attemp">function swe_rise_trans(tjd_ut, ipl, starname, epheflag, rsmi, geolon, geolat, geoalt, atpress, attemp)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters37">Parameters</a></li>
+          <li><a href="#return-array25">return array</a></li>
+          <li><a href="#C-declaration40">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_rise_trans_true_hor-tjd_ut-ipl-starname-epheflag-rsmi-geolon-geolat-geoalt-atpress-attemp-horhgt">function swe_rise_trans_true_hor(tjd_ut, ipl, starname, epheflag, rsmi, geolon, geolat, geoalt, atpress, attemp, horhgt)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters38">Parameters</a></li>
+          <li><a href="#return-array26">return array</a></li>
+          <li><a href="#C-declaration41">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_get_orbital_elements-tjd_1t-ipl-iflag">function swe_get_orbital_elements(tjd_1t, ipl, iflag)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters39">Parameters</a></li>
+          <li><a href="#return-array27">return array</a></li>
+          <li><a href="#C-declaration42">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_orbit_max_min_true_distance-tjd_et-ipl-iflag">function swe_orbit_max_min_true_distance(tjd_et, ipl, iflag)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters40">Parameters</a></li>
+          <li><a href="#return-array28">return array</a></li>
+          <li><a href="#C-declaration43">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_deltat-tjd">function swe_deltat(tjd)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters41">Parameters</a></li>
+          <li><a href="#return-value4">return value</a></li>
+          <li><a href="#C-declaration44">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_deltat_ex-tjd-ephe_flag">function swe_deltat_ex(tjd, ephe_flag)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters42">Parameters</a></li>
+          <li><a href="#return-array29">return array</a></li>
+          <li><a href="#C-declaration45">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_time_equ-tjd_et">function swe_time_equ(tjd_et)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters43">Parameters</a></li>
+          <li><a href="#return-array30">return array</a></li>
+          <li><a href="#C-declaration46">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_lmt_to_lat-tjd_lmt-geolon">function swe_lmt_to_lat(tjd_lmt, geolon)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters44">Parameters</a></li>
+          <li><a href="#return-array31">return array</a></li>
+          <li><a href="#C-declaration47">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_lat_to_lmt-tjd_lat-geolon">function swe_lat_to_lmt(tjd_lat, geolon)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters45">Parameters</a></li>
+          <li><a href="#return-array32">return array</a></li>
+          <li><a href="#C-declaration48">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_sidtime0-tjd_ut-eps-nut">function swe_sidtime0(tjd_ut, eps, nut)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters46">Parameters</a></li>
+          <li><a href="#return-value5">return value</a></li>
+          <li><a href="#C-declaration49">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_sidtime-tjd_ut">function swe_sidtime(tjd_ut)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters47">Parameters</a></li>
+          <li><a href="#return-value6">return value</a></li>
+          <li><a href="#C-declaration50">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_cotrans-lng-lat-dist-eps">function swe_cotrans(lng, lat, dist, eps)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters48">Parameters</a></li>
+          <li><a href="#return-array33">return array</a></li>
+          <li><a href="#C-declaration51">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_cotrans_sp-lng-lat-dist-lngs-lats-dists-eps">function swe_cotrans_sp(lng, lat, dist, lngs, lats, dists, eps)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters49">Parameters</a></li>
+          <li><a href="#return-array34">return array</a></li>
+          <li><a href="#C-declaration52">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_get_tid_acc">function swe_get_tid_acc()</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters-none3">Parameters (none)</a></li>
+          <li><a href="#return-value7">return value</a></li>
+          <li><a href="#C-declaration53">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_set_tid_acc-t_acc">function swe_set_tid_acc(t_acc)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters50">Parameters</a></li>
+          <li><a href="#return-none5">return (none)</a></li>
+          <li><a href="#C-declaration54">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_set_delta_t_userdef-t_acc">function swe_set_delta_t_userdef(t_acc)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters51">Parameters</a></li>
+          <li><a href="#return-none6">return (none)</a></li>
+          <li><a href="#C-declaration55">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_degnorm-deg">function swe_degnorm(deg)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters52">Parameters</a></li>
+          <li><a href="#return-value8">return value</a></li>
+          <li><a href="#C-declaration56">C declaration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#function-swe_radnorm-rad">function swe_radnorm(rad)</a>
+    <ul>
+      <li>
+        <ul>
+          <li><a href="#Parameters53">Parameters</a></li>
+          <li><a href="#return-value9">return value</a></li>
+          <li><a href="#C-declaration57">C declaration</a></li>
         </ul>
       </li>
     </ul>
@@ -386,7 +661,7 @@
 
 <p>see also https://perldoc.perl.org/perlpod</p>
 
-<h1 id="function-swe_calc-tjd_ut-ipl-iflag">function swe_calc(tjd_ut, ipl, iflag)</h1>
+<h1 id="function-swe_calc-tjd_et-ipl-iflag">function swe_calc(tjd_et, ipl, iflag)</h1>
 
 <p>calculate position of planet ipl with time in Ephemeris Time (TDT)</p>
 
@@ -468,14 +743,14 @@
 
 <pre><code>  int swe_fixstar(char *star, double tjd_et, int32 iflag, double *xx, char *serr);</code></pre>
 
-<h1 id="function-swe_fixstar_ut-star-tjd_ut-iflag">function swe_fixstar_ut(star, tjd_ut, iflag)</h1>
+<h1 id="function-swe_fixstar2-star-tjd_et-iflag">function swe_fixstar2(star, tjd_et, iflag)</h1>
 
-<p>calculate position of a star with time in Universal Time (UT)</p>
+<p>calculate position of a star with time in Ephemeris Time (TDT)</p>
 
 <h3 id="Parameters4">Parameters</h3>
 
-<pre><code>  string        star        Name of fixed star to be searched, returned name of found star.
-  double        tjd_ut      Julian day in Universal Time.
+<pre><code>  string        star        Name of fixed star, or string with line number in star file
+  double        tjd_et      Julian day in Ephemeris Time.
   int           iflag       Flag bits for computation requirements.</code></pre>
 
 <h3 id="return-array4">return array</h3>
@@ -487,7 +762,87 @@
 
 <h3 id="C-declaration4">C declaration</h3>
 
-<pre><code>  int swe_fixstar(char *star, double tjd_et, int32 iflag, double *xx, char *serr);</code></pre>
+<pre><code>  int swe_fixstar2(char *star, double tjd_et, int32 iflag, double *xx, char *serr);</code></pre>
+
+<h1 id="function-swe_fixstar_ut-star-tjd_ut-iflag">function swe_fixstar_ut(star, tjd_ut, iflag)</h1>
+
+<p>calculate position of a star with time in Universal Time (UT)</p>
+
+<h3 id="Parameters5">Parameters</h3>
+
+<pre><code>  string        star        Name of fixed star to be searched, returned name of found star.
+  double        tjd_ut      Julian day in Universal Time.
+  int           iflag       Flag bits for computation requirements.</code></pre>
+
+<h3 id="return-array5">return array</h3>
+
+<pre><code>  [0..5]                double  position and speed vector xx
+  [&#39;star&#39;]              string  returned star name, usually different from input
+  [&#39;serr&#39;]              string  optional error message
+  [&#39;rc&#39;]                int             return flag, &lt; 0 in case of error</code></pre>
+
+<h3 id="C-declaration5">C declaration</h3>
+
+<pre><code>  int swe_fixstar_ut(char *star, double tjd_ut, int32 iflag, double *xx, char *serr);</code></pre>
+
+<h1 id="function-swe_fixstar2_ut-star-tjd_ut-iflag">function swe_fixstar2_ut(star, tjd_ut, iflag)</h1>
+
+<p>calculate position of a star with time in Universal Time (UT)</p>
+
+<h3 id="Parameters6">Parameters</h3>
+
+<pre><code>  string        star        Name of fixed star, or string with line number in star file
+  double        tjd_ut      Julian day in Universal Time.
+  int           iflag       Flag bits for computation requirements.</code></pre>
+
+<h3 id="return-array6">return array</h3>
+
+<pre><code>  [0..5]                double  position and speed vector xx
+  [&#39;star&#39;]              string  returned star name, usually different from input
+  [&#39;serr&#39;]              string  optional error message
+  [&#39;rc&#39;]                int             return flag, &lt; 0 in case of error</code></pre>
+
+<h3 id="C-declaration6">C declaration</h3>
+
+<pre><code>  int swe_fixstar2_ut(char *star, double tjd_ut, int32 iflag, double *xx, char *serr);</code></pre>
+
+<h1 id="function-swe_fixstar_mag-star">function swe_fixstar_mag(star)</h1>
+
+<p>deliver magnitude of star</p>
+
+<h3 id="Parameters7">Parameters</h3>
+
+<pre><code>  string        star        Name of fixed star to be searched</code></pre>
+
+<h3 id="return-array7">return array</h3>
+
+<pre><code>  [&#39;mag&#39;]               double  star magnitude, in case of success
+  [&#39;star&#39;]              string  returned star name, usually different from input
+  [&#39;rc&#39;]                int             return flag, &lt; 0 in case of error
+  [&#39;serr&#39;]              string  optional error message</code></pre>
+
+<h3 id="C-declaration7">C declaration</h3>
+
+<pre><code>  int swe_fixstar_mag(char *star, double *mag, char *serr);</code></pre>
+
+<h1 id="function-swe_fixstar2_mag-star">function swe_fixstar2_mag(star)</h1>
+
+<p>deliver magnitude of star</p>
+
+<h3 id="Parameters8">Parameters</h3>
+
+<pre><code>  string        star        Name of fixed star to be searched</code></pre>
+
+<h3 id="return-array8">return array</h3>
+
+<pre><code>  [&#39;mag&#39;]               double  star magnitude, in case of success
+  [&#39;star&#39;]              string  returned star name, usually different from input
+  [&#39;rc&#39;]                int             return flag, &lt; 0 in case of error
+  [&#39;serr&#39;]              string  optional error message</code></pre>
+
+<h3 id="C-declaration8">C declaration</h3>
+
+<pre><code>  int swe_fixstar2_mag(char *star, double *mag, char *serr);</code></pre>
 
 <h1 id="function-swe_close">function swe_close()</h1>
 
@@ -497,7 +852,7 @@
 
 <h3 id="return-none">return (none)</h3>
 
-<h3 id="C-declaration5">C declaration</h3>
+<h3 id="C-declaration9">C declaration</h3>
 
 <p>void swe_close()</p>
 
@@ -505,13 +860,13 @@
 
 <p>Define the path where SE ephemeris files reside</p>
 
-<h3 id="Parameters5">Parameters</h3>
+<h3 id="Parameters9">Parameters</h3>
 
 <pre><code>    string      path        Single directory name or a list of directories, searched in sequence.</code></pre>
 
 <h3 id="return-none1">return (none)</h3>
 
-<h3 id="C-declaration6">C declaration</h3>
+<h3 id="C-declaration10">C declaration</h3>
 
 <p>void swe_set_ephe_path(char *path);</p>
 
@@ -519,13 +874,13 @@
 
 <p>Define the file name for a JPL ephemeris file, used with flag SEFLG_JPLEPH</p>
 
-<h3 id="Parameters6">Parameters</h3>
+<h3 id="Parameters10">Parameters</h3>
 
 <pre><code>    string      fname       File name of JPL ephemeris (must be sibling of ephemeris files).</code></pre>
 
 <h3 id="return-none2">return (none)</h3>
 
-<h3 id="C-declaration7">C declaration</h3>
+<h3 id="C-declaration11">C declaration</h3>
 
 <p>void swe_set_jpl_file(char *fname);</p>
 
@@ -533,7 +888,7 @@
 
 <p>get the name of a planet, asteroid or fictitious object</p>
 
-<h3 id="Parameters7">Parameters</h3>
+<h3 id="Parameters11">Parameters</h3>
 
 <pre><code>    int         ipl         Planet/body/object number or constant.</code></pre>
 
@@ -541,7 +896,7 @@
 
 <p>In case of error, an error message is returned instead of a planet name.</p>
 
-<h3 id="C-declaration8">C declaration</h3>
+<h3 id="C-declaration12">C declaration</h3>
 
 <p>(char *) swe_get_planet_name(int ipl, char *spname);</p>
 
@@ -549,7 +904,7 @@
 
 <p>Set topocentric reference places, used with flag SEFLG_TOPOCTR and some function</p>
 
-<h3 id="Parameters8">Parameters</h3>
+<h3 id="Parameters12">Parameters</h3>
 
 <pre><code>    double       geolon      Longitude of location in degrees.
     double       geolat      Latitude of location in degrees.
@@ -557,7 +912,7 @@
 
 <h3 id="return-none3">return (none)</h3>
 
-<h3 id="C-declaration9">C declaration</h3>
+<h3 id="C-declaration13">C declaration</h3>
 
 <p>void swe_set_topo(double geolon, double geolat, double geoalt)</p>
 
@@ -565,7 +920,7 @@
 
 <p>Set one of the numerous sidereal modes, used with flag SEFLG_SIDEREAL and some functions</p>
 
-<h3 id="Parameters9">Parameters</h3>
+<h3 id="Parameters13">Parameters</h3>
 
 <pre><code>    int         sid_mode      Number of constant of ayanamsa to use.
     double      t0            Reference date if using SE_SIDM_USER flag, 0 otherwise.
@@ -573,7 +928,7 @@
 
 <h3 id="return-none4">return (none)</h3>
 
-<h3 id="C-declaration10">C declaration</h3>
+<h3 id="C-declaration14">C declaration</h3>
 
 <p>void swe_set_sid_mode(int32 sid_mode, double t0, double ayan_t0)</p>
 
@@ -581,13 +936,13 @@
 
 <p>Compute the ayanamsa without nutation.</p>
 
-<h3 id="Parameters10">Parameters</h3>
+<h3 id="Parameters14">Parameters</h3>
 
 <pre><code>    double         tjd_et      Julian day in Ephemeris Time.</code></pre>
 
 <h3 id="return-double">return double</h3>
 
-<h3 id="C-declaration11">C declaration</h3>
+<h3 id="C-declaration15">C declaration</h3>
 
 <p>double swe_get_ayanamsa(double tjd_et);</p>
 
@@ -595,19 +950,19 @@
 
 <p>Compute the ayanamsa with or without nutation, depending on flag.</p>
 
-<h3 id="Parameters11">Parameters</h3>
+<h3 id="Parameters15">Parameters</h3>
 
 <pre><code>    double      tjd_et      Julian day in Ephemeris Time.
     int         iflag       Flag bits for computation requirements.</code></pre>
 
-<h3 id="return-array5">return array</h3>
+<h3 id="return-array9">return array</h3>
 
 <pre><code>    [
         &#39;daya&#39; =&gt; (double) Value of ayanamsa.
         &#39;serr&#39; =&gt; (string) Error message or empty string.
     ]</code></pre>
 
-<h3 id="C-declaration12">C declaration</h3>
+<h3 id="C-declaration16">C declaration</h3>
 
 <p>int32 swe_get_ayanamsa_ex(double tjd_et, int32 iflag, double *daya, char *serr);</p>
 
@@ -615,7 +970,7 @@
 
 <p>Compute the ayanamsa without nutation.</p>
 
-<h3 id="Parameters12">Parameters</h3>
+<h3 id="Parameters16">Parameters</h3>
 
 <pre><code>    double         tjd_ut      Julian day in Universal Time.</code></pre>
 
@@ -623,7 +978,7 @@
 
 <pre><code>        double</code></pre>
 
-<h3 id="C-declaration13">C declaration</h3>
+<h3 id="C-declaration17">C declaration</h3>
 
 <p>double swe_get_ayanamsa_ut(double tjd_ut);</p>
 
@@ -633,18 +988,18 @@
 
 <p>Get ayanamsa value in current sidereal mode, time in UT</p>
 
-<h3 id="Parameters13">Parameters</h3>
+<h3 id="Parameters17">Parameters</h3>
 
 <pre><code>    double      tjd_ut      Julian day in Universal Time.
     int         iflag       Flag bits for computation requirements.</code></pre>
 
-<h3 id="return-array6">return array</h3>
+<h3 id="return-array10">return array</h3>
 
 <pre><code>  [&#39;daya&#39;]              double  ayanamsa value
   [&#39;serr&#39;]              string  optional error message
   [&#39;rc&#39;]                int             return flag, &lt; 0 in case of error</code></pre>
 
-<h3 id="C-declaration14">C declaration</h3>
+<h3 id="C-declaration18">C declaration</h3>
 
 <p>int32 swe_get_ayanamsa_ex_ut(double tjd_ut, int32 iflag, double *daya, char *serr);</p>
 
@@ -652,13 +1007,13 @@
 
 <p>Get ayanamsa name for this sidereal mode</p>
 
-<h3 id="Parameters14">Parameters</h3>
+<h3 id="Parameters18">Parameters</h3>
 
 <pre><code>    int         isidmode      Number or constant of sidereal mode.</code></pre>
 
 <h3 id="return-string1">return string</h3>
 
-<h3 id="C-declaration15">C declaration</h3>
+<h3 id="C-declaration19">C declaration</h3>
 
 <p>const char *swe_get_ayanamsa_name(int32 isidmode);</p>
 
@@ -672,7 +1027,7 @@
 
 <p>Version information of the Swiss Ephemeris library, different from the version of this PHP extension.</p>
 
-<h3 id="C-declaration16">C declaration</h3>
+<h3 id="C-declaration20">C declaration</h3>
 
 <p>char *swe_version(char* svers);</p>
 
@@ -686,7 +1041,7 @@
 
 <pre><code>        string  path to currently used library</code></pre>
 
-<h3 id="C-declaration17">C declaration</h3>
+<h3 id="C-declaration21">C declaration</h3>
 
 <p>char *swe_get_library_path(char *spath);</p>
 
@@ -702,11 +1057,11 @@
   ifno = 3     other asteroid or planetary moon file, if such object was computed
   ifno = 4     star file</code></pre>
 
-<h3 id="Parameters15">Parameters</h3>
+<h3 id="Parameters19">Parameters</h3>
 
 <pre><code>    int         ifno</code></pre>
 
-<h3 id="return-array7">return array</h3>
+<h3 id="return-array11">return array</h3>
 
 <pre><code>  [&#39;path&#39;]              string
   [&#39;tfstart&#39;]   double
@@ -715,7 +1070,7 @@
 
   In case of error, NULL is returned.</code></pre>
 
-<h3 id="C-declaration18">C declaration</h3>
+<h3 id="C-declaration22">C declaration</h3>
 
 <pre><code> char * swe_get_current_file_data(int ifno, double *tfstart, double *tfend, int *denum);</code></pre>
 
@@ -723,7 +1078,7 @@
 
 <p>Converts a calendar date to julian day number tjd, with validity check for date. Parameter cal_flag is a character, j or g, and not the same as the constants SE_GREG_CAL and SE_JUL_CAL used in swe_juldate() and swe_revjul()</p>
 
-<h3 id="Parameters16">Parameters</h3>
+<h3 id="Parameters20">Parameters</h3>
 
 <pre><code>  int           year
   int           month           (1..12)
@@ -735,7 +1090,7 @@
 
 <pre><code>  double|null    converted tjd, or in case of illegal input date, NULL.</code></pre>
 
-<h3 id="C-declaration19">C declaration</h3>
+<h3 id="C-declaration23">C declaration</h3>
 
 <pre><code>  int swe_date_conversion( int y , int m , int d , double utime, char c, double *tjd);</code></pre>
 
@@ -743,7 +1098,7 @@
 
 <p>Converts a calendar date to julian day number tjd, no validity check for date.</p>
 
-<h3 id="Parameters17">Parameters</h3>
+<h3 id="Parameters21">Parameters</h3>
 
 <pre><code>  int           year            
   int           month           (1..12)
@@ -755,7 +1110,7 @@
 
 <pre><code>  double    converted tjd</code></pre>
 
-<h3 id="C-declaration20">C declaration</h3>
+<h3 id="C-declaration24">C declaration</h3>
 
 <pre><code>  double swe_julday(int year, int month, int day, double hour, int gregflag); </code></pre>
 
@@ -763,19 +1118,19 @@
 
 <p>Converts julian day number to calendar date</p>
 
-<h3 id="Parameters18">Parameters</h3>
+<h3 id="Parameters22">Parameters</h3>
 
 <pre><code>  double        jd              julian day number
   int           gregflag        SE_GREG_CAL (==1) or SE_JUL_CAL (==0)</code></pre>
 
-<h3 id="return-array8">return array</h3>
+<h3 id="return-array12">return array</h3>
 
 <pre><code>  [&#39;year&#39;]              int
   [&#39;month&#39;]             int
   [&#39;day&#39;]               int
   [&#39;hour&#39;]              double</code></pre>
 
-<h3 id="C-declaration21">C declaration</h3>
+<h3 id="C-declaration25">C declaration</h3>
 
 <pre><code>  void swe_revjul ( double jd, int gregflag, int *jyear, int *jmon, int *jday, double *jut);</code></pre>
 
@@ -783,12 +1138,12 @@
 
 <p>Converts julian day number / time in Ephemeris time to date and time in UTC</p>
 
-<h3 id="Parameters19">Parameters</h3>
+<h3 id="Parameters23">Parameters</h3>
 
 <pre><code>  double        tjd_et          julian day number
   int           gregflag        SE_GREG_CAL (==1) or SE_JUL_CAL (==0)</code></pre>
 
-<h3 id="return-array9">return array</h3>
+<h3 id="return-array13">return array</h3>
 
 <pre><code>  [&#39;year&#39;]      int
   [&#39;month&#39;]     int
@@ -797,7 +1152,7 @@
   [&#39;min&#39;]       int
   [&#39;sec&#39;]       double</code></pre>
 
-<h3 id="C-declaration22">C declaration</h3>
+<h3 id="C-declaration26">C declaration</h3>
 
 <pre><code>  void swe_jdet_to_utc (double tjd_et, int32 gregflag, int32 *iyear, int32 *imonth, int32 *iday, int32 *ihour, int32 *imin, double *dsec);</code></pre>
 
@@ -805,12 +1160,12 @@
 
 <p>Converts julian day number / time in UT to date and time in UTC</p>
 
-<h3 id="Parameters20">Parameters</h3>
+<h3 id="Parameters24">Parameters</h3>
 
 <pre><code>  double    tjd_ut              julian day number and time in UT
   int       gregflag    SE_GREG_CAL (==1) or SE_JUL_CAL (==0)</code></pre>
 
-<h3 id="return-array10">return array</h3>
+<h3 id="return-array14">return array</h3>
 
 <pre><code>  [&#39;year&#39;]  int
   [&#39;month&#39;] int
@@ -819,7 +1174,7 @@
   [&#39;min&#39;]   int
   [&#39;sec&#39;]       double</code></pre>
 
-<h3 id="C-declaration23">C declaration</h3>
+<h3 id="C-declaration27">C declaration</h3>
 
 <pre><code>  void swe_jdut1_to_utc (double tjd_ut, int32 gregflag, int32 *iyear, int32 *imonth, int32 *iday, int32 *ihour, int32 *imin, double *dsec);</code></pre>
 
@@ -827,7 +1182,7 @@
 
 <p>Converts a calendar date to julian day number tjd, no validity check for date.</p>
 
-<h3 id="Parameters21">Parameters</h3>
+<h3 id="Parameters25">Parameters</h3>
 
 <pre><code>  int           year
   int           month   (1..12)
@@ -837,7 +1192,7 @@
   double        dsec    (0.0 .. 59.99999)
   int           gregflag        SE_GREG_CAL (==1) or SE_JUL_CAL (==0)</code></pre>
 
-<h3 id="return-array11">return array</h3>
+<h3 id="return-array15">return array</h3>
 
 <pre><code>  In case of success
 
@@ -850,7 +1205,7 @@
   [&#39;serr&#39;]      string
   [&#39;rc&#39;]        int             -1</code></pre>
 
-<h3 id="C-declaration24">C declaration</h3>
+<h3 id="C-declaration28">C declaration</h3>
 
 <pre><code>  int swe_utc_to_jd( int32 iyear, int32 imonth, int32 iday, int32 ihour, int32 imin, double dsec, int32 gregflag, double *dret, char *serr);</code></pre>
 
@@ -858,7 +1213,7 @@
 
 <p>Converts a calendar date in a zone with time offset d_timezone into a calendar date in UT (UT1).</p>
 
-<h3 id="Parameters22">Parameters</h3>
+<h3 id="Parameters26">Parameters</h3>
 
 <pre><code>  int           year
   int           month   (1..12)
@@ -868,7 +1223,7 @@
   double        dsec    (0.0 .. 59.99999)
   double        d_timezone      offset of time zone to UT, in hours as double</code></pre>
 
-<h3 id="return-array12">return array</h3>
+<h3 id="return-array16">return array</h3>
 
 <pre><code>  [&#39;year&#39;]      int
   [&#39;month&#39;]     int
@@ -877,7 +1232,7 @@
   [&#39;min&#39;]       int
   [&#39;sec&#39;]       double</code></pre>
 
-<h3 id="C-declaration25">C declaration</h3>
+<h3 id="C-declaration29">C declaration</h3>
 
 <pre><code>  void swe_utc_time_zone( int32 iyear, int32 imonth, int32 iday, int32 ihour, int32 imin, double dsec, double d_timezone, int32 *iyear_out, int32 *imonth_out, int32 *iday_out, int32 *ihour_out, int32 *imin_out, double *dsec_out); </code></pre>
 
@@ -885,20 +1240,20 @@
 
 <p>calculated house cusps for given date/time, location and house system</p>
 
-<h3 id="Parameters23">Parameters</h3>
+<h3 id="Parameters27">Parameters</h3>
 
 <pre><code>  double        tjd_ut      Julian day in Universal Time.
   double                geolat          latitude -90.00 .. 90.00 (north postive, south negative)
   double                geolon          longitude -180.00 .. 180.00 (east postive, sowest negative)
   string                hsys            first letter indicates house system, default &#39;P&#39; for Placidus</code></pre>
 
-<h3 id="return-array13">return array</h3>
+<h3 id="return-array17">return array</h3>
 
 <pre><code>  [&#39;cusps&#39;]     array of 13 or 37 doubles
   [&#39;ascmc&#39;]     array of 10 doubles
   [&#39;rc&#39;]        int     return flag, &lt; 0 in case of error</code></pre>
 
-<h3 id="C-declaration26">C declaration</h3>
+<h3 id="C-declaration30">C declaration</h3>
 
 <pre><code>  int swe_houses( double tjd_ut, double geolat, double geolon, int hsys, double *cusps, double *ascmc);</code></pre>
 
@@ -906,7 +1261,7 @@
 
 <p>calculated house cusps for given date/time, location and house system</p>
 
-<h3 id="Parameters24">Parameters</h3>
+<h3 id="Parameters28">Parameters</h3>
 
 <pre><code>  double        tjd_ut      Julian day in Universal Time.
   int                   iflag
@@ -914,13 +1269,13 @@
   double                geolon          longitude -180.00 .. 180.00 (east postive, sowest negative)
   string                hsys            first letter indicates house system, default &#39;P&#39; for Placidus</code></pre>
 
-<h3 id="return-array14">return array</h3>
+<h3 id="return-array18">return array</h3>
 
 <pre><code>  [&#39;cusps&#39;]     array of 13 or 37 doubles
   [&#39;ascmc&#39;]     array of 10 doubles
   [&#39;rc&#39;]        int     return flag, &lt; 0 in case of error</code></pre>
 
-<h3 id="C-declaration27">C declaration</h3>
+<h3 id="C-declaration31">C declaration</h3>
 
 <pre><code>  int swe_houses_ex( double tjd_ut, int iflag, double geolat, double geolon, int hsys, double *cusps, double *ascmc);</code></pre>
 
@@ -928,7 +1283,7 @@
 
 <p>calculated house cusps for given date/time, location and house system</p>
 
-<h3 id="Parameters25">Parameters</h3>
+<h3 id="Parameters29">Parameters</h3>
 
 <pre><code>  double        tjd_ut      Julian day in Universal Time.
   int                   iflag
@@ -936,7 +1291,7 @@
   double                geolon          longitude -180.00 .. 180.00 (east postive, sowest negative)
   string                hsys            first letter indicates house system, default &#39;P&#39; for Placidus</code></pre>
 
-<h3 id="return-array15">return array</h3>
+<h3 id="return-array19">return array</h3>
 
 <pre><code>  [&#39;cusps&#39;]                     array of 13 or 37 doubles
   [&#39;ascmc&#39;]                     array of 10 doubles
@@ -945,7 +1300,7 @@
   [&#39;rc&#39;]                        int     return flag, &lt; 0 in case of error
   [&#39;serr&#39;]                      string</code></pre>
 
-<h3 id="C-declaration28">C declaration</h3>
+<h3 id="C-declaration32">C declaration</h3>
 
 <pre><code>  int swe_houses_ex2( double tjd_ut, int iflag, double geolat, double geolon, int hsys, double *cusps, double *ascmc, double *cusp_speed, double *ascmc_speed, char *serr);</code></pre>
 
@@ -953,20 +1308,20 @@
 
 <p>calculated house cusps for given armc, latitude, obliquity and house system</p>
 
-<h3 id="Parameters26">Parameters</h3>
+<h3 id="Parameters30">Parameters</h3>
 
 <pre><code>  double        armc            0.00 .. 360.00
   double                geolat          latitude -90.00 .. 90.00 (north postive, south negative)
   double                eps                     obliquity of the ecliptic
   string                hsys            first letter indicates house system, default &#39;P&#39; for Placidus</code></pre>
 
-<h3 id="return-array16">return array</h3>
+<h3 id="return-array20">return array</h3>
 
 <pre><code>  [&#39;cusps&#39;]     array of 13 or 37 doubles
   [&#39;ascmc&#39;]     array of 10 doubles
   [&#39;rc&#39;]        int     return flag, &lt; 0 in case of error</code></pre>
 
-<h3 id="C-declaration29">C declaration</h3>
+<h3 id="C-declaration33">C declaration</h3>
 
 <pre><code>  int swe_houses_armc( double armc, double geolat, double eps, int hsys, double *cusps, double *ascmc);</code></pre>
 
@@ -974,14 +1329,14 @@
 
 <p>calculated house cusps for given armc, latitude, obliquity and house system</p>
 
-<h3 id="Parameters27">Parameters</h3>
+<h3 id="Parameters31">Parameters</h3>
 
 <pre><code>  double        armc            0.00 .. 360.00
   double                geolat          latitude -90.00 .. 90.00 (north postive, south negative)
   double                eps                     obliquity of the ecliptic
   string                hsys            first letter indicates house system, default &#39;P&#39; for Placidus</code></pre>
 
-<h3 id="return-array17">return array</h3>
+<h3 id="return-array21">return array</h3>
 
 <pre><code>  [&#39;cusps&#39;]                     array of 13 or 37 doubles
   [&#39;ascmc&#39;]                     array of 10 doubles
@@ -990,7 +1345,7 @@
   [&#39;rc&#39;]                        int     return flag, &lt; 0 in case of error
   [&#39;serr&#39;]                      string</code></pre>
 
-<h3 id="C-declaration30">C declaration</h3>
+<h3 id="C-declaration34">C declaration</h3>
 
 <pre><code>  int swe_houses_armc_ex2( double armc, double geolat, double eps, int hsys, double *cusps, double *ascmc, double *cusp_speed, double *ascmc_speed, char *serr);</code></pre>
 
@@ -998,7 +1353,7 @@
 
 <p>calculated house position of object for given armc, latitude, obliquity and house system</p>
 
-<h3 id="Parameters28">Parameters</h3>
+<h3 id="Parameters32">Parameters</h3>
 
 <pre><code>  double        armc            0.00 .. 360.00
   double                geolat          latitude -90.00 .. 90.00 (north postive, south negative)
@@ -1015,7 +1370,7 @@
 
         string          error message</code></pre>
 
-<h3 id="C-declaration31">C declaration</h3>
+<h3 id="C-declaration35">C declaration</h3>
 
 <pre><code>  double swe_house_pos(double armc, double geolat, double eps, int hsys, double *xpin, char *serr)</code></pre>
 
@@ -1023,7 +1378,7 @@
 
 <p>Get the name of a house system</p>
 
-<h3 id="Parameters29">Parameters</h3>
+<h3 id="Parameters33">Parameters</h3>
 
 <pre><code>  string                hsys            first letter indicates house system, default &#39;P&#39; for Placidus</code></pre>
 
@@ -1033,9 +1388,453 @@
 
         or fail if system unknown.</code></pre>
 
-<h3 id="C-declaration32">C declaration</h3>
+<h3 id="C-declaration36">C declaration</h3>
 
 <pre><code>  char *swe_house_name(int hsys)</code></pre>
+
+<h1 id="function-swe_lun_occult_where-tjd_ut-ipl-star-iflag">function swe_lun_occult_where($tjd_ut, $ipl, $star, $iflag);</h1>
+
+<p>Finds the place on earth where the occultation is maximal at a given time.</p>
+
+<p>Get the name of a house system</p>
+
+<h3 id="Parameters34">Parameters</h3>
+
+<pre><code>  tjd_ut        double   Julian day number, Universal Time
+  ipl           int              Planet occulted
+  star          string   Star name, if a star occultation is searched
+  iflag         int      (specify ephemeris to be used, cf. swe_calc( ))</code></pre>
+
+<h3 id="return-array22">return array</h3>
+
+<pre><code>      retflag =&gt; (int)            ERR or eclipse type
+      serr    =&gt; (string)         Error string, on error only
+      star    =&gt; (string)         Corrected star name
+      geopos  =&gt; array of 2 doubles, geogr. position where eclipse is maximal
+      attr    =&gt; array of 8 double:
+                attr[0] fraction of object&#39;s diameter covered by moon (magnitude)
+                attr[1] ratio of lunar diameter to object&#39;s diameter
+                attr[2] fraction of object&#39;s disc covered by moon (obscuration)
+                attr[3] diameter of core shadow in km
+                attr[4] azimuth of object at tjd
+                attr[5] true altitude of object above horizon at tjd
+                attr[6] apparent altitude of object above horizon at tjd
+                attr[7] angular distance of moon from object in degrees</code></pre>
+
+<h3 id="C-declaration37">C declaration</h3>
+
+<pre><code>  int swe_lun_occult_where(double tjd, int32 ipl, char *starname, int32 ifl, double *geopos, double *attr, char *serr);</code></pre>
+
+<h1 id="function-swe_azalt-tjd_ut-calc_flag-geolon-geolat-geoalt-atpress-attemp-xin0-xin1">function swe_azalt(tjd_ut, calc_flag, geolon, geolat, geoalt, atpress, attemp, xin0, xin1)</h1>
+
+<p>Computes azimut and height, from either ecliptic or equatorial coordinates</p>
+
+<h3 id="Parameters35">Parameters</h3>
+
+<pre><code>  double        tjd_ut      
+  int           calc_flag
+  double                geolon          longitude
+  double                geolat          latitude
+  double                geoalt          altitude above sea
+  double                atpress         atmospheric pressure
+  double                attemp          atmospheric temperature
+  double                xin0            longitude of object
+  double                xin1            latitude of object</code></pre>
+
+<h3 id="return-array23">return array</h3>
+
+<pre><code>  [0..1]                        array of 2 doubles: 
+                     xaz[0] = azimuth
+                                         xaz[1] = true altitude
+                                         xaz[2] = apparent altitude</code></pre>
+
+<h3 id="C-declaration38">C declaration</h3>
+
+<pre><code>  void  swe_azalt( double tjd_ut, int32  calc_flag, double *geopos, double atpress, double attemp, double *xin, double *xaz)</code></pre>
+
+<h1 id="function-swe_azalt_rev-tjd_ut-iflag-xin0-xin1">function swe_azalt_rev(tjd_ut, iflag, xin0, xin1)</h1>
+
+<p>computes either ecliptical or equatorial coordinates from azimuth and true altitude in degrees.</p>
+
+<h3 id="Parameters36">Parameters</h3>
+
+<pre><code>  double        tjd_ut      
+  int           iflag           either SE_HOR2ECL or SE_HOR2EQU
+  double                xin0            azimut, in degrees
+  double                xin1            true altitude, in degrees</code></pre>
+
+<h3 id="return-array24">return array</h3>
+
+<pre><code>  [0..2]                        array of 3 doubles: 
+                     xout[0] = longitude
+                     xout[1] = latitude</code></pre>
+
+<h3 id="C-declaration39">C declaration</h3>
+
+<pre><code>  void  swe_azalt_rev( double tjd_ut, int32  calc_flag, double *geopos, double *xin, double *xout) </code></pre>
+
+<h1 id="function-swe_rise_trans-tjd_ut-ipl-starname-epheflag-rsmi-geolon-geolat-geoalt-atpress-attemp">function swe_rise_trans(tjd_ut, ipl, starname, epheflag, rsmi, geolon, geolat, geoalt, atpress, attemp)</h1>
+
+<p>rise, set, and meridian transits of sun, moon, planets, and stars</p>
+
+<h3 id="Parameters37">Parameters</h3>
+
+<pre><code>  double        tjd_ut      
+  int           ipl             planet number
+  string        starname        (used instead of planet if not null or empty)
+  int           epheflag
+  int           rsmi        flag combination, defines what is computed
+  double                geolon          longitude
+  double                geolat          latitude
+  double                geoalt          altitude above sea
+  double                atpress         atmospheric pressure
+  double                attemp          atmospheric temperature</code></pre>
+
+<h3 id="return-array25">return array</h3>
+
+<pre><code>  [0..9]                        array of 10 doubles
+  [&#39;star&#39;]              string, present only if starname was used in call parameters
+  [&#39;rc&#39;]                        int     return flag, &lt; 0 in case of error
+  
+  in case of error
+  [&#39;rc&#39;]                        int     &lt; 0 in case of error
+  [&#39;serr&#39;]                      string</code></pre>
+
+<h3 id="C-declaration40">C declaration</h3>
+
+<pre><code>  int  swe_rise_trans( double tjd_ut, int32 ipl, char *starname, int32 epheflag, int32 rsmi, double *geopos, double atpress, double attemp, double *tret, char *serr)</code></pre>
+
+<h1 id="function-swe_rise_trans_true_hor-tjd_ut-ipl-starname-epheflag-rsmi-geolon-geolat-geoalt-atpress-attemp-horhgt">function swe_rise_trans_true_hor(tjd_ut, ipl, starname, epheflag, rsmi, geolon, geolat, geoalt, atpress, attemp, horhgt)</h1>
+
+<p>rise, set, and meridian transits of sun, moon, planets, and stars</p>
+
+<h3 id="Parameters38">Parameters</h3>
+
+<pre><code>  double        tjd_ut      
+  int           ipl             planet number
+  string        starname        (used instead of planet if not null or empty)
+  int           epheflag
+  int           rsmi        flag combination, defines what is computed
+  double                geolon          longitude
+  double                geolat          latitude
+  double                geoalt          altitude above sea
+  double                atpress         atmospheric pressure
+  double                attemp          atmospheric temperature
+  double                horhgt          height of horizon</code></pre>
+
+<h3 id="return-array26">return array</h3>
+
+<pre><code>  [0..9]                        array of 10 doubles
+  [&#39;star&#39;]              string, present only if starname was used in call parameters
+  [&#39;rc&#39;]                        int     return flag, &lt; 0 in case of error
+  
+  in case of error
+  [&#39;rc&#39;]                        int     &lt; 0 in case of error
+  [&#39;serr&#39;]                      string</code></pre>
+
+<h3 id="C-declaration41">C declaration</h3>
+
+<pre><code>  int  swe_rise_trans_true_hor( double tjd_ut, int32 ipl, char *starname, int32 epheflag, int32 rsmi, double *geopos, double atpress, double attemp, double horhgt, double *tret, char *serr)</code></pre>
+
+<h1 id="function-swe_get_orbital_elements-tjd_1t-ipl-iflag">function swe_get_orbital_elements(tjd_1t, ipl, iflag)</h1>
+
+<p>Calculates osculating orbital elements (Kepler elements) of a planet or asteroid or the Earth-Moon barycentre. The function returns error if called for the Sun, the lunar nodes, or the apsides.</p>
+
+<h3 id="Parameters39">Parameters</h3>
+
+<pre><code>  double        tjd_et      Julian day in Ephemeris Time.
+  int           ipl         Planet/body/object number or constant.
+  int           iflag       Flag bits for computation requirements.</code></pre>
+
+<h3 id="return-array27">return array</h3>
+
+<pre><code>  [0..16]       array double, with elements
+  [&#39;serr&#39;]      string  optional error message
+  [&#39;rc&#39;]        int             return flag, &lt; 0 in case of error</code></pre>
+
+<h3 id="C-declaration42">C declaration</h3>
+
+<pre><code>  int swe_get_orbital_elements ( double tjd_et, int ipl, int iflag, double* xx, char* serr);</code></pre>
+
+<h1 id="function-swe_orbit_max_min_true_distance-tjd_et-ipl-iflag">function swe_orbit_max_min_true_distance(tjd_et, ipl, iflag)</h1>
+
+<p>This function calculates calculates the maximum possible distance, the minimum possible distance, and the current true distance of planet, the EMB, or an asteroid. The calculation can be done either heliocentrically or geocentrically.</p>
+
+<h3 id="Parameters40">Parameters</h3>
+
+<pre><code>  double        tjd_et      Julian day in Ephemeris Time.
+  int           ipl         Planet/body/object number or constant.
+  int           iflag       Flag bits for computation requirements.</code></pre>
+
+<h3 id="return-array28">return array</h3>
+
+<pre><code>  [&#39;dmax&#39;]      double
+  [&#39;dmin&#39;]      double
+  [&#39;dtrue&#39;]     double
+  [&#39;serr&#39;]      string  optional error message
+  [&#39;rc&#39;]        int             return flag, &lt; 0 in case of error</code></pre>
+
+<h3 id="C-declaration43">C declaration</h3>
+
+<pre><code>  int swe_orbit_max_min_true_distance ( double tjd_et, int ipl, int iflag, double* xx, char* serr);</code></pre>
+
+<h1 id="function-swe_deltat-tjd">function swe_deltat(tjd)</h1>
+
+<p>Calculate delta t (difference between UT &amp; ET) from Julian day number.</p>
+
+<h3 id="Parameters41">Parameters</h3>
+
+<pre><code>  double        tjd         Julian day in Universal Time.</code></pre>
+
+<h3 id="return-value4">return value</h3>
+
+<pre><code>  double        Delta T.</code></pre>
+
+<h3 id="C-declaration44">C declaration</h3>
+
+<pre><code>  double swe_deltat(double tjd);</code></pre>
+
+<h1 id="function-swe_deltat_ex-tjd-ephe_flag">function swe_deltat_ex(tjd, ephe_flag)</h1>
+
+<p>Calculate delta t (difference between UT &amp; ET) from Julian day number.</p>
+
+<p>If the function is called with SEFLG_SWIEPH before calling swe_set_ephe_path(), or with or SEFLG_JPLEPH before calling swe_set_jpl_file(), then the function returns a warning.</p>
+
+<h3 id="Parameters42">Parameters</h3>
+
+<pre><code>  double        tjd         Julian day in Universal Time.
+  int           ephe_flag   Ephemeris flag (one of SEFLG_SWIEPH, SEFLG_JPLEPH, SEFLG_MOSEPH).</code></pre>
+
+<h3 id="return-array29">return array</h3>
+
+<pre><code>    [
+        &#39;tjd_et&#39; =&gt; (double) Delta T.
+        &#39;serr&#39; =&gt; (string) Error string.
+    ]</code></pre>
+
+<h3 id="C-declaration45">C declaration</h3>
+
+<pre><code>  double swe_deltat_ex(double tjd, int32 ephe_flag, char *serr);</code></pre>
+
+<h1 id="function-swe_time_equ-tjd_et">function swe_time_equ(tjd_et)</h1>
+
+<p>Get the difference between local apparent and local mean time.</p>
+
+<h3 id="Parameters43">Parameters</h3>
+
+<pre><code>  double        tjd_et      Julian day in Ephemeris Time.</code></pre>
+
+<h3 id="return-array30">return array</h3>
+
+<pre><code>    [
+        &#39;rd&#39; =&gt; (int) Return code.
+        &#39;td&#39; =&gt; (double) Local Apparent Time - Local Mean Time.
+        &#39;serr&#39; =&gt; (string) Error string.
+    ]</code></pre>
+
+<h3 id="C-declaration46">C declaration</h3>
+
+<pre><code>  int swe_time_equ(double tjd_et, double *e, char *serr);</code></pre>
+
+<h1 id="function-swe_lmt_to_lat-tjd_lmt-geolon">function swe_lmt_to_lat(tjd_lmt, geolon)</h1>
+
+<p>Converts Local Mean Time (LMT) to Local Apparent Time (LAT).</p>
+
+<h3 id="Parameters44">Parameters</h3>
+
+<pre><code>  double        tjd_lmt     Julian day in Local Mean Time.
+  double        geolon      Longitude of geographic location.</code></pre>
+
+<h3 id="return-array31">return array</h3>
+
+<pre><code>    [
+        &#39;rd&#39; =&gt; (int) Return code.
+        &#39;tjd_lat&#39; =&gt; (double) Local Apparent Time.
+        &#39;serr&#39; =&gt; (string) Error string.
+    ]</code></pre>
+
+<h3 id="C-declaration47">C declaration</h3>
+
+<pre><code>  int32 swe_lmt_to_lat(double tjd_lmt, double geolon, double *tjd_lat, char *serr);</code></pre>
+
+<h1 id="function-swe_lat_to_lmt-tjd_lat-geolon">function swe_lat_to_lmt(tjd_lat, geolon)</h1>
+
+<p>Converts Local Apparent Time (LAT) to Local Mean Time (LMT).</p>
+
+<h3 id="Parameters45">Parameters</h3>
+
+<pre><code>  double        tjd_lat     Julian day in Local Apparent Time.
+  double        geolon      Longitude of geographic location.</code></pre>
+
+<h3 id="return-array32">return array</h3>
+
+<pre><code>    [
+        &#39;rd&#39; =&gt; (int) Return code.
+        &#39;tjd_lmt&#39; =&gt; (double) Local Mean Time.
+        &#39;serr&#39; =&gt; (string) Error string.
+    ]</code></pre>
+
+<h3 id="C-declaration48">C declaration</h3>
+
+<pre><code>  int32 swe_lat_to_lmt(double tjd_lat, double geolon, double *tjd_lmt, char *serr);</code></pre>
+
+<h1 id="function-swe_sidtime0-tjd_ut-eps-nut">function swe_sidtime0(tjd_ut, eps, nut)</h1>
+
+<p>Get sidereal time with user-specified ecliptic obliquity and nutation.</p>
+
+<h3 id="Parameters46">Parameters</h3>
+
+<pre><code>  double        tjd_ut      Julian day in Universal Time.
+  double        eps         Obliquity of ecliptic, in degrees.
+  double        nut         Nutation in longitude, in degrees.</code></pre>
+
+<h3 id="return-value5">return value</h3>
+
+<pre><code>    double      Sidereal time in degrees.</code></pre>
+
+<h3 id="C-declaration49">C declaration</h3>
+
+<pre><code>  double swe_sidtime0(double tjd_ut, double eps, double nut);</code></pre>
+
+<h1 id="function-swe_sidtime-tjd_ut">function swe_sidtime(tjd_ut)</h1>
+
+<p>Get sidereal time (ecliptic obliquity and nutation calculated internally).</p>
+
+<h3 id="Parameters47">Parameters</h3>
+
+<pre><code>  double        tjd_ut      Julian day in Universal Time.</code></pre>
+
+<h3 id="return-value6">return value</h3>
+
+<pre><code>    double      Sidereal time in degrees.</code></pre>
+
+<h3 id="C-declaration50">C declaration</h3>
+
+<pre><code>  double swe_sidtime(double tjd_ut);</code></pre>
+
+<h1 id="function-swe_cotrans-lng-lat-dist-eps">function swe_cotrans(lng, lat, dist, eps)</h1>
+
+<p>Transform coordinates from ecliptic to equatorial, or vice-versa. Convert equatorial to ecliptic if eps is positive. Convert ecliptic to equatorial if eps is negative.</p>
+
+<h3 id="Parameters48">Parameters</h3>
+
+<pre><code>  double        lng     Longitude/right ascension position.
+  double        lat     Latitude/declination position.
+  double        dist    Distance (ignored).</code></pre>
+
+<h3 id="return-array33">return array</h3>
+
+<pre><code>    [
+        0 =&gt; (double) Converted longitude/right ascension position.
+        1 =&gt; (double) Converted latitude/declination position.
+        2 =&gt; (double) distance (unchanged).
+    ]</code></pre>
+
+<h3 id="C-declaration51">C declaration</h3>
+
+<pre><code>  void swe_cotrans(double *xpo, double *xpn, double eps);</code></pre>
+
+<h1 id="function-swe_cotrans_sp-lng-lat-dist-lngs-lats-dists-eps">function swe_cotrans_sp(lng, lat, dist, lngs, lats, dists, eps)</h1>
+
+<p>Transform position and speed coordinates from ecliptic to equatorial, or vice-versa. Convert equatorial to ecliptic if eps is positive. Convert ecliptic to equatorial if eps is negative.</p>
+
+<h3 id="Parameters49">Parameters</h3>
+
+<pre><code>  double        lng     Longitude/right ascension.
+  double        lat     Latitude/declination.
+  double        dist    Distance (ignored).
+  double        lngs    Longitude/right ascension velocity.
+  double        lat     Latitude/declination velocity.
+  double        dists   Distance velocity (ignored).</code></pre>
+
+<h3 id="return-array34">return array</h3>
+
+<pre><code>    [
+        0 =&gt; (double) Converted longitude/right ascension value.
+        1 =&gt; (double) Converted latitude/declination value.
+        2 =&gt; (double) distance (unchanged).
+        3 =&gt; (double) Converted longitude/right ascension velocity.
+        4 =&gt; (double) Converted latitude/declination velocity.
+        5 =&gt; (double) distance velocity (unchanged).
+    ]</code></pre>
+
+<h3 id="C-declaration52">C declaration</h3>
+
+<pre><code>  void swe_cotrans_sp(double *xpo, double *xpn, double eps);</code></pre>
+
+<h1 id="function-swe_get_tid_acc">function swe_get_tid_acc()</h1>
+
+<p>Get tidal acceleration used in swe_deltat().</p>
+
+<h3 id="Parameters-none3">Parameters (none)</h3>
+
+<h3 id="return-value7">return value</h3>
+
+<pre><code>    double      Tidal acceleration value.</code></pre>
+
+<h3 id="C-declaration53">C declaration</h3>
+
+<pre><code>  double swe_get_tid_acc(void);</code></pre>
+
+<h1 id="function-swe_set_tid_acc-t_acc">function swe_set_tid_acc(t_acc)</h1>
+
+<p>Set tidal acceleration used in swe_deltat().</p>
+
+<h3 id="Parameters50">Parameters</h3>
+
+<pre><code>    double      Tidal acceleration.</code></pre>
+
+<h3 id="return-none5">return (none)</h3>
+
+<h3 id="C-declaration54">C declaration</h3>
+
+<pre><code>  void swe_set_tid_acc(double t_acc);</code></pre>
+
+<h1 id="function-swe_set_delta_t_userdef-t_acc">function swe_set_delta_t_userdef(t_acc)</h1>
+
+<p>Set fixed Delta T value to be returned by swe_deltat().</p>
+
+<h3 id="Parameters51">Parameters</h3>
+
+<pre><code>    double      Delta T.</code></pre>
+
+<h3 id="return-none6">return (none)</h3>
+
+<h3 id="C-declaration55">C declaration</h3>
+
+<pre><code>  void swe_set_delta_t_userdef(double t_acc);</code></pre>
+
+<h1 id="function-swe_degnorm-deg">function swe_degnorm(deg)</h1>
+
+<p>Normalize degrees to the range &gt;= 0 &amp; &lt; 360.</p>
+
+<h3 id="Parameters52">Parameters</h3>
+
+<pre><code>    double      Degree.</code></pre>
+
+<h3 id="return-value8">return value</h3>
+
+<pre><code>    double      Normalized degree.</code></pre>
+
+<h3 id="C-declaration56">C declaration</h3>
+
+<pre><code>  double swe_degnorm(double x);</code></pre>
+
+<h1 id="function-swe_radnorm-rad">function swe_radnorm(rad)</h1>
+
+<p>Normalize radians to the range &gt;= 0 &amp; &lt; 2 PI.</p>
+
+<h3 id="Parameters53">Parameters</h3>
+
+<pre><code>    double      Radians.</code></pre>
+
+<h3 id="return-value9">return value</h3>
+
+<pre><code>    double      Normalized radians.</code></pre>
+
+<h3 id="C-declaration57">C declaration</h3>
+
+<pre><code>  double swe_radnorm(double x);</code></pre>
 
 
 </body>
