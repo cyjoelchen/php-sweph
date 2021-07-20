@@ -2496,6 +2496,48 @@ PHP_FUNCTION(swe_sol_eclipse_where)
 	}
 }
 
+
+/* {{{ pod
+=pod
+
+=head1 function swe_lun_occult_where($tjd_ut, $ipl, $star, $iflag);
+
+Finds the place on earth where the occultation is maximal at a given
+time. 
+
+Get the name of a house system
+
+=head3 Parameters
+
+  tjd_ut	double   Julian day number, Universal Time
+  ipl    	int		 Planet occulted
+  star		string   Star name, if a star occultation is searched
+  iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
+
+=head3 return array
+
+
+      -> retflag	int            ERR or eclipse type
+	  -> serr       string         Error string, on error only
+      -> star		string         Corrected star name
+	  -> attr       array of 8 double:
+					attr[0] fraction of object's diameter covered by moon (magnitude)
+					attr[1] ratio of lunar diameter to object's diameter
+					attr[2] fraction of object's disc covered by moon (obscuration)
+					attr[3] diameter of core shadow in km
+					attr[4] azimuth of object at tjd
+					attr[5] true altitude of object above horizon at tjd
+					attr[6] apparent altitude of object above horizon at tjd
+					attr[7] angular distance of moon from object in degrees
+
+	  -> geopos     array of 2 doubles, geogr. position where eclipse is maximal
+
+=head3 C declaration
+
+  int swe_lun_occult_where(double tjd, int32 ipl, char *starname, int32 ifl, double *geopos, double *attr, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_lun_occult_where)
 {
 	char *arg = NULL;
@@ -2503,9 +2545,11 @@ PHP_FUNCTION(swe_lun_occult_where)
 	size_t arg_len;
 	double tjd_ut, geopos[2], attr[20];
 	char serr[AS_MAXCH], *starname = NULL; 
+	char star[AS_MAXCH];
 	int i;
 	zval geopos_arr, attr_arr;
 	*serr = '\0';
+	*star = '\0';
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
@@ -2513,7 +2557,9 @@ PHP_FUNCTION(swe_lun_occult_where)
 			&tjd_ut, &ipl, &starname, &arg_len, &ifl) == FAILURE) {
 		return;
 	}
-	rc = swe_lun_occult_where(tjd_ut, ipl, starname, ifl, geopos, attr, serr);
+    if (starname != NULL && arg_len > 0)
+		strcpy(star, starname);
+	rc = swe_lun_occult_where(tjd_ut, ipl, star, ifl, geopos, attr, serr);
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
@@ -2525,16 +2571,15 @@ PHP_FUNCTION(swe_lun_occult_where)
 	else
 	{
 		array_init(&geopos_arr);
-		
 		for(i = 0; i < 2; i++)
 			add_index_double(&geopos_arr, i, geopos[i]);
-	
 		array_init(&attr_arr);
-		for(i = 0; i < 20; i++)
+		for(i = 0; i < 8; i++)
 			add_index_double(&attr_arr, i, attr[i]);
-		
 		add_assoc_zval(return_value, "geopos", &geopos_arr);
 		add_assoc_zval(return_value, "attr", &attr_arr);
+		if (starname != NULL && arg_len > 0)
+			add_assoc_string(return_value, "star", star);
 	}
 }
 
