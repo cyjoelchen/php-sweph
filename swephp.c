@@ -2754,15 +2754,13 @@ PHP_FUNCTION(swe_lun_occult_when_glob)
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlslll",
-			&tjd_start, &ipl, &starname, s_len, &ifl, &ifltype, 
+			&tjd_start, &ipl, &starname, &s_len, &ifl, &ifltype, 
 			&backward, &arg_len) == FAILURE) {
 		return;
 	}
-return;
-    if (starname != NULL && s_len > 0)
+    if (starname != NULL && s_len > 0 && s_len < AS_MAXCH)
 		strcpy(star, starname);
-	// rc = swe_lun_occult_when_glob(tjd_start, ipl, star, ifl, ifltype, tret, backward, serr);
-    rc = ERR;
+	rc = swe_lun_occult_when_glob(tjd_start, ipl, star, ifl, ifltype, tret, backward, serr);
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
 
