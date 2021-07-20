@@ -2727,7 +2727,7 @@ PHP_FUNCTION(swe_lun_occult_when_loc)
 	char *arg = NULL;
 	int ipl, ifl, rc;
 	size_t arg_len;
-	double tjd_start, geopos[3], tret[10], attr[20];
+	double tjd_start, geopos[3], tret[10], attr[11];
 	char serr[AS_MAXCH], star[AS_MAXCH], *starname = NULL; 
 	int i;
 	int backward;
@@ -2757,7 +2757,7 @@ PHP_FUNCTION(swe_lun_occult_when_loc)
 			add_index_double(&tret_arr, i, attr[i]);
 		add_assoc_zval(return_value, "tret", &tret_arr);
 		array_init(&attr_arr);
-		for(i = 0; i < 20; i++)
+		for(i = 0; i < 10; i++)
 			add_index_double(&attr_arr, i, attr[i]);
 		if (starname != NULL && arg_len > 0)
 			add_assoc_string(return_value, "star", star);
