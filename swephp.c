@@ -3886,6 +3886,41 @@ PHP_FUNCTION(swe_cotrans)
 		add_index_double(return_value, i, xpn[i]);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_cotrans_sp(lng, lat, dist, lngs, lats, dists, eps)
+
+Transform position and speed coordinates from ecliptic to equatorial, or vice-versa.
+Convert equatorial to ecliptic if eps is positive.
+Convert ecliptic to equatorial if eps is negative.
+
+=head3 Parameters
+
+  double        lng     Longitude/right ascension.
+  double        lat     Latitude/declination.
+  double        dist    Distance.
+  double        lngs    Longitude/right ascension velocity.
+  double        lat     Latitude/declination velocity.
+  double        dists   Distance velocity.
+
+=head3 return array
+
+    [
+        0 => (double) Converted longitude/right ascension value.
+        1 => (double) Converted latitude/declination value.
+        2 => (double) Converted distance.
+        3 => (double) Converted longitude/right ascension velocity.
+        4 => (double) Converted latitude/declination velocity.
+        5 => (double) Converted distance velocity.
+    ]
+
+=head3 C declaration
+
+  void swe_cotrans_sp(double *xpo, double *xpn, double eps);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_cotrans_sp)
 {
 	int i;
