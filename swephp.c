@@ -2516,21 +2516,20 @@ Get the name of a house system
 
 =head3 return array
 
+      retflag => (int)            ERR or eclipse type
+      serr    => (string)         Error string, on error only
+      star    => (string)         Corrected star name
+      geopos  => array of 2 doubles, geogr. position where eclipse is maximal
+      attr    => array of 8 double:
+		attr[0] fraction of object's diameter covered by moon (magnitude)
+		attr[1] ratio of lunar diameter to object's diameter
+		attr[2] fraction of object's disc covered by moon (obscuration)
+		attr[3] diameter of core shadow in km
+		attr[4] azimuth of object at tjd
+		attr[5] true altitude of object above horizon at tjd
+		attr[6] apparent altitude of object above horizon at tjd
+		attr[7] angular distance of moon from object in degrees
 
-      -> retflag	int            ERR or eclipse type
-	  -> serr       string         Error string, on error only
-      -> star		string         Corrected star name
-	  -> attr       array of 8 double:
-					attr[0] fraction of object's diameter covered by moon (magnitude)
-					attr[1] ratio of lunar diameter to object's diameter
-					attr[2] fraction of object's disc covered by moon (obscuration)
-					attr[3] diameter of core shadow in km
-					attr[4] azimuth of object at tjd
-					attr[5] true altitude of object above horizon at tjd
-					attr[6] apparent altitude of object above horizon at tjd
-					attr[7] angular distance of moon from object in degrees
-
-	  -> geopos     array of 2 doubles, geogr. position where eclipse is maximal
 
 =head3 C declaration
 
