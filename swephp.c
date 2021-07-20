@@ -4069,6 +4069,27 @@ PHP_FUNCTION(swe_degnorm)
 	RETURN_DOUBLE(swe_degnorm(x));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_radnorm(rad)
+
+Normalize radians to the range >= 0 & < 2 PI.
+
+=head3 Parameters
+
+    double      Radians.
+
+=head3 return value
+
+    double      Normalized radians.
+
+=head3 C declaration
+
+  double swe_radnorm(double x);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_radnorm)
 {
 	double x;
