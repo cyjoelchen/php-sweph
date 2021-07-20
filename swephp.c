@@ -4035,6 +4035,27 @@ PHP_FUNCTION(swe_set_delta_t_userdef)
 	RETURN_NULL();
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_degnorm(deg)
+
+Normalize degrees to the range >= 0 & < 360.
+
+=head3 Parameters
+
+    double      Degree.
+
+=head3 return value
+
+    double      Normalized degree.
+
+=head3 C declaration
+
+  double swe_degnorm(double x);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_degnorm)
 {
 	double x, rc;
