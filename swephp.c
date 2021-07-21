@@ -4385,6 +4385,31 @@ PHP_FUNCTION(swe_rad_midp)
 	RETURN_DOUBLE(swe_rad_midp(x1, x0));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_deg_midp(x1, x2)
+
+Calculate a directional midpoint between 2 degree values:
+
+0,180 => 90
+180,0 => 270
+
+=head3 Parameters
+
+    double      x1      Starting degree value.
+    double      x2      Ending degree value.
+
+=head3 return value
+
+    double      Midpoint in degrees.
+
+=head3 C declaration
+
+  double swe_deg_midp(double x1, x0);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_deg_midp)
 {
 	double x1, x0;
