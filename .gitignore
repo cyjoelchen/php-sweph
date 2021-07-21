@@ -2,6 +2,7 @@
 .DS_Store
 .idea
 *.swp
+.gdb_history
 pod2htmd.tmp
 tests/*.php
 tests/*.diff

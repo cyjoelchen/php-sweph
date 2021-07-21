@@ -33,7 +33,6 @@ ZEND_DECLARE_MODULE_GLOBALS(swephp)
 */
 
 /* True global resources - no need for thread safety here */
-static int le_swephp;
 
 /* {{{ swephp_functions[]
  *
@@ -94,11 +93,11 @@ zend_function_entry swephp_functions[] = {
 	 * exports from swecl.c 
 	 ****************************/
 	PHP_FE(swe_sol_eclipse_where, NULL)
-	PHP_FE(swe_lun_occult_where, NULL)
 	PHP_FE(swe_sol_eclipse_how, NULL)
 	PHP_FE(swe_sol_eclipse_when_loc, NULL)
-	PHP_FE(swe_lun_occult_when_loc, NULL)
 	PHP_FE(swe_sol_eclipse_when_glob, NULL)
+	PHP_FE(swe_lun_occult_where, NULL)
+	PHP_FE(swe_lun_occult_when_loc, NULL)
 	PHP_FE(swe_lun_occult_when_glob, NULL)
 	PHP_FE(swe_lun_eclipse_how, NULL)
 	PHP_FE(swe_lun_eclipse_when, NULL)	
@@ -541,7 +540,7 @@ calculate position of planet ipl with time in Ephemeris Time (TDT)
 =head3 Parameters
 
   double        tjd_et      Julian day in Ephemeris Time.
-  int           ipl         Planet/body/object number or constant.
+  nt           ipl         Planet/body/object number or constant.
   int           iflag       Flag bits for computation requirements.
 
 =head3 return array
@@ -558,7 +557,6 @@ calculate position of planet ipl with time in Ephemeris Time (TDT)
  }}} */
 PHP_FUNCTION(swe_calc)
 {
-	char *arg = NULL;
 	int rc;
 	long ipl, iflag;
 	double tjd_et, xx[6];
@@ -609,7 +607,6 @@ calculate position of planet ipl with time in Universal Time UT
  }}} */
 PHP_FUNCTION(swe_calc_ut)
 {
-	char *arg = NULL;
 	int rc;
 	long ipl, iflag;
 	double tjd_ut, xx[6];
@@ -661,7 +658,6 @@ calculate position of planet ipl relative to a center object iplctr
  }}} */
 PHP_FUNCTION(swe_calc_pctr)
 {
-	char *arg = NULL;
 	int rc;
 	long ipl, iflag, iplctr;
 	double tjd_et, xx[6];
@@ -714,7 +710,6 @@ calculate position of a star with time in Ephemeris Time (TDT)
  }}} */
 PHP_FUNCTION(swe_fixstar)
 {
-	char *arg = NULL;
 	int rc;
 	long iflag;
 	double tjd_et, xx[6];
@@ -771,7 +766,6 @@ calculate position of a star with time in Ephemeris Time (TDT)
  }}} */
 PHP_FUNCTION(swe_fixstar2)
 {
-	char *arg = NULL;
 	int rc;
 	long iflag;
 	double tjd_et, xx[6];
@@ -828,7 +822,6 @@ calculate position of a star with time in Universal Time (UT)
  }}} */
 PHP_FUNCTION(swe_fixstar_ut)
 {
-	char *arg = NULL;
 	int rc;
 	long iflag;
 	double tjd_ut, xx[6];
@@ -884,7 +877,6 @@ calculate position of a star with time in Universal Time (UT)
  }}} */
 PHP_FUNCTION(swe_fixstar2_ut)
 {
-	char *arg = NULL;
 	int rc;
 	long iflag;
 	double tjd_ut, xx[6];
@@ -938,13 +930,11 @@ deliver magnitude of star
  }}} */
 PHP_FUNCTION(swe_fixstar_mag)
 {
-	char *arg = NULL;
 	int rc;
 	double dmag;
 	char *star_ptr = NULL;
-	int star_len;
+	size_t  star_len;
 	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
-	int i;
 	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
@@ -991,13 +981,11 @@ deliver magnitude of star
  }}} */
 PHP_FUNCTION(swe_fixstar2_mag)
 {
-	char *arg = NULL;
 	int rc;
 	double dmag;
 	char *star_ptr = NULL;
-	int star_len;
+	size_t  star_len;
 	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
-	int i;
 	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
@@ -1066,7 +1054,6 @@ PHP_FUNCTION(swe_set_ephe_path)
 {
 	char *arg = emalloc(100);
 	size_t arg_len;
-	int rc;
 
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
@@ -1101,7 +1088,6 @@ PHP_FUNCTION(swe_set_jpl_file)
 {
 	char *arg = NULL;
 	size_t arg_len;
-	int rc;
 
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
@@ -1173,7 +1159,6 @@ void swe_set_topo(double geolon, double geolat, double geoalt)
  }}} */
 PHP_FUNCTION(swe_set_topo)
 {
-	int rc;
 	double geo_lon, geo_lat, geo_alt;
 
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
@@ -1210,7 +1195,6 @@ void swe_set_sid_mode(int32 sid_mode, double t0, double ayan_t0)
 PHP_FUNCTION(swe_set_sid_mode)
 {
 	long sid_mode;
-	int rc;
 	double t0, ayan_t0;
 		
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
@@ -1324,8 +1308,6 @@ Compute the ayanamsa without nutation.
 =head3 C declaration
 
 double swe_get_ayanamsa_ut(double tjd_ut);
-
-<<<<<<< HEAD
 
 =cut
  }}} */
@@ -1521,7 +1503,7 @@ It delivers information about the last used file, depending on parameter ifno:
 }}} */
 PHP_FUNCTION(swe_get_current_file_data)
 {
-	int ifno;
+	long ifno;
 	int denum;
 	double tfstart, tfend;
 	char *a = NULL;
@@ -1632,9 +1614,8 @@ Converts a calendar date to julian day number tjd, no validity check for date.
  }}} */
 PHP_FUNCTION(swe_julday)
 {
-	int rc;
 	long year, month, day, gregflag;
-	double hour, julday;
+	double hour;
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
@@ -1674,7 +1655,8 @@ Converts julian day number to calendar date
  }}} */
 PHP_FUNCTION(swe_revjul)
 {
-	int year, month, day, gregflag;
+	int year, month, day;
+	long gregflag;
 	double hour, jd;
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
@@ -1908,8 +1890,6 @@ PHP_FUNCTION(swe_utc_time_zone)
 	int32 iyear_out, imonth_out, iday_out, ihour_out, imin_out;
 	double dsec_out;
 	
-	int32 rc;
-	
 	if(ZEND_NUM_ARGS() != 7) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "llllldd",
@@ -1963,7 +1943,6 @@ calculated house cusps for given date/time, location and house system
  }}} */
 PHP_FUNCTION(swe_houses)
 {
-	char *arg = NULL;
 	size_t hsys_len;
 	int rc;
 
@@ -2034,7 +2013,6 @@ calculated house cusps for given date/time, location and house system
  }}} */
 PHP_FUNCTION(swe_houses_ex)
 {
-	char *arg = NULL;
 	size_t hsys_len;
 	int rc;
 	char *hsys = NULL;
@@ -2108,7 +2086,6 @@ calculated house cusps for given date/time, location and house system
  }}} */
 PHP_FUNCTION(swe_houses_ex2)
 {
-	char *arg = NULL;
 	size_t hsys_len;
 	int rc;
 	char *hsys = NULL;
@@ -2190,13 +2167,12 @@ calculated house cusps for given armc, latitude, obliquity and house system
  }}} */
 PHP_FUNCTION(swe_houses_armc)
 {
-	char *arg = NULL;
 	size_t hsys_len;
 	int rc;
 	char *hsys = NULL;
 	double armc, geolat, eps;
 	double cusps[37], ascmc[10]; 
-	int i, iflag, houses;
+	int i, houses;
 	zval cusps_arr, ascmc_arr;
 	
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
@@ -2262,13 +2238,12 @@ calculated house cusps for given armc, latitude, obliquity and house system
  }}} */
 PHP_FUNCTION(swe_houses_armc_ex2)
 {
-	char *arg = NULL;
 	size_t hsys_len;
 	int rc;
 	char *hsys = NULL;
 	double armc, geolat, eps;
 	double cusps[37], ascmc[10], cusp_speed[37], ascmc_speed[10];
-	int i, iflag, houses;
+	int i, houses;
 	zval cusps_arr, ascmc_arr, cusp_speed_arr, ascmc_speed_arr;
 	char serr[AS_MAXCH];
 	*serr = '\0';
@@ -2347,12 +2322,10 @@ calculated house position of object for given armc, latitude, obliquity and hous
  }}} */
 PHP_FUNCTION(swe_house_pos)
 {
-	char *arg = NULL;
 	size_t hsys_len;
 	char *hsys = NULL;
 	double armc, geolat, eps, xpin[2], rc;
 	char serr[AS_MAXCH]; 
-	int i;
 	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
@@ -2426,30 +2399,31 @@ PHP_FUNCTION(swe_house_name)
 
 PHP_FUNCTION(swe_gauquelin_sector)
 {
-	char *arg = NULL;
-	size_t arg_len;
-	int ipl, iflag, imeth, rc;
+	size_t s_len;
+	long ipl, iflag, imeth;
+	int rc;
 	char *starname = NULL;
 	double t_ut, geopos[3], atpress, attemp, dgsect;
 	char serr[AS_MAXCH]; 
-	int i;
+	char star[AS_MAXCH]; 
 	*serr = '\0';
+	*star = '\0';
 	
 	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsllddddd",
-			&t_ut, &ipl, &starname, &arg_len, &iflag, &imeth, &geopos[0],
+			&t_ut, &ipl, &starname, &s_len, &iflag, &imeth, &geopos[0],
 			&geopos[1], &geopos[2], &atpress, &attemp) == FAILURE) {
 		return;
 	}
-	rc = swe_gauquelin_sector(t_ut, ipl, starname, iflag, imeth, geopos,
+    if (starname != NULL && s_len > 0)
+		strcpy(star, starname);
+	rc = swe_gauquelin_sector(t_ut, ipl, star, iflag, imeth, geopos,
 			atpress, attemp, &dgsect, serr);
 
-	if (rc == ERR)
-	{
+	if (rc == ERR) {
 		RETURN_STRING(serr);
-	}
-	else
+	} else
 	{
 		RETURN_DOUBLE(dgsect);
 	}	
@@ -2457,8 +2431,9 @@ PHP_FUNCTION(swe_gauquelin_sector)
 
 PHP_FUNCTION(swe_sol_eclipse_where)
 {
-	char *arg = NULL;
-	int arg_len, ifl, rc;
+	size_t arg_len;
+	long ifl;
+	int rc;
 	double tjd_ut, geopos[2], attr[20];
 	char serr[AS_MAXCH]; 
 	int i;
@@ -2500,12 +2475,10 @@ PHP_FUNCTION(swe_sol_eclipse_where)
 /* {{{ pod
 =pod
 
-=head1 function swe_lun_occult_where($tjd_ut, $ipl, $star, $iflag);
+=head1 function swe_lun_occult_where(tjd_ut, ipl, star, iflag);
 
 Finds the place on earth where the occultation is maximal at a given
 time. 
-
-Get the name of a house system
 
 =head3 Parameters
 
@@ -2517,6 +2490,8 @@ Get the name of a house system
 =head3 return array
 
       retflag => (int)            ERR or eclipse type
+		  There are the following eclipse types for lunar eclipses:
+		  SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
       serr    => (string)         Error string, on error only
       star    => (string)         Corrected star name
       geopos  => array of 2 doubles, geogr. position where eclipse is maximal
@@ -2539,13 +2514,12 @@ Get the name of a house system
  }}} */
 PHP_FUNCTION(swe_lun_occult_where)
 {
-	char *arg = NULL;
-	int ipl, ifl, rc;
-	size_t arg_len;
+	long ipl, ifl;
+	size_t arg_len, s_len;
 	double tjd_ut, geopos[2], attr[20];
 	char serr[AS_MAXCH], *starname = NULL; 
 	char star[AS_MAXCH];
-	int i;
+	int i, rc;
 	zval geopos_arr, attr_arr;
 	*serr = '\0';
 	*star = '\0';
@@ -2553,22 +2527,19 @@ PHP_FUNCTION(swe_lun_occult_where)
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsd",
-			&tjd_ut, &ipl, &starname, &arg_len, &ifl) == FAILURE) {
+			&tjd_ut, &ipl, &starname, &s_len, &ifl, &arg_len) == FAILURE) {
 		return;
 	}
-    if (starname != NULL && arg_len > 0)
+    if (starname != NULL && s_len > 0)
 		strcpy(star, starname);
 	rc = swe_lun_occult_where(tjd_ut, ipl, star, ifl, geopos, attr, serr);
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
 
-	if (rc == ERR)
-	{
+	if (rc == ERR) {
 		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
+	} else {
 		array_init(&geopos_arr);
 		for(i = 0; i < 2; i++)
 			add_index_double(&geopos_arr, i, geopos[i]);
@@ -2577,19 +2548,20 @@ PHP_FUNCTION(swe_lun_occult_where)
 			add_index_double(&attr_arr, i, attr[i]);
 		add_assoc_zval(return_value, "geopos", &geopos_arr);
 		add_assoc_zval(return_value, "attr", &attr_arr);
-		if (starname != NULL && arg_len > 0)
+		if (starname != NULL && s_len > 0)
 			add_assoc_string(return_value, "star", star);
 	}
 }
 
 PHP_FUNCTION(swe_sol_eclipse_how)
 {
-	char *arg = NULL;
-	int arg_len, ifl, rc;
+	size_t arg_len;
+	long ifl; 
+	int rc;
 	double tjd_ut, geopos[3], attr[20];
 	char serr[AS_MAXCH]; 
 	int i;
-	zval geopos_arr, attr_arr;
+	zval attr_arr;
 	*serr = '\0';
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
@@ -2619,12 +2591,12 @@ PHP_FUNCTION(swe_sol_eclipse_how)
 
 PHP_FUNCTION(swe_sol_eclipse_when_loc)
 {
-	char *arg = NULL;
-	int arg_len, ifl, rc;
+	size_t  arg_len;
+	long ifl, backward;
+	int rc;
 	double tjd_start,  geopos[3], tret[10], attr[20];
 	char serr[AS_MAXCH]; 
 	int i;
-	int backward;
 	zval tret_arr, attr_arr;
 	*serr = '\0';
 
@@ -2658,57 +2630,119 @@ PHP_FUNCTION(swe_sol_eclipse_when_loc)
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_lun_occult_when_loc(tjd_ut, ipl, star, iflag, geopos[0], geopos[1], geopos[2], backw);
+
+Finds the next occultation of a celestial body (ipl or star) by the moon,
+for a given place on earth.  
+
+There are the following eclipse types for lunar eclipses:
+SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
+
+=head3 Parameters
+
+  tjd_ut        double          Julian day number, Universal Time
+  ipl           int             Planet occulted
+  star          string|null     Star name, if a star occultation is searched
+  iflag         int             (specify ephemeris to be used, cf. swe_calc( ))
+  geopos[0]     double          geographic longitude
+  geopos[1]     double          geographic latitude
+  geopos[2]     double          altitude above sea level, in meters
+  backw         int             search backward in time
+
+	If you want to have only one conjunction 
+	of the moon with the body tested, add the following flag:
+	backward |= SE_ECL_ONE_TRY. If this flag is not set, 
+	the function will search for an occultation until it
+	finds one. For bodies with ecliptical latitudes > 5,
+	the function may search unsuccessfully until it reaches
+	the end of the ephemeris.
+
+=head3 return array
+
+      retflag => (int)            ERR or eclipse type
+      serr    => (string)         Error string, on error only
+      star    => (string)         Corrected star name, if input parameter is not null.
+      tret    => array of 10 double:
+		  tret[0] time of maximum eclipse
+		  tret[1]
+		  tret[2] time of partial phase begin (indices consistent with solar eclipses)
+		  tret[3] time of partial phase end
+		  tret[4] time of totality begin
+		  tret[5] time of totality end
+		  tret[6] time of penumbral phase begin
+		  tret[7] time of penumbral phase end
+		  tret[8] time of moonrise, if it occurs during the eclipse
+		  tret[9] time of moonset, if it occurs during the eclipse
+	  attr   => array of 20 double, not all are used
+	   attr[0] umbral magnitude at tjd
+	   attr[1] penumbral magnitude
+	   attr[4] azimuth of moon at tjd
+	   attr[5] true altitude of moon above horizon at tjd
+	   attr[6] apparent altitude of moon above horizon at tjd
+	   attr[7] distance of moon from opposition in degrees
+	   attr[8] umbral magnitude at tjd (= attr[0])
+	   attr[9] saros series number (if available; otherwise -99999999)
+	   attr[10] saros series member number (if available; otherwise -99999999) 
+
+=head3 C declaration
+
+  int swe_lun_occult_when_loc(double tjd_start, int32 ipl, char *starname, int32 ifl,
+       double *geopos, double *tret, double *attr, int32 backward, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_lun_occult_when_loc)
 {
-	char *arg = NULL;
-	int ipl, ifl, rc;
-	size_t arg_len;
-	double tjd_start, geopos[3], tret[10], attr[20];
-	char serr[AS_MAXCH], *starname = NULL; 
+	long backward, ipl, ifl;
+	int rc;
+	size_t arg_len, s_len;
+	double tjd_start, geopos[3], tret[10], attr[11];
+	char serr[AS_MAXCH], star[AS_MAXCH], *starname = NULL; 
 	int i;
-	int backward;
 	zval tret_arr, attr_arr;
 	*serr = '\0';
+	*star = '\0';
 
-	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
+	if(ZEND_NUM_ARGS() != 8) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsldddl",
-			&tjd_start, &ipl, &starname, &arg_len, &ifl, &geopos[0], &geopos[1],
-			&geopos[2], &backward) == FAILURE) {
+			&tjd_start, &ipl, &starname, &s_len, &ifl, &geopos[0], &geopos[1],
+			&geopos[2], &backward, &arg_len) == FAILURE) {
 		return;
 	}
-	rc = swe_lun_occult_when_loc(tjd_start, ipl, starname, ifl, geopos,
+    if (starname != NULL && s_len > 0 && s_len < AS_MAXCH)
+		strcpy(star, starname);
+	rc = swe_lun_occult_when_loc(tjd_start, ipl, star, ifl, geopos,
 			tret, attr, backward, serr);
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
-
-	if (rc == ERR)
-	{
+	if (rc == ERR) {
 		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
+	} else {
 		array_init(&tret_arr);
-		for(i = 0; i < 10; i++)
+		for(i = 0; i < 8; i++)
 			add_index_double(&tret_arr, i, attr[i]);
 		add_assoc_zval(return_value, "tret", &tret_arr);
-
 		array_init(&attr_arr);
-		for(i = 0; i < 20; i++)
+		for(i = 0; i < 10; i++)
 			add_index_double(&attr_arr, i, attr[i]);
-		
+		if (starname != NULL && s_len > 0)
+			add_assoc_string(return_value, "star", star);
 		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
 }
 
 PHP_FUNCTION(swe_sol_eclipse_when_glob)
 {
-	char *arg = NULL;
-	int arg_len, rc, ifl, ifltype;
+	size_t  arg_len;
+	long ifl, ifltype, backward;
 	double tjd_start, tret[10];
 	char serr[AS_MAXCH]; 
-	int i, backward;
+	int rc, i;
 	zval tret_arr;
 	*serr = '\0';
 
@@ -2738,15 +2772,57 @@ PHP_FUNCTION(swe_sol_eclipse_when_glob)
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_lun_occult_when_glob(tjd_ut, ipl, star, iflag, ifltype, backw);
+
+Finds the next occultation of a celestial body (ipl or star) by the moon,
+no matter where on earth.
+
+There are the following eclipse types for lunar eclipses:
+SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
+
+=head3 Parameters
+
+  tjd_ut        double          Julian day number, Universal Time
+  ipl           int             Planet occulted
+  star          string|null     Star name, if a star occultation is searched
+  iflag         int             (specify ephemeris to be used, cf. swe_calc( ))
+  ifltype       int             Eclipse type to be searched; 0 if any type of eclipse is wanted
+  backw         int             search backward in time
+
+=head3 return array
+
+      retflag => (int)            ERR or eclipse type
+      serr    => (string)         Error string, on error only
+      star    => (string)         Corrected star name, if input parameter is not null.
+      geopos  => array of 2 doubles, geogr. position where eclipse is maximal
+      tret    => array of 8 double:
+		tret[0] Time of maximum occultation (UT)
+		tret[1] time, when eclipse takes place at local apparent noon
+		tret[2] time of eclipse begin
+		tret[3] time of eclipse end
+		tret[4] time of totality begin
+		tret[5] time of totality end
+		tret[6] time of center line begin
+		tret[7] time of center line end
+
+
+=head3 C declaration
+
+  int swe_lun_occult_when_glob( double tjd_start, int32 ipl, char *starname, int32 ifl, int32 ifltype, double *tret, int32 backward, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_lun_occult_when_glob)
 {
-	char *arg = NULL;
-	int rc, ipl, ifl, ifltype;
+	long backward, ipl, ifl, ifltype;
 	size_t arg_len, s_len = 0;
 	double tjd_start, tret[10];
 	char serr[AS_MAXCH], *starname = NULL; 
 	char star[AS_MAXCH];
-	int i, backward;
+	int i, rc;
 	zval tret_arr;
 	*serr = '\0';
 	*star = '\0';
@@ -2775,13 +2851,60 @@ PHP_FUNCTION(swe_lun_occult_when_glob)
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_lun_eclipse_how(tjd_ut, iflag, geopos[0], geopos[1], geopos[2]);
+
+Computes attributes of a lunar eclipse for given tjd and geopos
+
+There are the following eclipse types for lunar eclipses:
+SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
+
+=head3 Parameters
+
+  tjd_ut	double   Julian day number, Universal Time
+  iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
+  geopos[0] double	 geographic longitude
+  geopos[1] double	 geographic latitude
+  geopos[2] double	 altitude above sea level, in meters
+
+	If you want to have only one conjunction 
+	of the moon with the body tested, add the following flag:
+	backward |= SE_ECL_ONE_TRY. If this flag is not set, 
+	the function will search for an occultation until it
+	finds one. For bodies with ecliptical latitudes > 5,
+	the function may search unsuccessfully until it reaches
+	the end of the ephemeris.
+
+=head3 return array
+
+      retflag => (int)            ERR or eclipse type, 0 if no eclipse
+	  serr   => (string)  in case of error
+	  attr   => array of 20 double, not all are used
+	   attr[0] umbral magnitude at tjd
+	   attr[1] penumbral magnitude
+	   attr[4] azimuth of moon at tjd
+	   attr[5] true altitude of moon above horizon at tjd
+	   attr[6] apparent altitude of moon above horizon at tjd
+	   attr[7] distance of moon from opposition in degrees
+	   attr[8] umbral magnitude at tjd (= attr[0])
+	   attr[9] saros series number (if available; otherwise -99999999)
+	   attr[10] saros series member number (if available; otherwise -99999999) 
+
+=head3 C declaration
+
+  int int32 CALL_CONV swe_lun_eclipse_how( double tjd_ut, int32 ifl, double *geopos, double *attr, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_lun_eclipse_how)
 {
-	char *arg = NULL;
-	int arg_len, rc, ifl;
-	double tjd_ut, geopos[3], attr[10];
-	char serr[AS_MAXCH], *starname = NULL; 
-	int i, backward;
+	size_t arg_len;
+	long  ifl;
+	double tjd_ut, geopos[3], attr[20];
+	char serr[AS_MAXCH];
+	int i, rc;
 	zval attr_arr;
 	*serr = '\0';
 
@@ -2796,28 +2919,61 @@ PHP_FUNCTION(swe_lun_eclipse_how)
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
 
-	if (rc == ERR)
-	{
+	if (rc < 0) {
 		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
+	} else {
 		array_init(&attr_arr);
-		
-		for(i = 0; i < 10; i++)
+		for(i = 0; i < 11; i++)
 			add_index_double(&attr_arr, i, attr[i]);
-			
 		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_lun_eclipse_when(tjd_ut, iflag, ifltype, backw);
+
+When is the next lunar eclipse?  
+
+There are the following eclipse types for lunar eclipses:
+SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
+
+=head3 Parameters
+
+  tjd_ut    double      Julian day number, Universal Time
+  iflag     int         (specify ephemeris to be used, cf. swe_calc( ))
+  ifltype   int         Eclipse type to be searched; 0 if any type of eclipse is wanted
+  backw     int         search backward in time
+
+=head3 return array
+
+      retflag => (int)            ERR or eclipse type
+      serr    => (string)         Error string, on error only
+      tret    => array of 8 double:
+        tret[0]	time of maximum eclipse
+        tret[1]	(unused ?)
+        tret[2]	time of partial phase begin (indices consistent with solar eclipses)
+        tret[3]	time of partial phase end
+        tret[4]	time of totality begin
+        tret[5]	time of totality end
+        tret[6]	time of penumbral phase begin
+        tret[7]	time of penumbral phase end
+
+
+=head3 C declaration
+
+  int swe_lun_eclipse_when(double tjd_start, int32 ifl, int32 ifltype, double *tret, int32 backward, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_lun_eclipse_when)
 {
-	char *arg = NULL;
-	int arg_len, rc, ifl, ifltype;
+	size_t arg_len;
+	long backward, ifl, ifltype;
 	double tjd_start, tret[10];
 	char serr[AS_MAXCH]; 
-	int i, backward;
+	int i, rc;
 	zval tret_arr;
 	*serr = '\0';
 
@@ -2831,29 +2987,74 @@ PHP_FUNCTION(swe_lun_eclipse_when)
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
-
-	if (rc == ERR)
-	{
+	if (rc < 0) {
 		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
+	} else {
 		array_init(&tret_arr);
-		
-		for(i = 0; i < 10; i++)
+		for(i = 0; i < 8; i++)
 			add_index_double(&tret_arr, i, tret[i]);
-			
 		add_assoc_zval(return_value, "tret", &tret_arr);
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_lun_eclipse_when_loc(tjd_ut, iflag, geopos[0], geopos[1], geopos[2], backw);
+
+When is the next lunar eclipse, observable at a geographic position? 
+
+There are the following eclipse types for lunar eclipses:
+SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
+
+=head3 Parameters
+
+  tjd_ut	double   Julian day number, Universal Time
+  iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
+  geopos[0] double	 geographic longitude
+  geopos[1] double	 geographic latitude
+  geopos[2] double	 altitude above sea level, in meters
+  backw		int		 search backward in time
+
+=head3 return array
+
+      retflag => (int)            ERR or eclipse type
+      serr    => (string)         Error string, on error only
+      tret    => array of 10 double:
+		  tret[0] time of maximum eclipse
+		  tret[1] (unused ?)
+		  tret[2] time of partial phase begin (indices consistent with solar eclipses)
+		  tret[3] time of partial phase end
+		  tret[4] time of totality begin
+		  tret[5] time of totality end
+		  tret[6] time of penumbral phase begin
+		  tret[7] time of penumbral phase end
+		  tret[8] time of moonrise, if it occurs during the eclipse
+		  tret[9] time of moonset, if it occurs during the eclipse
+	  attr   => array of 11 double, not all are used
+	   attr[0] umbral magnitude at tjd
+	   attr[1] penumbral magnitude
+	   attr[4] azimuth of moon at tjd
+	   attr[5] true altitude of moon above horizon at tjd
+	   attr[6] apparent altitude of moon above horizon at tjd
+	   attr[7] distance of moon from opposition in degrees
+	   attr[8] umbral magnitude at tjd (= attr[0])
+	   attr[9] saros series number (if available; otherwise -99999999)
+	   attr[10] saros series member number (if available; otherwise -99999999) 
+
+=head3 C declaration
+
+  int swe_lun_eclipse_when_loc(double tjd_start, int32 ifl, double *geopos, double *tret, double *attr, int32 backward, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_lun_eclipse_when_loc)
 {
-	char *arg = NULL;
-	int arg_len, rc, ifl;
+	size_t arg_len;
+	long backward, ifl;
 	double tjd_ut, geopos[3], tret[10], attr[20];
-	char serr[AS_MAXCH], *starname = NULL;
-	int i, backward;
+	char serr[AS_MAXCH];
+	int i, rc;
 	zval tret_arr, attr_arr;
 	*serr = '\0';
 
@@ -2868,12 +3069,9 @@ PHP_FUNCTION(swe_lun_eclipse_when_loc)
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
 
-	if (rc == ERR)
-	{
+	if (rc < 0) {
 		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
+	} else {
 		array_init(&tret_arr);
 
 		for(i = 0; i < 10; i++)
@@ -2882,7 +3080,7 @@ PHP_FUNCTION(swe_lun_eclipse_when_loc)
 
 		array_init(&attr_arr);
 
-		for(i = 0; i < 20; i++)
+		for(i = 0; i < 11; i++)
 			add_index_double(&attr_arr, i, attr[i]);			
 		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
@@ -2890,11 +3088,11 @@ PHP_FUNCTION(swe_lun_eclipse_when_loc)
 
 PHP_FUNCTION(swe_pheno)
 {
-	char *arg = NULL;
-	int arg_len, rc, ipl, iflag;
+	size_t arg_len;
+	long  ipl, iflag;
 	double tjd, attr[20];
 	char serr[AS_MAXCH]; 
-	int i;
+	int i, rc;
 	zval attr_arr;
 	*serr = '\0';
 
@@ -2926,8 +3124,9 @@ PHP_FUNCTION(swe_pheno)
 
 PHP_FUNCTION(swe_pheno_ut)
 {
-	char *arg = NULL;
-	int arg_len, rc, ipl, iflag;
+	size_t arg_len;
+	int rc;
+	long ipl, iflag;
 	double tjd_ut, attr[20];
 	char serr[AS_MAXCH]; 
 	int i;
@@ -2962,8 +3161,9 @@ PHP_FUNCTION(swe_pheno_ut)
 
 PHP_FUNCTION(swe_refrac)
 {
-	char *arg = NULL;
-	int arg_len, rc, calc_flag;
+	size_t arg_len; 
+	int rc;
+	long calc_flag;
 	double inalt, atpress, attemp;
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
@@ -2979,8 +3179,9 @@ PHP_FUNCTION(swe_refrac)
 
 PHP_FUNCTION(swe_refrac_extended)
 {
-	char *arg = NULL;
-	int arg_len, rc, calc_flag, i;
+	size_t arg_len;
+	int rc, i;
+	long calc_flag;
 	double inalt, geoalt, atpress, lapse_rate, attemp;
 	double dret[4];
 
@@ -3002,8 +3203,7 @@ PHP_FUNCTION(swe_refrac_extended)
 
 PHP_FUNCTION(swe_set_lapse_rate)
 {
-	char *arg = NULL;
-	int arg_len;
+	size_t arg_len;
 	double lapse_rate;
 
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
@@ -3017,11 +3217,13 @@ PHP_FUNCTION(swe_set_lapse_rate)
 
 PHP_FUNCTION(swe_heliacal_ut)
 {
-	char *arg = NULL;
-	int arg_len, rc, ipl, iflag;
+	size_t arg_len;
+	int rc;
 	double tjdstart, dgeo[3], datm[4], dobs[6], dret[3];
 	char serr[AS_MAXCH], *objectname = NULL; 
-	int i, olen, event_type, helflag;
+	int i;
+	size_t olen;
+	long event_type, helflag;
 	*serr = '\0';
 	if(ZEND_NUM_ARGS() != 17) WRONG_PARAM_COUNT;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsll",
@@ -3041,11 +3243,13 @@ PHP_FUNCTION(swe_heliacal_ut)
 
 PHP_FUNCTION(swe_heliacal_pheno_ut)
 {
-	char *arg = NULL;
-	int arg_len, rc, ipl, iflag;
+	size_t arg_len;
+	int rc;
 	double tjdstart, dgeo[3], datm[4], dobs[6], darr[50];
 	char serr[AS_MAXCH], *objectname = NULL; 
-	int i, olen, event_type, helflag;
+	int i;
+	size_t olen;
+	long event_type, helflag;
 	*serr = '\0';
 	if(ZEND_NUM_ARGS() != 17) WRONG_PARAM_COUNT;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsll",
@@ -3065,11 +3269,13 @@ PHP_FUNCTION(swe_heliacal_pheno_ut)
 
 PHP_FUNCTION(swe_vis_limit_mag)
 {
-	char *arg = NULL;
-	int arg_len, rc, ipl, iflag;
+	size_t arg_len;
+	int rc;
 	double tjdstart, dgeo[3], datm[4], dobs[6], darr[8];
 	char serr[AS_MAXCH], *objectname = NULL; 
-	int i, olen, helflag;
+	int i;
+	size_t olen;
+	long helflag;
 	*serr = '\0';
 	if(ZEND_NUM_ARGS() != 17) WRONG_PARAM_COUNT;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsl",
@@ -3122,8 +3328,8 @@ Computes azimut and height, from either ecliptic or equatorial coordinates
  }}} */
 PHP_FUNCTION(swe_azalt)
 {
-	char *arg = NULL;
-	int arg_len, rc, calc_flag;
+	size_t arg_len;
+	long calc_flag;
 	double tjd_ut, geopos[3], atpress, attemp, xin[2], xaz[3];
 	int i;
 
@@ -3173,8 +3379,8 @@ computes either ecliptical or equatorial coordinates from azimuth and true altit
  }}} */
 PHP_FUNCTION(swe_azalt_rev)
 {
-	char *arg = NULL;
-	int arg_len, calc_flag;
+	size_t arg_len;
+	long calc_flag;
 	double tjd_ut, geopos[3], xin[2], xout[3];
 	int i;
 
@@ -3232,8 +3438,8 @@ rise, set, and meridian transits of sun, moon, planets, and stars
  }}} */
 PHP_FUNCTION(swe_rise_trans)
 {
-	char *arg = NULL;
-	int arg_len, rc, s_len;
+	size_t arg_len, s_len;
+	int rc;
 	long ipl, epheflag, rsmi;
 	double tjd_ut, geopos[3], tret[10], atpress, attemp;
 	char serr[AS_MAXCH], *starname = NULL; 
@@ -3315,8 +3521,8 @@ rise, set, and meridian transits of sun, moon, planets, and stars
  }}} */
 PHP_FUNCTION(swe_rise_trans_true_hor)
 {
-	char *arg = NULL;
-	int arg_len, rc, s_len;
+	size_t arg_len, s_len;
+	int rc;
 	long ipl, epheflag, rsmi;
 	double tjd_ut, geopos[3], tret[10], atpress, attemp, horhgt;
 	char serr[AS_MAXCH], *starname = NULL; 
@@ -3360,8 +3566,8 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 
 PHP_FUNCTION(swe_nod_aps)
 {
-	char *arg = NULL;
-	int arg_len, rc;
+	size_t arg_len;
+	int rc;
     long ipl, iflag, method;
 	double tjd_et, xnasc[6], xndsc[6], xperi[6], xaphe[6];
 	char serr[AS_MAXCH]; 
@@ -3412,8 +3618,8 @@ PHP_FUNCTION(swe_nod_aps)
 
 PHP_FUNCTION(swe_nod_aps_ut)
 {
-	char *arg = NULL;
-	int arg_len, rc;
+	size_t arg_len;
+	int rc;
     long ipl, iflag, method;
 	double tjd_ut, xnasc[6], xndsc[6], xperi[6], xaphe[6];
 	char serr[AS_MAXCH]; 
@@ -3491,7 +3697,6 @@ The function returns error if called for the Sun, the lunar nodes, or the apside
  }}} */
 PHP_FUNCTION(swe_get_orbital_elements)
 {
-	char *arg = NULL;
 	int rc;
 	long ipl, iflag;
 	double tjd_et, dret[50];
@@ -3547,12 +3752,10 @@ geocentrically.
  }}} */
 PHP_FUNCTION(swe_orbit_max_min_true_distance)
 {
-	char *arg = NULL;
 	int rc;
 	long ipl, iflag;
 	double tjd_et, dmax, dmin, dtrue;
 	char serr[AS_MAXCH]; 
-	int i;
 	*serr = '\0';
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
@@ -3659,8 +3862,8 @@ PHP_FUNCTION(swe_deltat_ex)
 	tjd_et = swe_deltat_ex(tjd_ut, ephe_flag, serr);
 
 	array_init(return_value);
-
 	add_assoc_double(return_value, "tjd_et", tjd_et);
+
 	add_assoc_string(return_value, "serr", serr);
 }
 
@@ -3691,7 +3894,6 @@ Get the difference between local apparent and local mean time.
  }}} */
 PHP_FUNCTION(swe_time_equ)
 {
-	char *arg = NULL;
 	double tjd, te;
 	int rc;
 	char serr[AS_MAXCH]; 
@@ -3739,7 +3941,6 @@ Converts Local Mean Time (LMT) to Local Apparent Time (LAT).
  }}} */
 PHP_FUNCTION(swe_lmt_to_lat)
 {
-	char *arg = NULL;
 	double tjd_lmt, geolon;
 	double tjd_lat;
 	int rc;
@@ -3788,7 +3989,6 @@ Converts Local Apparent Time (LAT) to Local Mean Time (LMT).
  }}} */
 PHP_FUNCTION(swe_lat_to_lmt)
 {
-	char *arg = NULL;
 	double tjd_lmt, tjd_lat, geolon;
 	int rc;
 	char serr[AS_MAXCH]; 
@@ -3833,7 +4033,7 @@ Get sidereal time with user-specified ecliptic obliquity and nutation.
  }}} */
 PHP_FUNCTION(swe_sidtime0)
 {
-	double tjd_ut, eps, nut, rc;
+	double tjd_ut, eps, nut;
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
@@ -3867,7 +4067,7 @@ Get sidereal time (ecliptic obliquity and nutation calculated internally).
  }}} */
 PHP_FUNCTION(swe_sidtime)
 {
-	double tjd_ut, rc;
+	double tjd_ut;
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
@@ -4100,7 +4300,7 @@ Normalize degrees to the range >= 0 & < 360.
  }}} */
 PHP_FUNCTION(swe_degnorm)
 {
-	double x, rc;
+	double x;
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 

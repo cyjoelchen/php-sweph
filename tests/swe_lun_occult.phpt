@@ -16,6 +16,9 @@ $tjd_ut = $rv['tret'][0];
 var_dump($tjd_ut, print_date($tjd_ut));
 echo "swe_lun_occult_where for Venus\n";
 var_dump(swe_lun_occult_where($tjd_ut, SE_VENUS, "", SEFLG_SWIEPH));
+echo "swe_lun_occult_when_loc for Venus\n";
+$rv = swe_lun_occult_when_loc(2454466.5, SE_VENUS, "", SEFLG_SWIEPH, 12.1, 49.0, 330, 0);
+var_dump($rv);
 
 function print_date($t)
 {
@@ -58,7 +61,7 @@ array(2) {
 float(2454531.2969455)
 string(20) "2008 3 5  19:7:36 UT"
 swe_lun_occult_where for Venus
-array(4) {
+array(3) {
   ["retflag"]=>
   int(5)
   ["geopos"]=>
@@ -87,6 +90,51 @@ array(4) {
     [7]=>
     float(1.8151476701449E-5)
   }
-  ["star"]=>
-  string(0) ""
+}
+swe_lun_occult_when_loc for Venus
+array(3) {
+  ["retflag"]=>
+  int(8070)
+  ["tret"]=>
+  array(8) {
+    [0]=>
+    float(30.8278899834)
+    [1]=>
+    float(106.80564129198)
+    [2]=>
+    float(11407.445011791)
+    [3]=>
+    float(-3452.9823246968)
+    [4]=>
+    float(36.788614918225)
+    [5]=>
+    float(8.7055707380266)
+    [6]=>
+    float(8.8017950776801)
+    [7]=>
+    float(0.10655162304033)
+  }
+  ["attr"]=>
+  array(10) {
+    [0]=>
+    float(30.8278899834)
+    [1]=>
+    float(106.80564129198)
+    [2]=>
+    float(11407.445011791)
+    [3]=>
+    float(-3452.9823246968)
+    [4]=>
+    float(36.788614918225)
+    [5]=>
+    float(8.7055707380266)
+    [6]=>
+    float(8.8017950776801)
+    [7]=>
+    float(0.10655162304033)
+    [8]=>
+    float(0)
+    [9]=>
+    float(0)
+  }
 }
