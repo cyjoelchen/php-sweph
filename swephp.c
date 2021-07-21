@@ -2661,7 +2661,7 @@ PHP_FUNCTION(swe_sol_eclipse_when_loc)
 /* {{{ pod
 =pod
 
-=head1 function swe_lun_occult_when_loc(tjd_ut, ipl, star, iflag, backw, geopos[0], geopos[1], geopos[2]);
+=head1 function swe_lun_occult_when_loc(tjd_ut, ipl, star, iflag, geopos[0], geopos[1], geopos[2], backw);
 
 Finds the next occultation of a celestial body (ipl or star) by the moon,
 for a given place on earth.  
@@ -2675,10 +2675,10 @@ SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_CENTRAL, SE_ECL_NONCENTRAL
   ipl    	int		 Planet occulted
   star		string   Star name, if a star occultation is searched
   iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
-  backw		int		 search backward in time
   geopos[0] double	 geographic longitude
   geopos[1] double	 geographic latitude
   geopos[2] double	 altitude above sea level, in meters
+  backw		int		 search backward in time
 
 	If you want to have only one conjunction 
 	of the moon with the body tested, add the following flag:
