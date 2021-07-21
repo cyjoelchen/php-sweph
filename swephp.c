@@ -580,6 +580,7 @@ PHP_FUNCTION(swe_calc)
 		add_index_double(return_value, i, xx[i]);
 	add_assoc_string(return_value, "serr", serr);
 	add_assoc_long(return_value, "rc", rc);
+	add_assoc_double(return_value, "tjd_et", tjd_et);
 }
 
 /* {{{ pod
@@ -631,6 +632,7 @@ PHP_FUNCTION(swe_calc_ut)
 		add_index_double(return_value, i, xx[i]);
 	add_assoc_string(return_value, "serr", serr);
 	add_assoc_long(return_value, "rc", rc);
+	add_assoc_double(return_value, "tjd_ut", tjd_ut);
 }
 
 /* {{{ pod
@@ -683,6 +685,7 @@ PHP_FUNCTION(swe_calc_pctr)
 		add_index_double(return_value, i, xx[i]);
 	add_assoc_string(return_value, "serr", serr);
 	add_assoc_long(return_value, "rc", rc);
+	add_assoc_double(return_value, "tjd_et", tjd_et);
 }
 
 #define MAX_FIXSTAR_NAME (2 * SE_MAX_STNAME + 1)
@@ -2884,7 +2887,7 @@ PHP_FUNCTION(swe_lun_occult_when_glob)
 /* {{{ pod
 =pod
 
-=head1 function swe_lun_eclipse_how(tjd_ut, iflag, geopos[0], geopos[1], geopos[2], serr);
+=head1 function swe_lun_eclipse_how(tjd_ut, iflag, geopos[0], geopos[1], geopos[2]);
 
 Computes attributes of a lunar eclipse for given tjd and geopos
 
@@ -2948,6 +2951,7 @@ PHP_FUNCTION(swe_lun_eclipse_how)
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
+	add_assoc_double(return_value, "tjd_ut", tjd_ut);
 
 	if (rc < 0) {
 		add_assoc_string(return_value, "serr", serr);			
@@ -2993,7 +2997,7 @@ SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
 
 =head3 C declaration
 
-  int swe_lun_occult_when_glob( double tjd_start, int32 ipl, char *starname, int32 ifl, int32 ifltype, double *tret, int32 backward, char *serr)
+  int swe_lun_eclipse_when(double tjd_start, int32 ifl, int32 ifltype, double *tret, int32 backward, char *serr);
 
 =cut
  }}} */
@@ -3017,6 +3021,7 @@ PHP_FUNCTION(swe_lun_eclipse_when)
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
+	add_assoc_double(return_value, "tjd_start", tjd_start);
 	if (rc < 0) {
 		add_assoc_string(return_value, "serr", serr);			
 	} else {
@@ -3098,6 +3103,7 @@ PHP_FUNCTION(swe_lun_eclipse_when_loc)
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
+	add_assoc_double(return_value, "tjd_ut", tjd_ut);
 
 	if (rc < 0) {
 		add_assoc_string(return_value, "serr", serr);			

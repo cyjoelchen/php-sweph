@@ -12,7 +12,7 @@ swe_set_ephe_path('./sweph/ephe');
 var_dump(swe_calc(2452275.5, 0, SEFLG_SWIEPH|SEFLG_SPEED));
 ?>
 --EXPECT--
-array(8) {
+array(9) {
   [0]=>
   float(280.38296810621)
   [1]=>
@@ -29,4 +29,6 @@ array(8) {
   string(0) ""
   ["rc"]=>
   int(258)
+  ["tjd_et"]=>
+  float(2452275.5)
 }
