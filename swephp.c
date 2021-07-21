@@ -2993,7 +2993,7 @@ SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
 
 =head3 C declaration
 
-  int swe_lun_occult_when_glob( double tjd_start, int32 ipl, char *starname, int32 ifl, int32 ifltype, double *tret, int32 backward, char *serr)
+  int swe_lun_eclipse_when(double tjd_start, int32 ipl, int32 ifltype, double *tret, int32 backward, char *serr)
 
 =cut
  }}} */
