@@ -79,7 +79,8 @@ _The HTML version of this documentation is included in this repository here:_
 ```php
 <?php
 
-swe_set_ephe_path("/usr/local/share/sweph");
+# Set path to ephemeris data files (ex. for Docker setup).
+swe_set_ephe_path("/root/php-sweph/sweph/ephe");
 
 # calc planet position
 list($y, $m, $d, $h, $mi, $s) = sscanf(gmdate("Y m d G i s"), "%d %d %d %d %d %d");
@@ -93,7 +94,7 @@ for($i = SE_SUN; $i <= SE_VESTA; $i++)
     $xx = swe_calc_ut($jul_ut, $i, SEFLG_SPEED);
     if ($xx['rc'] < 0) 
     { // error calling swe_calc_ut();
-        $planets[$i] = array('error' => $xx[rc]);
+        $planets[$i] = array('error' => $xx['rc']);
         continue;
     }
 
@@ -104,7 +105,8 @@ for($i = SE_SUN; $i <= SE_VESTA; $i++)
         'speed' => $xx[3]
     );
 }
-echo "planets: \n" . json_encode($planets, $options = JSON_PRETTY_PRINT) . "\n";
+
+$out = ['planets' => json_encode($planets, JSON_PRETTY_PRINT)];
 
 # calc house cusps
 define("GEO_LNG", 121.5);
@@ -119,9 +121,11 @@ for($i = 1; $i <= 12; $i ++)
     $houses[$i] = array('lng' => $yy['cusps'][$i]);
 }
 
-echo "houses: \n" . json_encode($houses, $options = JSON_PRETTY_PRINT) . "\n";
-?>
+$out['houses'] = json_encode($houses, JSON_PRETTY_PRINT);
 
+echo '<pre>';
+var_dump($out);
+echo '</pre>';
 ```
 
 ## Development
