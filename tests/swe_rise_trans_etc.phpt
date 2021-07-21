@@ -34,7 +34,8 @@ for($i = SE_SUN; $i <= SE_PLUTO; $i++)
         'speed' => $xx[3]
     );
 }
-echo "planets: \n" . var_dump($planets) . "\n";
+echo "planets: \n";
+var_dump($planets);
 
 # calc house cusps
 define("GEO_LNG", 6.57);
@@ -50,7 +51,8 @@ for($i = 1; $i <= 12; $i ++)
     $houses[$i] =  $yy['cusps'][$i];
 }
 
-echo "houses for $place: \n" . var_dump($houses) . "\n";
+echo "houses for $place: \n";
+var_dump($houses);
 
 $flags = array(SE_CALC_RISE, SE_CALC_MTRANSIT, SE_CALC_SET, SE_CALC_ITRANSIT );
 $flagnam = array('rise', 'mer_transit', 'set', 'lower_mer_transit');
@@ -64,10 +66,12 @@ for($i = 0; $i < 4; $i++) {
     $tr = $rv['tret'][0];
   $ptrans[$i] = array(
     'what' => $flagnam[$i],
+    'tr'   => $tr,
     'when' => print_date($tr)
   );
 }
-echo "rise $pnam: \n" . var_dump($ptrans) . "\n";
+echo "rise $pnam: \n";
+var_dump($ptrans);
 
 $starname = 'Aldebaran';
 for($i = 0; $i < 4; $i++) {
@@ -79,10 +83,12 @@ for($i = 0; $i < 4; $i++) {
   $strans['star'] = $rv['star'];
   $strans[$i] = array(
     'what' => $flagnam[$i],
+    'tr'   => $tr,
     'when' => print_date($tr)
   );
 }
-echo "rise $starname: \n" . var_dump($strans) . "\n";
+echo "rise $starname: \n";
+var_dump($strans); 
 
 function print_date($t)
 {
@@ -94,6 +100,7 @@ function print_date($t)
 }
 ?>
 --EXPECT--
+planets: 
 array(12) {
   ["julday"]=>
   float(2459414.1041667)
@@ -210,8 +217,7 @@ array(12) {
     float(-0.024042545347569)
   }
 }
-planets: 
-
+houses for La Croix Valmer, France: 
 array(12) {
   [1]=>
   float(234.34346163378)
@@ -238,70 +244,83 @@ array(12) {
   [12]=>
   float(214.57560492698)
 }
-houses for La Croix Valmer, France: 
-
+rise Moon: 
 array(4) {
   [0]=>
-  array(2) {
+  array(3) {
     ["what"]=>
     string(4) "rise"
+    ["tr"]=>
+    float(2459415.1051389)
     ["when"]=>
-    string(21) "2021 7 19  4:10:52 UT"
+    string(22) "2021 7 19  14:31:24 UT"
   }
   [1]=>
-  array(2) {
+  array(3) {
     ["what"]=>
     string(11) "mer_transit"
+    ["tr"]=>
+    float(2459414.2750031)
     ["when"]=>
-    string(21) "2021 7 19  11:40:3 UT"
+    string(21) "2021 7 18  18:36:0 UT"
   }
   [2]=>
-  array(2) {
+  array(3) {
     ["what"]=>
     string(3) "set"
+    ["tr"]=>
+    float(2459414.4915438)
     ["when"]=>
-    string(21) "2021 7 18  19:9:30 UT"
+    string(22) "2021 7 18  23:47:49 UT"
   }
   [3]=>
-  array(2) {
+  array(3) {
     ["what"]=>
     string(17) "lower_mer_transit"
+    ["tr"]=>
+    float(2459414.7936034)
     ["when"]=>
-    string(21) "2021 7 18  23:40:1 UT"
+    string(20) "2021 7 19  7:2:47 UT"
   }
 }
-rise Moon: 
-
+rise Aldebaran: 
 array(5) {
   ["star"]=>
   string(15) "Aldebaran,alTau"
   [0]=>
-  array(2) {
+  array(3) {
     ["what"]=>
     string(4) "rise"
+    ["tr"]=>
+    float(2459414.5514624)
     ["when"]=>
     string(20) "2021 7 19  1:14:6 UT"
   }
   [1]=>
-  array(2) {
+  array(3) {
     ["what"]=>
     string(11) "mer_transit"
+    ["tr"]=>
+    float(2459414.8482207)
     ["when"]=>
     string(21) "2021 7 19  8:21:26 UT"
   }
   [2]=>
-  array(2) {
+  array(3) {
     ["what"]=>
     string(3) "set"
+    ["tr"]=>
+    float(2459414.1477096)
     ["when"]=>
     string(22) "2021 7 18  15:32:42 UT"
   }
   [3]=>
-  array(2) {
+  array(3) {
     ["what"]=>
     string(17) "lower_mer_transit"
+    ["tr"]=>
+    float(2459414.3495859)
     ["when"]=>
     string(22) "2021 7 18  20:23:24 UT"
   }
 }
-rise Aldebaran:
