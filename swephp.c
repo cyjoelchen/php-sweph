@@ -3027,32 +3027,6 @@ PHP_FUNCTION(swe_lun_eclipse_when)
 	}
 }
 
-/* When is the next lunar eclipse, observable at a geographic position?
- *
- * retflag	SE_ECL_TOTAL or SE_ECL_PENUMBRAL or SE_ECL_PARTIAL
- *
- * tret[0]	time of maximum eclipse
- * tret[1]	
- * tret[2]	time of partial phase begin (indices consistent with solar eclipses)
- * tret[3]	time of partial phase end
- * tret[4]	time of totality begin
- * tret[5]	time of totality end
- * tret[6]	time of penumbral phase begin
- * tret[7]	time of penumbral phase end
- * tret[8]	time of moonrise, if it occurs during the eclipse
- * tret[9]	time of moonset, if it occurs during the eclipse
- *
- * attr[0]      umbral magnitude at tjd
- * attr[1]      penumbral magnitude
- * attr[4]      azimuth of moon at tjd
- * attr[5]      true altitude of moon above horizon at tjd
- * attr[6]      apparent altitude of moon above horizon at tjd
- * attr[7]      distance of moon from opposition in degrees
- * attr[8]      umbral magnitude at tjd (= attr[0])
- * attr[9]      saros series number
- * attr[10]     saros series member number
- *         declare as attr[20] at least !
- */
 /* {{{ pod
 =pod
 
@@ -3087,7 +3061,7 @@ SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
 		  tret[7] time of penumbral phase end
 		  tret[8] time of moonrise, if it occurs during the eclipse
 		  tret[9] time of moonset, if it occurs during the eclipse
-	  attr   => array of 20 double, not all are used
+	  attr   => array of 11 double, not all are used
 	   attr[0] umbral magnitude at tjd
 	   attr[1] penumbral magnitude
 	   attr[4] azimuth of moon at tjd
