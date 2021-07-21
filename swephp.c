@@ -2671,14 +2671,14 @@ SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
 
 =head3 Parameters
 
-  tjd_ut	double   Julian day number, Universal Time
-  ipl    	int		 Planet occulted
-  star		string   Star name, if a star occultation is searched
-  iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
-  geopos[0] double	 geographic longitude
-  geopos[1] double	 geographic latitude
-  geopos[2] double	 altitude above sea level, in meters
-  backw		int		 search backward in time
+  tjd_ut        double          Julian day number, Universal Time
+  ipl           int             Planet occulted
+  star          string|null     Star name, if a star occultation is searched
+  iflag         int             (specify ephemeris to be used, cf. swe_calc( ))
+  geopos[0]     double          geographic longitude
+  geopos[1]     double          geographic latitude
+  geopos[2]     double          altitude above sea level, in meters
+  backw         int             search backward in time
 
 	If you want to have only one conjunction 
 	of the moon with the body tested, add the following flag:
@@ -2692,7 +2692,7 @@ SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
 
       retflag => (int)            ERR or eclipse type
       serr    => (string)         Error string, on error only
-      star    => (string)         Corrected star name
+      star    => (string)         Corrected star name, if input parameter is not null.
       tret    => array of 10 double:
 		  tret[0] time of maximum eclipse
 		  tret[1]
@@ -2814,18 +2814,18 @@ SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
 
 =head3 Parameters
 
-  tjd_ut	double   Julian day number, Universal Time
-  ipl    	int		 Planet occulted
-  star		string   Star name, if a star occultation is searched
-  iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
-  ifltype	int		 Eclipse type to be searched; 0 if any type of eclipse is wanted
-  backw		int		 search backward in time
+  tjd_ut	double          Julian day number, Universal Time
+  ipl    	int             Planet occulted
+  star		string|null     Star name, if a star occultation is searched
+  iflag   	int             (specify ephemeris to be used, cf. swe_calc( ))
+  ifltype	int             Eclipse type to be searched; 0 if any type of eclipse is wanted
+  backw		int             search backward in time
 
 =head3 return array
 
       retflag => (int)            ERR or eclipse type
       serr    => (string)         Error string, on error only
-      star    => (string)         Corrected star name
+      star    => (string)         Corrected star name, if input parameter is not null.
       geopos  => array of 2 doubles, geogr. position where eclipse is maximal
       tret    => array of 8 double:
 		tret[0] Time of maximum occultation (UT)
