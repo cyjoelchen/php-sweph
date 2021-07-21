@@ -933,7 +933,7 @@ PHP_FUNCTION(swe_fixstar_mag)
 	int rc;
 	double dmag;
 	char *star_ptr = NULL;
-	int star_len;
+	size_t  star_len;
 	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
 	*serr = '\0';
 	
@@ -984,7 +984,7 @@ PHP_FUNCTION(swe_fixstar2_mag)
 	int rc;
 	double dmag;
 	char *star_ptr = NULL;
-	int star_len;
+	size_t  star_len;
 	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
 	*serr = '\0';
 	
@@ -1503,7 +1503,7 @@ It delivers information about the last used file, depending on parameter ifno:
 }}} */
 PHP_FUNCTION(swe_get_current_file_data)
 {
-	int ifno;
+	long ifno;
 	int denum;
 	double tfstart, tfend;
 	char *a = NULL;
@@ -1655,7 +1655,8 @@ Converts julian day number to calendar date
  }}} */
 PHP_FUNCTION(swe_revjul)
 {
-	int year, month, day, gregflag;
+	int year, month, day;
+	long gregflag;
 	double hour, jd;
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
@@ -2398,29 +2399,31 @@ PHP_FUNCTION(swe_house_name)
 
 PHP_FUNCTION(swe_gauquelin_sector)
 {
-	size_t arg_len;
+	size_t s_len;
 	long ipl, iflag, imeth;
 	int rc;
 	char *starname = NULL;
 	double t_ut, geopos[3], atpress, attemp, dgsect;
 	char serr[AS_MAXCH]; 
+	char star[AS_MAXCH]; 
 	*serr = '\0';
+	*star = '\0';
 	
 	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsllddddd",
-			&t_ut, &ipl, &starname, &arg_len, &iflag, &imeth, &geopos[0],
+			&t_ut, &ipl, &starname, &s_len, &iflag, &imeth, &geopos[0],
 			&geopos[1], &geopos[2], &atpress, &attemp) == FAILURE) {
 		return;
 	}
-	rc = swe_gauquelin_sector(t_ut, ipl, starname, iflag, imeth, geopos,
+    if (starname != NULL && s_len > 0)
+		strcpy(star, starname);
+	rc = swe_gauquelin_sector(t_ut, ipl, star, iflag, imeth, geopos,
 			atpress, attemp, &dgsect, serr);
 
-	if (rc == ERR)
-	{
+	if (rc == ERR) {
 		RETURN_STRING(serr);
-	}
-	else
+	} else
 	{
 		RETURN_DOUBLE(dgsect);
 	}	
@@ -3218,7 +3221,9 @@ PHP_FUNCTION(swe_heliacal_ut)
 	int rc;
 	double tjdstart, dgeo[3], datm[4], dobs[6], dret[3];
 	char serr[AS_MAXCH], *objectname = NULL; 
-	int i, olen, event_type, helflag;
+	int i;
+	size_t olen;
+	long event_type, helflag;
 	*serr = '\0';
 	if(ZEND_NUM_ARGS() != 17) WRONG_PARAM_COUNT;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsll",
@@ -3242,7 +3247,9 @@ PHP_FUNCTION(swe_heliacal_pheno_ut)
 	int rc;
 	double tjdstart, dgeo[3], datm[4], dobs[6], darr[50];
 	char serr[AS_MAXCH], *objectname = NULL; 
-	int i, olen, event_type, helflag;
+	int i;
+	size_t olen;
+	long event_type, helflag;
 	*serr = '\0';
 	if(ZEND_NUM_ARGS() != 17) WRONG_PARAM_COUNT;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsll",
@@ -3266,7 +3273,9 @@ PHP_FUNCTION(swe_vis_limit_mag)
 	int rc;
 	double tjdstart, dgeo[3], datm[4], dobs[6], darr[8];
 	char serr[AS_MAXCH], *objectname = NULL; 
-	int i, olen, helflag;
+	int i;
+	size_t olen;
+	long helflag;
 	*serr = '\0';
 	if(ZEND_NUM_ARGS() != 17) WRONG_PARAM_COUNT;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsl",
