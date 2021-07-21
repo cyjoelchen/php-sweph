@@ -540,7 +540,7 @@ calculate position of planet ipl with time in Ephemeris Time (TDT)
 =head3 Parameters
 
   double        tjd_et      Julian day in Ephemeris Time.
-  int           ipl         Planet/body/object number or constant.
+  nt           ipl         Planet/body/object number or constant.
   int           iflag       Flag bits for computation requirements.
 
 =head3 return array
@@ -2399,7 +2399,8 @@ PHP_FUNCTION(swe_house_name)
 PHP_FUNCTION(swe_gauquelin_sector)
 {
 	size_t arg_len;
-	int ipl, iflag, imeth, rc;
+	long ipl, iflag, imeth;
+	int rc;
 	char *starname = NULL;
 	double t_ut, geopos[3], atpress, attemp, dgsect;
 	char serr[AS_MAXCH]; 
@@ -2427,7 +2428,9 @@ PHP_FUNCTION(swe_gauquelin_sector)
 
 PHP_FUNCTION(swe_sol_eclipse_where)
 {
-	int arg_len, ifl, rc;
+	size_t arg_len;
+	long ifl;
+	int rc;
 	double tjd_ut, geopos[2], attr[20];
 	char serr[AS_MAXCH]; 
 	int i;
@@ -2508,12 +2511,12 @@ time.
  }}} */
 PHP_FUNCTION(swe_lun_occult_where)
 {
-	int ipl, ifl, rc;
+	long ipl, ifl;
 	size_t arg_len, s_len;
 	double tjd_ut, geopos[2], attr[20];
 	char serr[AS_MAXCH], *starname = NULL; 
 	char star[AS_MAXCH];
-	int i;
+	int i, rc;
 	zval geopos_arr, attr_arr;
 	*serr = '\0';
 	*star = '\0';
@@ -2549,7 +2552,9 @@ PHP_FUNCTION(swe_lun_occult_where)
 
 PHP_FUNCTION(swe_sol_eclipse_how)
 {
-	int arg_len, ifl, rc;
+	size_t arg_len;
+	long ifl; 
+	int rc;
 	double tjd_ut, geopos[3], attr[20];
 	char serr[AS_MAXCH]; 
 	int i;
@@ -2583,11 +2588,12 @@ PHP_FUNCTION(swe_sol_eclipse_how)
 
 PHP_FUNCTION(swe_sol_eclipse_when_loc)
 {
-	int arg_len, ifl, rc;
+	size_t  arg_len;
+	long ifl, backward;
+	int rc;
 	double tjd_start,  geopos[3], tret[10], attr[20];
 	char serr[AS_MAXCH]; 
 	int i;
-	int backward;
 	zval tret_arr, attr_arr;
 	*serr = '\0';
 
@@ -2687,12 +2693,12 @@ SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
  }}} */
 PHP_FUNCTION(swe_lun_occult_when_loc)
 {
-	int ipl, ifl, rc;
+	long backward, ipl, ifl;
+	int rc;
 	size_t arg_len, s_len;
 	double tjd_start, geopos[3], tret[10], attr[11];
 	char serr[AS_MAXCH], star[AS_MAXCH], *starname = NULL; 
 	int i;
-	int backward;
 	zval tret_arr, attr_arr;
 	*serr = '\0';
 	*star = '\0';
@@ -2729,10 +2735,11 @@ PHP_FUNCTION(swe_lun_occult_when_loc)
 
 PHP_FUNCTION(swe_sol_eclipse_when_glob)
 {
-	int arg_len, rc, ifl, ifltype;
+	size_t  arg_len;
+	long ifl, ifltype, backward;
 	double tjd_start, tret[10];
 	char serr[AS_MAXCH]; 
-	int i, backward;
+	int rc, i;
 	zval tret_arr;
 	*serr = '\0';
 
@@ -2807,12 +2814,12 @@ SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
  }}} */
 PHP_FUNCTION(swe_lun_occult_when_glob)
 {
-	int rc, ipl, ifl, ifltype;
+	long backward, ipl, ifl, ifltype;
 	size_t arg_len, s_len = 0;
 	double tjd_start, tret[10];
 	char serr[AS_MAXCH], *starname = NULL; 
 	char star[AS_MAXCH];
-	int i, backward;
+	int i, rc;
 	zval tret_arr;
 	*serr = '\0';
 	*star = '\0';
@@ -2891,10 +2898,10 @@ SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
 PHP_FUNCTION(swe_lun_eclipse_how)
 {
 	size_t arg_len;
-	int rc, ifl;
+	long  ifl;
 	double tjd_ut, geopos[3], attr[20];
 	char serr[AS_MAXCH];
-	int i;
+	int i, rc;
 	zval attr_arr;
 	*serr = '\0';
 
@@ -2960,10 +2967,10 @@ SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
 PHP_FUNCTION(swe_lun_eclipse_when)
 {
 	size_t arg_len;
-	int rc, ifl, ifltype;
+	long backward, ifl, ifltype;
 	double tjd_start, tret[10];
 	char serr[AS_MAXCH]; 
-	int i, backward;
+	int i, rc;
 	zval tret_arr;
 	*serr = '\0';
 
@@ -3041,10 +3048,10 @@ SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
 PHP_FUNCTION(swe_lun_eclipse_when_loc)
 {
 	size_t arg_len;
-	int rc, ifl;
+	long backward, ifl;
 	double tjd_ut, geopos[3], tret[10], attr[20];
 	char serr[AS_MAXCH];
-	int i, backward;
+	int i, rc;
 	zval tret_arr, attr_arr;
 	*serr = '\0';
 
@@ -3078,10 +3085,11 @@ PHP_FUNCTION(swe_lun_eclipse_when_loc)
 
 PHP_FUNCTION(swe_pheno)
 {
-	int arg_len, rc, ipl, iflag;
+	size_t arg_len;
+	long  ipl, iflag;
 	double tjd, attr[20];
 	char serr[AS_MAXCH]; 
-	int i;
+	int i, rc;
 	zval attr_arr;
 	*serr = '\0';
 
@@ -3113,7 +3121,9 @@ PHP_FUNCTION(swe_pheno)
 
 PHP_FUNCTION(swe_pheno_ut)
 {
-	int arg_len, rc, ipl, iflag;
+	size_t arg_len;
+	int rc;
+	long ipl, iflag;
 	double tjd_ut, attr[20];
 	char serr[AS_MAXCH]; 
 	int i;
@@ -3148,7 +3158,9 @@ PHP_FUNCTION(swe_pheno_ut)
 
 PHP_FUNCTION(swe_refrac)
 {
-	int arg_len, rc, calc_flag;
+	size_t arg_len; 
+	int rc;
+	long calc_flag;
 	double inalt, atpress, attemp;
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
@@ -3164,7 +3176,9 @@ PHP_FUNCTION(swe_refrac)
 
 PHP_FUNCTION(swe_refrac_extended)
 {
-	int arg_len, rc, calc_flag, i;
+	size_t arg_len;
+	int rc, i;
+	long calc_flag;
 	double inalt, geoalt, atpress, lapse_rate, attemp;
 	double dret[4];
 
@@ -3186,7 +3200,7 @@ PHP_FUNCTION(swe_refrac_extended)
 
 PHP_FUNCTION(swe_set_lapse_rate)
 {
-	int arg_len;
+	size_t arg_len;
 	double lapse_rate;
 
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
@@ -3200,7 +3214,8 @@ PHP_FUNCTION(swe_set_lapse_rate)
 
 PHP_FUNCTION(swe_heliacal_ut)
 {
-	int arg_len, rc;
+	size_t arg_len;
+	int rc;
 	double tjdstart, dgeo[3], datm[4], dobs[6], dret[3];
 	char serr[AS_MAXCH], *objectname = NULL; 
 	int i, olen, event_type, helflag;
@@ -3223,7 +3238,8 @@ PHP_FUNCTION(swe_heliacal_ut)
 
 PHP_FUNCTION(swe_heliacal_pheno_ut)
 {
-	int arg_len, rc;
+	size_t arg_len;
+	int rc;
 	double tjdstart, dgeo[3], datm[4], dobs[6], darr[50];
 	char serr[AS_MAXCH], *objectname = NULL; 
 	int i, olen, event_type, helflag;
@@ -3246,7 +3262,8 @@ PHP_FUNCTION(swe_heliacal_pheno_ut)
 
 PHP_FUNCTION(swe_vis_limit_mag)
 {
-	int arg_len, rc;
+	size_t arg_len;
+	int rc;
 	double tjdstart, dgeo[3], datm[4], dobs[6], darr[8];
 	char serr[AS_MAXCH], *objectname = NULL; 
 	int i, olen, helflag;
@@ -3302,7 +3319,8 @@ Computes azimut and height, from either ecliptic or equatorial coordinates
  }}} */
 PHP_FUNCTION(swe_azalt)
 {
-	int arg_len, calc_flag;
+	size_t arg_len;
+	long calc_flag;
 	double tjd_ut, geopos[3], atpress, attemp, xin[2], xaz[3];
 	int i;
 
@@ -3352,7 +3370,8 @@ computes either ecliptical or equatorial coordinates from azimuth and true altit
  }}} */
 PHP_FUNCTION(swe_azalt_rev)
 {
-	int arg_len, calc_flag;
+	size_t arg_len;
+	long calc_flag;
 	double tjd_ut, geopos[3], xin[2], xout[3];
 	int i;
 
@@ -3410,7 +3429,8 @@ rise, set, and meridian transits of sun, moon, planets, and stars
  }}} */
 PHP_FUNCTION(swe_rise_trans)
 {
-	int arg_len, rc, s_len;
+	size_t arg_len, s_len;
+	int rc;
 	long ipl, epheflag, rsmi;
 	double tjd_ut, geopos[3], tret[10], atpress, attemp;
 	char serr[AS_MAXCH], *starname = NULL; 
@@ -3492,7 +3512,8 @@ rise, set, and meridian transits of sun, moon, planets, and stars
  }}} */
 PHP_FUNCTION(swe_rise_trans_true_hor)
 {
-	int arg_len, rc, s_len;
+	size_t arg_len, s_len;
+	int rc;
 	long ipl, epheflag, rsmi;
 	double tjd_ut, geopos[3], tret[10], atpress, attemp, horhgt;
 	char serr[AS_MAXCH], *starname = NULL; 
@@ -3536,7 +3557,8 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 
 PHP_FUNCTION(swe_nod_aps)
 {
-	int arg_len, rc;
+	size_t arg_len;
+	int rc;
     long ipl, iflag, method;
 	double tjd_et, xnasc[6], xndsc[6], xperi[6], xaphe[6];
 	char serr[AS_MAXCH]; 
@@ -3587,7 +3609,8 @@ PHP_FUNCTION(swe_nod_aps)
 
 PHP_FUNCTION(swe_nod_aps_ut)
 {
-	int arg_len, rc;
+	size_t arg_len;
+	int rc;
     long ipl, iflag, method;
 	double tjd_ut, xnasc[6], xndsc[6], xperi[6], xaphe[6];
 	char serr[AS_MAXCH]; 
