@@ -2814,12 +2814,12 @@ SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
 
 =head3 Parameters
 
-  tjd_ut	double          Julian day number, Universal Time
-  ipl    	int             Planet occulted
-  star		string|null     Star name, if a star occultation is searched
-  iflag   	int             (specify ephemeris to be used, cf. swe_calc( ))
-  ifltype	int             Eclipse type to be searched; 0 if any type of eclipse is wanted
-  backw		int             search backward in time
+  tjd_ut        double          Julian day number, Universal Time
+  ipl           int             Planet occulted
+  star          string|null     Star name, if a star occultation is searched
+  iflag         int             (specify ephemeris to be used, cf. swe_calc( ))
+  ifltype       int             Eclipse type to be searched; 0 if any type of eclipse is wanted
+  backw         int             search backward in time
 
 =head3 return array
 
@@ -2971,10 +2971,10 @@ SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
 
 =head3 Parameters
 
-  tjd_ut	double   Julian day number, Universal Time
-  iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
-  ifltype	int		 Eclipse type to be searched; 0 if any type of eclipse is wanted
-  backw		int		 search backward in time
+  tjd_ut    double      Julian day number, Universal Time
+  iflag     int         (specify ephemeris to be used, cf. swe_calc( ))
+  ifltype   int         Eclipse type to be searched; 0 if any type of eclipse is wanted
+  backw     int         search backward in time
 
 =head3 return array
 
