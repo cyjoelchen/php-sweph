@@ -4346,6 +4346,31 @@ PHP_FUNCTION(swe_radnorm)
 	RETURN_DOUBLE(swe_radnorm(x));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_rad_midp(x1, x2)
+
+Calculate a directional midpoint between 2 radian values:
+
+0, 3.14159 => 1.570795
+3.14159, 0 => 1.570795
+
+=head3 Parameters
+
+    double      x1      Starting radian value.
+    double      x2      Ending radian value.
+
+=head3 return value
+
+    double      Midpoint in radians.
+
+=head3 C declaration
+
+  double swe_rad_midp(double x1, x0);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_rad_midp)
 {
 	double x1, x0;
