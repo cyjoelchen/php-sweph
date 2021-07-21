@@ -61,7 +61,7 @@ array(2) {
 float(2454531.2969455)
 string(20) "2008 3 5  19:7:36 UT"
 swe_lun_occult_where for Venus
-array(4) {
+array(3) {
   ["retflag"]=>
   int(5)
   ["geopos"]=>
@@ -90,8 +90,6 @@ array(4) {
     [7]=>
     float(1.8151476701449E-5)
   }
-  ["star"]=>
-  string(0) ""
 }
 swe_lun_occult_when_loc for Venus
 array(3) {
