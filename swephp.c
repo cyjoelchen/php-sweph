@@ -4834,6 +4834,27 @@ PHP_FUNCTION(swe_cs2lonlatstr)
 	RETURN_STRING(swe_cs2lonlatstr((int)t, pchar[0], mchar[0], s));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_cs2degstr(t)
+
+Centiseconds -> degrees string.
+
+=head3 Parameters
+
+    int     t       Degree value in centiseconds.
+
+=head3 return value
+
+    string    Degree string.
+
+=head3 C declaration
+
+  char * swe_cs2degstr(CSEC t, char *a);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_cs2degstr)
 {
 	long t;
