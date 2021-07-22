@@ -4629,6 +4629,28 @@ PHP_FUNCTION(swe_difcs2n)
 	RETURN_LONG(swe_difcs2n((int)p1, (int)p2));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_difdeg2n(p1, p2)
+
+Distance in degrees p1 - p2 normalized to [-180..180].
+
+=head3 Parameters
+
+    double     p1      Starting position.
+    double     p2      Ending position.
+
+=head3 return value
+
+    double    Normalized distance.
+
+=head3 C declaration
+
+  double swe_difdeg2n(double p1, double p2);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_difdeg2n)
 {
 	double p1, p2;
