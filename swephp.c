@@ -2415,7 +2415,7 @@ finds the gauquelin sector position of a planet or fixed star at given date/time
 
 =head3 Parameters
 
-  tjd_ut	double
+  tjd_ut	double		Julian day number, Universal Time.
   ipl    	int		 Planet 
   star		string   Star name, if a star placement is searched
   iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
@@ -2796,7 +2796,7 @@ When and how is the next solar eclipse at a given geographical position?
 
 =head3 C declaration
 
-	int we_sol_eclipse_when_loc(double tjd_start, int32 ifl, double *geopos, double *tret, double *attr, int32 backward, char *serr)
+	int swe_sol_eclipse_when_loc(double tjd_start, int32 ifl, double *geopos, double *tret, double *attr, int32 backward, char *serr)
 
 =cut
  }}} */
@@ -2972,6 +2972,8 @@ When is the next solar eclipse anywhere on earth?
 		tret[5] time of totality end
 		tret[6] time of center line begin
 		tret[7] time of center line end
+		tret[8] Unused/not implemented.
+		tret[9] Unused/not implemented.
 
 =head3 C declaration
 
@@ -3339,7 +3341,7 @@ function calculates planetary phenomena
 =head3 Parameters
 
   double       tjd_et      Julian day in Ephemeris Time.
-  nt           ipl         Planet/body/object number or constant.
+  int           ipl         Planet/body/object number or constant.
   int          iflag       Flag bits for computation requirements.
 
 =head3 return array
@@ -3402,7 +3404,7 @@ function calculates planetary phenomena
 =head3 Parameters
 
   double       tjd_ut      Julian day in Universal Time.
-  nt           ipl         Planet/body/object number or constant.
+  int           ipl         Planet/body/object number or constant.
   int          iflag       Flag bits for computation requirements.
 
 =head3 return array
