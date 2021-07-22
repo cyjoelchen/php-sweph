@@ -4733,6 +4733,27 @@ PHP_FUNCTION(swe_csroundsec)
 	RETURN_LONG(swe_csroundsec((int)x));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_d2l(x)
+
+Double to long with rounding, no overflow check.
+
+=head3 Parameters
+
+    double     x      Value to round.
+
+=head3 return value
+
+    int    Rounded value.
+
+=head3 C declaration
+
+  long swe_d2l(double x);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_d2l)
 {
 	double x;
