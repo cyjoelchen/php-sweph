@@ -3,6 +3,12 @@
 ## Introduction
 `php-sweph` is a PHP extension to Astrodienst Swiss Ephemeris library. It's statically linked with libswe.a to implement one-to-one, C-to-PHP function mapping, no external binary executable required.
 
+## License
+`php-sweph` is work derived from the original release of the Astrodienst Swiss Ephemeris library.
+It is subject to the same licensing conditions as the C release. A copy of the license file
+is found in `sweph/src/LICENSE`. Since Swiss Ephemeris release 2.10.01 the GPL license has been
+replaced with the AGPL license, as one of the options in Astrodienst's dual licensing model.
+
 ## Installation
 
 This project uses tagged releases.
