@@ -4490,6 +4490,27 @@ PHP_FUNCTION(swe_split_deg)
 	add_assoc_long(return_value, "sgn", isgn);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_csnorm(p)
+
+Normalize argument into interval [0..DEG360].
+
+=head3 Parameters
+
+    int     p       Input value to normalize to >=0 & < 360.
+
+=head3 return value
+
+    long    Normalized value.
+
+=head3 C declaration
+
+  centisec swe_csnorm(centisec p)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_csnorm)
 {
 	long p;
