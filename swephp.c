@@ -4846,6 +4846,9 @@ PHP_FUNCTION(swe_cs2timestr)
 
 Centiseconds -> longitude or latitude string.
 
+	typical use for longitude: swe_cs2lonlatstr(cs, 'e', 'w')
+	typical use for latitude: swe_cs2lonlatstr(cs, 'n', 's')
+
 =head3 Parameters
 
     int     t       Longitude/latitude value in centiseconds.
