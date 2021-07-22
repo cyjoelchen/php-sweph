@@ -4594,6 +4594,28 @@ PHP_FUNCTION(swe_difdegn)
 	RETURN_DOUBLE(swe_difdegn(p1, p2));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_difcs2n(p1, p2)
+
+Distance in centisecs p1 - p2 normalized to [-180..180].
+
+=head3 Parameters
+
+    int     p1      Starting position.
+    int     p2      Ending position.
+
+=head3 return value
+
+    int    Normalized distance.
+
+=head3 C declaration
+
+  centisec swe_difcs2n(centisec p1, centisec p2);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_difcs2n)
 {
 	long p1, p2;
