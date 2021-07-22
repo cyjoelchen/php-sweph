@@ -2485,12 +2485,13 @@ PHP_FUNCTION(swe_gauquelin_sector)
 Finds the place on earth where the solar eclipse is maximal at a given
 time. 
 
-Algorithms for the central line is taken from Montenbruck, pp. 179ff.,
+Algorithm for the central line is taken from Montenbruck, pp. 179ff.,
 with the exception, that we consider refraction for the maxima of
 partial and noncentral eclipses.
 Geographical positions are referred to sea level / the mean ellipsoid.
 
 Errors:
+
  - from uncertainty of JPL-ephemerides (0.01 arcsec): 
       about 40 meters
  - from displacement of shadow points by atmospheric refraction:
@@ -2499,10 +2500,9 @@ Errors:
       a few meters
  - from polar motion
       a few meters
- For geographical locations that are interesting for observation,
- the error is always < 100 m.
- However, if the sun is close to the horizon,
- all of these errors can grow up to a km or more. 
+
+ For geographical locations that are interesting for observation, the error is always < 100 m.
+ However, if the sun is close to the horizon, all of these errors can grow up to a km or more. 
 
 =head3 Parameters
 
@@ -2827,7 +2827,7 @@ PHP_FUNCTION(swe_sol_eclipse_when_loc)
 	} else {
 		array_init(&tret_arr);
 		for(i = 0; i < 7; i++)
-			add_index_double(&tret_arr, i, attr[i]);
+			add_index_double(&tret_arr, i, tret[i]);
 		add_assoc_zval(return_value, "tret", &tret_arr);
 		array_init(&attr_arr);
 		for(i = 0; i < 11; i++)
