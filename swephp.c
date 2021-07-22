@@ -4839,6 +4839,29 @@ PHP_FUNCTION(swe_cs2timestr)
 	RETURN_STRING(swe_cs2timestr((int)t, (int)sep, (int)suppressZero, a));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_cs2lonlatstr(t, pchar, mchar)
+
+Centiseconds -> longitude or latitude string.
+
+=head3 Parameters
+
+    int     t       Longitude/latitude value in centiseconds.
+    string  pchar   Spacing character after degree notation.
+    string  mchar   ???
+
+=head3 return value
+
+    string    Longitude/latitude value as string.
+
+=head3 C declaration
+
+  char * swe_cs2lonlatstr(CSEC t, char pchar, char mchar, char *s);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_cs2lonlatstr)
 {
 	long t;
