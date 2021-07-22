@@ -2796,7 +2796,7 @@ When and how is the next solar eclipse at a given geographical position?
 
 =head3 C declaration
 
-	int we_sol_eclipse_when_loc(double tjd_start, int32 ifl, double *geopos, double *tret, double *attr, int32 backward, char *serr)
+	int swe_sol_eclipse_when_loc(double tjd_start, int32 ifl, double *geopos, double *tret, double *attr, int32 backward, char *serr)
 
 =cut
  }}} */
@@ -3339,7 +3339,7 @@ function calculates planetary phenomena
 =head3 Parameters
 
   double       tjd_et      Julian day in Ephemeris Time.
-  nt           ipl         Planet/body/object number or constant.
+  int           ipl         Planet/body/object number or constant.
   int          iflag       Flag bits for computation requirements.
 
 =head3 return array
@@ -3402,7 +3402,7 @@ function calculates planetary phenomena
 =head3 Parameters
 
   double       tjd_ut      Julian day in Universal Time.
-  nt           ipl         Planet/body/object number or constant.
+  int           ipl         Planet/body/object number or constant.
   int          iflag       Flag bits for computation requirements.
 
 =head3 return array
