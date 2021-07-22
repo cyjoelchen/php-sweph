@@ -459,6 +459,14 @@ PHP_MINIT_FUNCTION(swephp)
 	REGISTER_LONG_CONSTANT("SE_TIDAL_SWIEPH", SE_TIDAL_SWIEPH, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_TIDAL_JPLEPH", SE_TIDAL_JPLEPH, CONST_CS | CONST_PERSISTENT);
 
+	/* for swe_split_deg() */
+	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_ROUND_SEC", SE_SPLIT_DEG_ROUND_SEC, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_ROUND_MIN", SE_SPLIT_DEG_ROUND_MIN, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_ROUND_DEG", SE_SPLIT_DEG_ROUND_DEG, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_ZODIACAL", SE_SPLIT_DEG_ZODIACAL, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_NAKSHATRA", SE_SPLIT_DEG_NAKSHATRA, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_KEEP_SIGN", SE_SPLIT_DEG_KEEP_SIGN, CONST_CS | CONST_PERSISTENT);
+
 	return SUCCESS;
 }
 /* }}} */
@@ -4346,6 +4354,31 @@ PHP_FUNCTION(swe_radnorm)
 	RETURN_DOUBLE(swe_radnorm(x));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_rad_midp(x1, x2)
+
+Calculate a directional midpoint between 2 radian values:
+
+0, 3.14159 => 1.570795
+3.14159, 0 => 1.570795
+
+=head3 Parameters
+
+    double      x1      Starting radian value.
+    double      x2      Ending radian value.
+
+=head3 return value
+
+    double      Midpoint in radians.
+
+=head3 C declaration
+
+  double swe_rad_midp(double x1, x0);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_rad_midp)
 {
 	double x1, x0;
@@ -4360,6 +4393,31 @@ PHP_FUNCTION(swe_rad_midp)
 	RETURN_DOUBLE(swe_rad_midp(x1, x0));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_deg_midp(x1, x2)
+
+Calculate a directional midpoint between 2 degree values:
+
+0,180 => 90
+180,0 => 270
+
+=head3 Parameters
+
+    double      x1      Starting degree value.
+    double      x2      Ending degree value.
+
+=head3 return value
+
+    double      Midpoint in degrees.
+
+=head3 C declaration
+
+  double swe_deg_midp(double x1, x0);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_deg_midp)
 {
 	double x1, x0;
@@ -4374,6 +4432,43 @@ PHP_FUNCTION(swe_deg_midp)
 	RETURN_DOUBLE(swe_deg_midp(x1, x0));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_split_deg(ddeg, roundflag)
+
+This function takes a decimal degree number as input and provides sign or nakshatra,
+degree, minutes, seconds and fraction of second.
+
+It can also round to seconds, minutes, degrees.
+
+=head3 Parameters
+
+    double      ddeg            Decimal degree value to "split".
+    double      roundflag       Default is no rounding; otherwise use flags:
+                                SE_SPLIT_DEG_ROUND_SEC
+                                SE_SPLIT_DEG_ROUND_MIN
+                                SE_SPLIT_DEG_ROUND_DEG
+                                SE_SPLIT_DEG_ZODIACAL
+                                SE_SPLIT_DEG_NAKSHATRA
+                                SE_SPLIT_DEG_KEEP_SIGN
+
+=head3 return array
+
+    [
+        'deg' => (int) Integer portion of input value.
+        'min' => (int) Minute portion of input value (>= 0 < 60).
+        'sec' => (int) Seconds portion of input value (>= 0 < 60).
+        'secfr' => (double) Fractional portion of seconds.
+        'sgn' => (int) Zodiac sign number; or +/- 1.
+    ]
+
+=head3 C declaration
+
+  double swe_split_deg(double ddeg, int32 roundflag, int32 *ideg, int32 *imin, int32 *isec, double *dsecfr, int32 *isgn)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_split_deg)
 {
 	long roundflag;
@@ -4395,6 +4490,27 @@ PHP_FUNCTION(swe_split_deg)
 	add_assoc_long(return_value, "sgn", isgn);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_csnorm(p)
+
+Normalize argument into interval [0..DEG360].
+
+=head3 Parameters
+
+    int     p       Input value to normalize to >=0 & < 360.
+
+=head3 return value
+
+    long    Normalized value.
+
+=head3 C declaration
+
+  centisec swe_csnorm(centisec p)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_csnorm)
 {
 	long p;
@@ -4408,6 +4524,28 @@ PHP_FUNCTION(swe_csnorm)
 	RETURN_LONG(swe_csnorm(p));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_difcsn(p1, p2)
+
+Distance in centisecs p1 - p2 normalized to [0..360].
+
+=head3 Parameters
+
+    int     p1      Starting position.
+    int     p2      Ending position.
+
+=head3 return value
+
+    long    Normalized distance.
+
+=head3 C declaration
+
+  centisec swe_difcsn(centisec p1, centisec p2)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_difcsn)
 {
 	long p1, p2;
@@ -4421,6 +4559,28 @@ PHP_FUNCTION(swe_difcsn)
 	RETURN_LONG(swe_difcsn((int)p1, (int)p2));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_difdegn(p1, p2)
+
+Distance in degrees.
+
+=head3 Parameters
+
+    double     p1      Starting position.
+    double     p2      Ending position.
+
+=head3 return value
+
+    double    Normalized distance.
+
+=head3 C declaration
+
+  double swe_difdegn(double p1, double p2);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_difdegn)
 {
 	double p1, p2;
@@ -4434,6 +4594,28 @@ PHP_FUNCTION(swe_difdegn)
 	RETURN_DOUBLE(swe_difdegn(p1, p2));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_difcs2n(p1, p2)
+
+Distance in centisecs p1 - p2 normalized to [-180..180].
+
+=head3 Parameters
+
+    int     p1      Starting position.
+    int     p2      Ending position.
+
+=head3 return value
+
+    int    Normalized distance.
+
+=head3 C declaration
+
+  centisec swe_difcs2n(centisec p1, centisec p2);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_difcs2n)
 {
 	long p1, p2;
@@ -4447,6 +4629,28 @@ PHP_FUNCTION(swe_difcs2n)
 	RETURN_LONG(swe_difcs2n((int)p1, (int)p2));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_difdeg2n(p1, p2)
+
+Distance in degrees p1 - p2 normalized to [-180..180].
+
+=head3 Parameters
+
+    double     p1      Starting position.
+    double     p2      Ending position.
+
+=head3 return value
+
+    double    Normalized distance.
+
+=head3 C declaration
+
+  double swe_difdeg2n(double p1, double p2);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_difdeg2n)
 {
 	double p1, p2;
@@ -4460,6 +4664,28 @@ PHP_FUNCTION(swe_difdeg2n)
 	RETURN_DOUBLE(swe_difdeg2n(p1, p2));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_difrad2n(p1, p2)
+
+Distance in radians p1 - p2 normalized to [-PI..PI].
+
+=head3 Parameters
+
+    double     p1      Starting position.
+    double     p2      Ending position.
+
+=head3 return value
+
+    double    Normalized distance.
+
+=head3 C declaration
+
+  double swe_difrad2n(double p1, double p2);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_difrad2n)
 {
 	double p1, p2;
@@ -4473,6 +4699,27 @@ PHP_FUNCTION(swe_difrad2n)
 	RETURN_DOUBLE(swe_difrad2n(p1, p2));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_csroundsec(x)
+
+Round second, but at 29.5959 always down.
+
+=head3 Parameters
+
+    int     x      Second value.
+
+=head3 return value
+
+    int    Rounded value.
+
+=head3 C declaration
+
+  centisec swe_csroundsec(centisec x);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_csroundsec)
 {
 	long x;
@@ -4486,6 +4733,27 @@ PHP_FUNCTION(swe_csroundsec)
 	RETURN_LONG(swe_csroundsec((int)x));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_d2l(x)
+
+Double to long with rounding, no overflow check.
+
+=head3 Parameters
+
+    double     x      Value to round.
+
+=head3 return value
+
+    int    Rounded value.
+
+=head3 C declaration
+
+  long swe_d2l(double x);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_d2l)
 {
 	double x;
@@ -4499,6 +4767,27 @@ PHP_FUNCTION(swe_d2l)
 	RETURN_LONG(swe_d2l(x));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_day_of_week(jd)
+
+Get day of week from Julian day, expressed as integer (0 = Monday, 6 = Sunday).
+
+=head3 Parameters
+
+    double     jd      Julian day number.
+
+=head3 return value
+
+    int    Day of week.
+
+=head3 C declaration
+
+  int swe_day_of_week(double jd);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_day_of_week)
 {
 	double jd;
@@ -4512,6 +4801,29 @@ PHP_FUNCTION(swe_day_of_week)
 	RETURN_LONG(swe_day_of_week(jd));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_cs2timestr(t, sep, suppressZero)
+
+Centiseconds -> time string.
+
+=head3 Parameters
+
+    int     t               Time in centiseconds.
+    int     sep             ASCII code of character to use as separator.
+    int     suppressZero    Remove trailing zeros (default is to show them).
+
+=head3 return value
+
+    string    Time as string.
+
+=head3 C declaration
+
+  char * swe_cs2timestr(CSEC t, int sep, AS_BOOL suppressZero, char *a);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_cs2timestr)
 {
 	long t, sep, suppressZero;
@@ -4527,6 +4839,32 @@ PHP_FUNCTION(swe_cs2timestr)
 	RETURN_STRING(swe_cs2timestr((int)t, (int)sep, (int)suppressZero, a));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_cs2lonlatstr(t, pchar, mchar)
+
+Centiseconds -> longitude or latitude string.
+
+	typical use for longitude: swe_cs2lonlatstr(cs, 'e', 'w')
+	typical use for latitude: swe_cs2lonlatstr(cs, 'n', 's')
+
+=head3 Parameters
+
+    int     t       Longitude/latitude value in centiseconds.
+    string  pchar   Spacing character after degree notation.
+    string  mchar   Spacing character after degree notation, if value is negative.
+
+=head3 return value
+
+    string    Longitude/latitude value as string.
+
+=head3 C declaration
+
+  char * swe_cs2lonlatstr(CSEC t, char pchar, char mchar, char *s);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_cs2lonlatstr)
 {
 	long t;
@@ -4545,6 +4883,27 @@ PHP_FUNCTION(swe_cs2lonlatstr)
 	RETURN_STRING(swe_cs2lonlatstr((int)t, pchar[0], mchar[0], s));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_cs2degstr(t)
+
+Centiseconds -> degrees string.
+
+=head3 Parameters
+
+    int     t       Degree value in centiseconds.
+
+=head3 return value
+
+    string    Degree string.
+
+=head3 C declaration
+
+  char * swe_cs2degstr(CSEC t, char *a);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_cs2degstr)
 {
 	long t;
