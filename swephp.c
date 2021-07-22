@@ -4801,6 +4801,29 @@ PHP_FUNCTION(swe_day_of_week)
 	RETURN_LONG(swe_day_of_week(jd));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_cs2timestr(t, sep, suppressZero)
+
+Centiseconds -> time string.
+
+=head3 Parameters
+
+    int     t               Time in centiseconds.
+    int     sep             ASCII code of character to use as separator.
+    int     suppressZero    Remove trailing zeros (default is to show them).
+
+=head3 return value
+
+    string    Time as string.
+
+=head3 C declaration
+
+  char * swe_cs2timestr(CSEC t, int sep, AS_BOOL suppressZero, char *a);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_cs2timestr)
 {
 	long t, sep, suppressZero;
