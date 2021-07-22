@@ -80,7 +80,7 @@ _The HTML version of this documentation is included in this repository here:_
 <?php
 
 # Set path to ephemeris data files (ex. for Docker setup).
-swe_set_ephe_path("/root/php-sweph/sweph/ephe");
+swe_set_ephe_path("./sweph/ephe");
 
 # calc planet position
 list($y, $m, $d, $h, $mi, $s) = sscanf(gmdate("Y m d G i s"), "%d %d %d %d %d %d");
