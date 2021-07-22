@@ -459,6 +459,14 @@ PHP_MINIT_FUNCTION(swephp)
 	REGISTER_LONG_CONSTANT("SE_TIDAL_SWIEPH", SE_TIDAL_SWIEPH, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_TIDAL_JPLEPH", SE_TIDAL_JPLEPH, CONST_CS | CONST_PERSISTENT);
 
+	/* for swe_split_deg() */
+	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_ROUND_SEC", SE_SPLIT_DEG_ROUND_SEC, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_ROUND_MIN", SE_SPLIT_DEG_ROUND_MIN, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_ROUND_DEG", SE_SPLIT_DEG_ROUND_DEG, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_ZODIACAL", SE_SPLIT_DEG_ZODIACAL, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_NAKSHATRA", SE_SPLIT_DEG_NAKSHATRA, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_KEEP_SIGN", SE_SPLIT_DEG_KEEP_SIGN, CONST_CS | CONST_PERSISTENT);
+
 	return SUCCESS;
 }
 /* }}} */
@@ -4424,6 +4432,43 @@ PHP_FUNCTION(swe_deg_midp)
 	RETURN_DOUBLE(swe_deg_midp(x1, x0));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_split_deg(ddeg, roundflag)
+
+This function takes a decimal degree number as input and provides sign or nakshatra,
+degree, minutes, seconds and fraction of second.
+
+It can also round to seconds, minutes, degrees.
+
+=head3 Parameters
+
+    double      ddeg            Decimal degree value to "split".
+    double      roundflag       Default is no rounding; otherwise use flags:
+                                SE_SPLIT_DEG_ROUND_SEC
+                                SE_SPLIT_DEG_ROUND_MIN
+                                SE_SPLIT_DEG_ROUND_DEG
+                                SE_SPLIT_DEG_ZODIACAL
+                                SE_SPLIT_DEG_NAKSHATRA
+                                SE_SPLIT_DEG_KEEP_SIGN
+
+=head3 return array
+
+    [
+        'deg' => (int) Integer portion of input value.
+        'min' => (int) Minute portion of input value (>= 0 < 60).
+        'sec' => (int) Seconds portion of input value (>= 0 < 60).
+        'secfr' => (double) Fractional portion of seconds.
+        'sgn' => (int) Zodiac sign number; or +/- 1.
+    ]
+
+=head3 C declaration
+
+  double swe_split_deg(double ddeg, int32 roundflag, int32 *ideg, int32 *imin, int32 *isec, double *dsecfr, int32 *isgn)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_split_deg)
 {
 	long roundflag;
