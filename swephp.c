@@ -3557,7 +3557,7 @@ PHP_FUNCTION(swe_refrac_extended)
 	
 	array_init(return_value);
 	add_assoc_long(return_value, "rc", rc);
-	for(i = 0; i < 3; i++)
+	for(i = 0; i < 4; i++)
 		add_index_double(return_value, i, dret[i]);
 	add_assoc_double(return_value, "retflag", rc);
 }

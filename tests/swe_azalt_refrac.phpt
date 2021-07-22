@@ -71,9 +71,7 @@ swe_refrac_extended(19.97972538002, 330, 0, 10.0, 30, SE_TRUE_TO_APP)
 rv[0] = 19.979725
 rv[1] = 19.975900
 rv[2] = -0.003826
-
-Notice: Undefined offset: 3 in /home/alois/php-sweph/tests/swe_azalt_refrac.php on line 41
-rv[3] = 0.000000
+rv[3] = -0.582825
 swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 309.8883982075, -1.6164161204145)
 planet Moon	lon=309.888398	lat=-1.616416
 horizon coordinates
@@ -88,9 +86,7 @@ swe_refrac_extended(14.168707435917, 330, 0, 10.0, 30, SE_TRUE_TO_APP)
 rv[0] = 14.168707
 rv[1] = 14.163272
 rv[2] = -0.005436
-
-Notice: Undefined offset: 3 in /home/alois/php-sweph/tests/swe_azalt_refrac.php on line 41
-rv[3] = 0.000000
+rv[3] = -0.582825
 swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 317.58169019832, 3.5727768041555)
 planet Mercury	lon=317.581690	lat=3.572777
 horizon coordinates
@@ -105,9 +101,7 @@ swe_refrac_extended(23.054619397828, 330, 0, 10.0, 30, SE_TRUE_TO_APP)
 rv[0] = 23.054619
 rv[1] = 23.051351
 rv[2] = -0.003268
-
-Notice: Undefined offset: 3 in /home/alois/php-sweph/tests/swe_azalt_refrac.php on line 41
-rv[3] = 0.000000
+rv[3] = -0.582825
 swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 286.27461775725, 0.45824983922003)
 planet Venus	lon=286.274618	lat=0.458250
 horizon coordinates
@@ -122,9 +116,7 @@ swe_refrac_extended(0.074099595114085, 330, 0, 10.0, 30, SE_TRUE_TO_APP)
 rv[0] = 0.074100
 rv[1] = 0.025166
 rv[2] = -0.048933
-
-Notice: Undefined offset: 3 in /home/alois/php-sweph/tests/swe_azalt_refrac.php on line 41
-rv[3] = 0.000000
+rv[3] = -0.582825
 swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 84.347673788076, 3.269827510972)
 planet Mars	lon=84.347674	lat=3.269828
 horizon coordinates
@@ -139,9 +131,7 @@ swe_refrac_extended(17.317286330931, 330, 0, 10.0, 30, SE_TRUE_TO_APP)
 rv[0] = 17.317286
 rv[1] = 17.312835
 rv[2] = -0.004452
-
-Notice: Undefined offset: 3 in /home/alois/php-sweph/tests/swe_azalt_refrac.php on line 41
-rv[3] = 0.000000
+rv[3] = -0.582825
 swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 281.08104864944, 0.11611585917234)
 planet Jupiter	lon=281.081049	lat=0.116116
 horizon coordinates
@@ -156,9 +146,7 @@ swe_refrac_extended(-3.6753655043035, 330, 0, 10.0, 30, SE_TRUE_TO_APP)
 rv[0] = -3.675366
 rv[1] = -3.675366
 rv[2] = 0.000000
-
-Notice: Undefined offset: 3 in /home/alois/php-sweph/tests/swe_azalt_refrac.php on line 41
-rv[3] = 0.000000
+rv[3] = -0.582825
 swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 156.55664098162, 1.807919057902)
 planet Saturn	lon=156.556641	lat=1.807919
 horizon coordinates
@@ -173,9 +161,7 @@ swe_refrac_extended(-29.463314277349, 330, 0, 10.0, 30, SE_TRUE_TO_APP)
 rv[0] = -29.463314
 rv[1] = -29.463314
 rv[2] = 0.000000
-
-Notice: Undefined offset: 3 in /home/alois/php-sweph/tests/swe_azalt_refrac.php on line 41
-rv[3] = 0.000000
+rv[3] = -0.582825
 swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 346.91144266408, -0.73880594411775)
 planet Uranus	lon=346.911443	lat=-0.738806
 horizon coordinates
@@ -190,9 +176,7 @@ swe_refrac_extended(35.134977545971, 330, 0, 10.0, 30, SE_TRUE_TO_APP)
 rv[0] = 35.134978
 rv[1] = 35.133001
 rv[2] = -0.001976
-
-Notice: Undefined offset: 3 in /home/alois/php-sweph/tests/swe_azalt_refrac.php on line 41
-rv[3] = 0.000000
+rv[3] = -0.582825
 swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 321.54464479387, -0.29238086027684)
 planet Neptune	lon=321.544645	lat=-0.292381
 horizon coordinates
@@ -207,9 +191,7 @@ swe_refrac_extended(22.432808718829, 330, 0, 10.0, 30, SE_TRUE_TO_APP)
 rv[0] = 22.432809
 rv[1] = 22.429440
 rv[2] = -0.003369
-
-Notice: Undefined offset: 3 in /home/alois/php-sweph/tests/swe_azalt_refrac.php on line 41
-rv[3] = 0.000000
+rv[3] = -0.582825
 swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 270.33845556252, 6.2835633668811)
 planet Pluto	lon=270.338456	lat=6.283563
 horizon coordinates
@@ -224,6 +206,4 @@ swe_refrac_extended(-6.1698581235873, 330, 0, 10.0, 30, SE_TRUE_TO_APP)
 rv[0] = -6.169858
 rv[1] = -6.169858
 rv[2] = 0.000000
-
-Notice: Undefined offset: 3 in /home/alois/php-sweph/tests/swe_azalt_refrac.php on line 41
-rv[3] = 0.000000
+rv[3] = -0.582825
