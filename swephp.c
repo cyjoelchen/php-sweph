@@ -4767,6 +4767,27 @@ PHP_FUNCTION(swe_d2l)
 	RETURN_LONG(swe_d2l(x));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_day_of_week(jd)
+
+Get day of week from Julian day, expressed as integer (0 = Monday, 6 = Sunday).
+
+=head3 Parameters
+
+    double     jd      Julian day number.
+
+=head3 return value
+
+    int    Day of week.
+
+=head3 C declaration
+
+  int swe_day_of_week(double jd);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_day_of_week)
 {
 	double jd;
