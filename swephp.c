@@ -2415,7 +2415,7 @@ finds the gauquelin sector position of a planet or fixed star at given date/time
 
 =head3 Parameters
 
-  tjd_ut	double
+  tjd_ut	double		Julian day number, Universal Time.
   ipl    	int		 Planet 
   star		string   Star name, if a star placement is searched
   iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
