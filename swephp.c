@@ -3501,7 +3501,7 @@ PHP_FUNCTION(swe_refrac)
 /* {{{ pod
 =pod
 
-=head1 function swe_refrac_extended(inalt, atpress, attemp, calc_flag)
+=head1 function swe_refrac_extended(inalt, geoalt, atpress, lapse_rate, attemp, calc_flag)
 
 Transforms apparent to true altitude and vice-versa.
 This function was created thanks to and with the help of the
@@ -3524,6 +3524,7 @@ It is more correct and more skilled than the old function swe_refrac():
 
 =head3 return array
 
+  ['rc']	int return code
   [0..3]	 array of 4 doubles: 
 	[0] true altitude, if possible; otherwise input value
 	[1] apparent altitude, if possible; otherwise input value
@@ -3553,9 +3554,9 @@ PHP_FUNCTION(swe_refrac_extended)
 	}
 	rc = swe_refrac_extended(inalt, geoalt, atpress, lapse_rate, attemp, calc_flag, dret);
 
-	RETURN_DOUBLE(rc);
 	
 	array_init(return_value);
+	add_assoc_long(return_value, "rc", rc);
 	for(i = 0; i < 3; i++)
 		add_index_double(return_value, i, dret[i]);
 	add_assoc_double(return_value, "retflag", rc);
@@ -3719,7 +3720,7 @@ Computes azimut and height, from either ecliptic or equatorial coordinates
 =head3 Parameters
 
   double        tjd_ut      
-  int           calc_flag
+  int           calc_flag		either SE_ECL2HOR or SE_EQU2HOR
   double		geolon		longitude
   double		geolat		latitude
   double		geoalt		altitude above sea
@@ -3751,7 +3752,7 @@ PHP_FUNCTION(swe_azalt)
 
 	if(ZEND_NUM_ARGS() != 9) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dldddddddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlddddddd",
 			&tjd_ut, &calc_flag, 
 			&geopos[0], &geopos[1], &geopos[2], 
 			&atpress, &attemp,
@@ -3769,22 +3770,22 @@ PHP_FUNCTION(swe_azalt)
 /* {{{ pod
 =pod
 
-=head1 function swe_azalt_rev(tjd_ut, iflag, xin0, xin1)
+=head1 function swe_azalt_rev(tjd_ut, calc_flag, xin0, xin1)
 
 computes either ecliptical or equatorial coordinates from azimuth and true altitude in degrees.
 
 =head3 Parameters
 
   double        tjd_ut      
-  int           iflag		either SE_HOR2ECL or SE_HOR2EQU
+  int           calc_flag		either SE_HOR2ECL or SE_HOR2EQU
   double		xin0		azimut, in degrees
   double		xin1		true altitude, in degrees
 
 =head3 return array
 
-  [0..2]			array of 3 doubles: 
-                     xout[0] = longitude
-                     xout[1] = latitude
+	array of 2 doubles: 
+	 xout[0] = longitude
+	 xout[1] = latitude
 
 
 =head3 C declaration
