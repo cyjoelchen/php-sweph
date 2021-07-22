@@ -4699,6 +4699,27 @@ PHP_FUNCTION(swe_difrad2n)
 	RETURN_DOUBLE(swe_difrad2n(p1, p2));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_csroundsec(x)
+
+Round second, but at 29.5959 always down.
+
+=head3 Parameters
+
+    int     x      Second value.
+
+=head3 return value
+
+    int    Rounded value.
+
+=head3 C declaration
+
+  centisec swe_csroundsec(centisec x);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_csroundsec)
 {
 	long x;
