@@ -5,8 +5,9 @@
 
 ## License
 `php-sweph` is work derived from the original release of the Astrodienst Swiss Ephemeris library.
-It is subject to the same licensing conditions as the C release. A copy of the license file
-is found in `sweph/src/LICENSE`. Since Swiss Ephemeris release 2.10.01 the GPL license has been
+To use `php-sweph`, the licensing conditions imposed by Astrodienst for Swiss Ephemeris must
+be fulfilled. A copy of the license file
+is found in `sweph/src/LICENSE`. Please note: since Swiss Ephemeris release 2.10.01 the GPL license has been
 replaced with the AGPL license, as one of the options in Astrodienst's dual licensing model.
 
 ## Installation
