@@ -2972,6 +2972,8 @@ When is the next solar eclipse anywhere on earth?
 		tret[5] time of totality end
 		tret[6] time of center line begin
 		tret[7] time of center line end
+		tret[8] Unused/not implemented.
+		tret[9] Unused/not implemented.
 
 =head3 C declaration
 
