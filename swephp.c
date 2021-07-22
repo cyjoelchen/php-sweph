@@ -4524,6 +4524,28 @@ PHP_FUNCTION(swe_csnorm)
 	RETURN_LONG(swe_csnorm(p));
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_difcsn(p1, p2)
+
+Distance in centisecs p1 - p2 normalized to [0..360].
+
+=head3 Parameters
+
+    int     p1      Starting position.
+    int     p2      Ending position.
+
+=head3 return value
+
+    long    Normalized distance.
+
+=head3 C declaration
+
+  centisec swe_difcsn(centisec p1, centisec p2)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_difcsn)
 {
 	long p1, p2;
