@@ -2522,21 +2522,15 @@ PHP_FUNCTION(swe_sol_eclipse_where)
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
 
-	if (rc == ERR)
-	{
+	if (rc < 0) {
 		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
+	} else {
 		array_init(&geopos_arr);
-		
 		for(i = 0; i < 2; i++)
 			add_index_double(&geopos_arr, i, geopos[i]);
-	
 		array_init(&attr_arr);
 		for(i = 0; i < 20; i++)
 			add_index_double(&attr_arr, i, attr[i]);
-		
 		add_assoc_zval(return_value, "geopos", &geopos_arr);
 		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
@@ -2810,17 +2804,13 @@ PHP_FUNCTION(swe_lun_occult_when_loc)
 /* {{{ pod
 =pod
 
-=head1 function swe_sol_eclipse_when_glob(tjd_ut, iflag, ifltype, backw);
+=head1 function swe_sol_eclipse_when_glob(tjd_start, iflag, ifltype, backw);
 
 When is the next solar eclipse anywhere on earth?
 
-returns SE_ECL_TOTAL or SE_ECL_ANNULAR or SE_ECL_PARTIAL or SE_ECL_ANNULAR_TOTAL
-        SE_ECL_CENTRAL
-        SE_ECL_NONCENTRAL
-
 =head3 Parameters
 
-  tjd_ut    double      Julian day number, Universal Time
+  tjd_start    double      Julian day number, Universal Time
   iflag     int         (specify ephemeris to be used, cf. swe_calc( ))
   ifltype   int         Eclipse type to be searched; 0 if any type of eclipse is wanted
   backw     int         search backward in time
@@ -2828,6 +2818,9 @@ returns SE_ECL_TOTAL or SE_ECL_ANNULAR or SE_ECL_PARTIAL or SE_ECL_ANNULAR_TOTAL
 =head3 return array
 
       retflag => (int)            ERR or eclipse type
+		returns SE_ECL_TOTAL or SE_ECL_ANNULAR or SE_ECL_PARTIAL or SE_ECL_ANNULAR_TOTAL
+				SE_ECL_CENTRAL
+				SE_ECL_NONCENTRAL
       serr    => (string)         Error string, on error only
       tret    => array of 8 double:
         tret[0]	time of maximum eclipse
@@ -3109,7 +3102,7 @@ PHP_FUNCTION(swe_lun_eclipse_when)
 /* {{{ pod
 =pod
 
-=head1 function swe_lun_eclipse_when_loc(tjd_ut, iflag, geopos[0], geopos[1], geopos[2], backw);
+=head1 function swe_lun_eclipse_when_loc(tjd_start, iflag, geopos[0], geopos[1], geopos[2], backw);
 
 When is the next lunar eclipse, observable at a geographic position? 
 
@@ -3118,7 +3111,7 @@ SE_ECL_TOTAL, SE_ECL_PARTIAL, SE_ECL_PENUMBRAL
 
 =head3 Parameters
 
-  tjd_ut	double   Julian day number, Universal Time
+  tjd_start	double   Julian day number, Universal Time
   iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
   geopos[0] double	 geographic longitude
   geopos[1] double	 geographic latitude
@@ -3161,7 +3154,7 @@ PHP_FUNCTION(swe_lun_eclipse_when_loc)
 {
 	size_t arg_len;
 	long backward, ifl;
-	double tjd_ut, geopos[3], tret[10], attr[20];
+	double tjd_start, geopos[3], tret[10], attr[20];
 	char serr[AS_MAXCH];
 	int i, rc;
 	zval tret_arr, attr_arr;
@@ -3170,10 +3163,10 @@ PHP_FUNCTION(swe_lun_eclipse_when_loc)
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dldddl",
-			&tjd_ut, &ifl, &geopos[0], &geopos[1], &geopos[2], &backward, &arg_len) == FAILURE) {
+			&tjd_start, &ifl, &geopos[0], &geopos[1], &geopos[2], &backward, &arg_len) == FAILURE) {
 		return;
 	}
-	rc = swe_lun_eclipse_when_loc(tjd_ut, ifl, geopos, tret, attr, backward, serr);
+	rc = swe_lun_eclipse_when_loc(tjd_start, ifl, geopos, tret, attr, backward, serr);
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
