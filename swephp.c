@@ -4850,7 +4850,7 @@ Centiseconds -> longitude or latitude string.
 
     int     t       Longitude/latitude value in centiseconds.
     string  pchar   Spacing character after degree notation.
-    string  mchar   ???
+    string  mchar   Spacing character after degree notation, if value is negative.
 
 =head3 return value
 
