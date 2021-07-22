@@ -895,6 +895,8 @@ PHP_FUNCTION(swe_fixstar2_ut)
 	strncpy(star, star_ptr, star_len);
 	rc = swe_fixstar2_ut(star, tjd_ut, (int)iflag, xx, serr);
 
+  
+  
 	array_init(return_value);
 	for(i = 0; i < 6; i++)
 		add_index_double(return_value, i, xx[i]);
@@ -3970,6 +3972,40 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_nod_aps(tjd_et, ipl, iflag, method)
+
+calculate nodes and apsides 
+
+Detailed documentation in Programmer's manual and in comments in C source file swecl.
+
+
+=head3 Parameters
+
+  double        tjd_et      Julian day in Ephemeris Time.
+  int           ipl         Planet/body/object number or constant.
+  int           iflag       Flag bits for computation requirements.
+  int		    method
+  	combination of SE_NODBIT_MEAN, SE_NODBIT_OSCU, SE_NODBIT_OSCU_BAR, SE_NODBIT_FOCAL
+	according to docu
+
+=head3 return array
+
+  ['retflag']   int		return flag, < 0 in case of error
+  ['serr']      string	optional error message
+  ['xnasc']     array of 6 doubles
+  ['xndsc']     array of 6 doubles
+  ['xperi']     array of 6 doubles
+  ['xaphe']     array of 6 doubles
+
+=head3 C declaration
+
+  int swe_nod_aps(double tjd_et, int32 ipl, int32 iflag, int32  method, double *xnasc, double *xndsc, double *xperi, double *xaphe, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_nod_aps)
 {
 	size_t arg_len;
@@ -3993,28 +4029,21 @@ PHP_FUNCTION(swe_nod_aps)
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
 
-	if (rc == ERR)
-	{
+	if (rc < 0) {
 		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
+	} else {
 		array_init(&xnasc_arr);
 		for(i = 0; i < 6; i++)
 			add_index_double(&xnasc_arr, i, xnasc[i]);
-
 		array_init(&xndsc_arr);
 		for(i = 0; i < 6; i++)
 			add_index_double(&xndsc_arr, i, xndsc[i]);
-
 		array_init(&xperi_arr);
 		for(i = 0; i < 6; i++)
 			add_index_double(&xperi_arr, i, xperi[i]);
-
 		array_init(&xaphe_arr);
 		for(i = 0; i < 6; i++)
 			add_index_double(&xaphe_arr, i, xaphe[i]);
-			
 		add_assoc_zval(return_value, "xnasc", &xnasc_arr);
 		add_assoc_zval(return_value, "xndsc", &xndsc_arr);
 		add_assoc_zval(return_value, "xnperi", &xperi_arr);
@@ -4022,6 +4051,40 @@ PHP_FUNCTION(swe_nod_aps)
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_nod_aps_ut(tjd_ut, ipl, iflag, method)
+
+calculate nodes and apsides 
+
+Detailed documentation in Programmer's manual and in comments in C source file swecl.
+
+
+=head3 Parameters
+
+  double        tjd_ut      Julian day in Universal Time.
+  int           ipl         Planet/body/object number or constant.
+  int           iflag       Flag bits for computation requirements.
+  int		    method
+  	combination of SE_NODBIT_MEAN, SE_NODBIT_OSCU, SE_NODBIT_OSCU_BAR, SE_NODBIT_FOCAL
+	according to docu
+
+=head3 return array
+
+  ['retflag']   int		return flag, < 0 in case of error
+  ['serr']      string	optional error message
+  ['xnasc']     array of 6 doubles
+  ['xndsc']     array of 6 doubles
+  ['xperi']     array of 6 doubles
+  ['xaphe']     array of 6 doubles
+
+=head3 C declaration
+
+  int swe_nod_aps_ut(double tjd_ut, int32 ipl, int32 iflag, int32  method, double *xnasc, double *xndsc, double *xperi, double *xaphe, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_nod_aps_ut)
 {
 	size_t arg_len;
@@ -4045,28 +4108,21 @@ PHP_FUNCTION(swe_nod_aps_ut)
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
 
-	if (rc == ERR)
-	{
+	if (rc < 0) {
 		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
+	} else {
 		array_init(&xnasc_arr);
 		for(i = 0; i < 6; i++)
 			add_index_double(&xnasc_arr, i, xnasc[i]);
-
 		array_init(&xndsc_arr);
 		for(i = 0; i < 6; i++)
 			add_index_double(&xndsc_arr, i, xndsc[i]);
-
 		array_init(&xperi_arr);
 		for(i = 0; i < 6; i++)
 			add_index_double(&xperi_arr, i, xperi[i]);
-
 		array_init(&xaphe_arr);
 		for(i = 0; i < 6; i++)
 			add_index_double(&xaphe_arr, i, xaphe[i]);
-			
 		add_assoc_zval(return_value, "xnasc", &xnasc_arr);
 		add_assoc_zval(return_value, "xndsc", &xndsc_arr);
 		add_assoc_zval(return_value, "xnperi", &xperi_arr);
