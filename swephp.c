@@ -106,7 +106,6 @@ zend_function_entry swephp_functions[] = {
 	PHP_FE(swe_pheno_ut, NULL)
 	PHP_FE(swe_refrac, NULL)
 	PHP_FE(swe_refrac_extended, NULL)
-	PHP_FE(swe_set_lapse_rate, NULL)
 	PHP_FE(swe_azalt, NULL)
 	PHP_FE(swe_azalt_rev, NULL)
 	PHP_FE(swe_rise_trans, NULL)
@@ -2394,9 +2393,45 @@ PHP_FUNCTION(swe_house_name)
 }
 
 /**************************** 
- * exports from sweecl.c 
+ * exports from swecl.c 
  ****************************/
 
+/* {{{ pod
+=pod
+
+=head1 function swe_gauquelin_sector(tjd_ut, ipl, starname, iflag, imeth, geolon, geolat, geoalt, atpress, attemp)
+
+finds the gauquelin sector position of a planet or fixed star at given date/time (UT)
+
+=head3 Parameters
+
+  tjd_ut	double
+  ipl    	int		 Planet 
+  star		string   Star name, if a star placement is searched
+  iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
+  imeth   	int      method: 0 = with lat., 1 = without lat., 
+					 2 = from rise/set, 3 = from rise/set with refraction 
+  double		geolon		longitude
+  double		geolat		latitude
+  double		geoalt		altitude above sea
+  double		atpress		atmospheric pressure
+  double		attemp		atmospheric temperature
+
+=head3 return array
+      rc => (int)            ERR or OK 
+      serr    => (string)         Error string, on error only
+
+	in case of success;
+      star    => (string)         Corrected star name, if input starname was given
+      gsect    => (double) 
+
+
+=head3 C declaration
+
+   int swe_gauquelin_sector(double t_ut, int32 ipl, char *starname, int32 iflag, int32 imeth, double *geopos, double atpress, double attemp, double *dgsect, char *serr);
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_gauquelin_sector)
 {
 	size_t s_len;
@@ -2421,11 +2456,14 @@ PHP_FUNCTION(swe_gauquelin_sector)
 	rc = swe_gauquelin_sector(t_ut, ipl, star, iflag, imeth, geopos,
 			atpress, attemp, &dgsect, serr);
 
-	if (rc == ERR) {
-		RETURN_STRING(serr);
-	} else
-	{
-		RETURN_DOUBLE(dgsect);
+	array_init(return_value);
+	add_assoc_long(return_value, "rc", rc);
+	if (rc < 0) {
+		add_assoc_string(return_value, "serr", serr);			
+	} else {
+		add_assoc_double(return_value, "gsect", dgsect);
+		if (starname != NULL && s_len > 0)
+			add_assoc_string(return_value, "star", star);
 	}	
 }
 
@@ -2521,7 +2559,6 @@ PHP_FUNCTION(swe_sol_eclipse_where)
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
-
 	if (rc < 0) {
 		add_assoc_string(return_value, "serr", serr);			
 	} else {
@@ -2618,6 +2655,50 @@ PHP_FUNCTION(swe_lun_occult_where)
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_sol_eclipse_how(tjd_ut, iflag, geopos[0], geopos[1], geopos[2]);
+
+Computes attributes of a solar eclipse for given tjd, geo. longitude, geo. latitude, and geo. height.
+
+=head3 Parameters
+
+  tjd_ut	double   Julian day number, Universal Time
+  iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
+  geopos[0] double	 geographic longitude
+  geopos[1] double	 geographic latitude
+  geopos[2] double	 altitude above sea level, in meters
+
+=head3 return array
+
+      retflag => (int)            ERR or eclipse type
+		 SE_ECL_TOTAL or SE_ECL_ANNULAR or SE_ECL_PARTIAL
+         SE_ECL_NONCENTRAL, 
+	     if 0, no eclipse is visible at geogr. position.
+
+      serr    => (string)         Error string, on error only
+	  attr   => array of 11 double,
+		 attr[0]        fraction of solar diameter covered by moon;
+					    with total/annular eclipses, it results in magnitude acc. to IMCCE.
+		 attr[1]        ratio of lunar diameter to solar one
+		 attr[2]        fraction of solar disc covered by moon (obscuration)
+		 attr[3]        diameter of core shadow in km
+		 attr[4]        azimuth of sun at tjd
+		 attr[5]        true altitude of sun above horizon at tjd
+		 attr[6]        apparent altitude of sun above horizon at tjd
+		 attr[7]        elongation of moon in degrees
+		 attr[8]        magnitude acc. to NASA;
+					    = attr[0] for partial and attr[1] for annular and total eclipses
+		 attr[9]        saros series number
+		 attr[10]       saros series member number
+
+=head3 C declaration
+
+	int swe_sol_eclipse_how( double tjd_ut, int32 ifl, double *geopos, double *attr, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_sol_eclipse_how)
 {
 	size_t arg_len;
@@ -2654,6 +2735,61 @@ PHP_FUNCTION(swe_sol_eclipse_how)
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_sol_eclipse_when_loc(tjd_start, iflag, geopos[0], geopos[1], geopos[2], backw);
+
+When and how is the next solar eclipse at a given geographical position?
+
+=head3 Parameters
+
+  tjd_start	double   Julian day number, Universal Time
+  iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
+  geopos[0] double	 geographic longitude
+  geopos[1] double	 geographic latitude
+  geopos[2] double	 altitude above sea level, in meters
+  backw		int		 search backward in time
+
+=head3 return array
+
+      retflag => (int)            ERR or eclipse type
+		 SE_ECL_TOTAL or SE_ECL_ANNULAR or SE_ECL_PARTIAL
+         SE_ECL_VISIBLE, 
+		 SE_ECL_MAX_VISIBLE, 
+		 SE_ECL_1ST_VISIBLE, SE_ECL_2ND_VISIBLE
+		 SE_ECL_3ST_VISIBLE, SE_ECL_4ND_VISIBLE
+
+      serr    => (string)         Error string, on error only
+      tret    => array of 7 double:
+		 tret[0]        time of maximum eclipse
+		 tret[1]        time of first contact
+		 tret[2]        time of second contact
+		 tret[3]        time of third contact
+		 tret[4]        time of forth contact
+		 tret[5]        time of sun rise between first and forth contact
+		 tret[6]        time of sun set beween first and forth contact
+	  attr   => array of 11 double,
+		 attr[0]        fraction of solar diameter covered by moon;
+					    with total/annular eclipses, it results in magnitude acc. to IMCCE.
+		 attr[1]        ratio of lunar diameter to solar one
+		 attr[2]        fraction of solar disc covered by moon (obscuration)
+		 attr[3]        diameter of core shadow in km
+		 attr[4]        azimuth of sun at tjd
+		 attr[5]        true altitude of sun above horizon at tjd
+		 attr[6]        apparent altitude of sun above horizon at tjd
+		 attr[7]        elongation of moon in degrees
+		 attr[8]        magnitude acc. to NASA;
+					    = attr[0] for partial and attr[1] for annular and total eclipses
+		 attr[9]        saros series number
+		 attr[10]       saros series member number
+
+=head3 C declaration
+
+	int we_sol_eclipse_when_loc(double tjd_start, int32 ifl, double *geopos, double *tret, double *attr, int32 backward, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_sol_eclipse_when_loc)
 {
 	size_t  arg_len;
@@ -2676,21 +2812,16 @@ PHP_FUNCTION(swe_sol_eclipse_when_loc)
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
 
-	if (rc == ERR)
-	{
+	if (rc == ERR) {
 		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
+	} else {
 		array_init(&tret_arr);
-		for(i = 0; i < 10; i++)
+		for(i = 0; i < 7; i++)
 			add_index_double(&tret_arr, i, attr[i]);
 		add_assoc_zval(return_value, "tret", &tret_arr);
-
 		array_init(&attr_arr);
-		for(i = 0; i < 20; i++)
+		for(i = 0; i < 11; i++)
 			add_index_double(&attr_arr, i, attr[i]);
-		
 		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
 }
@@ -3188,11 +3319,43 @@ PHP_FUNCTION(swe_lun_eclipse_when_loc)
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_pheno(tjd_et, ipl, iflag)
+
+function calculates planetary phenomena
+
+=head3 Parameters
+
+  double       tjd_et      Julian day in Ephemeris Time.
+  nt           ipl         Planet/body/object number or constant.
+  int          iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+      retflag => (int)            ERR or used iflag bits
+
+      serr    => (string)         Error string, on error only
+	  attr   => array of 6 double,
+		attr[0] = phase angle (earth-planet-sun)
+		attr[1] = phase (illumined fraction of disc)
+		attr[2] = elongation of planet
+		attr[3] = apparent diameter of disc
+		attr[4] = apparent magnitude
+		attr[5] = geocentric horizontal parallax (Moon)
+
+=head3 C declaration
+
+  int swe_pheno(double tjd_et, int32 ipl, int32 iflag, double *attr, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_pheno)
 {
 	size_t arg_len;
 	long  ipl, iflag;
-	double tjd, attr[20];
+	double tjd_et, attr[20];
 	char serr[AS_MAXCH]; 
 	int i, rc;
 	zval attr_arr;
@@ -3201,29 +3364,56 @@ PHP_FUNCTION(swe_pheno)
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
-			&tjd, &ipl, &iflag, &arg_len) == FAILURE) {
+			&tjd_et, &ipl, &iflag, &arg_len) == FAILURE) {
 		return;
 	}
-	rc = swe_pheno(tjd, ipl, iflag, attr, serr);
+	rc = swe_pheno(tjd_et, ipl, iflag, attr, serr);
 
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
 
-	if (rc == ERR)
-	{
+	if (rc < 0) {
 		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
+	} else {
 		array_init(&attr_arr);
-		
-		for(i = 0; i < 20; i++)
+		for(i = 0; i < 6; i++)
 			add_index_double(&attr_arr, i, attr[i]);
-			
 		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_pheno_ut(tjd_ut, ipl, iflag)
+
+function calculates planetary phenomena
+
+=head3 Parameters
+
+  double       tjd_ut      Julian day in Universal Time.
+  nt           ipl         Planet/body/object number or constant.
+  int          iflag       Flag bits for computation requirements.
+
+=head3 return array
+
+      retflag => (int)            ERR or used iflag bits
+
+      serr    => (string)         Error string, on error only
+	  attr   => array of 6 double,
+		attr[0] = phase angle (earth-planet-sun)
+		attr[1] = phase (illumined fraction of disc)
+		attr[2] = elongation of planet
+		attr[3] = apparent diameter of disc
+		attr[4] = apparent magnitude
+		attr[5] = geocentric horizontal parallax (Moon)
+
+=head3 C declaration
+
+  int swe_pheno_ut(double tjd_ut, int32 ipl, int32 iflag, double *attr, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_pheno_ut)
 {
 	size_t arg_len;
@@ -3246,25 +3436,44 @@ PHP_FUNCTION(swe_pheno_ut)
 	array_init(return_value);
 	add_assoc_long(return_value, "retflag", rc);
 
-	if (rc == ERR)
-	{
+	if (rc < 0) {
 		add_assoc_string(return_value, "serr", serr);			
-	}
-	else
-	{
+	} else {
 		array_init(&attr_arr);
-		
-		for(i = 0; i < 20; i++)
+		for(i = 0; i < 6; i++)
 			add_index_double(&attr_arr, i, attr[i]);
-			
 		add_assoc_zval(return_value, "attr", &attr_arr);
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_refrac(inalt, atpress, attemp, calc_flag)
+
+Transforms apparent to true altitude and vice-versa.
+
+=head3 Parameters
+
+  double		inalt		altitude of object in degrees 
+  double		atpress		atmospheric pressure (hectopascal)
+  double		attemp		atmospheric temperature °C
+  int           calc_flag   either SE_APP_TO_TRUE or  SE_TRUE_TO_APP
+
+=head3 return value
+
+  double	converted altitude
+
+=head3 C declaration
+
+  double swe_refrac(double inalt, double atpress, double attemp, int32 calc_flag)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_refrac)
 {
 	size_t arg_len; 
-	int rc;
+	double outalt;
 	long calc_flag;
 	double inalt, atpress, attemp;
 
@@ -3274,11 +3483,50 @@ PHP_FUNCTION(swe_refrac)
 			&inalt, &atpress, &attemp, &calc_flag, &arg_len) == FAILURE) {
 		return;
 	}
-	rc = swe_refrac(inalt, atpress, attemp, calc_flag);
+	outalt = swe_refrac(inalt, atpress, attemp, calc_flag);
 
-	RETURN_DOUBLE(rc);
+	RETURN_DOUBLE(outalt);
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_refrac_extended(inalt, atpress, attemp, calc_flag)
+
+Transforms apparent to true altitude and vice-versa.
+This function was created thanks to and with the help of the
+archaeoastronomer Victor Reijs.
+It is more correct and more skilled than the old function swe_refrac():
+ - it allows correct calculation of refraction for altitudes above sea > 0,
+   where the ideal horizon and planets that are visible may have a 
+   negative height. (for swe_refrac(), negative apparent heights do not 
+   exist!)
+ - it allows to manipulate the refraction constant
+
+=head3 Parameters
+
+  double	inalt		altitude of object in degrees 
+  double	geoalt      altitude of observer above sea level in meters 
+  double	atpress		atmospheric pressure (hectopascal)
+  double	lapse_rate  (dT/dh) [deg K/m]
+  double	attemp		atmospheric temperature °C
+  int       calc_flag   either SE_APP_TO_TRUE or  SE_TRUE_TO_APP
+
+=head3 return array
+
+  [0..3]	 array of 4 doubles: 
+	[0] true altitude, if possible; otherwise input value
+	[1] apparent altitude, if possible; otherwise input value
+	[2] refraction
+	[3] dip of the horizon
+
+
+=head3 C declaration
+
+  double swe_refrac_extended(double inalt, double geoalt, double atpress, double attemp, double lapse_rate, int32 calc_flag, double *dret)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_refrac_extended)
 {
 	size_t arg_len;
@@ -3303,20 +3551,31 @@ PHP_FUNCTION(swe_refrac_extended)
 	add_assoc_double(return_value, "retflag", rc);
 }
 
-PHP_FUNCTION(swe_set_lapse_rate)
-{
-	size_t arg_len;
-	double lapse_rate;
+/* {{{ pod
+=pod
 
-	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
+=head1 function swe_heliacal_ut()
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
-			&lapse_rate, &arg_len) == FAILURE) {
-		return;
-	}
-	swe_set_lapse_rate(lapse_rate);
-}
+see Programmer's manual and C source code in swehel.c
 
+=head3 Parameters
+
+	see Programmer's manual and C source code in swehel.c
+
+
+=head3 return array
+
+  array of 3 doubles
+   [0]: beginning of visibility (Julian day number)
+   [1]: optimum visibility (Julian day number; 0 if SE_HELFLAG_AV)
+   [2]: end of visibility (Julian day number; 0 if SE_HELFLAG_AV)
+
+=head3 C declaration
+
+  int swe_heliacal_ut(double JDNDaysUTStart, double *dgeo, double *datm, double *dobs, char *ObjectNameIn, int32 TypeEvent, int32 helflag, double *dret, char *serr_ret)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_heliacal_ut)
 {
 	size_t arg_len;
@@ -3343,6 +3602,29 @@ PHP_FUNCTION(swe_heliacal_ut)
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_heliacal_pheno_ut()
+
+see Programmer's manual and C source code in swehel.c
+
+=head3 Parameters
+
+	see Programmer's manual and C source code in swehel.c
+
+
+=head3 return array
+
+  array of 30 doubles
+	see Programmer's manual and C source code in swehel.c
+
+=head3 C declaration
+
+  int swe_heliacal_pheno_ut(double JDNDaysUT, double *dgeo, double *datm, double *dobs, char *ObjectNameIn, int32 TypeEvent, int32 helflag, double *darr, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_heliacal_pheno_ut)
 {
 	size_t arg_len;
@@ -3369,6 +3651,28 @@ PHP_FUNCTION(swe_heliacal_pheno_ut)
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_vis_limit_mag()
+
+Limiting magnitude in dark skies
+
+=head3 Parameters
+
+see Programmer's manual and C source code in swehel.c
+
+=head3 return array
+
+	see Programmer's manual and C source code in swehel.c
+
+
+=head3 C declaration
+
+  int swe_vis_limit_mag(double tjdut, double *dgeo, double *datm, double *dobs, char *ObjectName, int32 helflag, double *dret, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_vis_limit_mag)
 {
 	size_t arg_len;

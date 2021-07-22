@@ -104,7 +104,6 @@ PHP_FUNCTION(swe_pheno);
 PHP_FUNCTION(swe_pheno_ut);
 PHP_FUNCTION(swe_refrac);
 PHP_FUNCTION(swe_refrac_extended);
-PHP_FUNCTION(swe_set_lapse_rate);
 PHP_FUNCTION(swe_azalt);
 PHP_FUNCTION(swe_azalt_rev);
 PHP_FUNCTION(swe_rise_trans);
