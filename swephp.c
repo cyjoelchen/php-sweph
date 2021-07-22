@@ -2429,6 +2429,77 @@ PHP_FUNCTION(swe_gauquelin_sector)
 	}	
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_sol_eclipse_where(tjd_ut, iflag);
+
+Finds the place on earth where the solar eclipse is maximal at a given
+time. 
+
+Algorithms for the central line is taken from Montenbruck, pp. 179ff.,
+with the exception, that we consider refraction for the maxima of
+partial and noncentral eclipses.
+Geographical positions are referred to sea level / the mean ellipsoid.
+
+Errors:
+ - from uncertainty of JPL-ephemerides (0.01 arcsec): 
+      about 40 meters
+ - from displacement of shadow points by atmospheric refraction:
+      a few meters 
+ - from deviation of the geoid from the ellipsoid 
+      a few meters
+ - from polar motion
+      a few meters
+ For geographical locations that are interesting for observation,
+ the error is always < 100 m.
+ However, if the sun is close to the horizon,
+ all of these errors can grow up to a km or more. 
+
+=head3 Parameters
+
+  tjd_ut	double   Julian day number, Universal Time
+  iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
+
+=head3 return array
+
+      retflag => (int)            ERR or eclipse type
+		 
+		 Function returns as 'retflag':
+		 -1 (ERR)     on error (e.g. if swe_calc() for sun or moon fails)
+		 0            if there is no solar eclipse at tjd
+		 SE_ECL_TOTAL
+		 SE_ECL_ANNULAR
+		 SE_ECL_TOTAL | SE_ECL_CENTRAL
+		 SE_ECL_TOTAL | SE_ECL_NONCENTRAL
+		 SE_ECL_ANNULAR | SE_ECL_CENTRAL
+		 SE_ECL_ANNULAR | SE_ECL_NONCENTRAL
+		 SE_ECL_PARTIAL
+
+      serr    => (string)         Error string, on error only
+      geopos  => array of 2 doubles, geogr. position where eclipse is maximal
+      attr    => array of 11 double:
+		 attr[0]        fraction of solar diameter covered by moon (magnitude)
+		 attr[1]        ratio of lunar diameter to solar one
+		 attr[2]        fraction of solar disc covered by moon (obscuration)
+		 attr[3]      diameter of core shadow in km
+		 attr[4]        azimuth of sun at tjd
+		 attr[5]        true altitude of sun above horizon at tjd
+		 attr[6]        apparent altitude of sun above horizon at tjd
+		 attr[7]        angular distance of moon from sun in degrees
+		 attr[8]        magnitude acc. to NASA;
+					  = attr[0] for partial and attr[1] for annular and total eclipses
+		 attr[9]        saros series number
+		 attr[10]       saros series member number
+
+
+=head3 C declaration
+
+	int  swe_sol_eclipse_where( double tjd_ut, int32 ifl, double *geopos, double *attr, char *serr) 
+
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_sol_eclipse_where)
 {
 	size_t arg_len;
@@ -2736,6 +2807,44 @@ PHP_FUNCTION(swe_lun_occult_when_loc)
 	}
 }
 
+/* {{{ pod
+=pod
+
+=head1 function swe_sol_eclipse_when_glob(tjd_ut, iflag, ifltype, backw);
+
+When is the next solar eclipse anywhere on earth?
+
+returns SE_ECL_TOTAL or SE_ECL_ANNULAR or SE_ECL_PARTIAL or SE_ECL_ANNULAR_TOTAL
+        SE_ECL_CENTRAL
+        SE_ECL_NONCENTRAL
+
+=head3 Parameters
+
+  tjd_ut    double      Julian day number, Universal Time
+  iflag     int         (specify ephemeris to be used, cf. swe_calc( ))
+  ifltype   int         Eclipse type to be searched; 0 if any type of eclipse is wanted
+  backw     int         search backward in time
+
+=head3 return array
+
+      retflag => (int)            ERR or eclipse type
+      serr    => (string)         Error string, on error only
+      tret    => array of 8 double:
+        tret[0]	time of maximum eclipse
+        tret[1]	time, when eclipse takes place at local apparent noon
+		tret[2] time of eclipse begin
+		tret[3] time of eclipse end
+		tret[4] time of totality begin
+		tret[5] time of totality end
+		tret[6] time of center line begin
+		tret[7] time of center line end
+
+=head3 C declaration
+
+  int swe_sol_eclipse_when_glob(double tjd_start, int32 ifl, int32 ifltype, double *tret, int32 backward, char *serr)
+
+=cut
+ }}} */
 PHP_FUNCTION(swe_sol_eclipse_when_glob)
 {
 	size_t  arg_len;
