@@ -3717,18 +3717,26 @@ PHP_FUNCTION(swe_heliacal_pheno_ut)
 /* {{{ pod
 =pod
 
-=head1 function swe_vis_limit_mag()
+=head1 function swe_vis_limit_mag(tjdstart, geolon, geolat, geoalt, atpress, attemp, athum, atuom, oage, oeyes, omono, ozoom, odia, otrans, objectname, helflag)
 
 Limiting magnitude in dark skies
 
 =head3 Parameters
 
-see Programmer's manual and C source code in swehel.c
+    Identical to input parameters of swe_heliacal_ut(), except no `event_type`.
 
 =head3 return array
 
-	see Programmer's manual and C source code in swehel.c
-
+    [
+        0 => (double)   limiting visual magnitude (if dret[0] > magnitude of object, then the object is visible);
+        1 => (double)   altitude of object;
+        2 => (double)   azimuth of object;
+        3 => (double)   altitude of sun;
+        4 => (double)   azimuth of sun;
+        5 => (double)   altitude of moon;
+        6 => (double)   azimuth of moon;
+        7 => (double)   magnitude of object;
+    ]
 
 =head3 C declaration
 
@@ -3746,7 +3754,7 @@ PHP_FUNCTION(swe_vis_limit_mag)
 	size_t olen;
 	long helflag;
 	*serr = '\0';
-	if(ZEND_NUM_ARGS() != 17) WRONG_PARAM_COUNT;
+	if(ZEND_NUM_ARGS() != 16) WRONG_PARAM_COUNT;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsl",
 			&tjdstart, &dgeo[0], &dgeo[1], &dgeo[2], &datm[0], &datm[1], &datm[2], &datm[3],  &dobs[0], &dobs[1], &dobs[2], &dobs[3], &dobs[4], &dobs[5],  &objectname, &olen, &helflag,  &arg_len) == FAILURE) {
 		return;
