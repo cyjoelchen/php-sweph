@@ -466,6 +466,16 @@ PHP_MINIT_FUNCTION(swephp)
 	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_NAKSHATRA", SE_SPLIT_DEG_NAKSHATRA, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_KEEP_SIGN", SE_SPLIT_DEG_KEEP_SIGN, CONST_CS | CONST_PERSISTENT);
 
+	/* for swe_heliacal_ut() */
+	REGISTER_LONG_CONSTANT("SE_HELIACAL_RISING", SE_HELIACAL_RISING, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_HELIACAL_SETTING", SE_HELIACAL_SETTING, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_EVENING_FIRST", SE_EVENING_FIRST, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_MORNING_LAST", SE_MORNING_LAST, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_HELFLAG_OPTICAL_PARAMS", SE_HELFLAG_OPTICAL_PARAMS, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_HELFLAG_NO_DETAILS", SE_HELFLAG_NO_DETAILS, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_HELFLAG_VISLIM_DARK", SE_HELFLAG_VISLIM_DARK, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_HELFLAG_VISLIM_NOMOON", SE_HELFLAG_VISLIM_NOMOON, CONST_CS | CONST_PERSISTENT);
+
 	return SUCCESS;
 }
 /* }}} */
@@ -3567,14 +3577,52 @@ PHP_FUNCTION(swe_refrac_extended)
 /* {{{ pod
 =pod
 
-=head1 function swe_heliacal_ut()
+=head1 function swe_heliacal_ut(tjdstart, geolon, geolat, geoalt, atpress, attemp, athum, atuom, oage, oeyes, omono, ozoom, odia, otrans, objectname, event_type, helflag)
 
-see Programmer's manual and C source code in swehel.c
+Compute heliacal risings etc. of a planet or star.
+
+If this is too much for you, set all these values to 0.
+The software will then set the following defaults:
+
+- Pressure 1013.25, temperature 15, relative humidity 40.
+- The values will be modified depending on the altitude of the observer above sea level.
 
 =head3 Parameters
 
-	see Programmer's manual and C source code in swehel.c
+    double      tjdstart        Julian day number of start date for the search, Universal Time.
 
+    double      geolon          Geographic longitude.
+    double      geolat          Geographic latitude.
+    double      geoalt          Geographic altitude (eye height), in meters.
+
+    double      atpress         Atmospheric pressure in mbar (hPa).
+    double      attemp          Atmospheric temperature in C.
+    double      athum           Relative humidity in %.
+    double      atuom           Unit of measure:
+                                < 1 & > 0, then it is the total atmospheric coefficient (ktot)
+                                0, then other atmospheric parameters determine the total atmospheric coefficient (ktot)
+                                >= 1, then meteorological range (km)
+
+    double      oage            Age of observer in years (default = 36).
+    double      oeyes           Snellen ratio of observers eyes (default = 1 = normal).
+    double      omono           0 = monocular, 1 = binocular.
+    double      ozoom           Telescope magnification: 0 = default to naked eye (binocular), 1 = naked eye.
+    double      odia            Optical aperture (telescope diameter) in mm.
+    double      otrans          Optical transmission.
+
+    string      objectname      Name string of fixed star or planet.
+
+    int         event_type      Options:
+                                SE_HELIACAL_RISING (1): morning first (exists for all visible planets and stars);
+                                SE_HELIACAL_SETTING (2): evening last (exists for all visible planets and stars);
+                                SE_EVENING_FIRST (3): evening first (exists for Mercury, Venus, and the Moon);
+                                SE_MORNING_LAST (4): morning last (exists for Mercury, Venus, and the Moon).
+
+    int         helflag         Ephemeris flag, like iflag in swe_calc(). In addition:
+                                SE_HELFLAG_OPTICAL_PARAMS (512);
+                                SE_HELFLAG_NO_DETAILS (1024);
+                                SE_HELFLAG_VISLIM_DARK (4096);
+                                SE_HELFLAG_VISLIM_NOMOON (8192);
 
 =head3 return array
 
