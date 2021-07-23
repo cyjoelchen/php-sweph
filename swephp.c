@@ -466,6 +466,16 @@ PHP_MINIT_FUNCTION(swephp)
 	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_NAKSHATRA", SE_SPLIT_DEG_NAKSHATRA, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SE_SPLIT_DEG_KEEP_SIGN", SE_SPLIT_DEG_KEEP_SIGN, CONST_CS | CONST_PERSISTENT);
 
+	/* for swe_heliacal_ut() */
+	REGISTER_LONG_CONSTANT("SE_HELIACAL_RISING", SE_HELIACAL_RISING, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_HELIACAL_SETTING", SE_HELIACAL_SETTING, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_EVENING_FIRST", SE_EVENING_FIRST, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_MORNING_LAST", SE_MORNING_LAST, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_HELFLAG_OPTICAL_PARAMS", SE_HELFLAG_OPTICAL_PARAMS, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_HELFLAG_NO_DETAILS", SE_HELFLAG_NO_DETAILS, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_HELFLAG_VISLIM_DARK", SE_HELFLAG_VISLIM_DARK, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SE_HELFLAG_VISLIM_NOMOON", SE_HELFLAG_VISLIM_NOMOON, CONST_CS | CONST_PERSISTENT);
+
 	return SUCCESS;
 }
 /* }}} */
@@ -2415,7 +2425,7 @@ finds the gauquelin sector position of a planet or fixed star at given date/time
 
 =head3 Parameters
 
-  tjd_ut	double
+  tjd_ut	double		Julian day number, Universal Time.
   ipl    	int		 Planet 
   star		string   Star name, if a star placement is searched
   iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
@@ -2796,7 +2806,7 @@ When and how is the next solar eclipse at a given geographical position?
 
 =head3 C declaration
 
-	int we_sol_eclipse_when_loc(double tjd_start, int32 ifl, double *geopos, double *tret, double *attr, int32 backward, char *serr)
+	int swe_sol_eclipse_when_loc(double tjd_start, int32 ifl, double *geopos, double *tret, double *attr, int32 backward, char *serr)
 
 =cut
  }}} */
@@ -2972,6 +2982,8 @@ When is the next solar eclipse anywhere on earth?
 		tret[5] time of totality end
 		tret[6] time of center line begin
 		tret[7] time of center line end
+		tret[8] Unused/not implemented.
+		tret[9] Unused/not implemented.
 
 =head3 C declaration
 
@@ -3339,7 +3351,7 @@ function calculates planetary phenomena
 =head3 Parameters
 
   double       tjd_et      Julian day in Ephemeris Time.
-  nt           ipl         Planet/body/object number or constant.
+  int           ipl         Planet/body/object number or constant.
   int          iflag       Flag bits for computation requirements.
 
 =head3 return array
@@ -3402,7 +3414,7 @@ function calculates planetary phenomena
 =head3 Parameters
 
   double       tjd_ut      Julian day in Universal Time.
-  nt           ipl         Planet/body/object number or constant.
+  int           ipl         Planet/body/object number or constant.
   int          iflag       Flag bits for computation requirements.
 
 =head3 return array
@@ -3569,14 +3581,52 @@ PHP_FUNCTION(swe_refrac_extended)
 /* {{{ pod
 =pod
 
-=head1 function swe_heliacal_ut()
+=head1 function swe_heliacal_ut(tjdstart, geolon, geolat, geoalt, atpress, attemp, athum, atuom, oage, oeyes, omono, ozoom, odia, otrans, objectname, event_type, helflag)
 
-see Programmer's manual and C source code in swehel.c
+Compute heliacal risings etc. of a planet or star.
+
+If this is too much for you, set all these values to 0.
+The software will then set the following defaults:
+
+- Pressure 1013.25, temperature 15, relative humidity 40.
+- The values will be modified depending on the altitude of the observer above sea level.
 
 =head3 Parameters
 
-	see Programmer's manual and C source code in swehel.c
+    double      tjdstart        Julian day number of start date for the search, Universal Time.
 
+    double      geolon          Geographic longitude.
+    double      geolat          Geographic latitude.
+    double      geoalt          Geographic altitude (eye height), in meters.
+
+    double      atpress         Atmospheric pressure in mbar (hPa).
+    double      attemp          Atmospheric temperature in C.
+    double      athum           Relative humidity in %.
+    double      atuom           Unit of measure:
+                                < 1 & > 0, then it is the total atmospheric coefficient (ktot)
+                                0, then other atmospheric parameters determine the total atmospheric coefficient (ktot)
+                                >= 1, then meteorological range (km)
+
+    double      oage            Age of observer in years (default = 36).
+    double      oeyes           Snellen ratio of observers eyes (default = 1 = normal).
+    double      omono           0 = monocular, 1 = binocular.
+    double      ozoom           Telescope magnification: 0 = default to naked eye (binocular), 1 = naked eye.
+    double      odia            Optical aperture (telescope diameter) in mm.
+    double      otrans          Optical transmission.
+
+    string      objectname      Name string of fixed star or planet.
+
+    int         event_type      Options:
+                                SE_HELIACAL_RISING (1): morning first (exists for all visible planets and stars);
+                                SE_HELIACAL_SETTING (2): evening last (exists for all visible planets and stars);
+                                SE_EVENING_FIRST (3): evening first (exists for Mercury, Venus, and the Moon);
+                                SE_MORNING_LAST (4): morning last (exists for Mercury, Venus, and the Moon).
+
+    int         helflag         Ephemeris flag, like iflag in swe_calc(). In addition:
+                                SE_HELFLAG_OPTICAL_PARAMS (512);
+                                SE_HELFLAG_NO_DETAILS (1024);
+                                SE_HELFLAG_VISLIM_DARK (4096);
+                                SE_HELFLAG_VISLIM_NOMOON (8192);
 
 =head3 return array
 
@@ -3620,14 +3670,16 @@ PHP_FUNCTION(swe_heliacal_ut)
 /* {{{ pod
 =pod
 
-=head1 function swe_heliacal_pheno_ut()
+=head1 function swe_heliacal_pheno_ut(tjdstart, geolon, geolat, geoalt, atpress, attemp, athum, atuom, oage, oeyes, omono, ozoom, odia, otrans, objectname, event_type, helflag)
 
-see Programmer's manual and C source code in swehel.c
+Provides data that are relevant for the calculation of heliacal risings and settings.
+
+This function does not provide data of heliacal risings and settings,
+just some additional data mostly used for test purposes
 
 =head3 Parameters
 
-	see Programmer's manual and C source code in swehel.c
-
+	Identical to input parameters of swe_heliacal_ut().
 
 =head3 return array
 
@@ -3669,18 +3721,26 @@ PHP_FUNCTION(swe_heliacal_pheno_ut)
 /* {{{ pod
 =pod
 
-=head1 function swe_vis_limit_mag()
+=head1 function swe_vis_limit_mag(tjdstart, geolon, geolat, geoalt, atpress, attemp, athum, atuom, oage, oeyes, omono, ozoom, odia, otrans, objectname, helflag)
 
 Limiting magnitude in dark skies
 
 =head3 Parameters
 
-see Programmer's manual and C source code in swehel.c
+    Identical to input parameters of swe_heliacal_ut(), except no `event_type`.
 
 =head3 return array
 
-	see Programmer's manual and C source code in swehel.c
-
+    [
+        0 => (double)   limiting visual magnitude (if dret[0] > magnitude of object, then the object is visible);
+        1 => (double)   altitude of object;
+        2 => (double)   azimuth of object;
+        3 => (double)   altitude of sun;
+        4 => (double)   azimuth of sun;
+        5 => (double)   altitude of moon;
+        6 => (double)   azimuth of moon;
+        7 => (double)   magnitude of object;
+    ]
 
 =head3 C declaration
 
@@ -3698,7 +3758,7 @@ PHP_FUNCTION(swe_vis_limit_mag)
 	size_t olen;
 	long helflag;
 	*serr = '\0';
-	if(ZEND_NUM_ARGS() != 17) WRONG_PARAM_COUNT;
+	if(ZEND_NUM_ARGS() != 16) WRONG_PARAM_COUNT;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsl",
 			&tjdstart, &dgeo[0], &dgeo[1], &dgeo[2], &datm[0], &datm[1], &datm[2], &datm[3],  &dobs[0], &dobs[1], &dobs[2], &dobs[3], &dobs[4], &dobs[5],  &objectname, &olen, &helflag,  &arg_len) == FAILURE) {
 		return;
