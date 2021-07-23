@@ -3459,6 +3459,8 @@ PHP_FUNCTION(swe_pheno_ut)
 /* {{{ pod
 =pod
 
+=encoding utf-8
+
 =head1 function swe_refrac(inalt, atpress, attemp, calc_flag)
 
 Transforms apparent to true altitude and vice-versa.
@@ -3501,11 +3503,13 @@ PHP_FUNCTION(swe_refrac)
 /* {{{ pod
 =pod
 
-=head1 function swe_refrac_extended(inalt, geoalt, atpress, lapse_rate, attemp, calc_flag)
+=head1 function swe_refrac_extended(inalt, geoalt, atpress, attemp, lapse_rate, calc_flag)
 
 Transforms apparent to true altitude and vice-versa.
+
 This function was created thanks to and with the help of the
 archaeoastronomer Victor Reijs.
+
 It is more correct and more skilled than the old function swe_refrac():
  - it allows correct calculation of refraction for altitudes above sea > 0,
    where the ideal horizon and planets that are visible may have a 
@@ -3549,15 +3553,15 @@ PHP_FUNCTION(swe_refrac_extended)
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dddddl",
-			&inalt, &geoalt, &atpress, &lapse_rate, &attemp, &calc_flag, &arg_len) == FAILURE) {
+			&inalt, &geoalt, &atpress, &attemp, &lapse_rate, &calc_flag, &arg_len) == FAILURE) {
 		return;
 	}
-	rc = swe_refrac_extended(inalt, geoalt, atpress, lapse_rate, attemp, calc_flag, dret);
+	rc = swe_refrac_extended(inalt, geoalt, atpress, attemp, lapse_rate, calc_flag, dret);
 
 	
 	array_init(return_value);
 	add_assoc_long(return_value, "rc", rc);
-	for(i = 0; i < 3; i++)
+	for(i = 0; i < 4; i++)
 		add_index_double(return_value, i, dret[i]);
 	add_assoc_double(return_value, "retflag", rc);
 }
