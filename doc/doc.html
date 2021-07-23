@@ -574,7 +574,7 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_refrac_extended-inalt-atpress-attemp-calc_flag">function swe_refrac_extended(inalt, atpress, attemp, calc_flag)</a>
+  <li><a href="#function-swe_refrac_extended-inalt-geoalt-atpress-attemp-lapse_rate-calc_flag">function swe_refrac_extended(inalt, geoalt, atpress, attemp, lapse_rate, calc_flag)</a>
     <ul>
       <li>
         <ul>
@@ -585,7 +585,7 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_heliacal_ut">function swe_heliacal_ut()</a>
+  <li><a href="#function-swe_heliacal_ut-tjdstart-geolon-geolat-geoalt-atpress-attemp-athum-atuom-oage-oeyes-omono-ozoom-odia-otrans-objectname-event_type-helflag">function swe_heliacal_ut(tjdstart, geolon, geolat, geoalt, atpress, attemp, athum, atuom, oage, oeyes, omono, ozoom, odia, otrans, objectname, event_type, helflag)</a>
     <ul>
       <li>
         <ul>
@@ -596,7 +596,7 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_heliacal_pheno_ut">function swe_heliacal_pheno_ut()</a>
+  <li><a href="#function-swe_heliacal_pheno_ut-tjdstart-geolon-geolat-geoalt-atpress-attemp-athum-atuom-oage-oeyes-omono-ozoom-odia-otrans-objectname-event_type-helflag">function swe_heliacal_pheno_ut(tjdstart, geolon, geolat, geoalt, atpress, attemp, athum, atuom, oage, oeyes, omono, ozoom, odia, otrans, objectname, event_type, helflag)</a>
     <ul>
       <li>
         <ul>
@@ -607,7 +607,7 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_vis_limit_mag">function swe_vis_limit_mag()</a>
+  <li><a href="#function-swe_vis_limit_mag-tjdstart-geolon-geolat-geoalt-atpress-attemp-athum-atuom-oage-oeyes-omono-ozoom-odia-otrans-objectname-helflag">function swe_vis_limit_mag(tjdstart, geolon, geolat, geoalt, atpress, attemp, athum, atuom, oage, oeyes, omono, ozoom, odia, otrans, objectname, helflag)</a>
     <ul>
       <li>
         <ul>
@@ -629,7 +629,7 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_azalt_rev-tjd_ut-iflag-xin0-xin1">function swe_azalt_rev(tjd_ut, iflag, xin0, xin1)</a>
+  <li><a href="#function-swe_azalt_rev-tjd_ut-calc_flag-xin0-xin1">function swe_azalt_rev(tjd_ut, calc_flag, xin0, xin1)</a>
     <ul>
       <li>
         <ul>
@@ -1025,7 +1025,6 @@
       </li>
     </ul>
   </li>
-  <li><a href="#POD-ERRORS">POD ERRORS</a></li>
 </ul>
 
 <h1 id="About-pod-documentation-comments">About pod documentation comments</h1>
@@ -1771,7 +1770,7 @@
 
 <h3 id="Parameters34">Parameters</h3>
 
-<pre><code>  tjd_ut        double
+<pre><code>  tjd_ut        double          Julian day number, Universal Time.
   ipl           int              Planet 
   star          string   Star name, if a star placement is searched
   iflag         int      (specify ephemeris to be used, cf. swe_calc( ))
@@ -1973,7 +1972,7 @@
 
 <h3 id="C-declaration41">C declaration</h3>
 
-<pre><code>        int we_sol_eclipse_when_loc(double tjd_start, int32 ifl, double *geopos, double *tret, double *attr, int32 backward, char *serr)</code></pre>
+<pre><code>        int swe_sol_eclipse_when_loc(double tjd_start, int32 ifl, double *geopos, double *tret, double *attr, int32 backward, char *serr)</code></pre>
 
 <h1 id="function-swe_lun_occult_when_loc-tjd_ut-ipl-star-iflag-geopos-0-geopos-1-geopos-2-backw">function swe_lun_occult_when_loc(tjd_ut, ipl, star, iflag, geopos[0], geopos[1], geopos[2], backw);</h1>
 
@@ -2058,7 +2057,9 @@
                 tret[4] time of totality begin
                 tret[5] time of totality end
                 tret[6] time of center line begin
-                tret[7] time of center line end</code></pre>
+                tret[7] time of center line end
+                tret[8] Unused/not implemented.
+                tret[9] Unused/not implemented.</code></pre>
 
 <h3 id="C-declaration43">C declaration</h3>
 
@@ -2223,7 +2224,7 @@
 <h3 id="Parameters45">Parameters</h3>
 
 <pre><code>  double       tjd_et      Julian day in Ephemeris Time.
-  nt           ipl         Planet/body/object number or constant.
+  int           ipl         Planet/body/object number or constant.
   int          iflag       Flag bits for computation requirements.</code></pre>
 
 <h3 id="return-array32">return array</h3>
@@ -2250,7 +2251,7 @@
 <h3 id="Parameters46">Parameters</h3>
 
 <pre><code>  double       tjd_ut      Julian day in Universal Time.
-  nt           ipl         Planet/body/object number or constant.
+  int           ipl         Planet/body/object number or constant.
   int          iflag       Flag bits for computation requirements.</code></pre>
 
 <h3 id="return-array33">return array</h3>
@@ -2289,9 +2290,13 @@
 
 <pre><code>  double swe_refrac(double inalt, double atpress, double attemp, int32 calc_flag)</code></pre>
 
-<h1 id="function-swe_refrac_extended-inalt-atpress-attemp-calc_flag">function swe_refrac_extended(inalt, atpress, attemp, calc_flag)</h1>
+<h1 id="function-swe_refrac_extended-inalt-geoalt-atpress-attemp-lapse_rate-calc_flag">function swe_refrac_extended(inalt, geoalt, atpress, attemp, lapse_rate, calc_flag)</h1>
 
-<p>Transforms apparent to true altitude and vice-versa. This function was created thanks to and with the help of the archaeoastronomer Victor Reijs. It is more correct and more skilled than the old function swe_refrac(): - it allows correct calculation of refraction for altitudes above sea &gt; 0, where the ideal horizon and planets that are visible may have a negative height. (for swe_refrac(), negative apparent heights do not exist!) - it allows to manipulate the refraction constant</p>
+<p>Transforms apparent to true altitude and vice-versa.</p>
+
+<p>This function was created thanks to and with the help of the archaeoastronomer Victor Reijs.</p>
+
+<p>It is more correct and more skilled than the old function swe_refrac(): - it allows correct calculation of refraction for altitudes above sea &gt; 0, where the ideal horizon and planets that are visible may have a negative height. (for swe_refrac(), negative apparent heights do not exist!) - it allows to manipulate the refraction constant</p>
 
 <h3 id="Parameters48">Parameters</h3>
 
@@ -2304,7 +2309,8 @@
 
 <h3 id="return-array34">return array</h3>
 
-<pre><code>  [0..3]         array of 4 doubles: 
+<pre><code>  [&#39;rc&#39;]        int return code
+  [0..3]         array of 4 doubles: 
         [0] true altitude, if possible; otherwise input value
         [1] apparent altitude, if possible; otherwise input value
         [2] refraction
@@ -2314,13 +2320,50 @@
 
 <pre><code>  double swe_refrac_extended(double inalt, double geoalt, double atpress, double attemp, double lapse_rate, int32 calc_flag, double *dret)</code></pre>
 
-<h1 id="function-swe_heliacal_ut">function swe_heliacal_ut()</h1>
+<h1 id="function-swe_heliacal_ut-tjdstart-geolon-geolat-geoalt-atpress-attemp-athum-atuom-oage-oeyes-omono-ozoom-odia-otrans-objectname-event_type-helflag">function swe_heliacal_ut(tjdstart, geolon, geolat, geoalt, atpress, attemp, athum, atuom, oage, oeyes, omono, ozoom, odia, otrans, objectname, event_type, helflag)</h1>
 
-<p>see Programmer&#39;s manual and C source code in swehel.c</p>
+<p>Compute heliacal risings etc. of a planet or star.</p>
+
+<p>If this is too much for you, set all these values to 0. The software will then set the following defaults:</p>
+
+<p>- Pressure 1013.25, temperature 15, relative humidity 40. - The values will be modified depending on the altitude of the observer above sea level.</p>
 
 <h3 id="Parameters49">Parameters</h3>
 
-<pre><code>        see Programmer&#39;s manual and C source code in swehel.c</code></pre>
+<pre><code>    double      tjdstart        Julian day number of start date for the search, Universal Time.
+
+    double      geolon          Geographic longitude.
+    double      geolat          Geographic latitude.
+    double      geoalt          Geographic altitude (eye height), in meters.
+
+    double      atpress         Atmospheric pressure in mbar (hPa).
+    double      attemp          Atmospheric temperature in C.
+    double      athum           Relative humidity in %.
+    double      atuom           Unit of measure:
+                                &lt; 1 &amp; &gt; 0, then it is the total atmospheric coefficient (ktot)
+                                0, then other atmospheric parameters determine the total atmospheric coefficient (ktot)
+                                &gt;= 1, then meteorological range (km)
+
+    double      oage            Age of observer in years (default = 36).
+    double      oeyes           Snellen ratio of observers eyes (default = 1 = normal).
+    double      omono           0 = monocular, 1 = binocular.
+    double      ozoom           Telescope magnification: 0 = default to naked eye (binocular), 1 = naked eye.
+    double      odia            Optical aperture (telescope diameter) in mm.
+    double      otrans          Optical transmission.
+
+    string      objectname      Name string of fixed star or planet.
+
+    int         event_type      Options:
+                                SE_HELIACAL_RISING (1): morning first (exists for all visible planets and stars);
+                                SE_HELIACAL_SETTING (2): evening last (exists for all visible planets and stars);
+                                SE_EVENING_FIRST (3): evening first (exists for Mercury, Venus, and the Moon);
+                                SE_MORNING_LAST (4): morning last (exists for Mercury, Venus, and the Moon).
+
+    int         helflag         Ephemeris flag, like iflag in swe_calc(). In addition:
+                                SE_HELFLAG_OPTICAL_PARAMS (512);
+                                SE_HELFLAG_NO_DETAILS (1024);
+                                SE_HELFLAG_VISLIM_DARK (4096);
+                                SE_HELFLAG_VISLIM_NOMOON (8192);</code></pre>
 
 <h3 id="return-array35">return array</h3>
 
@@ -2333,13 +2376,15 @@
 
 <pre><code>  int swe_heliacal_ut(double JDNDaysUTStart, double *dgeo, double *datm, double *dobs, char *ObjectNameIn, int32 TypeEvent, int32 helflag, double *dret, char *serr_ret)</code></pre>
 
-<h1 id="function-swe_heliacal_pheno_ut">function swe_heliacal_pheno_ut()</h1>
+<h1 id="function-swe_heliacal_pheno_ut-tjdstart-geolon-geolat-geoalt-atpress-attemp-athum-atuom-oage-oeyes-omono-ozoom-odia-otrans-objectname-event_type-helflag">function swe_heliacal_pheno_ut(tjdstart, geolon, geolat, geoalt, atpress, attemp, athum, atuom, oage, oeyes, omono, ozoom, odia, otrans, objectname, event_type, helflag)</h1>
 
-<p>see Programmer&#39;s manual and C source code in swehel.c</p>
+<p>Provides data that are relevant for the calculation of heliacal risings and settings.</p>
+
+<p>This function does not provide data of heliacal risings and settings, just some additional data mostly used for test purposes</p>
 
 <h3 id="Parameters50">Parameters</h3>
 
-<pre><code>        see Programmer&#39;s manual and C source code in swehel.c</code></pre>
+<pre><code>        Identical to input parameters of swe_heliacal_ut().</code></pre>
 
 <h3 id="return-array36">return array</h3>
 
@@ -2350,17 +2395,26 @@
 
 <pre><code>  int swe_heliacal_pheno_ut(double JDNDaysUT, double *dgeo, double *datm, double *dobs, char *ObjectNameIn, int32 TypeEvent, int32 helflag, double *darr, char *serr)</code></pre>
 
-<h1 id="function-swe_vis_limit_mag">function swe_vis_limit_mag()</h1>
+<h1 id="function-swe_vis_limit_mag-tjdstart-geolon-geolat-geoalt-atpress-attemp-athum-atuom-oage-oeyes-omono-ozoom-odia-otrans-objectname-helflag">function swe_vis_limit_mag(tjdstart, geolon, geolat, geoalt, atpress, attemp, athum, atuom, oage, oeyes, omono, ozoom, odia, otrans, objectname, helflag)</h1>
 
 <p>Limiting magnitude in dark skies</p>
 
 <h3 id="Parameters51">Parameters</h3>
 
-<p>see Programmer&#39;s manual and C source code in swehel.c</p>
+<pre><code>    Identical to input parameters of swe_heliacal_ut(), except no `event_type`.</code></pre>
 
 <h3 id="return-array37">return array</h3>
 
-<pre><code>        see Programmer&#39;s manual and C source code in swehel.c</code></pre>
+<pre><code>    [
+        0 =&gt; (double)   limiting visual magnitude (if dret[0] &gt; magnitude of object, then the object is visible);
+        1 =&gt; (double)   altitude of object;
+        2 =&gt; (double)   azimuth of object;
+        3 =&gt; (double)   altitude of sun;
+        4 =&gt; (double)   azimuth of sun;
+        5 =&gt; (double)   altitude of moon;
+        6 =&gt; (double)   azimuth of moon;
+        7 =&gt; (double)   magnitude of object;
+    ]</code></pre>
 
 <h3 id="C-declaration54">C declaration</h3>
 
@@ -2373,7 +2427,7 @@
 <h3 id="Parameters52">Parameters</h3>
 
 <pre><code>  double        tjd_ut      
-  int           calc_flag
+  int           calc_flag               either SE_ECL2HOR or SE_EQU2HOR
   double                geolon          longitude
   double                geolat          latitude
   double                geoalt          altitude above sea
@@ -2393,22 +2447,22 @@
 
 <pre><code>  void  swe_azalt( double tjd_ut, int32  calc_flag, double *geopos, double atpress, double attemp, double *xin, double *xaz)</code></pre>
 
-<h1 id="function-swe_azalt_rev-tjd_ut-iflag-xin0-xin1">function swe_azalt_rev(tjd_ut, iflag, xin0, xin1)</h1>
+<h1 id="function-swe_azalt_rev-tjd_ut-calc_flag-xin0-xin1">function swe_azalt_rev(tjd_ut, calc_flag, xin0, xin1)</h1>
 
 <p>computes either ecliptical or equatorial coordinates from azimuth and true altitude in degrees.</p>
 
 <h3 id="Parameters53">Parameters</h3>
 
 <pre><code>  double        tjd_ut      
-  int           iflag           either SE_HOR2ECL or SE_HOR2EQU
+  int           calc_flag               either SE_HOR2ECL or SE_HOR2EQU
   double                xin0            azimut, in degrees
   double                xin1            true altitude, in degrees</code></pre>
 
 <h3 id="return-array39">return array</h3>
 
-<pre><code>  [0..2]                        array of 3 doubles: 
-                     xout[0] = longitude
-                     xout[1] = latitude</code></pre>
+<pre><code>        array of 2 doubles: 
+         xout[0] = longitude
+         xout[1] = latitude</code></pre>
 
 <h3 id="C-declaration56">C declaration</h3>
 
@@ -3105,20 +3159,6 @@
 <h3 id="C-declaration91">C declaration</h3>
 
 <pre><code>  char * swe_cs2degstr(CSEC t, char *a);</code></pre>
-
-<h1 id="POD-ERRORS">POD ERRORS</h1>
-
-<p>Hey! <b>The above document had some coding errors, which are explained below:</b></p>
-
-<dl>
-
-<dt id="Around-line-3470">Around line 3470:</dt>
-<dd>
-
-<p>Non-ASCII character seen before =encoding in &#39;&deg;C&#39;. Assuming UTF-8</p>
-
-</dd>
-</dl>
 
 
 </body>
