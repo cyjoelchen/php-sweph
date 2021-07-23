@@ -3666,14 +3666,16 @@ PHP_FUNCTION(swe_heliacal_ut)
 /* {{{ pod
 =pod
 
-=head1 function swe_heliacal_pheno_ut()
+=head1 function swe_heliacal_pheno_ut(tjdstart, geolon, geolat, geoalt, atpress, attemp, athum, atuom, oage, oeyes, omono, ozoom, odia, otrans, objectname, event_type, helflag)
 
-see Programmer's manual and C source code in swehel.c
+Provides data that are relevant for the calculation of heliacal risings and settings.
+
+This function does not provide data of heliacal risings and settings,
+just some additional data mostly used for test purposes
 
 =head3 Parameters
 
-	see Programmer's manual and C source code in swehel.c
-
+	Identical to input parameters of swe_heliacal_ut().
 
 =head3 return array
 
