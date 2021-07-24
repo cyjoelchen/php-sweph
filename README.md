@@ -19,7 +19,7 @@ Follow the steps to build the latest version of this extension.
 Make sure `php-dev` has installed already.
 
 ```
-git clone -b v2.0.29 https://github.com/cyjoelchen/php-sweph.git
+git clone -b v3.0.0 https://github.com/cyjoelchen/php-sweph.git
 cd php-sweph
 phpize
 ./configure
@@ -33,7 +33,6 @@ Now you should able to see swephp section from `phpinfo()`.
 
  swephp support | enabled 
 ---|---
- extension version | 3.0 Rev: 00
  library (libswe.a) version | 2.10.01a
  default ephemeris file path | .:/users/ephe2/:/users/ephe/ 
 
