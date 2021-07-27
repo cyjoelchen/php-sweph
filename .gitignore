@@ -13,6 +13,7 @@ tests/*.sh
 tests/*.swp
 sweph/src/*.o
 sweph/src/libswe.a
+sweph/src/swetest
 modules
 sweph*.la
 sweph*.lo
