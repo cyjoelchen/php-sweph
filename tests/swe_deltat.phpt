@@ -9,7 +9,8 @@ if (!extension_loaded('swephp')) {
 --FILE--
 <?php
 swe_set_ephe_path('./sweph/ephe');
-var_dump(round(swe_deltat(2452275.5), 6));
+$dt = swe_deltat(2452275.5) * 86400;
+var_dump(round($dt, 6));
 ?>
 --EXPECT--
-float(0.000744)
+float(64.300074)
