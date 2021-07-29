@@ -4370,7 +4370,7 @@ then the function returns a warning.
 =head3 return array
 
     [
-        'tjd_et' => (double) Delta T.
+        'dt' => (double) Delta T.
         'serr' => (string) Error string.
     ]
 
@@ -4382,7 +4382,7 @@ then the function returns a warning.
  }}} */
 PHP_FUNCTION(swe_deltat_ex)
 {
-	double tjd_ut, tjd_et;
+	double tjd_ut, dt;
 	long ephe_flag;
 	char serr[AS_MAXCH];
 	*serr = '\0';
@@ -4394,10 +4394,10 @@ PHP_FUNCTION(swe_deltat_ex)
 		return;
 	}
 
-	tjd_et = swe_deltat_ex(tjd_ut, ephe_flag, serr);
+	dt = swe_deltat_ex(tjd_ut, ephe_flag, serr);
 
 	array_init(return_value);
-	add_assoc_double(return_value, "tjd_et", tjd_et);
+	add_assoc_double(return_value, "dt", dt);
 
 	add_assoc_string(return_value, "serr", serr);
 }
