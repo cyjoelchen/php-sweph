@@ -2941,7 +2941,7 @@ PHP_FUNCTION(swe_lun_occult_when_loc)
 	} else {
 		array_init(&tret_arr);
 		for(i = 0; i < 8; i++)
-			add_index_double(&tret_arr, i, attr[i]);
+			add_index_double(&tret_arr, i, tret[i]);
 		add_assoc_zval(return_value, "tret", &tret_arr);
 		array_init(&attr_arr);
 		for(i = 0; i < 10; i++)
