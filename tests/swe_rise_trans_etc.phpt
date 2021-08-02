@@ -9,6 +9,7 @@ if (!extension_loaded('swephp')) {
 --FILE--
 <?php
 
+include 'utility/Format.php';
 swe_set_ephe_path('./sweph/ephe');
 
 # calc planet position
@@ -67,7 +68,7 @@ for($i = 0; $i < 4; $i++) {
   $ptrans[$i] = array(
     'what' => $flagnam[$i],
     'tr'   => $tr,
-    'when' => print_date($tr)
+    'when' => Format::date($tr)
   );
 }
 echo "rise $pnam: \n";
@@ -84,20 +85,12 @@ for($i = 0; $i < 4; $i++) {
   $strans[$i] = array(
     'what' => $flagnam[$i],
     'tr'   => $tr,
-    'when' => print_date($tr)
+    'when' => Format::date($tr)
   );
 }
 echo "rise $starname: \n";
 var_dump($strans); 
 
-function print_date($t)
-{
-  $r = swe_jdut1_to_utc($t, SE_GREG_CAL);
-  $sec = floor($r['sec']);
-  $date = $r['year'] . " " .  $r['month'] . " " .  $r['day']  . "  " . $r['hour'] .":".$r['min'] .":".$sec .' UT';
-  # $date = $r['year'] . " / ss";
-  return $date;
-}
 ?>
 --EXPECT--
 planets: 
