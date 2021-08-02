@@ -8,26 +8,18 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
+include 'utility/Format.php';
 swe_set_ephe_path('./sweph/ephe');
 echo "swe_lun_occult_when_glob for Venus\n";
 $rv = swe_lun_occult_when_glob(2454466.5, SE_VENUS, "", SEFLG_SWIEPH, 0, 0);
 var_dump($rv);
 $tjd_ut = $rv['tret'][0];
-var_dump($tjd_ut, print_date($tjd_ut));
+var_dump($tjd_ut, Format::date($tjd_ut));
 echo "swe_lun_occult_where for Venus\n";
 var_dump(swe_lun_occult_where($tjd_ut, SE_VENUS, "", SEFLG_SWIEPH));
 echo "swe_lun_occult_when_loc for Venus\n";
 $rv = swe_lun_occult_when_loc(2454466.5, SE_VENUS, "", SEFLG_SWIEPH, 12.1, 49.0, 330, 0);
 var_dump($rv);
-
-function print_date($t)
-{
-  $r = swe_jdut1_to_utc($t, SE_GREG_CAL);
-  $sec = floor($r['sec']);
-  $date = $r['year'] . " " .  $r['month'] . " " .  $r['day']  . "  " . $r['hour'] .":".$r['min'] .":".$sec .' UT';
-  # $date = $r['year'] . " / ss";
-  return $date;
-}
 ?>
 --EXPECT--
 swe_lun_occult_when_glob for Venus
