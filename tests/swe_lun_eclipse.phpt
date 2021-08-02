@@ -8,12 +8,13 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
+include 'utility/Format.php';
 swe_set_ephe_path('./sweph/ephe');
 echo "swe_lun_eclipse_when(2454466.5, SEFLG_SWIEPH, 0, 0)\n";
 $rv = swe_lun_eclipse_when(2454466.5, SEFLG_SWIEPH, 0, 0);
 printf( "retflag = %d %b\n", $rv['retflag'], $rv['retflag']);
 $tjd_ut = $rv['tret'][0];
-$d = print_date($tjd_ut);
+$d = Format::date($tjd_ut);
 printf("%f %s\n",  $tjd_ut,  $d);
 print_array( $rv['tret'], 8, 'tret');
 $geo = array(12.1, 49.0, 330);
@@ -21,7 +22,7 @@ echo "swe_lun_eclipse_when_loc($tjd_ut, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2],
 $rv = swe_lun_eclipse_when_loc($tjd_ut, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2], 0);
 printf( "retflag = %d %b\n", $rv['retflag'], $rv['retflag']);
 $tjd_ut = $rv['tret'][0];
-$d = print_date($tjd_ut);
+$d = Format::date($tjd_ut);
 printf("%f %s\n",  $tjd_ut,  $d);
 print_array( $geo, 3, 'geo');
 print_array( $rv['tret'], 10, 'tret');
@@ -31,15 +32,6 @@ $rv = swe_lun_eclipse_how($tjd_ut, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2]);
 printf("%f %s\n",  $tjd_ut,  $d);
 print_array( $geo, 3, 'geo');
 print_array( $rv['attr'], 11, 'attr');
-
-function print_date($t)
-{
-  $r = swe_jdut1_to_utc($t, SE_GREG_CAL);
-  $sec = floor($r['sec']);
-  $date = $r['year'] . " " .  $r['month'] . " " .  $r['day']  . "  " . $r['hour'] .":".$r['min'] .":".$sec .' UT';
-  # $date = $r['year'] . " / ss";
-  return $date;
-}
 
 function print_array($arr, $n, $name)
 {
