@@ -8,6 +8,13 @@
 class Format
 {
     /**
+     * Default precision value to use for rounding.
+     *
+     * @const int
+     */
+    public const PRECISION = 6;
+
+    /**
      * Convert a Julian datetime value into a human-readable datetime string.
      *
      * @param float $jdt Julian datetime value.
@@ -36,7 +43,7 @@ class Format
      * @param int $precision Number of decimal places to keep.
      * @return array
      */
-    public static function round(array $input, int $precision = 6): array
+    public static function round(array $input, int $precision = Format::PRECISION): array
     {
         return array_map(function ($value) use ($precision) {
             return is_double($value) ? round($value, $precision) : $value;
