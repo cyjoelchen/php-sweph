@@ -8,39 +8,36 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
+
+include 'utility/Format.php';
 swe_set_ephe_path('./sweph/ephe');
+
 echo "swe_sol_eclipse_when_glob(2454466.5, SEFLG_SWIEPH, 0, 0)\n";
 $rv = swe_sol_eclipse_when_glob(2454466.5, SEFLG_SWIEPH, 0, 0);
 printf( "retflag = %d %b\n", $rv['retflag'], $rv['retflag']);
 $tjd_ut = $rv['tret'][0];
-$d = print_date($tjd_ut);
+$d = Format::date($tjd_ut);
 printf("%f %s\n",  $tjd_ut,  $d);
 print_array_t( $rv['tret'], 8, 'tret');
+
 echo "swe_sol_eclipse_where($tjd_ut, SEFLG_SWIEPH)\n";
 $rv = swe_sol_eclipse_where($tjd_ut, SEFLG_SWIEPH);
 printf( "retflag = %d %b\n", $rv['retflag'], $rv['retflag']);
 print_array( $rv['geopos'], 2, 'geopos');
 print_array( $rv['attr'], 11, 'attr');
 $geo = array(-153.1, -65.0, 0);
+
 echo "swe_sol_eclipse_when_loc(2454466.5, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2], 0)\n";
 $rv = swe_sol_eclipse_when_loc(2454466.5, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2], 0);
 printf( "retflag = %d %b\n", $rv['retflag'], $rv['retflag']);
 print_array( $rv['tret'], 7, 'tret');
 print_array_t( $rv['tret'], 5, 'tret');
 print_array( $rv['attr'], 11, 'attr');
+
 echo "swe_sol_eclipse_how($tjd_ut, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2])\n";
 $rv = swe_sol_eclipse_how($tjd_ut, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2]);
 printf( "retflag = %d %b\n", $rv['retflag'], $rv['retflag']);
 print_array( $rv['attr'], 11, 'attr');
-
-function print_date($t)
-{
-  $r = swe_jdut1_to_utc($t, SE_GREG_CAL);
-  $sec = floor($r['sec']);
-  $date = $r['year'] . " " .  $r['month'] . " " .  $r['day']  . "  " . $r['hour'] .":".$r['min'] .":".$sec .' UT';
-  # $date = $r['year'] . " / ss";
-  return $date;
-}
 
 function print_array($arr, $n, $name)
 {
@@ -50,7 +47,7 @@ function print_array($arr, $n, $name)
 function print_array_t($arr, $n, $name)
 {
   for ($i = 0; $i < $n; $i++) {
-   printf( "%s[%d] = %f %s\n", $name, $i, $arr[$i], print_date($arr[$i]));;
+   printf( "%s[%d] = %f %s\n", $name, $i, $arr[$i], Format::date($arr[$i]));;
   }
 }
 ?>
