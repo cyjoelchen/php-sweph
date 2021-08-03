@@ -1,0 +1,35 @@
+name: run-tests
+
+on: [push]
+
+jobs:
+  make-test:
+    strategy:
+      matrix:
+        php: ['7.0', '7.1', '7.2', '7.3', '7.4']
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository.
+        uses: actions/checkout@v2
+
+      - name: Install php${{ matrix.php }}-dev.
+        run: |
+          sudo apt install software-properties-common
+          sudo add-apt-repository ppa:ondrej/php
+          sudo apt update
+          sudo apt install php${{ matrix.php }}-dev
+          sudo update-alternatives --set php /usr/bin/php${{ matrix.php }}
+          sudo update-alternatives --set phpize /usr/bin/phpize${{ matrix.php }}
+          sudo update-alternatives --set php-config /usr/bin/php-config${{ matrix.php }}
+
+      - name: Build Extension.
+        run: |
+          phpize
+          ./configure
+          make
+          sudo make install
+
+      - name: Run Tests.
+        run: yes n | make test
