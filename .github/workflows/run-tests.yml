@@ -1,0 +1,29 @@
+name: run-tests
+
+on: [push]
+
+jobs:
+  make-test:
+    strategy:
+      matrix:
+        php-versions: ['7.3']
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository.
+        uses: actions/checkout@v2
+
+      - name: Install php-dev.
+        run: sudo apt install php-dev
+
+      - name: Build Extension.
+        run: |
+          phpize
+          ./configure
+          make
+          make install
+          echo "extension=swephp.so" > /usr/local/etc/php/conf.d/swephp.ini
+
+      - name: Run Tests.
+        run: yes n | make test
