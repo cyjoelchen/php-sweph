@@ -37,6 +37,23 @@ class Format
     }
 
     /**
+     * Convert an array of Julian datetime values into their human-readable
+     * datetime string equivalents, returning a rounded version of the
+     * original JDT value as well.
+     *
+     * @param array $input Input array.
+     * @return array
+     */
+    public static function jdtWithUtc(array $input): array
+    {
+        return array_map(function ($value) {
+            return is_double($value)
+                ? sprintf('%f %s', round($value, Format::PRECISION), Format::date($value))
+                : $value;
+        }, $input);
+    }
+
+    /**
      * Round all decimal values in an array to specified precision.
      *
      * @param array $input Input array.
