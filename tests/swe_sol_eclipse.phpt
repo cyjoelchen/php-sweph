@@ -16,7 +16,7 @@ echo "swe_sol_eclipse_when_glob(2454466.5, SEFLG_SWIEPH, 0, 0)\n";
 $rv = swe_sol_eclipse_when_glob(2454466.5, SEFLG_SWIEPH, 0, 0);
 printf( "retflag = %d %b\n", $rv['retflag'], $rv['retflag']);
 $tjd_ut = $rv['tret'][0];
-$d = Format::date($tjd_ut);
+$d = Format::asUtc($tjd_ut);
 printf("%f %s\n",  $tjd_ut,  $d);
 var_dump(Format::jdtWithUtc(array_slice($rv['tret'], 0, 8)));
 

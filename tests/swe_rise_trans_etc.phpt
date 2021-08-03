@@ -68,7 +68,7 @@ for($i = 0; $i < 4; $i++) {
   $ptrans[$i] = array(
     'what' => $flagnam[$i],
     'tr'   => $tr,
-    'when' => Format::date($tr)
+    'when' => Format::asUtc($tr)
   );
 }
 echo "rise $pnam: \n";
@@ -85,7 +85,7 @@ for($i = 0; $i < 4; $i++) {
   $strans[$i] = array(
     'what' => $flagnam[$i],
     'tr'   => $tr,
-    'when' => Format::date($tr)
+    'when' => Format::asUtc($tr)
   );
 }
 echo "rise $starname: \n";

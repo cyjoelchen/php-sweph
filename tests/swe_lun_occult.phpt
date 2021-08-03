@@ -14,7 +14,7 @@ echo "swe_lun_occult_when_glob for Venus\n";
 $rv = swe_lun_occult_when_glob(2454466.5, SE_VENUS, "", SEFLG_SWIEPH, 0, 0);
 var_dump($rv);
 $tjd_ut = $rv['tret'][0];
-var_dump($tjd_ut, Format::date($tjd_ut));
+var_dump($tjd_ut, Format::asUtc($tjd_ut));
 echo "swe_lun_occult_where for Venus\n";
 var_dump(swe_lun_occult_where($tjd_ut, SE_VENUS, "", SEFLG_SWIEPH));
 echo "swe_lun_occult_when_loc for Venus\n";

@@ -20,7 +20,7 @@ class Format
      * @param float $jdt Julian datetime value.
      * @return string
      */
-    public static function date(float $jdt): string
+    public static function asUtc(float $jdt): string
     {
         $r = swe_jdut1_to_utc($jdt, SE_GREG_CAL);
         $sec = floor($r['sec']);
@@ -48,7 +48,7 @@ class Format
     {
         return array_map(function ($value) {
             return is_double($value)
-                ? sprintf('%f %s', round($value, Format::PRECISION), Format::date($value))
+                ? sprintf('%f %s', round($value, Format::PRECISION), Format::asUtc($value))
                 : $value;
         }, $input);
     }

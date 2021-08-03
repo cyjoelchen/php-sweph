@@ -15,7 +15,7 @@ echo "swe_lun_eclipse_when(2454466.5, SEFLG_SWIEPH, 0, 0)\n";
 $rv = swe_lun_eclipse_when(2454466.5, SEFLG_SWIEPH, 0, 0);
 printf( "retflag = %d %b\n", $rv['retflag'], $rv['retflag']);
 $tjd_ut = $rv['tret'][0];
-$d = Format::date($tjd_ut);
+$d = Format::asUtc($tjd_ut);
 printf("%f %s\n",  $tjd_ut,  $d);
 var_dump(Format::round($rv['tret']));
 $geo = array(12.1, 49.0, 330);
@@ -24,7 +24,7 @@ echo "swe_lun_eclipse_when_loc($tjd_ut, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2],
 $rv = swe_lun_eclipse_when_loc($tjd_ut, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2], 0);
 printf( "retflag = %d %b\n", $rv['retflag'], $rv['retflag']);
 $tjd_ut = $rv['tret'][0];
-$d = Format::date($tjd_ut);
+$d = Format::asUtc($tjd_ut);
 printf("%f %s\n",  $tjd_ut,  $d);
 var_dump(Format::round($geo));
 var_dump(Format::round($rv['tret']));
