@@ -29,8 +29,7 @@ jobs:
           phpize
           ./configure
           make
-          make install
-          echo "extension=swephp.so" > /usr/local/etc/php/conf.d/swephp.ini
+          sudo make install
 
       - name: Run Tests.
         run: yes n | make test
