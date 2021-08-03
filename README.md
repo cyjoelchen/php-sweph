@@ -19,7 +19,7 @@ Follow the steps to build the latest version of this extension.
 Make sure `php-dev` has installed already.
 
 ```
-git clone -b v3.0.0 https://github.com/cyjoelchen/php-sweph.git
+git clone -b 3.0.1 https://github.com/cyjoelchen/php-sweph.git
 cd php-sweph
 phpize
 ./configure
@@ -140,16 +140,16 @@ This repository ships with a simple Docker setup for easy development.
 Setup your local environment for iterative testing:
 
 ```
-> docker build -t se_php .
-> docker run --name se-php -dit -v ${PWD}:/root/php-sweph se_php
+> docker build -t php_sweph .
+> docker run --name php-sweph -dit -v ${PWD}:/root/php-sweph php_sweph
 ```
 
-_The container `se-php` will run in the background._
+_The container `php-sweph` will run in the background._
 
 The easiest way to build and test is to start an interactive terminal:
 
 ```
-> docker exec -it se-php bash
+> docker exec -it php-sweph bash
 > ./build-se
 ``` 
 
@@ -161,7 +161,7 @@ When you're finished, exit the container and stop it:
 
 ```
 > exit
-> docker stop se-php
+> docker stop php-sweph
 ```
 
 
