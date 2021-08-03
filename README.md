@@ -19,7 +19,7 @@ Follow the steps to build the latest version of this extension.
 Make sure `php-dev` has installed already.
 
 ```
-git clone -b v3.0.0 https://github.com/cyjoelchen/php-sweph.git
+git clone -b 3.0.1 https://github.com/cyjoelchen/php-sweph.git
 cd php-sweph
 phpize
 ./configure
