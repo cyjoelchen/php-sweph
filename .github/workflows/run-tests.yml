@@ -6,7 +6,7 @@ jobs:
   make-test:
     strategy:
       matrix:
-        php-versions: ['7.3']
+        php: ['7.3']
 
     runs-on: ubuntu-latest
 
@@ -14,8 +14,15 @@ jobs:
       - name: Checkout Repository.
         uses: actions/checkout@v2
 
-      - name: Install php-dev.
-        run: sudo apt install php-dev
+      - name: Install php${{ matrix.php }}-dev.
+        run: |
+          sudo apt install software-properties-common
+          sudo add-apt-repository ppa:ondrej/php
+          sudo apt update
+          sudo apt install php${{ matrix.php }}-dev
+          sudo update-alternatives --set php /usr/bin/php${{ matrix.php }}
+          sudo update-alternatives --set phpize /usr/bin/phpize${{ matrix.php }}
+          sudo update-alternatives --set php-config /usr/bin/php-config${{ matrix.php }}
 
       - name: Build Extension.
         run: |
