@@ -26,6 +26,7 @@ libtool
 missing
 mk*
 run-test*
+!.github/workflows/run-tests.yml
 !config.m4
 config*
 install-sh
