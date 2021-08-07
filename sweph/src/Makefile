@@ -14,7 +14,7 @@
 #
 
 CFLAGS =  -O2 -Wall -fPIC # for Linux and other gcc systems
-CFLAGS =  -g -Wall -fPIC # for Linux and other gcc systems
+#CFLAGS =  -g -Wall -fPIC # for Linux and other gcc systems
 OP=$(CFLAGS)  
 CC=cc	#for Linux
 
