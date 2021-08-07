@@ -33,7 +33,7 @@ Now you should able to see swephp section from `phpinfo()`.
 
  swephp support | enabled 
 ---|---
- library (libswe.a) version | 2.10.01a
+ library (libswe.a) version | 2.10.02
  default ephemeris file path | .:/users/ephe2/:/users/ephe/ 
 
 You are all set!
