@@ -731,7 +731,7 @@ PHP_FUNCTION(swe_fixstar)
 	long iflag;
 	double tjd_et, xx[6];
 	char *star_ptr = NULL;
-	int star_len;
+	size_t star_len;
 	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
 	int i;
 	
@@ -787,7 +787,7 @@ PHP_FUNCTION(swe_fixstar2)
 	long iflag;
 	double tjd_et, xx[6];
 	char *star_ptr = NULL;
-	int star_len;
+	size_t star_len;
 	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
 	int i;
 	
@@ -843,7 +843,7 @@ PHP_FUNCTION(swe_fixstar_ut)
 	long iflag;
 	double tjd_ut, xx[6];
 	char *star_ptr = NULL;
-	int star_len;
+	size_t star_len;
 	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
 	int i;
 	*serr = '\0';
@@ -898,7 +898,7 @@ PHP_FUNCTION(swe_fixstar2_ut)
 	long iflag;
 	double tjd_ut, xx[6];
 	char *star_ptr = NULL;
-	int star_len;
+	size_t star_len;
 	char star[MAX_FIXSTAR_NAME], serr[AS_MAXCH];
 	int i;
 	*serr = '\0';
