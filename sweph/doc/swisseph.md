@@ -714,17 +714,13 @@ years and 18 main-asteroid files for the time range of 10.800 years.
 
 The file names are as follows:
 
-**Planetary file Moon file Main asteroid file Time range**
-
-Seplm132.se1 Semom132.se1 11 Aug 13000 BCE -- 12602 BCE
-
-Seplm126.se1 Semom126.se1 12601 BCE -- 12002 BCE
-
-Seplm120.se1 Semom120.se1 12001 BCE -- 11402 BCE
-
-Seplm114.se1 Semom114.se1 11401 BCE -- 10802 BCE
-
-Seplm108.se1 Semom108.se1 10801 BCE -- 10202 BCE
+Planetary file|Moon file|Main asteroid file|Time range
+--------------|---------|------------------|-------------------------------
+Seplm132.se1|Semom132.se1||11 Aug 13000 BCE -- 12602 BCE
+Seplm126.se1|Semom126.se1||12601 BCE -- 12002 BCE
+Seplm120.se1|Semom120.se1||12001 BCE -- 11402 BCE
+Seplm114.se1|Semom114.se1||11401 BCE -- 10802 BCE
+Seplm108.se1|Semom108.se1||10801 BCE -- 10202 BCE
 
 Seplm102.se1 Semom102.se1 10201 BCE -- 9602 BCE
 
