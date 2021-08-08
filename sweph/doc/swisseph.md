@@ -325,7 +325,7 @@ Email of developers: via mailing list <https://groups.io/g/swisseph/>
 Authors: Dieter Koch and Dr. Alois Treindl
 
 ## Editing history
-
+```
 +--------+-------------------------------------------------------------+
 | 14-se  | Appendix A by Alois                                         |
 | p-1997 |                                                             |
@@ -500,6 +500,7 @@ Authors: Dieter Koch and Dr. Alois Treindl
 | 6-ap   | Dieter: Improved chapter 2.1.2.2. "Swiss Ephemeris and JPL  |
 | r-2021 | Horizons System of Nasa"                                    |
 +--------+-------------------------------------------------------------+
+```
 
 ## Swiss Ephemeris release history
 
