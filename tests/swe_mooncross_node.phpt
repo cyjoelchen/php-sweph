@@ -8,9 +8,10 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
+include 'utility/Format.php';
 swe_set_ephe_path('./sweph/ephe');
-var_dump(swe_mooncross_node(2455334.0, SEFLG_SWIEPH));
-var_dump(swe_mooncross_node_ut(2455334.0, SEFLG_SWIEPH));
+var_dump(Format::round(swe_mooncross_node(2455334.0, SEFLG_SWIEPH)));
+var_dump(Format::round(swe_mooncross_node_ut(2455334.0, SEFLG_SWIEPH)));
 ?>
 --EXPECT--
 array(5) {
@@ -19,11 +20,11 @@ array(5) {
   ["rc"]=>
   int(0)
   ["jx"]=>
-  float(2455334.1525965)
+  float(2455334.152597)
   ["xlon"]=>
-  float(102.73339203829)
+  float(102.733392)
   ["xlat"]=>
-  float(1.9682940639408E-10)
+  float(0)
 }
 array(5) {
   ["serr"]=>
@@ -31,9 +32,9 @@ array(5) {
   ["rc"]=>
   int(0)
   ["jx"]=>
-  float(2455334.1518307)
+  float(2455334.151831)
   ["xlon"]=>
-  float(102.73339203829)
+  float(102.733392)
   ["xlat"]=>
-  float(1.9682940639408E-10)
+  float(0)
 }
