@@ -11,4 +11,4 @@ echo ‘skip’;
 var_dump(swe_version());
 ?>
 --EXPECT--
-string(8) "2.10.01a"
+string(7) "2.10.02"

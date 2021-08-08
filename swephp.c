@@ -45,6 +45,14 @@ zend_function_entry swephp_functions[] = {
 	PHP_FE(swe_calc, NULL)
 	PHP_FE(swe_calc_ut, NULL)
 	PHP_FE(swe_calc_pctr, NULL)
+	PHP_FE(swe_solcross, NULL)
+	PHP_FE(swe_solcross_ut, NULL)
+	PHP_FE(swe_mooncross, NULL)
+	PHP_FE(swe_mooncross_ut, NULL)
+	PHP_FE(swe_mooncross_node, NULL)
+	PHP_FE(swe_mooncross_node_ut, NULL)
+	PHP_FE(swe_helio_cross, NULL)
+	PHP_FE(swe_helio_cross_ut, NULL)
 	PHP_FE(swe_fixstar, NULL)
 	PHP_FE(swe_fixstar_ut, NULL)
 	PHP_FE(swe_fixstar_mag, NULL)
@@ -697,6 +705,442 @@ PHP_FUNCTION(swe_calc_pctr)
 	add_assoc_string(return_value, "serr", serr);
 	add_assoc_long(return_value, "rc", rc);
 }
+
+/* {{{ pod
+=pod
+
+=head1 function swe_solcross(x2cross, jd_et, iflag)
+
+computes moment of Sun's crossing over some longitude
+
+=head3 Parameters
+
+  double		x2cross	    zodiac position to be crossed
+  double        jd_et      start date in Ephemeris Time.
+  int           iflag       Flag bits for computation requirements, e.g.
+  		               SEFLG_HELCTR (crossing of Earth instead of Sun)
+					   SEFLG_TRUEPOS
+					   SEFLG_NONUT
+					   SEFLG_EQUATORIAL
+
+=head3 return array
+
+  ['jx']		double	crossing date/time
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  double swe_solcross(double x2cross, double jd_et, int flag, char *serr)
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_solcross)
+{
+	int rc = 0;
+	long iflag;
+	double jd_et, jx, x2cross;
+	char serr[AS_MAXCH]; 
+	*serr = '\0';
+	jx = 0;
+	
+	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddl",
+			&x2cross, &jd_et, &iflag) == FAILURE) {
+		return;
+	}
+	jx = swe_solcross(x2cross, jd_et, iflag,serr);
+	if (*serr != '\0' || jx < jd_et) {
+	  rc = ERR;
+    }
+	array_init(return_value);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+	add_assoc_double(return_value, "jx", jx);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_solcross_ut(x2cross, jd_ut, iflag)
+
+computes moment of Sun's crossing over some longitude
+
+=head3 Parameters
+
+  double		x2cross	    zodiac position to be crossed
+  double        jd_ut      start date in Universal Time
+  int           iflag       Flag bits for computation requirements, e.g.
+  		               SEFLG_HELCTR (crossing of Earth instead of Sun)
+					   SEFLG_TRUEPOS
+					   SEFLG_NONUT
+					   SEFLG_EQUATORIAL
+
+=head3 return array
+
+  ['jx']		double	crossing date/time
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  double swe_solcross_ut(double x2cross, double jd_ut, int flag, char *serr)
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_solcross_ut)
+{
+	int rc = 0;
+	long iflag;
+	double jd_ut, jx, x2cross;
+	char serr[AS_MAXCH]; 
+	*serr = '\0';
+	jx = 0;
+	
+	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddl",
+			&x2cross, &jd_ut, &iflag) == FAILURE) {
+		return;
+	}
+	jx = swe_solcross_ut(x2cross, jd_ut, iflag,serr);
+	if (*serr != '\0' || jx < jd_ut) {
+	  rc = ERR;
+    }
+	array_init(return_value);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+	add_assoc_double(return_value, "jx", jx);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_mooncross(x2cross, jd_et, iflag)
+
+computes moment of Moon's crossing over some longitude
+
+=head3 Parameters
+
+  double		x2cross	    zodiac position to be crossed
+  double        jd_et      start date in Ephemeris Time.
+  int           iflag       Flag bits for computation requirements, e.g.
+  		               SEFLG_HELCTR (crossing of Earth instead of Sun)
+					   SEFLG_TRUEPOS
+					   SEFLG_NONUT
+					   SEFLG_EQUATORIAL
+
+=head3 return array
+
+  ['jx']		double	crossing date/time
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  double swe_mooncross(double x2cross, double jd_et, int flag, char *serr)
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_mooncross)
+{
+	int rc = 0;
+	long iflag;
+	double jd_et, jx, x2cross;
+	char serr[AS_MAXCH]; 
+	*serr = '\0';
+	jx = 0;
+	
+	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddl",
+			&x2cross, &jd_et, &iflag) == FAILURE) {
+		return;
+	}
+	jx = swe_mooncross(x2cross, jd_et, iflag,serr);
+	if (*serr != '\0' || jx < jd_et) {
+	  rc = ERR;
+    }
+	array_init(return_value);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+	add_assoc_double(return_value, "jx", jx);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_mooncross_ut(x2cross, jd_ut, iflag)
+
+computes moment of Moon's crossing over some longitude
+
+=head3 Parameters
+
+  double		x2cross	    zodiac position to be crossed
+  double        jd_ut      start date in Universal Time
+  int           iflag       Flag bits for computation requirements, e.g.
+  		               SEFLG_HELCTR (crossing of Earth instead of Sun)
+					   SEFLG_TRUEPOS
+					   SEFLG_NONUT
+					   SEFLG_EQUATORIAL
+
+=head3 return array
+
+  ['jx']		double	crossing date/time
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  double swe_mooncross_ut(double x2cross, double jd_ut, int flag, char *serr)
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_mooncross_ut)
+{
+	int rc = 0;
+	long iflag;
+	double jd_ut, jx, x2cross;
+	char serr[AS_MAXCH]; 
+	*serr = '\0';
+	jx = 0;
+	
+	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddl",
+			&x2cross, &jd_ut, &iflag) == FAILURE) {
+		return;
+	}
+	jx = swe_mooncross_ut(x2cross, jd_ut, iflag,serr);
+	if (*serr != '\0' || jx < jd_ut) {
+	  rc = ERR;
+    }
+	array_init(return_value);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+	add_assoc_double(return_value, "jx", jx);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_mooncross_node(jd_et, iflag)
+
+computes Moon's crossing its true node, i.e. through zero latitude
+
+=head3 Parameters
+
+  double        jd_et      start date in Ephemeris Time.
+  int           iflag       Flag bits for computation requirements, e.g.
+
+=head3 return array
+
+  ['jx']		double	crossing date/time
+  ['xlon']		double	longitude at crossing time
+  ['xlat']		double	latitude at crossing time (very near zero)
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  double swe_mooncross_node(double jd_et, int flag, double *xlon, double *xlat, char *serr)
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_mooncross_node)
+{
+	int rc = 0;
+	long iflag;
+	double jd_et, jx, xlon, xlat;
+	char serr[AS_MAXCH]; 
+	*serr = '\0';
+	jx = 0;
+	
+	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+			&jd_et, &iflag) == FAILURE) {
+		return;
+	}
+	jx = swe_mooncross_node(jd_et, iflag, &xlon, &xlat, serr);
+	if (*serr != '\0' || jx < jd_et) {
+	  rc = ERR;
+    }
+	array_init(return_value);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+	add_assoc_double(return_value, "jx", jx);
+	add_assoc_double(return_value, "xlon", xlon);
+	add_assoc_double(return_value, "xlat", xlat);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_mooncross_node_ut(jd_ut, iflag)
+
+computes Moon's crossing its true node, i.e. through zero latitude
+
+=head3 Parameters
+
+  double        jd_ut      start date in Universal Time
+  int           iflag       Flag bits for computation requirements, e.g.
+
+=head3 return array
+
+  ['jx']		double	crossing date/time
+  ['xlon']		double	longitude at crossing time
+  ['xlat']		double	latitude at crossing time (very near zero)
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  double swe_mooncross_node_ut(double jd_ut, int flag, double *xlon, double *xlat, char *serr)
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_mooncross_node_ut)
+{
+	int rc = 0;
+	long iflag;
+	double jd_ut, jx, xlon, xlat;
+	char serr[AS_MAXCH]; 
+	*serr = '\0';
+	jx = 0;
+	
+	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+			&jd_ut, &iflag) == FAILURE) {
+		return;
+	}
+	jx = swe_mooncross_node_ut(jd_ut, iflag, &xlon, &xlat, serr);
+	if (*serr != '\0' || jx < jd_ut) {
+	  rc = ERR;
+    }
+	array_init(return_value);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+	add_assoc_double(return_value, "jx", jx);
+	add_assoc_double(return_value, "xlon", xlon);
+	add_assoc_double(return_value, "xlat", xlat);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_helio_cross(ipl, x2cross, jd_et, iflag, dir)
+
+computes a planet's heliocentric  crossing over some longitude
+
+=head3 Parameters
+
+  int			ipl			planet nuber
+  double		x2cross	    zodiac position to be crossed
+  double        jd_et      start date in Ephemeris Time.
+  int           iflag       Flag bits for computation requirements, e.g.
+					   SEFLG_TRUEPOS
+					   SEFLG_NONUT
+					   SEFLG_EQUATORIAL
+  dir    		int			direction of search
+							   >= 0    forward in time
+							   -1      backward in time
+
+=head3 return array
+
+  ['jx']		double	crossing date/time
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_helio_cross(int ipl, double x2cross, double jd_et, int iflag, int dir, double *jd_cross, char *serr)
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_helio_cross)
+{
+	int rc = 0;
+	long ipl;
+	long iflag;
+	long dir;
+	double jd_et, jx, x2cross;
+	char serr[AS_MAXCH]; 
+	*serr = '\0';
+	jx = 0;
+	
+	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lddll",
+			&ipl, &x2cross, &jd_et, &iflag, &dir) == FAILURE) {
+		return;
+	}
+	rc = swe_helio_cross(ipl,x2cross, jd_et, iflag, dir, &jx, serr);
+	array_init(return_value);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+	add_assoc_double(return_value, "jx", jx);
+}
+
+/* {{{ pod
+=pod
+
+=head1 function swe_helio_cross_ut(ipl, x2cross, jd_ut, iflag, dir)
+
+computes a planet's heliocentric  crossing over some longitude
+
+=head3 Parameters
+
+  int			ipl			planet nuber
+  double		x2cross	    zodiac position to be crossed
+  double        jd_ut      start date in Universal Time.
+  int           iflag       Flag bits for computation requirements, e.g.
+					   SEFLG_TRUEPOS
+					   SEFLG_NONUT
+					   SEFLG_EQUATORIAL
+  dir    		int			direction of search
+							   >= 0    forward in time
+							   -1      backward in time
+
+=head3 return array
+
+  ['jx']		double	crossing date/time
+  ['serr']		string	optional error message
+  ['rc']		int		return flag, < 0 in case of error
+
+=head3 C declaration
+
+  int swe_helio_cross_ut(int ipl, double x2cross, double jd_ut, int iflag, int dir, double *jd_cross, char *serr)
+
+=cut
+ }}} */
+PHP_FUNCTION(swe_helio_cross_ut)
+{
+	int rc = 0;
+	long ipl;
+	long iflag;
+	long dir;
+	double jd_ut, jx, x2cross;
+	char serr[AS_MAXCH]; 
+	*serr = '\0';
+	jx = 0;
+	
+	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
+		
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lddll",
+			&ipl, &x2cross, &jd_ut, &iflag, &dir) == FAILURE) {
+		return;
+	}
+	rc = swe_helio_cross_ut(ipl,x2cross, jd_ut, iflag, dir, &jx, serr);
+	array_init(return_value);
+	add_assoc_string(return_value, "serr", serr);
+	add_assoc_long(return_value, "rc", rc);
+	add_assoc_double(return_value, "jx", jx);
+}
+
+
 
 #define MAX_FIXSTAR_NAME (2 * SE_MAX_STNAME + 1)
 /* {{{ pod
