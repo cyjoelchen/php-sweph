@@ -130,9 +130,8 @@ Date         | what
 2.10	|10-dec-2020	|NEW: planetary moons
 
 
-#  {#section .list-paragraph}
 
-#  Introduction
+#  1. Introduction
 
 **Swiss Ephemeris** is a function package of astronomical calculations
 that serves the needs of astrologers, archeoastronomers, and, depending
@@ -173,7 +172,7 @@ Swiss Ephemeris must be fulfilled. A copy of the license file is found in  file 
 Since Swiss Ephemeris release 2.10.01 the GPL license has been replaced with the AGPL license,
 as one of the options in Astrodienst's dual licensing model.
 
-# Description of the ephemerides
+# 2. Description of the ephemerides
 
 ## Planetary and lunar ephemerides
 
@@ -376,11 +375,11 @@ With the Moon, there is an increasing difference of 0.9"/cty2 between
 The differences between DE200 and DE403 (DE406) can be summarized as
 follows:
 
-> 1980 -- 2000 all planets \< 0.01",
-> 1600 -- 1980 Sun -- Jupiter a few 0.1",
-> 1900 -- 1980 Saturn -- Neptune a few 0.1",
-> 1600 -- 1900 Saturn -- Neptune a few ",
-> 1750 -- 2169 Moon a few ".
+1980 -- 2000| all planets| \< 0.01",
+1600 -- 1980| Sun -- Jupiter| a few 0.1",
+1900 -- 1980| Saturn -- Neptune| a few 0.1",
+1600 -- 1900| Saturn -- Neptune| a few ",
+1750 -- 2169| Moon| a few ".
 
 (see: E.M. Standish, X.X. Newhall, J.G. Williams, and W.M. Folkner, JPL
 Planetary and Lunar Ephemerides, DE403/LE403, JPL Interoffice Memorandum
