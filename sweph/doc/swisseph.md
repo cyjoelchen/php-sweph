@@ -23,172 +23,99 @@ Authors: Dieter Koch and Dr. Alois Treindl
 --------------|-------------------------------------------------------------
 15-sep-1997  | split docu, swephprg.doc now separate (programming interface)
 16-sep-1997  | Dieter: absolute precision of JPL, position and speed transformations
-
-| 24-se  | Dieter: main asteroids                                      |
-| p-1997 |                                                             |
-+--------+-------------------------------------------------------------+
-| 27-se  | Alois: restructured for better HTML conversion, added       |
-| p-1997 | public function list                                        |
-+--------+-------------------------------------------------------------+
-| 8-oc   | Dieter: Chapter 4 (houses) added                            |
-| t-1997 |                                                             |
-+--------+-------------------------------------------------------------+
-| 28-no  | Dieter: Chapter 5 (delta t) added                           |
-| v-1997 |                                                             |
-+--------+-------------------------------------------------------------+
-| 20-ja  | Dieter: Chapter 3 (more than\...) added, Chapter 4 (houses) |
-| n-1998 | enlarged                                                    |
-+--------+-------------------------------------------------------------+
-| 14-ju  | Dieter: more about the precision of our asteroids           |
-| l-1998 |                                                             |
-+--------+-------------------------------------------------------------+
-| 21-ju  | Alois: houses in PLACALC and ASTROLOG                       |
-| l-1998 |                                                             |
-+--------+-------------------------------------------------------------+
-| 27-ju  | Dieter: True node Chapter improved                          |
-| l-1998 |                                                             |
-+--------+-------------------------------------------------------------+
-| 2-se   | Dieter: updated asteroid Chapter                            |
-| p-1998 |                                                             |
-+--------+-------------------------------------------------------------+
-| 29-no  | Alois: added info on Public License and source code         |
-| v-1998 | availability                                                |
-+--------+-------------------------------------------------------------+
-| 4-de   | Alois: updated asteroid file information                    |
-| c-1998 |                                                             |
-+--------+-------------------------------------------------------------+
-| 17-de  | Alois: Section 2.1.5 added: extended time range to 10.800   |
-| c-1998 | years                                                       |
-+--------+-------------------------------------------------------------+
-| 17-de  | Dieter: paragraphs on Chiron and Pholus ephemerides updated |
-| c-1998 |                                                             |
-+--------+-------------------------------------------------------------+
-| 12-ja  | Dieter: paragraph on eclipses                               |
-| n-1999 |                                                             |
-+--------+-------------------------------------------------------------+
-| 19-ap  | Dieter: paragraph on eclipses and planetary phenomena       |
-| r-1999 |                                                             |
-+--------+-------------------------------------------------------------+
-| 21-ju  | Dieter: Chapter 2.27 on sidereal ephemerides                |
-| n-1999 |                                                             |
-+--------+-------------------------------------------------------------+
-| 27-ju  | Dieter: Chapter 2.27 on sidereal ephemerides completed      |
-| l-1999 |                                                             |
-+--------+-------------------------------------------------------------+
-| 15-fe  | Dieter: many things for Version 1.52                        |
-| b-2000 |                                                             |
-+--------+-------------------------------------------------------------+
-| 11-se  | Dieter: a few additions for version 1.61                    |
-| p-2000 |                                                             |
-+--------+-------------------------------------------------------------+
-| 24-ju  | Dieter: a few additions for version 1.62                    |
-| l-2001 |                                                             |
-+--------+-------------------------------------------------------------+
-| 5-ja   | Alois: house calculation added to swetest for version 1.63  |
-| n-2002 |                                                             |
-+--------+-------------------------------------------------------------+
-| 26-fe  | Dieter: Gauquelin sectors for version 1.64                  |
-| b-2002 |                                                             |
-+--------+-------------------------------------------------------------+
-| 12-ju  | Alois: code revisions for compatibility with 64-bit         |
-| n-2003 | compilers, version 1.65                                     |
-+--------+-------------------------------------------------------------+
-| 10-ju  | Dieter: Morinus houses for Version 1.66                     |
-| l-2003 |                                                             |
-+--------+-------------------------------------------------------------+
-| 12-ju  | Dieter: documentation of Delta T algorithms implemented     |
-| l-2004 | with version 1.64                                           |
-+--------+-------------------------------------------------------------+
-| 7-fe   | Alois: added note about mean lunar elements, section 2.2.1  |
-| b-2005 |                                                             |
-+--------+-------------------------------------------------------------+
-| 22-fe  | Dieter: added documentation for version 1.70, see section   |
-| b-2006 | 2.1.2.1-3                                                   |
-+--------+-------------------------------------------------------------+
-| 17-ju  | Dieter: updated documentation of Krusinski-Pisa house       |
-| l-2007 | system.                                                     |
-+--------+-------------------------------------------------------------+
-| 28-no  | Dieter: documentation of new Delta T calculation for        |
-| v-2007 | version 1.72, see section 7                                 |
-+--------+-------------------------------------------------------------+
-| 17-ju  | Alois: license change to dual license, GNU GPL or           |
-| n-2008 | Professional License                                        |
-+--------+-------------------------------------------------------------+
-| 31-ma  | Dieter: heliacal events                                     |
-| r-2009 |                                                             |
-+--------+-------------------------------------------------------------+
-| 26-fe  | Alois: manual update, deleted references to CDROM           |
-| b-2010 |                                                             |
-+--------+-------------------------------------------------------------+
-| 25-ja  | Dieter: Delta T updated, v. 1.77.                           |
-| n-2011 |                                                             |
-+--------+-------------------------------------------------------------+
-| 2-au   | Dieter: new precession, v. 1.78.                            |
-| g-2012 |                                                             |
-+--------+-------------------------------------------------------------+
-| 23-ap  | Dieter: new ayanamshas                                      |
-| r-2013 |                                                             |
-+--------+-------------------------------------------------------------+
-| 11-fe  | Dieter: many additions for v. 2.00                          |
-| b-2014 |                                                             |
-+--------+-------------------------------------------------------------+
-| 18-ma  | Dieter: documentation of APC house system and Pushya        |
-| r-2015 | ayanamsha                                                   |
-+--------+-------------------------------------------------------------+
-| 21-oc  | Dieter: small correction in documentation of Lahiri         |
-| t-2015 | ayanamsha                                                   |
-+--------+-------------------------------------------------------------+
-| 3-fe   | Dieter: documentation of house systems updated (equal,      |
-| b-2016 | Porphyry, Pullen, Sripati)                                  |
-+--------+-------------------------------------------------------------+
-| 22-ap  | Dieter: documentation of ayanamsha revised                  |
-| r-2016 |                                                             |
-+--------+-------------------------------------------------------------+
-| 10-ja  | Dieter: new Delta T                                         |
-| n-2017 |                                                             |
-+--------+-------------------------------------------------------------+
-| 29-no  | Dieter: update for comparison SwissEph - JPL Horizons using |
-| v-2017 | SE2.07; Ch. 2.1.6 added                                     |
-+--------+-------------------------------------------------------------+
-| 4-ja   | Dieter: "Vedic"/Sheoran ayanamsha added                     |
-| n-2018 |                                                             |
-+--------+-------------------------------------------------------------+
-| 13-ju  | Dieter: small corrections for version 2.08                  |
-| n-2019 |                                                             |
-+--------+-------------------------------------------------------------+
-| 11-se  | Simon Hren, documentation reformatted, merged with a recent |
-| p-2019 | unpublished update by Dieter                                |
-+--------+-------------------------------------------------------------+
-| 6-ja   | A few corrections by Simon Hren and updates by Dieter       |
-| n-2020 |                                                             |
-+--------+-------------------------------------------------------------+
-| 24-ju  | Dieter: Chapters on ayanamsha improved; appendix E on Swiss |
-| n-2020 | Ephemeris versus IAE, IENA, RP                              |
-+--------+-------------------------------------------------------------+
-| 24-ju  | Dieter: Appendix C: added Test 2a concerning inertial       |
-| n-2020 | apparent positions with JPL Horizons                        |
-+--------+-------------------------------------------------------------+
-| 27-ju  | Dieter: small corrections in chapter 7 on Delta T           |
-| n-2020 |                                                             |
-+--------+-------------------------------------------------------------+
-| 29-ju  | Dieter: small changes in Appendix E                         |
-| n-2020 |                                                             |
-+--------+-------------------------------------------------------------+
-| 1-de   | Dieter: several Additions in Appendix E, concerning the     |
-| c-2020 | centers of body of the planets,                             |
-|        |                                                             |
-|        | planetary moons, comets and 99942 Apophis                   |
-+--------+-------------------------------------------------------------+
-| 9-de   | Dieter: "AD" replaced by "CE" and "BC" replaced by "BCE".   |
-| c-2020 |                                                             |
-+--------+-------------------------------------------------------------+
+24-sep-1997  | Dieter: main asteroids
+27-sep-1997  | Alois: restructured for better HTML conversion, added public function list
+8-oct-1997   | Dieter: Chapter 4 (houses) added
+28-nov-1997  | Dieter: Chapter 5 (delta t) added
+20-jan-1998  | Dieter: Chapter 3 (more than\...) added, Chapter 4 (houses) enlarged
+14-jul-1998  | Dieter: more about the precision of our asteroids
+21-jul-1998  | Alois: houses in PLACALC and ASTROLOG
+27-jul-1998  | Dieter: True node Chapter improved
+2-sep-1998   | Dieter: updated asteroid Chapter
+29-nov-1998  | Alois: added info on Public License and source code availability
+4-dec-1998   | Alois: updated asteroid file information
+17-dec-1998  | Alois: Section 2.1.5 added: extended time range to 10.800 years
+17-dec-1998  | Dieter: paragraphs on Chiron and Pholus ephemerides updated
+12-jan-1999  | Dieter: paragraph on eclipses
+19-apr-1999  | Dieter: paragraph on eclipses and planetary phenomena
+21-jun-1999  | Dieter: Chapter 2.27 on sidereal ephemerides
+27-jul-1999  | Dieter: Chapter 2.27 on sidereal ephemerides completed
+15-fe  | Dieter: many things for Version 1.52
+b-2000 |
+11-se  | Dieter: a few additions for version 1.61
+p-2000 |
+24-ju  | Dieter: a few additions for version 1.62
+l-2001 |
+5-ja   | Alois: house calculation added to swetest for version 1.63
+n-2002 |
+26-fe  | Dieter: Gauquelin sectors for version 1.64
+b-2002 |
+12-ju  | Alois: code revisions for compatibility with 64-bit
+n-2003 | compilers, version 1.65
+10-ju  | Dieter: Morinus houses for Version 1.66
+l-2003 |
+12-ju  | Dieter: documentation of Delta T algorithms implemented
+l-2004 | with version 1.64
+7-fe   | Alois: added note about mean lunar elements, section 2.2.1
+b-2005 |
+22-fe  | Dieter: added documentation for version 1.70, see section
+b-2006 | 2.1.2.1-3
+17-ju  | Dieter: updated documentation of Krusinski-Pisa house
+l-2007 | system.
+28-no  | Dieter: documentation of new Delta T calculation for
+v-2007 | version 1.72, see section 7
+17-ju  | Alois: license change to dual license, GNU GPL or
+n-2008 | Professional License
+31-ma  | Dieter: heliacal events
+r-2009 |
+26-fe  | Alois: manual update, deleted references to CDROM
+b-2010 |
+25-ja  | Dieter: Delta T updated, v. 1.77.
+n-2011 |
+2-au   | Dieter: new precession, v. 1.78.
+g-2012 |
+23-ap  | Dieter: new ayanamshas
+r-2013 |
+11-fe  | Dieter: many additions for v. 2.00
+b-2014 |
+18-ma  | Dieter: documentation of APC house system and Pushya
+r-2015 | ayanamsha
+21-oc  | Dieter: small correction in documentation of Lahiri
+t-2015 | ayanamsha
+3-fe   | Dieter: documentation of house systems updated (equal,
+b-2016 | Porphyry, Pullen, Sripati)
+22-ap  | Dieter: documentation of ayanamsha revised
+r-2016 |
+10-ja  | Dieter: new Delta T
+n-2017 |
+29-no  | Dieter: update for comparison SwissEph - JPL Horizons using
+v-2017 | SE2.07; Ch. 2.1.6 added
+4-ja   | Dieter: "Vedic"/Sheoran ayanamsha added
+n-2018 |
+13-ju  | Dieter: small corrections for version 2.08
+n-2019 |
+11-se  | Simon Hren, documentation reformatted, merged with a recent
+p-2019 | unpublished update by Dieter
+6-ja   | A few corrections by Simon Hren and updates by Dieter
+n-2020 |
+24-ju  | Dieter: Chapters on ayanamsha improved; appendix E on Swiss
+n-2020 | Ephemeris versus IAE, IENA, RP
+24-ju  | Dieter: Appendix C: added Test 2a concerning inertial
+n-2020 | apparent positions with JPL Horizons
+27-ju  | Dieter: small corrections in chapter 7 on Delta T
+n-2020 |
+29-ju  | Dieter: small changes in Appendix E
+n-2020 |
+1-de   | Dieter: several Additions in Appendix E, concerning the
+c-2020 | centers of body of the planets,
+     |                                                             |
+     | planetary moons, comets and 99942 Apophis                   |
+9-de   | Dieter: "AD" replaced by "CE" and "BC" replaced by "BCE".   |
+c-2020 |                                                             |
 | 15-de  | Alois: minor corrections                                    |
 | c-2020 |                                                             |
-+--------+-------------------------------------------------------------+
 | 6-ap   | Dieter: Improved chapter 2.1.2.2. "Swiss Ephemeris and JPL  |
 | r-2021 | Horizons System of Nasa"                                    |
-+--------+-------------------------------------------------------------+
-```
 
 ## Swiss Ephemeris release history
 
