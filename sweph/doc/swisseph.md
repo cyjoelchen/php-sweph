@@ -19,6 +19,8 @@ Authors: Dieter Koch and Dr. Alois Treindl
 
 ## Editing history
 
+Date| 
+----|------------------
 14-sep-1997 | Appendix A by Alois                                         
 15-sep-1997  | split docu, swephprg.doc now separate (programming interface)
 16-sep-1997  | Dieter: absolute precision of JPL, position and speed transformations
