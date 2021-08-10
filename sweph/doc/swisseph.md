@@ -81,8 +81,8 @@ Date         | what
 
 ## Swiss Ephemeris release history
 
-1.00  |30-sept-1997  |
-------|--------------|--------------------------------------------------------
+1.00    |30-sept-1997   |
+--------|---------------|--------------------------------------------------------
 1.01	|9-oct-1997	|  simplified houses() and sidtime() functions, Vertex added.
 1.02	|16-oct-1997	| houses() changed again
 1.03	|28-oct-1997	| minor fixes
