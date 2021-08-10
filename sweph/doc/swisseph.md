@@ -20,7 +20,6 @@ Authors: Dieter Koch and Dr. Alois Treindl
 ## Editing history
 
 14-sep-1997 | Appendix A by Alois                                         
---------------|-------------------------------------------------------------
 15-sep-1997  | split docu, swephprg.doc now separate (programming interface)
 16-sep-1997  | Dieter: absolute precision of JPL, position and speed transformations
 24-sep-1997  | Dieter: main asteroids
@@ -40,82 +39,44 @@ Authors: Dieter Koch and Dr. Alois Treindl
 19-apr-1999  | Dieter: paragraph on eclipses and planetary phenomena
 21-jun-1999  | Dieter: Chapter 2.27 on sidereal ephemerides
 27-jul-1999  | Dieter: Chapter 2.27 on sidereal ephemerides completed
-15-fe  | Dieter: many things for Version 1.52
-b-2000 |
-11-se  | Dieter: a few additions for version 1.61
-p-2000 |
-24-ju  | Dieter: a few additions for version 1.62
-l-2001 |
-5-ja   | Alois: house calculation added to swetest for version 1.63
-n-2002 |
-26-fe  | Dieter: Gauquelin sectors for version 1.64
-b-2002 |
-12-ju  | Alois: code revisions for compatibility with 64-bit
-n-2003 | compilers, version 1.65
-10-ju  | Dieter: Morinus houses for Version 1.66
-l-2003 |
-12-ju  | Dieter: documentation of Delta T algorithms implemented
-l-2004 | with version 1.64
-7-fe   | Alois: added note about mean lunar elements, section 2.2.1
-b-2005 |
-22-fe  | Dieter: added documentation for version 1.70, see section
-b-2006 | 2.1.2.1-3
-17-ju  | Dieter: updated documentation of Krusinski-Pisa house
-l-2007 | system.
-28-no  | Dieter: documentation of new Delta T calculation for
-v-2007 | version 1.72, see section 7
-17-ju  | Alois: license change to dual license, GNU GPL or
-n-2008 | Professional License
-31-ma  | Dieter: heliacal events
-r-2009 |
-26-fe  | Alois: manual update, deleted references to CDROM
-b-2010 |
-25-ja  | Dieter: Delta T updated, v. 1.77.
-n-2011 |
-2-au   | Dieter: new precession, v. 1.78.
-g-2012 |
-23-ap  | Dieter: new ayanamshas
-r-2013 |
-11-fe  | Dieter: many additions for v. 2.00
-b-2014 |
-18-ma  | Dieter: documentation of APC house system and Pushya
-r-2015 | ayanamsha
-21-oc  | Dieter: small correction in documentation of Lahiri
-t-2015 | ayanamsha
-3-fe   | Dieter: documentation of house systems updated (equal,
-b-2016 | Porphyry, Pullen, Sripati)
-22-ap  | Dieter: documentation of ayanamsha revised
-r-2016 |
-10-ja  | Dieter: new Delta T
-n-2017 |
-29-no  | Dieter: update for comparison SwissEph - JPL Horizons using
-v-2017 | SE2.07; Ch. 2.1.6 added
-4-ja   | Dieter: "Vedic"/Sheoran ayanamsha added
-n-2018 |
-13-ju  | Dieter: small corrections for version 2.08
-n-2019 |
-11-se  | Simon Hren, documentation reformatted, merged with a recent
-p-2019 | unpublished update by Dieter
-6-ja   | A few corrections by Simon Hren and updates by Dieter
-n-2020 |
-24-ju  | Dieter: Chapters on ayanamsha improved; appendix E on Swiss
-n-2020 | Ephemeris versus IAE, IENA, RP
-24-ju  | Dieter: Appendix C: added Test 2a concerning inertial
-n-2020 | apparent positions with JPL Horizons
-27-ju  | Dieter: small corrections in chapter 7 on Delta T
-n-2020 |
-29-ju  | Dieter: small changes in Appendix E
-n-2020 |
-1-de   | Dieter: several Additions in Appendix E, concerning the
-c-2020 | centers of body of the planets,
-     |                                                             |
-     | planetary moons, comets and 99942 Apophis                   |
-9-de   | Dieter: "AD" replaced by "CE" and "BC" replaced by "BCE".   |
-c-2020 |                                                             |
-| 15-de  | Alois: minor corrections                                    |
-| c-2020 |                                                             |
-| 6-ap   | Dieter: Improved chapter 2.1.2.2. "Swiss Ephemeris and JPL  |
-| r-2021 | Horizons System of Nasa"                                    |
+15-feb-2000  | Dieter: many things for Version 1.52
+11-sep-2000  | Dieter: a few additions for version 1.61
+24-jul-2001  | Dieter: a few additions for version 1.62
+5-jan-2002   | Alois: house calculation added to swetest for version 1.63
+26-feb-2002  | Dieter: Gauquelin sectors for version 1.64
+12-jun-2003  | Alois: code revisions for compatibility with 64-bit compilers, version 1.65
+10-jul-2003  | Dieter: Morinus houses for Version 1.66
+12-jul-2004  | Dieter: documentation of Delta T algorithms implemented with version 1.64
+7-feb-2005   | Alois: added note about mean lunar elements, section 2.2.1
+22-feb-2006  | Dieter: added documentation for version 1.70, see section 2.1.2.1-3
+17-jul-2007  | Dieter: updated documentation of Krusinski-Pisa house system.
+28-nov-2007  | Dieter: documentation of new Delta T calculation for version 1.72, see section 7
+17-jun-2008  | Alois: license change to dual license, GNU GPL or Professional License
+31-mar-2009  | Dieter: heliacal events
+26-feb-2010  | Alois: manual update, deleted references to CDROM
+25-jan-2011  | Dieter: Delta T updated, v. 1.77.
+2-aug-2012   | Dieter: new precession, v. 1.78.
+23-apr-2013  | Dieter: new ayanamshas
+11-feb-2014  | Dieter: many additions for v. 2.00
+18-mar-2015  | Dieter: documentation of APC house system and Pushya ayanamsha
+21-oct-2015  | Dieter: small correction in documentation of Lahiri ayanamsha
+3-feb-2016   | Dieter: documentation of house systems updated (equal, Porphyry, Pullen, Sripati)
+22-apr-2016  | Dieter: documentation of ayanamsha revised
+10-jan-2017  | Dieter: new Delta T
+29-nov-2017  | Dieter: update for comparison SwissEph - JPL Horizons using SE2.07; Ch. 2.1.6 added
+4-jan-2018   | Dieter: "Vedic"/Sheoran ayanamsha added
+13-jun-2019   | Dieter: small corrections for version 2.08
+11-sep-2019  | Simon Hren, documentation reformatted, merged with a recent unpublished update by Dieter
+6-jan-2020   | A few corrections by Simon Hren and updates by Dieter
+24-jun-2020  | Dieter: Chapters on ayanamsha improved; appendix E on Swiss Ephemeris versus IAE, IENA, RP
+24-jun-2020  | Dieter: Appendix C: added Test 2a concerning inertial apparent positions with JPL Horizons
+27-jun-2020  | Dieter: small corrections in chapter 7 on Delta T
+29-jun-2020  | Dieter: small changes in Appendix E
+1-dec-2020   | Dieter: several Additions in Appendix E, concerning the centers of body of the planets,
+	       planetary moons, comets and 99942 Apophis                  
+9-dec-2020   | Dieter: "AD" replaced by "CE" and "BC" replaced by "BCE".
+15-dec-2020 | Alois: minor corrections                                    
+6-apr-2021   | Dieter: Improved chapter 2.1.2.2. "Swiss Ephemeris and JPL Horizons System of Nasa"                                    
 
 ## Swiss Ephemeris release history
 
