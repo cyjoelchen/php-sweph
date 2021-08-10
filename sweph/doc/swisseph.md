@@ -20,7 +20,7 @@ Authors: Dieter Koch and Dr. Alois Treindl
 ## Editing history
 
 Date         | what
--------------|------------------
+-------------|--------------------------------------------------------------------|
 14-sep-1997  | Appendix A by Alois
 15-sep-1997  | split docu, swephprg.doc now separate (programming interface)
 16-sep-1997  | Dieter: absolute precision of JPL, position and speed transformations
@@ -74,8 +74,7 @@ Date         | what
 24-jun-2020  | Dieter: Appendix C: added Test 2a concerning inertial apparent positions with JPL Horizons
 27-jun-2020  | Dieter: small corrections in chapter 7 on Delta T
 29-jun-2020  | Dieter: small changes in Appendix E
-1-dec-2020   | Dieter: several Additions in Appendix E, concerning the centers of body of the planets,
-	       planetary moons, comets and 99942 Apophis
+1-dec-2020   | Dieter: several Additions in Appendix E, concerning the centers of body of the planets, planetary moons, comets and 99942 Apophis
 9-dec-2020   | Dieter: "AD" replaced by "CE" and "BC" replaced by "BCE".
 15-dec-2020 | Alois: minor corrections
 6-apr-2021   | Dieter: Improved chapter 2.1.2.2. "Swiss Ephemeris and JPL Horizons System of Nasa" 
