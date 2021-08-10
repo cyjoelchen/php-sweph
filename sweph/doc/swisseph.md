@@ -52,7 +52,7 @@ Date         | what
 7-feb-2005   | Alois: added note about mean lunar elements, section 2.2.1
 22-feb-2006  | Dieter: added documentation for version 1.70, see section 2.1.2.1-3
 17-jul-2007  | Dieter: updated documentation of Krusinski-Pisa house system.
-28-nov-2007  | Dieter: documentation of new Delta T calculation for version 1.72, see section 7
+28-nov-2007 | Dieter: documentation of new Delta T calculation for version 1.72, see section 7
 17-jun-2008  | Alois: license change to dual license, GNU GPL or Professional License
 31-mar-2009  | Dieter: heliacal events
 26-feb-2010  | Alois: manual update, deleted references to CDROM
@@ -76,7 +76,7 @@ Date         | what
 29-jun-2020  | Dieter: small changes in Appendix E
 1-dec-2020   | Dieter: several Additions in Appendix E, concerning the centers of body of the planets, planetary moons, comets and 99942 Apophis
 9-dec-2020   | Dieter: "AD" replaced by "CE" and "BC" replaced by "BCE".
-15-dec-2020 | Alois: minor corrections
+15-dec-2020  | Alois: minor corrections
 6-apr-2021   | Dieter: Improved chapter 2.1.2.2. "Swiss Ephemeris and JPL Horizons System of Nasa" 
 
 ## Swiss Ephemeris release history
