@@ -81,53 +81,53 @@ Date         | what
 
 ## Swiss Ephemeris release history
 
-1.00    |30-sept-1997   |
+1.00    |30-sept-1997   |        
 --------|---------------|--------------------------------------------------------
-1.01	|9-oct-1997	|  simplified houses() and sidtime() functions, Vertex added.
-1.02	|16-oct-1997	| houses() changed again
-1.03	|28-oct-1997	| minor fixes
-1.04	|8-dec-1997	|  minor fixes
-1.10	|9-jan-1998	|  bug fix, pushed to all licensees
-1.11	|12-jan-1998	| minor fixes
-1.20	|21-jan-1998	| NEW: topocentric planets and house positions
-1.21	|28-jan-1998	| Delphi declarations and sample for Delphi 1.0
-1.22	|2-feb-1998	|  asteroids moved to subdirectory. Swe_calc() finds them there.
-1.23	|11-feb-1998	| two minor bug fixes.
-1.24	|7-mar-1998	|  documentation for Borland C++ Builder added
-1.25	|4-june-1998	| sample for Borland Delphi-2 added
-1.26	|29-nov-1998	| source added, Placalc API added
-1.30	|17-dec-1998	| NEW: Time range extended to 10.800 years
-1.31	|12-jan-1999	| NEW: Eclipses
-1.40	|19-apr-1999	| NEW: planetary phenomena
-1.50	|27-jul-1999	| NEW: sidereal ephemerides
-1.52	|15-feb-2000	| several NEW features, minor bug fixes
-1.60	|15-feb-2000	| major release with many new features and some minor bug fixes
-1.61	|11-sep-2000	| minor release, additions to se_rise_trans(), swe_houses(), fictitious planets
-1.62	|23-jul-2001	| minor release, fictitious Earth satellites, asteroid numbers \> 55535 possible
-1.63	|5-jan-2002	|  minor release, house calculation added to swetest.c and swetest.exe
-1.64	|7-apr-2002	|  NEW: occultations of planets, minor bug fixes, new Delta T algorithms
-1.65	|12-jun-2003	| minor release, small code renovations for 64-bit compilation
-1.66	|10-jul-2003	| NEW: Morinus houses
-1.67	|31-mar-2005	| minor release: Delta-T updated, minor bug fixes
-1.70	|2-mar-2006	|  IAU resolutions up to 2005 implemented; \"interpolated\" lunar apsides
-1.72	|28-nov-2007	| Delta T calculation according to Morrison/Stephenson 2004
-1.74	|17-jun-2008	| license model changed to dual license, GNU GPL or Professional License
-1.76	|31-mar-2009	| NEW: Heliacal events
-1.77	|25-jan-2011	| Delta T calculation updated acc. to Espenak/Meeus 2006, new fixed stars file
-1.78	|2-aug-2012	|  precession calculation updated acc. to Vondrák et alii 2012
-1.79	|23-apr-2013	| new ayanamshas, improved precision of eclipse functions, minor bug fixes
-1.80	|3-sep-2013	|  security update and bugfixes
-2.00	|11-feb-2014	| Swiss Ephemeris now based on JPL ephemeris DE431
-2.01	|18-mar-2015	| bug fixes for version 2.00
-2.02	|11-aug-2015	| new functions swe_deltat_ex() and swe_get_ayanamsa_ex(); bug fixes.
-2.03	|16-oct-2015	| Swiss Ephemeris thread safe; minor bug fixes
-2.04	|21-oct-2015	| V. 2.03 had DLL with calling convention \_\_cdecl; we return to \_stdcall
-2.05	|22-apr-2015	| new house methods, new ayanamshas, minor bug fixes
-2.06	|10-jan-2017	| new Delta T, minor bug fixes
-2.07	|10-jan-2018	| better performance of swe_fixstar() and swe_rise_trans()
-2.08	|13-jun-2019	| update of Delta T and minor bug fixes
-2.09	|22-jul-2020	| Improved Placidus houses, sidereal ephemerides, planetary magnitudes; minor bug fixes
-2.10	|10-dec-2020	| NEW: planetary moons
+1.01	|9-oct-1997	|simplified houses() and sidtime() functions, Vertex added.
+1.02	|16-oct-1997	|houses() changed again
+1.03	|28-oct-1997	|minor fixes
+1.04	|8-dec-1997	|minor fixes
+1.10	|9-jan-1998	|bug fix, pushed to all licensees
+1.11	|12-jan-1998	|minor fixes
+1.20	|21-jan-1998	|NEW: topocentric planets and house positions
+1.21	|28-jan-1998	|Delphi declarations and sample for Delphi 1.0
+1.22	|2-feb-1998	|asteroids moved to subdirectory. Swe_calc() finds them there.
+1.23	|11-feb-1998	|two minor bug fixes.
+1.24	|7-mar-1998	|documentation for Borland C++ Builder added
+1.25	|4-june-1998	|sample for Borland Delphi-2 added
+1.26	|29-nov-1998	|source added, Placalc API added
+1.30	|17-dec-1998	|NEW: Time range extended to 10.800 years
+1.31	|12-jan-1999	|NEW: Eclipses
+1.40	|19-apr-1999	|NEW: planetary phenomena
+1.50	|27-jul-1999	|NEW: sidereal ephemerides
+1.52	|15-feb-2000	|several NEW features, minor bug fixes
+1.60	|15-feb-2000	|major release with many new features and some minor bug fixes
+1.61	|11-sep-2000	|minor release, additions to se_rise_trans(), swe_houses(), fictitious planets
+1.62	|23-jul-2001	|minor release, fictitious Earth satellites, asteroid numbers \> 55535 possible
+1.63	|5-jan-2002	|minor release, house calculation added to swetest.c and swetest.exe
+1.64	|7-apr-2002	|NEW: occultations of planets, minor bug fixes, new Delta T algorithms
+1.65	|12-jun-2003	|minor release, small code renovations for 64-bit compilation
+1.66	|10-jul-2003	|NEW: Morinus houses
+1.67	|31-mar-2005	|minor release: Delta-T updated, minor bug fixes
+1.70	|2-mar-2006	|IAU resolutions up to 2005 implemented; \"interpolated\" lunar apsides
+1.72	|28-nov-2007	|Delta T calculation according to Morrison/Stephenson 2004
+1.74	|17-jun-2008	|license model changed to dual license, GNU GPL or Professional License
+1.76	|31-mar-2009	|NEW: Heliacal events
+1.77	|25-jan-2011	|Delta T calculation updated acc. to Espenak/Meeus 2006, new fixed stars file
+1.78	|2-aug-2012	|precession calculation updated acc. to Vondrák et alii 2012
+1.79	|23-apr-2013	|new ayanamshas, improved precision of eclipse functions, minor bug fixes
+1.80	|3-sep-2013	|security update and bugfixes
+2.00	|11-feb-2014	|Swiss Ephemeris now based on JPL ephemeris DE431
+2.01	|18-mar-2015	|bug fixes for version 2.00
+2.02	|11-aug-2015	|new functions swe_deltat_ex() and swe_get_ayanamsa_ex(); bug fixes.
+2.03	|16-oct-2015	|Swiss Ephemeris thread safe; minor bug fixes
+2.04	|21-oct-2015	|V. 2.03 had DLL with calling convention \_\_cdecl; we return to \_stdcall
+2.05	|22-apr-2015	|new house methods, new ayanamshas, minor bug fixes
+2.06	|10-jan-2017	|new Delta T, minor bug fixes
+2.07	|10-jan-2018	|better performance of swe_fixstar() and swe_rise_trans()
+2.08	|13-jun-2019	|update of Delta T and minor bug fixes
+2.09	|22-jul-2020	|Improved Placidus houses, sidereal ephemerides, planetary magnitudes; minor bug fixes
+2.10	|10-dec-2020	|NEW: planetary moons
 
 
 #  {#section .list-paragraph}
