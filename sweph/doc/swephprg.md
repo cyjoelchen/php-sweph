@@ -736,17 +736,10 @@ int main()
   while (TRUE) {
     printf("nDate (d.m.y) ?");
     gets(sdate);
-    /* stop if a period . is entered */
-    if (*sdate == '.')
-    return OK;
-      exit(1);
+    // stop if a period . is entered 
+    if (*sdate == '.') return OK;
     // we have day, month and year and convert to Julian day number
-    tjd_ut = **swe_julday**(jyear, jmon, jday, jut, SE_GREG_CAL);
-    /*
-    * compute Ephemeris time from Universal time by adding delta_t
-    * not required for Swisseph versions smaller than 1.60
-    */
-    /* te = tjd_ut + swe_deltat(tjd_ut); */
+    tjd_ut = swe_julday(jyear, jmon, jday, jut, SE_GREG_CAL);
     printf("date: %02d.%02d.%d at 0:00 Universal timen", jday, jmon, jyear);
     printf("planet tlongitudetlatitudetdistancetspeed long.n");
     // a loop over all planets
@@ -757,8 +750,10 @@ int main()
       /* if there is a problem, a negative value is returned and an
       * error message is in serr.
       */
-      if (iflgret < 0)
+      if (iflgret < 0) {
 	printf("error: %sn", serr);
+	return ERR;
+      }
       // get the name of the planet p
       swe_get_planet_name(p, snam);
       // print the coordinates
