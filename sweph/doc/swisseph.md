@@ -339,39 +339,17 @@ environment and use it with their applications.
 The Swiss Ephemeris is not a product for end users. It is a toolset for
 programmers to build into their astrological software.
 
-Swiss Ephemeris is made available by its authors under a dual licensing
-system. The software developer, who uses any part of Swiss Ephemeris in
-his or her software, must choose between one of the two license models,
-which are:
+The Swiss Ephemeris is made available by its authors under a dual
+licensing system. The software developer, who uses any part of Swiss
+Ephemeris in his or her software, must choose between one of the two
+license models, which are:
 
-a\) GNU public license version 2 or later:
+To use Swiss Ephemeris, the licensing conditions imposed by Astrodienst for 
+Swiss Ephemeris must be fulfilled. A copy of the license file is found in  file LICENSE. 
 
-b\) Swiss Ephemeris Professional License.
-
-The choice must be made before the software developer distributes
-software containing parts of Swiss Ephemeris to others, and before any
-public service using the developed software is activated.
-
-If the developer choses the GNU GPL software license, he or she must
-fulfill the conditions of that license, which includes the obligation to
-place his or her whole software project under the GNU GPL or a
-compatible license. See
-http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-
-If the developer choses the Swiss Ephemeris Professional license, he
-must follow the instructions as found in http://www.astro.com/swisseph/
-and purchase the Swiss Ephemeris Professional Edition from Astrodienst
-and sign the corresponding license contract.
-
-The Swiss Ephemeris Professional Edition can be purchased from
-Astrodienst for a one-time fixed fee for each commercial programming
-project. The license is just a legal document. All actual software and
-data are found in the public download area and are to be downloaded from
-there.
-
-**Professional license**: The license fee for the first license is Swiss
-Francs (CHF) 750.-, and CHF 400.- for each additional license by the
-same licensee. An unlimited license is available for CHF 1550.-.
+**Please note:**
+Since Swiss Ephemeris release 2.10.01 the GPL license has been replaced with the AGPL license,
+as one of the options in Astrodienst's dual licensing model.
 
 # Description of the ephemerides
 
