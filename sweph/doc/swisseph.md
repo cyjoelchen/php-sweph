@@ -555,13 +555,9 @@ The differences between DE200 and DE403 (DE406) can be summarized as
 follows:
 
 > 1980 -- 2000 all planets \< 0.01",
->
 > 1600 -- 1980 Sun -- Jupiter a few 0.1",
->
 > 1900 -- 1980 Saturn -- Neptune a few 0.1",
->
 > 1600 -- 1900 Saturn -- Neptune a few ",
->
 > 1750 -- 2169 Moon a few ".
 
 (see: E.M. Standish, X.X. Newhall, J.G. Williams, and W.M. Folkner, JPL
@@ -573,28 +569,21 @@ Comparison of JPL ephemerides DE406 (1998) with DE431 (2013)
 Differences DE431-DE406 for 3000 BCE to 3000 CE:
 
 > Moon \< 7\" (TT), \< 2\" (UT)
->
 > Sun, Mercury, Venus \< 0.4 \"
->
 > Mars \< 2\"
->
 > Jupiter \< 6\"
->
 > Saturn \< 0.1\"
->
 > Uranus \< 28\"
->
 > Neptune \< 53\"
->
 > Pluto \< 129\"
 
-Moon, position (DE431) -- position (DE406) in TT and UT
+**Moon, position (DE431) -- position (DE406) in TT and UT**
 
 (Delta T adjusted to tidal acceleration of lunar ephemeris)
 
   -------------------------------------------------------------------------
-  **Year**     **dL(TT)**     **dL(UT)**     **dB(TT)**     **dB(UT)**
-  ------------ -------------- -------------- -------------- ---------------
+  **Year**    |**dL(TT)**    |**dL(UT)**    |**dB(TT)**    |**dB(UT)**
+  ------------|--------------|--------------|--------------|---------------
   -2999        6.33\"         -0.30\"        -0.01\"        0.05\"
 
   -2500        5.91\"         -0.62\"        -0.85\"        -0.32\"
