@@ -19,16 +19,10 @@ Authors: Dieter Koch and Dr. Alois Treindl
 
 ## Editing history
 ```
-+--------+-------------------------------------------------------------+
-| 14-se  | Appendix A by Alois                                         |
-| p-1997 |                                                             |
-+========+=============================================================+
-| 15-se  | split docu, swephprg.doc now separate (programming          |
-| p-1997 | interface)                                                  |
-+--------+-------------------------------------------------------------+
-| 16-se  | Dieter: absolute precision of JPL, position and speed       |
-| p-1997 | transformations                                             |
-+--------+-------------------------------------------------------------+
+14-sep-1997 | Appendix A by Alois                                         
+==============|=============================================================
+15-sep-1997  | split docu, swephprg.doc now separate (programming interface)
+16-sep-1997  | Dieter: absolute precision of JPL, position and speed transformations
 | 24-se  | Dieter: main asteroids                                      |
 | p-1997 |                                                             |
 +--------+-------------------------------------------------------------+
