@@ -18,11 +18,12 @@ Email of developers: via mailing list <https://groups.io/g/swisseph/>
 Authors: Dieter Koch and Dr. Alois Treindl
 
 ## Editing history
-```
+
 14-sep-1997 | Appendix A by Alois                                         
-==============|=============================================================
+--------------|-------------------------------------------------------------
 15-sep-1997  | split docu, swephprg.doc now separate (programming interface)
 16-sep-1997  | Dieter: absolute precision of JPL, position and speed transformations
+
 | 24-se  | Dieter: main asteroids                                      |
 | p-1997 |                                                             |
 +--------+-------------------------------------------------------------+
