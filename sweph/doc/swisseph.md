@@ -20,7 +20,7 @@ Authors: Dieter Koch and Dr. Alois Treindl
 ## Editing history
 
 Date         | what
-------------------|--------------------------------------------------------------------|
+-------------|--------------------------------------------------------------------|
 14-sep-1997  | Appendix A by Alois
 15-sep-1997  | split docu, swephprg.doc now separate (programming interface)
 16-sep-1997  | Dieter: absolute precision of JPL, position and speed transformations
@@ -81,7 +81,7 @@ Date         | what
 
 ## Swiss Ephemeris release history
 
-1.00    |30-sept-1997   |        
+1.00    |30-sept-1997   | what       
 --------|---------------|--------------------------------------------------------
 1.01	|9-oct-1997	|simplified houses() and sidtime() functions, Vertex added.
 1.02	|16-oct-1997	|houses() changed again
