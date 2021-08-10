@@ -721,7 +721,7 @@ err_msg);
 
 Here is a miniature sample program, it is in the source distribution as
 swemini.c:
-
+```c
 #include \"swephexp.h\" /\* this includes \"sweodef.h\" \*/
 
 int main()
@@ -841,6 +841,7 @@ snam, x2\[0\], x2\[1\], x2\[2\], x2\[3\]);
 return OK;
 
 }
+```
 
 # The Ephemeris file related functions
 
