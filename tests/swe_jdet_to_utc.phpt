@@ -8,7 +8,8 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
-var_dump(swe_jdet_to_utc(2452275.5, 1));
+include 'utility/Format.php';
+var_dump(Format::round(swe_jdet_to_utc(2452275.5, 1)));
 ?>
 --EXPECT--
 array(6) {
@@ -23,5 +24,5 @@ array(6) {
   ["min"]=>
   int(58)
   ["sec"]=>
-  float(55.815998911858)
+  float(55.815999)
 }

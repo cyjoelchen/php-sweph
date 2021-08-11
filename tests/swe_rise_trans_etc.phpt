@@ -35,8 +35,8 @@ for($i = SE_SUN; $i <= SE_PLUTO; $i++)
         'speed' => $xx[3]
     );
 }
-echo "planets: \n";
-var_dump($planets);
+echo "planets:\n";
+var_dump(Format::round($planets));
 
 # calc house cusps
 define("GEO_LNG", 6.57);
@@ -52,8 +52,8 @@ for($i = 1; $i <= 12; $i ++)
     $houses[$i] =  $yy['cusps'][$i];
 }
 
-echo "houses for $place: \n";
-var_dump($houses);
+echo "houses for $place:\n";
+var_dump(Format::round($houses));
 
 $flags = array(SE_CALC_RISE, SE_CALC_MTRANSIT, SE_CALC_SET, SE_CALC_ITRANSIT );
 $flagnam = array('rise', 'mer_transit', 'set', 'lower_mer_transit');
@@ -71,8 +71,8 @@ for($i = 0; $i < 4; $i++) {
     'when' => Format::asUtc($tr)
   );
 }
-echo "rise $pnam: \n";
-var_dump($ptrans);
+echo "rise $pnam:\n";
+var_dump(Format::round($ptrans));
 
 $starname = 'Aldebaran';
 for($i = 0; $i < 4; $i++) {
@@ -88,15 +88,15 @@ for($i = 0; $i < 4; $i++) {
     'when' => Format::asUtc($tr)
   );
 }
-echo "rise $starname: \n";
-var_dump($strans); 
+echo "rise $starname:\n";
+var_dump(Format::round($strans));
 
 ?>
 --EXPECT--
-planets: 
+planets:
 array(12) {
   ["julday"]=>
-  float(2459414.1041667)
+  float(2459414.104167)
   ["date"]=>
   string(17) "2021 7 18 14:30:0"
   [0]=>
@@ -104,147 +104,147 @@ array(12) {
     ["name"]=>
     string(3) "Sun"
     ["lng"]=>
-    float(116.18534989049)
+    float(116.18535)
     ["lat"]=>
-    float(0.00012662472317656)
+    float(0.000127)
     ["speed"]=>
-    float(0.95410359219874)
+    float(0.954104)
   }
   [1]=>
   array(4) {
     ["name"]=>
     string(4) "Moon"
     ["lng"]=>
-    float(221.70015460516)
+    float(221.700155)
     ["lat"]=>
-    float(2.4332191025185)
+    float(2.433219)
     ["speed"]=>
-    float(14.221994281492)
+    float(14.221994)
   }
   [2]=>
   array(4) {
     ["name"]=>
     string(7) "Mercury"
     ["lng"]=>
-    float(101.03806285389)
+    float(101.038063)
     ["lat"]=>
-    float(-0.15312011983447)
+    float(-0.15312)
     ["speed"]=>
-    float(1.8315999176181)
+    float(1.8316)
   }
   [3]=>
   array(4) {
     ["name"]=>
     string(5) "Venus"
     ["lng"]=>
-    float(145.88714912056)
+    float(145.887149)
     ["lat"]=>
-    float(1.606489550705)
+    float(1.60649)
     ["speed"]=>
-    float(1.2031918265558)
+    float(1.203192)
   }
   [4]=>
   array(4) {
     ["name"]=>
     string(4) "Mars"
     ["lng"]=>
-    float(142.95895147277)
+    float(142.958951)
     ["lat"]=>
-    float(1.1598101112913)
+    float(1.15981)
     ["speed"]=>
-    float(0.62428593696902)
+    float(0.624286)
   }
   [5]=>
   array(4) {
     ["name"]=>
     string(7) "Jupiter"
     ["lng"]=>
-    float(330.95948282093)
+    float(330.959483)
     ["lat"]=>
-    float(-1.0867218396553)
+    float(-1.086722)
     ["speed"]=>
-    float(-0.084815300481077)
+    float(-0.084815)
   }
   [6]=>
   array(4) {
     ["name"]=>
     string(6) "Saturn"
     ["lng"]=>
-    float(311.25430944266)
+    float(311.254309)
     ["lat"]=>
-    float(-0.755638849497)
+    float(-0.755639)
     ["speed"]=>
-    float(-0.07032968576381)
+    float(-0.07033)
   }
   [7]=>
   array(4) {
     ["name"]=>
     string(6) "Uranus"
     ["lng"]=>
-    float(44.363312776843)
+    float(44.363313)
     ["lat"]=>
-    float(-0.40948915017122)
+    float(-0.409489)
     ["speed"]=>
-    float(0.025946676071729)
+    float(0.025947)
   }
   [8]=>
   array(4) {
     ["name"]=>
     string(7) "Neptune"
     ["lng"]=>
-    float(353.06132222642)
+    float(353.061322)
     ["lat"]=>
-    float(-1.1445196078033)
+    float(-1.14452)
     ["speed"]=>
-    float(-0.011878927164128)
+    float(-0.011879)
   }
   [9]=>
   array(4) {
     ["name"]=>
     string(5) "Pluto"
     ["lng"]=>
-    float(295.5442639829)
+    float(295.544264)
     ["lat"]=>
-    float(-1.573848740468)
+    float(-1.573849)
     ["speed"]=>
-    float(-0.024042545347569)
+    float(-0.024043)
   }
 }
-houses for La Croix Valmer, France: 
+houses for La Croix Valmer, France:
 array(12) {
   [1]=>
-  float(234.34346163378)
+  float(234.343462)
   [2]=>
-  float(265.17119112916)
+  float(265.171191)
   [3]=>
-  float(301.86857662845)
+  float(301.868577)
   [4]=>
-  float(339.09663856081)
+  float(339.096639)
   [5]=>
-  float(10.244718259547)
+  float(10.244718)
   [6]=>
-  float(34.575604926979)
+  float(34.575605)
   [7]=>
-  float(54.343461633779)
+  float(54.343462)
   [8]=>
-  float(85.171191129158)
+  float(85.171191)
   [9]=>
-  float(121.86857662845)
+  float(121.868577)
   [10]=>
-  float(159.09663856081)
+  float(159.096639)
   [11]=>
-  float(190.24471825955)
+  float(190.244718)
   [12]=>
-  float(214.57560492698)
+  float(214.575605)
 }
-rise Moon: 
+rise Moon:
 array(4) {
   [0]=>
   array(3) {
     ["what"]=>
     string(4) "rise"
     ["tr"]=>
-    float(2459415.1051389)
+    float(2459415.105139)
     ["when"]=>
     string(22) "2021 7 19  14:31:24 UT"
   }
@@ -253,7 +253,7 @@ array(4) {
     ["what"]=>
     string(11) "mer_transit"
     ["tr"]=>
-    float(2459414.2750031)
+    float(2459414.275003)
     ["when"]=>
     string(21) "2021 7 18  18:36:0 UT"
   }
@@ -262,7 +262,7 @@ array(4) {
     ["what"]=>
     string(3) "set"
     ["tr"]=>
-    float(2459414.4915438)
+    float(2459414.491544)
     ["when"]=>
     string(22) "2021 7 18  23:47:49 UT"
   }
@@ -271,12 +271,12 @@ array(4) {
     ["what"]=>
     string(17) "lower_mer_transit"
     ["tr"]=>
-    float(2459414.7936034)
+    float(2459414.793603)
     ["when"]=>
     string(20) "2021 7 19  7:2:47 UT"
   }
 }
-rise Aldebaran: 
+rise Aldebaran:
 array(5) {
   ["star"]=>
   string(15) "Aldebaran,alTau"
@@ -285,7 +285,7 @@ array(5) {
     ["what"]=>
     string(4) "rise"
     ["tr"]=>
-    float(2459414.5514624)
+    float(2459414.551462)
     ["when"]=>
     string(20) "2021 7 19  1:14:6 UT"
   }
@@ -294,7 +294,7 @@ array(5) {
     ["what"]=>
     string(11) "mer_transit"
     ["tr"]=>
-    float(2459414.8482207)
+    float(2459414.848221)
     ["when"]=>
     string(21) "2021 7 19  8:21:26 UT"
   }
@@ -303,7 +303,7 @@ array(5) {
     ["what"]=>
     string(3) "set"
     ["tr"]=>
-    float(2459414.1477096)
+    float(2459414.14771)
     ["when"]=>
     string(22) "2021 7 18  15:32:42 UT"
   }
@@ -312,7 +312,7 @@ array(5) {
     ["what"]=>
     string(17) "lower_mer_transit"
     ["tr"]=>
-    float(2459414.3495859)
+    float(2459414.349586)
     ["when"]=>
     string(22) "2021 7 18  20:23:24 UT"
   }

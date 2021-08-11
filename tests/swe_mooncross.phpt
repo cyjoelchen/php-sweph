@@ -8,9 +8,10 @@ echo 'skip';
 ?>
 --FILE--
 <?php
+include 'utility/Format.php';
 swe_set_ephe_path('./sweph/ephe');
-var_dump(swe_mooncross(30, 2455334.0, SEFLG_SWIEPH));
-var_dump(swe_mooncross_ut(30, 2455334.0, SEFLG_SWIEPH));
+var_dump(Format::round(swe_mooncross(30, 2455334.0, SEFLG_SWIEPH)));
+var_dump(Format::round(swe_mooncross_ut(30, 2455334.0, SEFLG_SWIEPH)));
 ?>
 --EXPECT--
 array(3) {
