@@ -227,3 +227,76 @@ function swe_get_library_path(): string {}
  * @return string|null
  */
 function swe_get_current_file_data(int $ifno): ?string {}
+
+/**
+ * @param int $year
+ * @param int $month
+ * @param int $day
+ * @param double $hour
+ * @param int $cal_flag
+ * @return double|null
+ */
+function swe_date_conversion(int $year, int $month, int $day, double $hour, int $cal_flag): ?double {}
+
+/**
+ * @param int $year
+ * @param int $month
+ * @param int $day
+ * @param double $hour
+ * @param int $gregflag
+ * @return double
+ */
+function swe_julday(int $year, int $month, int $day, double $hour, int $gregflag): double {}
+
+/**
+ * @param double $jd
+ * @param int $gregflag
+ * @return array
+ */
+function swe_revjul(double $jd, int $gregflag): array {}
+
+/**
+ * @param double $tjd_et
+ * @param int $gregflag
+ * @return array
+ */
+function swe_jdet_to_utc(double $tjd_et, int $gregflag): array {}
+
+/**
+ * @param double $tjd_ut
+ * @param int $gregflag
+ * @return array
+ */
+function swe_jdut1_to_utc(double $tjd_ut, int $gregflag): array {}
+
+/**
+ * @param int $year
+ * @param int $month
+ * @param int $day
+ * @param int $hour
+ * @param int $min
+ * @param double $dsec
+ * @param int $gregflag
+ * @return array
+ */
+function swe_utc_to_jd(int $year, int $month, int $day, int $hour, int $min, double $dsec, int $gregflag): array {}
+
+/**
+ * @param int $year
+ * @param int $month
+ * @param int $day
+ * @param int $hour
+ * @param int $min
+ * @param double $dsec
+ * @param double $d_timezone
+ * @return array
+ */
+function swe_utc_time_zone(
+    int $year,
+    int $month,
+    int $day,
+    int $hour,
+    int $min,
+    double $dsec,
+    double $d_timezone
+): array {}

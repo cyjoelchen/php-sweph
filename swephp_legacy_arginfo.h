@@ -1,5 +1,5 @@
 /* This is a generated file, edit the .stub.php file instead.
- * Stub hash: ea7a15504bfb6ab8fd7e544e3cc9396806c51f44 */
+ * Stub hash: 5023e53ce38d952a6297e3335e6c5caf871f11c2 */
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_calc, 0, 0, 3)
 	ZEND_ARG_INFO(0, tjd_et)
@@ -137,6 +137,57 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_get_current_file_data, 0, 0, 1)
 	ZEND_ARG_INFO(0, ifno)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_date_conversion, 0, 0, 5)
+	ZEND_ARG_INFO(0, year)
+	ZEND_ARG_INFO(0, month)
+	ZEND_ARG_INFO(0, day)
+	ZEND_ARG_INFO(0, hour)
+	ZEND_ARG_INFO(0, cal_flag)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_julday, 0, 0, 5)
+	ZEND_ARG_INFO(0, year)
+	ZEND_ARG_INFO(0, month)
+	ZEND_ARG_INFO(0, day)
+	ZEND_ARG_INFO(0, hour)
+	ZEND_ARG_INFO(0, gregflag)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_revjul, 0, 0, 2)
+	ZEND_ARG_INFO(0, jd)
+	ZEND_ARG_INFO(0, gregflag)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_jdet_to_utc, 0, 0, 2)
+	ZEND_ARG_INFO(0, tjd_et)
+	ZEND_ARG_INFO(0, gregflag)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_jdut1_to_utc, 0, 0, 2)
+	ZEND_ARG_INFO(0, tjd_ut)
+	ZEND_ARG_INFO(0, gregflag)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_utc_to_jd, 0, 0, 7)
+	ZEND_ARG_INFO(0, year)
+	ZEND_ARG_INFO(0, month)
+	ZEND_ARG_INFO(0, day)
+	ZEND_ARG_INFO(0, hour)
+	ZEND_ARG_INFO(0, min)
+	ZEND_ARG_INFO(0, dsec)
+	ZEND_ARG_INFO(0, gregflag)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_utc_time_zone, 0, 0, 7)
+	ZEND_ARG_INFO(0, year)
+	ZEND_ARG_INFO(0, month)
+	ZEND_ARG_INFO(0, day)
+	ZEND_ARG_INFO(0, hour)
+	ZEND_ARG_INFO(0, min)
+	ZEND_ARG_INFO(0, dsec)
+	ZEND_ARG_INFO(0, d_timezone)
+ZEND_END_ARG_INFO()
+
 
 ZEND_FUNCTION(swe_calc);
 ZEND_FUNCTION(swe_calc_ut);
@@ -169,6 +220,13 @@ ZEND_FUNCTION(swe_get_ayanamsa_name);
 ZEND_FUNCTION(swe_version);
 ZEND_FUNCTION(swe_get_library_path);
 ZEND_FUNCTION(swe_get_current_file_data);
+ZEND_FUNCTION(swe_date_conversion);
+ZEND_FUNCTION(swe_julday);
+ZEND_FUNCTION(swe_revjul);
+ZEND_FUNCTION(swe_jdet_to_utc);
+ZEND_FUNCTION(swe_jdut1_to_utc);
+ZEND_FUNCTION(swe_utc_to_jd);
+ZEND_FUNCTION(swe_utc_time_zone);
 
 
 static const zend_function_entry ext_functions[] = {
@@ -203,5 +261,12 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(swe_version, arginfo_swe_version)
 	ZEND_FE(swe_get_library_path, arginfo_swe_get_library_path)
 	ZEND_FE(swe_get_current_file_data, arginfo_swe_get_current_file_data)
+	ZEND_FE(swe_date_conversion, arginfo_swe_date_conversion)
+	ZEND_FE(swe_julday, arginfo_swe_julday)
+	ZEND_FE(swe_revjul, arginfo_swe_revjul)
+	ZEND_FE(swe_jdet_to_utc, arginfo_swe_jdet_to_utc)
+	ZEND_FE(swe_jdut1_to_utc, arginfo_swe_jdut1_to_utc)
+	ZEND_FE(swe_utc_to_jd, arginfo_swe_utc_to_jd)
+	ZEND_FE(swe_utc_time_zone, arginfo_swe_utc_time_zone)
 	ZEND_FE_END
 };

@@ -85,13 +85,13 @@ zend_function_entry swephp_functions[] = {
 	/**************************** 
 	 * exports from swedate.c 
 	 ****************************/
-	PHP_FE(swe_date_conversion, NULL)
-	PHP_FE(swe_julday, NULL)
-	PHP_FE(swe_revjul, NULL)
-	PHP_FE(swe_jdet_to_utc, NULL)
-	PHP_FE(swe_jdut1_to_utc, NULL)
-	PHP_FE(swe_utc_to_jd, NULL)
-	PHP_FE(swe_utc_time_zone, NULL)
+	PHP_FE(swe_date_conversion, arginfo_swe_date_conversion)
+	PHP_FE(swe_julday, arginfo_swe_julday)
+	PHP_FE(swe_revjul, arginfo_swe_revjul)
+	PHP_FE(swe_jdet_to_utc, arginfo_swe_jdet_to_utc)
+	PHP_FE(swe_jdut1_to_utc, arginfo_swe_jdut1_to_utc)
+	PHP_FE(swe_utc_to_jd, arginfo_swe_utc_to_jd)
+	PHP_FE(swe_utc_time_zone, arginfo_swe_utc_time_zone)
 	
 	/**************************** 
 	 * exports from swehouse.c 
