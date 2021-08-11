@@ -23,9 +23,10 @@
 #define SWEPH_EXTENSION_VERSION "2.0 Rev: 29"
 
 #if PHP_MAJOR_VERSION < 8
-# define IS_PHP7	1
+#include "swephp_legacy_arginfo.h"
 #else
-# define IS_PHP7	0
+#include "swephp_arginfo.h"
+#endif
 
 #ifndef TSRMLS_D
 #define TSRMLS_D void
@@ -49,9 +50,9 @@ zend_function_entry swephp_functions[] = {
 	/**************************** 
 	 * exports from sweph.c 
 	 ****************************/
-	PHP_FE(swe_calc, NULL)
-	PHP_FE(swe_calc_ut, NULL)
-	PHP_FE(swe_calc_pctr, NULL)
+	PHP_FE(swe_calc, arginfo_swe_calc)
+	PHP_FE(swe_calc_ut, arginfo_swe_calc_ut)
+	PHP_FE(swe_calc_pctr, arginfo_swe_calc_pctr)
 	PHP_FE(swe_solcross, NULL)
 	PHP_FE(swe_solcross_ut, NULL)
 	PHP_FE(swe_mooncross, NULL)
