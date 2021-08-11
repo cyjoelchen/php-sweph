@@ -809,3 +809,210 @@ function swe_get_orbital_elements(double $tjd_et, int $ipl, int $iflag): array {
  * @return array
  */
 function swe_orbit_max_min_true_distance(double $tjd_et, int $ipl, int $iflag): array {}
+
+/**
+ * @param float $tjd
+ * @return float
+ */
+function swe_deltat(double $tjd): double {}
+
+/**
+ * @param float $tjd
+ * @param int $ephe_flat
+ * @return array
+ */
+function swe_deltat_ex(double $tjd, int $ephe_flat): array {}
+
+/**
+ * @param float $tjd_et
+ * @return array
+ */
+function swe_time_equ(double $tjd_et): array {}
+
+/**
+ * @param float $tjd_lmt
+ * @param float $geolon
+ * @return array
+ */
+function swe_lmt_to_lat(double $tjd_lmt, double $geolon): array {}
+
+/**
+ * @param float $tjd_lat
+ * @param float $geolon
+ * @return array
+ */
+function swe_lat_to_lmt(double $tjd_lat, double $geolon): array {}
+
+/**
+ * @param float $tjd_ut
+ * @param float $eps
+ * @param float $nut
+ * @return float
+ */
+function swe_sidtime0(double $tjd_ut, double $eps, double $nut): double {}
+
+/**
+ * @param float $tjd_ut
+ * @return float
+ */
+function swe_sidtime(double $tjd_ut): double {}
+
+/**
+ * @param float $lng
+ * @param float $lat
+ * @param float $dist
+ * @param float $eps
+ * @return array
+ */
+function swe_cotrans(double $lng, double $lat, double $dist, double $eps): array {}
+
+/**
+ * @param float $lng
+ * @param float $lat
+ * @param float $dist
+ * @param float $lngs
+ * @param float $lats
+ * @param float $dists
+ * @param float $eps
+ * @return array
+ */
+function swe_cotrans_sp(
+    double $lng,
+    double $lat,
+    double $dist,
+    double $lngs,
+    double $lats,
+    double $dists,
+    double $eps
+): array {}
+
+/**
+ * @return float
+ */
+function swe_get_tid_acc(): double {}
+
+/**
+ * @param float $t_acc
+ * @return null
+ */
+function swe_set_tid_acc(double $t_acc) {}
+
+/**
+ * @param float $t_acc
+ * @return null
+ */
+function swe_set_delta_t_userdef(double $t_acc) {}
+
+/**
+ * @param float $deg
+ * @return float
+ */
+function swe_degnorm(double $deg): double {}
+
+/**
+ * @param float $rad
+ * @return float
+ */
+function swe_radnorm(double $rad): double {}
+
+/**
+ * @param float $x1
+ * @param float $x2
+ * @return float
+ */
+function swe_rad_midp(double $x1, double $x2): double {}
+
+/**
+ * @param float $x1
+ * @param float $x2
+ * @return float
+ */
+function swe_deg_midp(double $x1, double $x2): double {}
+
+/**
+ * @param float $ddeg
+ * @param int $roundflag
+ * @return array
+ */
+function swe_split_deg(double $ddeg, int $roundflag): array {}
+
+/**
+ * @param int $p
+ * @return int
+ */
+function swe_csnorm(int $p): int {}
+
+/**
+ * @param int $p1
+ * @param int $p2
+ * @return int
+ */
+function swe_difcsn(int $p1, int $p2): int {}
+
+/**
+ * @param float $p1
+ * @param float $p2
+ * @return float
+ */
+function swe_difdegn(double $p1, double $p2): double {}
+
+/**
+ * @param int $p1
+ * @param int $p2
+ * @return int
+ */
+function swe_difcs2n(int $p1, int $p2): int {}
+
+/**
+ * @param float $p1
+ * @param float $p2
+ * @return float
+ */
+function swe_difdeg2n(double $p1, double $p2): double {}
+
+/**
+ * @param float $p1
+ * @param float $p2
+ * @return float
+ */
+function swe_difrad2n(double $p1, double $p2): double {}
+
+/**
+ * @param int $x
+ * @return int
+ */
+function swe_csroundsec(int $x): int {}
+
+/**
+ * @param float $x
+ * @return float
+ */
+function swe_d2l(double $x): double {}
+
+/**
+ * @param float $jd
+ * @return int
+ */
+function swe_day_of_week(double $jd): int {}
+
+/**
+ * @param int $t
+ * @param int $sep
+ * @param int $suppressZero
+ * @return string
+ */
+function swe_cs2timestr(int $t, int $sep, int $suppressZero): string {}
+
+/**
+ * @param int $t
+ * @param string $pchar
+ * @param string $mchar
+ * @return string
+ */
+function swe_cs2lonlatstr(int $t, string $pchar, string $mchar): string {}
+
+/**
+ * @param int $t
+ * @return string
+ */
+function swe_cs2degstr(int $t): string {}

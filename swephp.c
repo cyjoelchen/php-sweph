@@ -137,41 +137,41 @@ zend_function_entry swephp_functions[] = {
 	/**************************** 
 	 * exports from swephlib.c 
 	 ****************************/
-	PHP_FE(swe_deltat, NULL)
-	PHP_FE(swe_deltat_ex, NULL)
-	PHP_FE(swe_time_equ, NULL)
-	PHP_FE(swe_lmt_to_lat, NULL)
-	PHP_FE(swe_lat_to_lmt, NULL)
-	PHP_FE(swe_sidtime0, NULL)
-	PHP_FE(swe_sidtime, NULL)
-	PHP_FE(swe_cotrans, NULL)
-	PHP_FE(swe_cotrans_sp, NULL)
-	PHP_FE(swe_get_tid_acc, NULL)
-	PHP_FE(swe_set_tid_acc, NULL)
-	PHP_FE(swe_set_delta_t_userdef, NULL)
-	PHP_FE(swe_degnorm, NULL)
-	PHP_FE(swe_radnorm, NULL)
-	PHP_FE(swe_rad_midp, NULL)
-	PHP_FE(swe_deg_midp, NULL)
-	PHP_FE(swe_split_deg, NULL)
+	PHP_FE(swe_deltat, arginfo_swe_deltat)
+	PHP_FE(swe_deltat_ex, arginfo_swe_deltat_ex)
+	PHP_FE(swe_time_equ, arginfo_swe_time_equ)
+	PHP_FE(swe_lmt_to_lat, arginfo_swe_lmt_to_lat)
+	PHP_FE(swe_lat_to_lmt, arginfo_swe_lat_to_lmt)
+	PHP_FE(swe_sidtime0, arginfo_swe_sidtime0)
+	PHP_FE(swe_sidtime, arginfo_swe_sidtime)
+	PHP_FE(swe_cotrans, arginfo_swe_cotrans)
+	PHP_FE(swe_cotrans_sp, arginfo_swe_cotrans_sp)
+	PHP_FE(swe_get_tid_acc, arginfo_swe_get_tid_acc)
+	PHP_FE(swe_set_tid_acc, arginfo_swe_set_tid_acc)
+	PHP_FE(swe_set_delta_t_userdef, arginfo_swe_set_delta_t_userdef)
+	PHP_FE(swe_degnorm, arginfo_swe_degnorm)
+	PHP_FE(swe_radnorm, arginfo_swe_radnorm)
+	PHP_FE(swe_rad_midp, arginfo_swe_rad_midp)
+	PHP_FE(swe_deg_midp, arginfo_swe_deg_midp)
+	PHP_FE(swe_split_deg, arginfo_swe_split_deg)
 
 	/******************************************************* 
 	 * other functions from swephlib.c;
 	 * they are not needed for Swiss Ephemeris,
 	 * but may be useful to former Placalc users.
 	 ********************************************************/
-	PHP_FE(swe_csnorm, NULL)
-	PHP_FE(swe_difcsn, NULL)
-	PHP_FE(swe_difdegn, NULL)
-	PHP_FE(swe_difcs2n, NULL)
-	PHP_FE(swe_difdeg2n, NULL)
-	PHP_FE(swe_difrad2n, NULL)
-	PHP_FE(swe_csroundsec, NULL)
-	PHP_FE(swe_d2l, NULL)
-	PHP_FE(swe_day_of_week, NULL)
-	PHP_FE(swe_cs2timestr, NULL)
-	PHP_FE(swe_cs2lonlatstr, NULL)
-	PHP_FE(swe_cs2degstr, NULL)
+	PHP_FE(swe_csnorm, arginfo_swe_csnorm)
+	PHP_FE(swe_difcsn, arginfo_swe_difcsn)
+	PHP_FE(swe_difdegn, arginfo_swe_difdegn)
+	PHP_FE(swe_difcs2n, arginfo_swe_difcs2n)
+	PHP_FE(swe_difdeg2n, arginfo_swe_difdeg2n)
+	PHP_FE(swe_difrad2n, arginfo_swe_difrad2n)
+	PHP_FE(swe_csroundsec, arginfo_swe_csroundsec)
+	PHP_FE(swe_d2l, arginfo_swe_d2l)
+	PHP_FE(swe_day_of_week, arginfo_swe_day_of_week)
+	PHP_FE(swe_cs2timestr, arginfo_swe_cs2timestr)
+	PHP_FE(swe_cs2lonlatstr, arginfo_swe_cs2lonlatstr)
+	PHP_FE(swe_cs2degstr, arginfo_swe_cs2degstr)
 
 //	PHP_FE(confirm_sweph_compiled,	NULL)		/* For testing, remove later. */
 	{NULL, NULL, NULL}	/* Must be the last line in swephp_functions[] */
@@ -5080,6 +5080,7 @@ Convert ecliptic to equatorial if eps is negative.
   double        lng     Longitude/right ascension position.
   double        lat     Latitude/declination position.
   double        dist    Distance (ignored).
+  double        eps     Obliquity of ecliptic, in degrees.
 
 =head3 return array
 
@@ -5132,6 +5133,7 @@ Convert ecliptic to equatorial if eps is negative.
   double        lngs    Longitude/right ascension velocity.
   double        lat     Latitude/declination velocity.
   double        dists   Distance velocity (ignored).
+  double        eps     Obliquity of ecliptic, in degrees.
 
 =head3 return array
 
@@ -5424,7 +5426,7 @@ It can also round to seconds, minutes, degrees.
 =head3 Parameters
 
     double      ddeg            Decimal degree value to "split".
-    double      roundflag       Default is no rounding; otherwise use flags:
+    int         roundflag       Default is no rounding; otherwise use flags:
                                 SE_SPLIT_DEG_ROUND_SEC
                                 SE_SPLIT_DEG_ROUND_MIN
                                 SE_SPLIT_DEG_ROUND_DEG

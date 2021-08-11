@@ -1,5 +1,5 @@
 /* This is a generated file, edit the .stub.php file instead.
- * Stub hash: e3fcb85b5bdcdd841a2f95a5ad0c04f3e93a7b9e */
+ * Stub hash: e6d6e77eaa491fad0c4501239f4ce7c879569fe6 */
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_calc, 0, 3, IS_ARRAY, 0)
 	ZEND_ARG_OBJ_INFO(0, tjd_et, double, 0)
@@ -434,6 +434,131 @@ ZEND_END_ARG_INFO()
 
 #define arginfo_swe_orbit_max_min_true_distance arginfo_swe_calc
 
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_swe_deltat, 0, 1, double, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_deltat_ex, 0, 2, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd, double, 0)
+	ZEND_ARG_TYPE_INFO(0, ephe_flat, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_time_equ, 0, 1, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_et, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_lmt_to_lat, 0, 2, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_lmt, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geolon, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_lat_to_lmt, 0, 2, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_lat, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geolon, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_swe_sidtime0, 0, 3, double, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_ut, double, 0)
+	ZEND_ARG_OBJ_INFO(0, eps, double, 0)
+	ZEND_ARG_OBJ_INFO(0, nut, double, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_swe_sidtime arginfo_swe_get_ayanamsa_ut
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_cotrans, 0, 4, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, lng, double, 0)
+	ZEND_ARG_OBJ_INFO(0, lat, double, 0)
+	ZEND_ARG_OBJ_INFO(0, dist, double, 0)
+	ZEND_ARG_OBJ_INFO(0, eps, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_cotrans_sp, 0, 7, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, lng, double, 0)
+	ZEND_ARG_OBJ_INFO(0, lat, double, 0)
+	ZEND_ARG_OBJ_INFO(0, dist, double, 0)
+	ZEND_ARG_OBJ_INFO(0, lngs, double, 0)
+	ZEND_ARG_OBJ_INFO(0, lats, double, 0)
+	ZEND_ARG_OBJ_INFO(0, dists, double, 0)
+	ZEND_ARG_OBJ_INFO(0, eps, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_swe_get_tid_acc, 0, 0, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_set_tid_acc, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, t_acc, double, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_swe_set_delta_t_userdef arginfo_swe_set_tid_acc
+
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_swe_degnorm, 0, 1, double, 0)
+	ZEND_ARG_OBJ_INFO(0, deg, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_swe_radnorm, 0, 1, double, 0)
+	ZEND_ARG_OBJ_INFO(0, rad, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_swe_rad_midp, 0, 2, double, 0)
+	ZEND_ARG_OBJ_INFO(0, x1, double, 0)
+	ZEND_ARG_OBJ_INFO(0, x2, double, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_swe_deg_midp arginfo_swe_rad_midp
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_split_deg, 0, 2, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, ddeg, double, 0)
+	ZEND_ARG_TYPE_INFO(0, roundflag, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_csnorm, 0, 1, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, p, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_difcsn, 0, 2, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, p1, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, p2, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_swe_difdegn, 0, 2, double, 0)
+	ZEND_ARG_OBJ_INFO(0, p1, double, 0)
+	ZEND_ARG_OBJ_INFO(0, p2, double, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_swe_difcs2n arginfo_swe_difcsn
+
+#define arginfo_swe_difdeg2n arginfo_swe_difdegn
+
+#define arginfo_swe_difrad2n arginfo_swe_difdegn
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_csroundsec, 0, 1, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, x, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_swe_d2l, 0, 1, double, 0)
+	ZEND_ARG_OBJ_INFO(0, x, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_day_of_week, 0, 1, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, jd, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_cs2timestr, 0, 3, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, t, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, sep, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, suppressZero, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_cs2lonlatstr, 0, 3, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, t, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, pchar, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, mchar, IS_STRING, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_cs2degstr, 0, 1, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, t, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
 
 ZEND_FUNCTION(swe_calc);
 ZEND_FUNCTION(swe_calc_ut);
@@ -506,6 +631,35 @@ ZEND_FUNCTION(swe_nod_aps);
 ZEND_FUNCTION(swe_nod_aps_ut);
 ZEND_FUNCTION(swe_get_orbital_elements);
 ZEND_FUNCTION(swe_orbit_max_min_true_distance);
+ZEND_FUNCTION(swe_deltat);
+ZEND_FUNCTION(swe_deltat_ex);
+ZEND_FUNCTION(swe_time_equ);
+ZEND_FUNCTION(swe_lmt_to_lat);
+ZEND_FUNCTION(swe_lat_to_lmt);
+ZEND_FUNCTION(swe_sidtime0);
+ZEND_FUNCTION(swe_sidtime);
+ZEND_FUNCTION(swe_cotrans);
+ZEND_FUNCTION(swe_cotrans_sp);
+ZEND_FUNCTION(swe_get_tid_acc);
+ZEND_FUNCTION(swe_set_tid_acc);
+ZEND_FUNCTION(swe_set_delta_t_userdef);
+ZEND_FUNCTION(swe_degnorm);
+ZEND_FUNCTION(swe_radnorm);
+ZEND_FUNCTION(swe_rad_midp);
+ZEND_FUNCTION(swe_deg_midp);
+ZEND_FUNCTION(swe_split_deg);
+ZEND_FUNCTION(swe_csnorm);
+ZEND_FUNCTION(swe_difcsn);
+ZEND_FUNCTION(swe_difdegn);
+ZEND_FUNCTION(swe_difcs2n);
+ZEND_FUNCTION(swe_difdeg2n);
+ZEND_FUNCTION(swe_difrad2n);
+ZEND_FUNCTION(swe_csroundsec);
+ZEND_FUNCTION(swe_d2l);
+ZEND_FUNCTION(swe_day_of_week);
+ZEND_FUNCTION(swe_cs2timestr);
+ZEND_FUNCTION(swe_cs2lonlatstr);
+ZEND_FUNCTION(swe_cs2degstr);
 
 
 static const zend_function_entry ext_functions[] = {
@@ -580,5 +734,34 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(swe_nod_aps_ut, arginfo_swe_nod_aps_ut)
 	ZEND_FE(swe_get_orbital_elements, arginfo_swe_get_orbital_elements)
 	ZEND_FE(swe_orbit_max_min_true_distance, arginfo_swe_orbit_max_min_true_distance)
+	ZEND_FE(swe_deltat, arginfo_swe_deltat)
+	ZEND_FE(swe_deltat_ex, arginfo_swe_deltat_ex)
+	ZEND_FE(swe_time_equ, arginfo_swe_time_equ)
+	ZEND_FE(swe_lmt_to_lat, arginfo_swe_lmt_to_lat)
+	ZEND_FE(swe_lat_to_lmt, arginfo_swe_lat_to_lmt)
+	ZEND_FE(swe_sidtime0, arginfo_swe_sidtime0)
+	ZEND_FE(swe_sidtime, arginfo_swe_sidtime)
+	ZEND_FE(swe_cotrans, arginfo_swe_cotrans)
+	ZEND_FE(swe_cotrans_sp, arginfo_swe_cotrans_sp)
+	ZEND_FE(swe_get_tid_acc, arginfo_swe_get_tid_acc)
+	ZEND_FE(swe_set_tid_acc, arginfo_swe_set_tid_acc)
+	ZEND_FE(swe_set_delta_t_userdef, arginfo_swe_set_delta_t_userdef)
+	ZEND_FE(swe_degnorm, arginfo_swe_degnorm)
+	ZEND_FE(swe_radnorm, arginfo_swe_radnorm)
+	ZEND_FE(swe_rad_midp, arginfo_swe_rad_midp)
+	ZEND_FE(swe_deg_midp, arginfo_swe_deg_midp)
+	ZEND_FE(swe_split_deg, arginfo_swe_split_deg)
+	ZEND_FE(swe_csnorm, arginfo_swe_csnorm)
+	ZEND_FE(swe_difcsn, arginfo_swe_difcsn)
+	ZEND_FE(swe_difdegn, arginfo_swe_difdegn)
+	ZEND_FE(swe_difcs2n, arginfo_swe_difcs2n)
+	ZEND_FE(swe_difdeg2n, arginfo_swe_difdeg2n)
+	ZEND_FE(swe_difrad2n, arginfo_swe_difrad2n)
+	ZEND_FE(swe_csroundsec, arginfo_swe_csroundsec)
+	ZEND_FE(swe_d2l, arginfo_swe_d2l)
+	ZEND_FE(swe_day_of_week, arginfo_swe_day_of_week)
+	ZEND_FE(swe_cs2timestr, arginfo_swe_cs2timestr)
+	ZEND_FE(swe_cs2lonlatstr, arginfo_swe_cs2lonlatstr)
+	ZEND_FE(swe_cs2degstr, arginfo_swe_cs2degstr)
 	ZEND_FE_END
 };
