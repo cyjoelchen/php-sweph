@@ -16,7 +16,7 @@ $rv = swe_lun_occult_when_glob(2454466.5, SE_VENUS, "", SEFLG_SWIEPH, 0, 0);
 var_dump(Format::round($rv));
 
 $tjd_ut = $rv['tret'][0];
-var_dump($tjd_ut, Format::asUtc($tjd_ut));
+var_dump(round($tjd_ut, 6), Format::asUtc($tjd_ut));
 
 echo "swe_lun_occult_where for Venus\n";
 var_dump(Format::round(swe_lun_occult_where($tjd_ut, SE_VENUS, "", SEFLG_SWIEPH)));
@@ -54,7 +54,7 @@ array(2) {
     float(0)
   }
 }
-float(2454531.2969454615)
+float(2454531.296945)
 string(20) "2008 3 5  19:7:36 UT"
 swe_lun_occult_where for Venus
 array(3) {
