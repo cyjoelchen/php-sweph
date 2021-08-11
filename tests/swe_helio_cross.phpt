@@ -8,9 +8,10 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
+include 'utility/Format.php';
 swe_set_ephe_path('./sweph/ephe');
-var_dump(swe_helio_cross(SE_SATURN, 30, 2455334.0, SEFLG_SWIEPH, 1));
-var_dump(swe_helio_cross_ut(SE_SATURN, 30, 2455334.0, SEFLG_SWIEPH, 1));
+var_dump(Format::round(swe_helio_cross(SE_SATURN, 30, 2455334.0, SEFLG_SWIEPH, 1)));
+var_dump(Format::round(swe_helio_cross_ut(SE_SATURN, 30, 2455334.0, SEFLG_SWIEPH, 1)));
 ?>
 --EXPECT--
 array(3) {
@@ -27,5 +28,5 @@ array(3) {
   ["rc"]=>
   int(0)
   ["jx"]=>
-  float(2461855.3794971)
+  float(2461855.379497)
 }

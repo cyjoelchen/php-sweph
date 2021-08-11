@@ -9,7 +9,7 @@ if (!extension_loaded('swephp')) {
 --FILE--
 <?php
 swe_set_ephe_path('./sweph/ephe');
-var_dump(swe_get_ayanamsa(2452275.5));
+var_dump(round(swe_get_ayanamsa(2452275.5), 6));
 ?>
 --EXPECT--
-float(24.768237848066)
+float(24.768238)
