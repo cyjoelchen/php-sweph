@@ -1,27 +1,27 @@
-**Swiss Ephemeris**
+# **Swiss Ephemeris**
 
 ![](media/image1.png)
 
-**Computer ephemeris for developers of astrological software**
+# **Computer ephemeris for developers of astrological software**
 
 # Contents
 
-Removed toc and hope for auto-creation from .md version later
+Removed table of contents and hope for auto-creation from .md version later
 
 
 # SWISS EPHEMERIS - computer ephemeris for developers of astrological software
- 
+
 © 1997 - 2021 by Astrodienst AG, Dammstr. 23,  CH-8702 Zollikon / Zürich, Switzerland
 
 Email of developers: via mailing list <https://groups.io/g/swisseph/>
 
 Authors: Dieter Koch and Dr. Alois Treindl
 
-## Editing history
+## 0.1. Editing history
 
-Date         | what
--------------|--------------------------------------------------------------------|
-14-sep-1997  | Appendix A by Alois
+Date.................         | what
+-------------|--------------------------------------------------------------------
+14-sep-1997  | Appendix B by Alois
 15-sep-1997  | split docu, swephprg.doc now separate (programming interface)
 16-sep-1997  | Dieter: absolute precision of JPL, position and speed transformations
 24-sep-1997  | Dieter: main asteroids
@@ -78,8 +78,9 @@ Date         | what
 9-dec-2020   | Dieter: "AD" replaced by "CE" and "BC" replaced by "BCE".
 15-dec-2020  | Alois: minor corrections
 6-apr-2021   | Dieter: Improved chapter 2.1.2.2. "Swiss Ephemeris and JPL Horizons System of Nasa" 
+11-aug-2021 | Alois: converted from docx (Word) to md (Markdown) format as base format 
 
-## Swiss Ephemeris release history
+## 0.2. Swiss Ephemeris release history
 
 1.00    |30-sept-1997   | what       
 --------|---------------|--------------------------------------------------------
@@ -133,8 +134,7 @@ Date         | what
 
 #  1. Introduction
 
-**Swiss Ephemeris** is a function package of astronomical calculations
-that serves the needs of astrologers, archeoastronomers, and, depending
+**Swiss Ephemeris** is a function package of astronomical calculations that serves the needs of astrologers, archeoastronomers, and, depending
 on purpose, also the needs of astronomers. It includes long-term
 ephemerides for the Sun, the Moon, the planets, more than 300.000
 asteroids, historically relevant fixed stars and some "hypothetical"
@@ -155,7 +155,7 @@ Full C source code is included with the Swiss Ephemeris, so that
 non-Windows programmers can create a linkable or shared library in their
 environment and use it with their applications.
 
-## Licensing
+## 1.2. Licensing
 
 The Swiss Ephemeris is not a product for end users. It is a toolset for
 programmers to build into their astrological software.
@@ -174,9 +174,9 @@ as one of the options in Astrodienst's dual licensing model.
 
 # 2. Description of the ephemerides
 
-## Planetary and lunar ephemerides
+## 2.1. Planetary and lunar ephemerides
 
-### Three ephemerides
+### 2.1.1. Three ephemerides
 
 The Swiss Ephemeris package allows planetary and lunar computations from
 any of the following three astronomical ephemerides:
@@ -263,26 +263,24 @@ All Swiss Ephemeris files have the file suffix .se1. A planetary file is
 about 500 kb, a lunar file 1300 kb. Swiss Ephemeris files are available
 for download from Astrodienst\'s web server.
 
-The time range of the Swiss Ephemeris
+##### The time range of the Swiss Ephemeris
 
 Versions until 1.80, which were based on JPL Ephemeris DE406 and some
 extension created by Astrodienst, work for the following time range:
 
-Start date 2 Jan 5401 BCE (-5400) Jul. = JD -251291.5
-
-End date 31 Dec 5399 CE (Greg. Cal.) = JD 3693368.5
+- Start date:	 2 Jan 5401 BCE (-5400) Jul. 	= JD -251291.5
+- End date:	 31 Dec 5399 CE (Greg. Cal.) 	= JD 3693368.5
 
 Versions since 2.00, which are based on JPL Ephemeris DE431, work for
 the following time range:
 
-Start date 11 Aug 13000 BCE (-12999) Jul. = JD -3026604.5
-
-End date 7 Jan 16800 CE Greg. = JD 7857139.5
+- Start date:	 11 Aug 13000 BCE (-12999) Jul. 	= JD -3026604.5
+- End date:	 7 Jan 16800 CE Greg. 	= JD 7857139.5
 
 Please note that versions prior to 2.00 are not able to correctly handle
 the JPL ephemeris DE431.
 
-A note on year numbering
+##### A note on year numbering
 
 There are two numbering systems for years before the year 1 CE. The
 historical numbering system (indicated with BCE) has no year zero. Year
@@ -326,15 +324,16 @@ and Chapront. This has a precision of 0.5 arc second relative to DE404
 for all dates between 1369 B.C. and 3000 A.D." (Moshier,
 http://www.moshier.net/aadoc.html).
 
+Note: The Moshier ephemeris is deprecated as part of Swiss Ephemeris. It wil be removed in the the next major release.
+
 #### The full JPL Ephemeris
 
 This is the full precision state-of-the-art ephemeris. It provides the
 highest precision and is the basis of the Astronomical Almanac. Time
 range:
 
-Start date 9 Dec 13002 BCE (-13001) Jul. = JD -3027215.5
-
-End date 11 Jan 17000 CE Greg. = JD 7930192.5
+Start date:	 9 Dec 13002 BCE (-13001) Jul. 	= JD -3027215.5
+End date:	 11 Jan 17000 CE Greg. 	= JD 7930192.5
 
 JPL is the Jet Propulsion Laboratory of NASA in Pasadena, CA, USA (see
 http://www.jpl.nasa.gov ). Since many years this institute, which is in
@@ -347,11 +346,9 @@ indicated by the DE-number. A higher number indicates a more recent
 version. SWISSEPH should be able to read any JPL file from DE200
 upwards.
 
-Accuracy of JPL ephemerides DE403/404 (1996) and DE405/406 (1998)
+##### Accuracy of JPL ephemerides DE403/404 (1996) and DE405/406 (1998)
 
-According to a paper (see below) by Standish and others on DE403 (of
-which DE406 is only a slight refinement), the accuracy of this ephemeris
-can be partly estimated from its difference from DE200:
+According to a paper (see below) by Standish and others on DE403 (of which DE406 is only a slight refinement), the accuracy of this ephemeris can be partly estimated from its difference from DE200:
 
 With the inner planets, Standish shows that within the period 1600 --
 2160 there is a maximum difference of 0.1 -- 0.2" which is mainly due to
@@ -375,28 +372,32 @@ With the Moon, there is an increasing difference of 0.9"/cty2 between
 The differences between DE200 and DE403 (DE406) can be summarized as
 follows:
 
-1980 -- 2000| all planets| \< 0.01",
-1600 -- 1980| Sun -- Jupiter| a few 0.1",
-1900 -- 1980| Saturn -- Neptune| a few 0.1",
-1600 -- 1900| Saturn -- Neptune| a few ",
-1750 -- 2169| Moon| a few ".
+| year range   | planet            | difference |
+| ------------ | ----------------- | ---------- |
+| 1980 -- 2000 | all planets       | \< 0.01",  |
+| 1600 -- 1980 | Sun -- Jupiter    | a few 0.1" |
+| 1900 -- 1980 | Saturn -- Neptune | a few 0.1" |
+| 1600 -- 1900 | Saturn -- Neptune | a few "    |
+| 1750 -- 2169 | Moon              | a few ".   |
 
 (see: E.M. Standish, X.X. Newhall, J.G. Williams, and W.M. Folkner, JPL
 Planetary and Lunar Ephemerides, DE403/LE403, JPL Interoffice Memorandum
 IOM 314.10-127, May 22, 1995, pp. 7f.)
 
-Comparison of JPL ephemerides DE406 (1998) with DE431 (2013)
+##### Comparison of JPL ephemerides DE406 (1998) with DE431 (2013)
 
-Differences DE431-DE406 for 3000 BCE to 3000 CE:
+##### Differences DE431-DE406 for 3000 BCE to 3000 CE:
 
-> Moon \< 7\" (TT), \< 2\" (UT)
-> Sun, Mercury, Venus \< 0.4 \"
-> Mars \< 2\"
-> Jupiter \< 6\"
-> Saturn \< 0.1\"
-> Uranus \< 28\"
-> Neptune \< 53\"
-> Pluto \< 129\"
+| planet              | difference               |
+| ------------------- | ------------------------ |
+| Moon                | \< 7\" (TT), \< 2\" (UT) |
+| Sun, Mercury, Venus | \< 0.4\"                 |
+| Mars                | \< 2\"                   |
+| Jupiter             | \< 6\"                   |
+| Saturn              | \< 0.1\"                 |
+| Uranus              | \< 28\"                  |
+| Neptune             | \< 53\"                  |
+| Pluto               | \< 129\"                 |
 
 **Moon, position (DE431) -- position (DE406) in TT and UT**
 
@@ -417,25 +418,25 @@ Differences DE431-DE406 for 3000 BCE to 3000 CE:
   2000	|0.00\"	|0.00\"	|0.00\"	|0.00\"
   2500	|0.06\"	|0.06\"	|-0.02\"	|-0.02\"
   3000	|0.10\"	|0.10\"	|-0.09\"	|-0.09\"
-  -------------------------------------------------------------------------
+-------------------------------------------------------------------------
 
 **Sun, position (DE431) -- position (DE406) in TT and UT**
 
-  **Year**	|**dL(TT)**	|**dL(UT)**
-  --------------|---------------	|-------------------------
-  2999	|0.21\"	|-0.34\"
-  -2500	|0.11\"	|-0.33\"
-  -2000	|0.09\"	|-0.26\"
-  -1500	|0.04\"	|-0.22\"
-  -1000	|0.06\"	|-0.14\"
-  -500	|0.02\"	|-0.11\"
-  0	|0.02\"	|-0.06\"
-  500	|0.00\"	|-0.04\"
-  1000	|0.00\"	|-0.01\"
-  1500	|-0.00\"	|-0.01\"
-  2000	|-0.00\"	|-0.00\"
-  2500	|-0.00\"	|-0.00\"
-  3000	|-0.01\"	|-0.01\"
+| **Year** | **dL(TT)** | **dL(UT)** |
+| -------- | ---------- | ---------- |
+| -2999    | 0.21\"     | -0.34\"    |
+| -2500    | 0.11\"     | -0.33\"    |
+| -2000    | 0.09\"     | -0.26\"    |
+| -1500    | 0.04\"     | -0.22\"    |
+| -1000    | 0.06\"     | -0.14\"    |
+| -500     | 0.02\"     | -0.11\"    |
+| 0        | 0.02\"     | -0.06\"    |
+| 500      | 0.00\"     | -0.04\"    |
+| 1000     | 0.00\"     | -0.01\"    |
+| 1500     | -0.00\"    | -0.01\"    |
+| 2000     | -0.00\"    | -0.00\"    |
+| 2500     | -0.00\"    | -0.00\"    |
+| 3000     | -0.01\"    | -0.01\"    |
 
 **Pluto, position (DE431) -- position (DE406) in TT**
 
@@ -465,7 +466,7 @@ positions for any date using the full JPL ephemerides DE200, DE406,
 DE421, DE431, or the compressed Swiss Ephemeris or the Moshier
 ephemeris.
 
-### The Swiss Ephemeris Compared with Astronomical Almanac and JPL Horizons
+### 2.1.2. The Swiss Ephemeris Compared with Astronomical Almanac and JPL Horizons
 
 #### Swiss Ephemeris and the Astronomical Almanac
 
@@ -555,9 +556,7 @@ More information on this and technical details are found in the
 programmer's documentation and in the source code, file swephlib.h.
 
 IERS Conventions 1996, 2003, and 2010 can be read or downloaded from
-here:
-
-http://www.iers.org/IERS/EN/DataProducts/Conventions/conventions.html
+here: http://www.iers.org/IERS/EN/DataProducts/Conventions/conventions.html
 
 Detailed instructions how to compare planetary positions as given by the
 Swiss Ephemeris with those of JPL are given in Appendix C at the end of
@@ -566,327 +565,9 @@ this documentation.
 Many thanks to Jon Giorgini, developer of the Horizons System, for
 explaining us the methods used at JPL.
 
-#### Differences between Swiss Ephemeris 1.70 and older versions
 
-With version 1.70, the standard algorithms recommended by the IAU
-resolutions up to 2005 were implemented. The following calculations have
-been added or changed with Swiss Ephemeris version 1.70:
 
--   \"Frame Bias\" transformation from ICRS to J2000;
-
--   Nutation IAU 2000B (could be switched to 2000A by the user);
-
--   Precession model P03 (Capitaine/Wallace/Chapront 2003), including
-    improvements in ecliptic obliquity and sidereal time that were
-    achieved by this model.
-
-The differences between the old and new planetary positions in ecliptic
-longitude (arc seconds) are:
-
-  -----------------------------------------------------------------------
-  **Year**                    **New -- Old**
-  --------------------------- -------------------------------------------
-  2000                        -0.00108
-
-  1995                        0.02448
-
-  1980                        0.05868
-
-  1970                        0.10224
-
-  1950                        0.15768
-
-  1900                        0.30852
-
-  1800                        0.58428
-
-  1799                        -0.04644
-
-  1700                        -0.07524
-
-  1500                        -0.12636
-
-  1000                        -0.25344
-
-  0                           -0.53316
-
-  -1000                       -0.85824
-
-  -2000                       -1.40796
-
-  -3000                       -3.33684
-
-  -4000                       -10.64808
-
-  -5000                       -32.68944
-
-  -5400                       -49.15188
-  -----------------------------------------------------------------------
-
-The discontinuity of the curve between 1800 and 1799 is explained by the
-fact that old versions of the Swiss Ephemeris used different precession
-models for different time ranges: the model IAU 1976 by Lieske for
-1800-2200, and the precession model by Williams 1994 outside that time
-range.
-
-**Note**: Precession model P03 is said to be accurate to 0.00005 arc
-second for CE 1000-3000.
-
-The differences between version 1.70 and older versions for the future
-are as follows:
-
-  -----------------------------------------------------------------------
-  **Year**                 **Difference**
-  ------------------------ ----------------------------------------------
-  2000                     -0.00108
-
-  2010                     -0.01620
-
-  2050                     -0.14004
-
-  2100                     -0.29448
-
-  2200                     -0.61452
-
-  2201                     0.05940
-
-  3000                     0.27252
-
-  4000                     0.48708
-
-  5000                     0.47592
-
-  5400                     0.40032
-  -----------------------------------------------------------------------
-
-The discontinuity in 2200 has the same explanation as the one in 1800.
-
-Jyotish / sidereal ephemerides
-
-The ephemeris changes by a constant value of about +0.3 arc second. This
-is because all our ayanamshas have the start epoch 1900, for which epoch
-precession was corrected by the same amount.
-
-Fictitious planets / bodies from the orbital elements file seorbel.txt
-
-There are changes of several 0.1 arcsec, depending on the epoch of the
-orbital elements and the correction of precession as can be seen in the
-tables above.
-
-The differences for ecliptic obliquity in arc seconds (new - old) are:
-
-  -----------------------------------------------------------------------
-  **Year**                   **Difference**
-  -------------------------- --------------------------------------------
-  5400                       -1.71468
-
-  5000                       -1.25244
-
-  4000                       -0.63612
-
-  3000                       -0.31788
-
-  2100                       -0.06336
-
-  2000                       -0.04212
-
-  1900                       -0.02016
-
-  1800                       0.01296
-
-  1700                       0.04032
-
-  1600                       0.06696
-
-  1500                       0.09432
-
-  1000                       0.22716
-
-  0                          0.51444
-
-  -1000                      1.07064
-
-  -2000                      2.62908
-
-  -3000                      6.68016
-
-  -4000                      15.73272
-
-  -5000                      33.54480
-
-  -5400                      44.22924
-  -----------------------------------------------------------------------
-
-The differences for sidereal time in seconds (new - old) are:
-
-  -----------------------------------------------------------------------
-  **Year**                   **Difference**
-  -------------------------- --------------------------------------------
-  5400                       -2.544
-
-  5000                       -1.461
-
-  4000                       -0.122
-
-  3000                       0.126
-
-  2100                       0.019
-
-  2000                       0.001
-
-  1900                       0.019
-
-  1000                       0.126
-
-  0                          -0.122
-
-  -500                       -0.594
-
-  -1000                      -1.461
-
-  -2000                      -5.029
-
-  -3000                      -12.355
-
-  -4000                      -25.330
-
-  -5000                      -46.175
-
-  -5400                      -57.273
-  -----------------------------------------------------------------------
-
-#### Differences between Swiss Ephemeris 1.78 and 1.77
-
-Former versions of the Swiss Ephemeris had used the precession model by
-Capitaine, Wallace, and Chapront of 2003 for the time range -5500 until
-9500 and the precession model Laskar 1986 for epochs outside this time
-range. (Since planetary ephemerides are restricted to -5400 to +5400,
-Laskar precession is only relevant for calculations of fixed stars.)
-
-Version 1.78 calculates precession and ecliptic obliquity according to
-Vondrák, Capitaine, and Wallace, "New precession expressions, valid for
-long time intervals", A&A 534, A22 (2011), which is good for +- 200
-millennia.
-
-This change has almost no ramifications for historical epochs. Planetary
-positions and the obliquity of the ecliptic change by less than an arc
-minute in 5400 BCE. However, for research concerning the prehistoric
-cave paintings (Lascaux, Altamira, etc., some of which may represent
-celestial constellations), fixed star positions are required for 15.000
-BCE or even earlier (the Chauvet cave was painted in 33.000 BCE). Such
-calculations are now possible using the Swiss Ephemeris version 1.78 or
-higher. However, the Sun, Moon, and the planets remain restricted to the
-time range 5400 BCE to 5400 CE.
-
-Differences (in arc sec) in precession (v. 1.78 -- v. 1.77, test star
-was Aldebaran)
-
-Only differences between -5500 and +9500 are differences Vondrák -- P03.
-Those outside this time range are actually differences Vondrák -- Laskar
-1986.
-
-  -----------------------------------------------------------------------
-  **Year**                      **Difference**
-  ----------------------------- -----------------------------------------
-  -20000                        -26716\"
-
-  -15000                        -2691\"
-
-  -10000                        -256\"
-
-  -5000                         -3.95352\"
-
-  -4000                         -9.77940\"
-
-  -3000                         -7.00524\"
-
-  -2000                         -3.40524\"
-
-  -1000                         -1.23732\"
-
-  0                             -0.33948\"
-
-  1000                          -0.05400\"
-
-  1800                          -0.00108\"
-
-  1900                          -0.00036\"
-
-  2000                          0.00000\"
-
-  2100                          -0.00036\"
-
-  2200                          -0.00072\"
-
-  3000                          0.03528\"
-
-  4000                          0.59904\"
-
-  5000                          2.90160\"
-
-  10000                         77\"
-
-  15000                         228\"
-
-  19000                         2839\"
-
-  20000                         5218\"
-  -----------------------------------------------------------------------
-
-Differences (in arc sec) in ecliptic obliquity:
-
-  -----------------------------------------------------------------------
-  **Year**                   **Difference**
-  -------------------------- --------------------------------------------
-  -20000                     11074.43664\"
-
-  -15000                     3321.50652\"
-
-  -10000                     632.60532\"
-
-  -5000                      -33.42636\"
-
-  0                          0.01008\"
-
-  1000                       0.00972\"
-
-  2000                       0.00000\"
-
-  3000                       -0.01008\"
-
-  4000                       -0.05868\"
-
-  10000                      -72.91980\"
-
-  15000                      -772.91712\"
-
-  20000                      -3521.23488"
-  -----------------------------------------------------------------------
-
-#### Differences between Swiss Ephemeris 2.00 and 1.80
-
-These differences are explained by the fact that the Swiss Ephemeris is
-now based on JPL Ephemeris DE431, whereas before release 2.00 it was
-based on DE406. The differences are listed above in Ch. 2.1.1.3, see
-paragraph on "Comparison of JPL ephemerides DE406 (1998) with DE431
-(2013)".
-
-#### Differences between Swiss Ephemeris 2.05.01 and 2.06
-
-Swiss Ephemeris 2.06 has a new Delta T algorithm based on:
-
--   Stephenson, F.R., Morrison, L.V., and Hohenkerk, C.Y., \"Measurement
-    of the Earth\'s Rotation: 720 BCE to CE 2015\", Royal Society
-    Proceedings A, 7 Dec 2016,
-
-http://rspa.royalsocietypublishing.org/lookup/doi/10.1098/rspa.2016.0404
-
-The Swiss Ephemeris uses it for calculations before 1948.
-
-Differences resulting from this update are shown in Chapter 7 on Delta
-T.
-
-### The details of coordinate transformation
+### 2.1.3. The details of coordinate transformation
 
 The following conversions are applied to the coordinates after reading
 the raw positions from the ephemeris files:
@@ -1039,10 +720,10 @@ from 3000 BCE to 5400 BCE. It is reasonable to assume that the
 integration errors in the backward integration are not significantly
 different from the integration errors in the upward integration.
 
-  -----------------------------------------------------------------------
+-----------------------------------------------------------------------
   **Planet**            **max. error\             **avg. error\
                         arcsec**                  arcsec**
-  --------------------- ------------------------- -----------------------
+--------------------- ------------------------- -----------------------
   Mercury               1.67                      0.61
 
   Venus                 0.14                      0.03
@@ -1071,10 +752,10 @@ cover an extension period from 3000 CE to 5400 CE. The maximum
 integration errors as determined in the test run 3000 CE down to 600 CE
 are given in the table below.
 
-  -----------------------------------------------------------------------
+-----------------------------------------------------------------------
   **Planet**            **max. error\             **avg. error\
                         arcsec**                  arcsec**
-  --------------------- ------------------------- -----------------------
+--------------------- ------------------------- -----------------------
   Mercury               2.01                      0.69
 
   Venus                 0.06                      0.02
@@ -1570,9 +1251,9 @@ time")
 The differences between the DE200 and the VSOP87 mean elements are
 considerable, though:
 
-  ------------------------------------------------------------------------
+------------------------------------------------------------------------
                     **Node**      **Perihelion**        
-  ----------------- ------------- --------------------- ------------------
+----------------- ------------- --------------------- ------------------
   Mercury           3"            4"                    
 
   Venus             3"            107"                  
@@ -1876,17 +1557,17 @@ have moons, except the earth. We call the center of the real planets the
 The difference between the barycenters and the COBs are small. The
 maximum geocentric angular distances are as follows:
 
-Mars       (0.2 m, irrelevant to us)
+Mars       (0.2 m, irrelevant to us)
 
-Jupiter    0.075 arcsec (jd 2468233.5)
+Jupiter    0.075 arcsec (jd 2468233.5)
 
-Saturn    0.053 arcsec (jd 2463601.5)
+Saturn    0.053 arcsec (jd 2463601.5)
 
-Uranus   0.0032 arcsec (jd 2446650.5)
+Uranus   0.0032 arcsec (jd 2446650.5)
 
 Neptune 0.0036 arcsec (jd 2449131.5)
 
-Pluto      0.088 arcsec (jd 2437372.5)
+Pluto      0.088 arcsec (jd 2437372.5)
 
 (from one-day-step calculations over 150 years)
 
@@ -2103,33 +1784,23 @@ from the Internet web page
 [swetest.htm](https://www.astro.com/swisseph/swetest.htm). The output
 will be:)
 
-  --------------------------------------------------------------------------
-                          **difference in\ **difference in\ **difference in\
-                          longitude**      latitude**       solar distance**
-  ---------- ------------ ---------------- ---------------- ----------------
-  Nep-Lev    01.01.1770   -18°0\'52.3811   0°55\'0.0332     -6.610753489
-
-  Nep-Lev    01.01.1790   -8°42\'9.1113    1°42\'55.7192    -4.257690148
-
-  Nep-Lev    02.01.1810   -3°49\'45.2014   1°35\'12.0858    -2.488363869
-
-  Nep-Lev    02.01.1830   -1°38\'2.8076    0°35\'57.0580    -2.112570665
-
-  Nep-Lev    02.01.1850   1°44\'23.0943    -0°43\'38.5357   -3.340858070
-
-  Nep-Lev    02.01.1870   9°17\'34.4981    -1°39\'24.1004   -5.513270186
-
-  Nep-Lev    02.01.1890   21°20\'56.6250   -1°38\'43.1479   -7.720578177
-
-  Nep-Lev    03.01.1910   36°27\'56.1314   -0°41\'59.4866   -9.265417529
-  --------------------------------------------------------------------------
+| ............... | date       | **difference in longitude** | **difference in latitude** | **difference in solar distance** |
+| --------------- | ---------- | --------------------------- | -------------------------- | -------------------------------- |
+| Nep-Lev         | 01.01.1770 | -18°0\'52.3811              | 0°55\'0.0332               | -6.610753489                     |
+| Nep-Lev         | 01.01.1790 | -8°42\'9.1113               | 1°42\'55.7192              | -4.257690148                     |
+| Nep-Lev         | 02.01.1810 | -3°49\'45.2014              | 1°35\'12.0858              | -2.488363869                     |
+| Nep-Lev         | 02.01.1830 | -1°38\'2.8076               | 0°35\'57.0580              | -2.112570665                     |
+| Nep-Lev         | 02.01.1850 | 1°44\'23.0943               | -0°43\'38.5357             | -3.340858070                     |
+| Nep-Lev         | 02.01.1870 | 9°17\'34.4981               | -1°39\'24.1004             | -5.513270186                     |
+| Nep-Lev         | 02.01.1890 | 21°20\'56.6250              | -1°38\'43.1479             | -7.720578177                     |
+| Nep-Lev         | 03.01.1910 | 36°27\'56.1314              | -0°41\'59.4866             | -9.265417529                     |
 
 One can see that the error is in the range of 2 degrees between 1830 and
 1850 and grows very fast beyond that period.
 
-## Sidereal Ephemerides for Astrology
+## 2.8. Sidereal Ephemerides for Astrology
 
-### The problem of defining the zodiac
+### 2.8.1. The problem of defining the zodiac
 
 Western astrology mostly uses the *tropical* zodiac, in which 0° Aries
 is fixed at the vernal point. The vernal point is the point where the
@@ -2171,7 +1842,7 @@ many write and pronounce it with an "s".)
 Thus, sidereal planetary positions are usually computed from tropical
 positions using the equation:
 
-sidereal_position = tropical_position -- ayanamsha(t)
+​    *sidereal_position = tropical_position -- ayanamsha(t)*
 
 where *ayanamsha* is the difference between the two zodiacs at a given
 epoch.
@@ -2183,7 +1854,7 @@ point, the so-called *precession rate,* in ecliptic longitude.
 The zero point of the sidereal zodiac is therefore traditionally defined
 by the equation:
 
-sidereal_0\_Aries = tropical_0\_Aries + ayanamsha(t).
+   *sidereal_0\_Aries = tropical_0\_Aries + ayanamsha(t).*
 
 As has been stated, the number of existing ayanamshas is considerable.
 The Swiss Ephemeris offers more than forty of them. At first glance,
@@ -2192,7 +1863,7 @@ evidence -- from a mere astronomical point of view -- for anyone of
 them. However, a historical study shows at least that many of them are
 related to each other and the basic approaches are not so many.
 
-### The Babylonian tradition and the Fagan/Bradley ayanamsha
+### 2.8.2. The Babylonian tradition and the Fagan/Bradley ayanamsha
 
 There have been several attempts to calculate the zero point of the
 Babylonian ecliptic from cuneiform lunar and planetary tablets.
@@ -2201,7 +1872,7 @@ The main problem in fixing the zero point is the inaccuracy of ancient
 observations. Around 1900 F.X. Kugler found that the Babylonian star
 positions fell into three groups:
 
-Kugler ayanamshas:
+**Kugler ayanamshas:**
 
 9)[^1] ayanamsha = -5°40´, t0 = -100
 
@@ -2212,7 +1883,7 @@ Kugler ayanamshas:
 In 1958, Peter Huber reviewed the topic in the light of new material and
 found:
 
-12\) Huber ayanamsha:
+**12\) Huber ayanamsha:**
 
 ayanamsha = -4°28´ +/- 20´, t0 = --100 Spica at 29 vi 07'59"
 
@@ -2226,7 +1897,7 @@ In 1977 Raymond Mercier noted that the zero point might have been
 defined as the ecliptic point that culminated simultaneously with the
 star eta Piscium (Al Pherg). For this possibility, we compute:
 
-13\) Eta Piscium ayanamsha:
+**13\) Eta Piscium ayanamsha:**
 
 ayanamsha = -5°04'46", t0 = --129 Spica at 29 vi 21
 
@@ -2239,7 +1910,7 @@ point must be computed from Spica at 29 vi 06\'05\" disregarding its
 proper motion. Fagan and Bradley defined their "synetic vernal point"
 as:
 
-0\) Fagan/Bradley ayanamsha:
+**0\) Fagan/Bradley ayanamsha:**
 
 ayanamsha = 24°02'31.36" for 1 Jan. 1950 with Spica at 29 vi 06\'05\"
 (without aberration)
@@ -2258,7 +1929,7 @@ to one of those stars.
 
 For this possibility, Swiss Ephemeris gives an Aldebaran ayanamsha:
 
-14\) Aldebaran-Antares ayanamsha:
+**14\) Aldebaran-Antares ayanamsha:**
 
 ayanamsha with Aldebaran at 15 ta 00'00" and Antares at 15 sc 00'17"
 around the year --100.
@@ -2270,7 +1941,7 @@ In 2010, the astronomy historian John P. Britton made another
 investigation in cuneiform astronomical tablets and corrected Huber's by
 a 7 arc minutes.
 
-38\) Britton ayanamsha:
+**38\) Britton ayanamsha:**
 
 ayanamsha = -3.2° +- 0.09°[^2]; t0 = 1 Jan. 0 Spica at 29 vi 14'58".
 
@@ -2294,7 +1965,7 @@ Sources:
     introduction of the uniform zodiac\", in Arch. Hist. Exact. Sci.
     (2010)64:617-663, p. 630.
 
-42\) Vettius Valens ayanamsha:
+**42\) Vettius Valens ayanamsha:**
 
 The ayanamsha used by Greek astrologers in late antiquity does not have
 a clear-cut definition. However, from extant charts it is known that the
@@ -2305,7 +1976,7 @@ to:
 -   James H. Holden, "The Classical Zodiac", in: AFA Journal of
     Research, vol. 7, no. 2 1995, p. 12.
 
-### The Hipparchan tradition
+### 2.8.3. The Hipparchan tradition
 
 Raymond Mercier has shown that all of the ancient Greek and the medieval
 Arabic astronomical works located the zero point of the ecliptic
@@ -2328,7 +1999,7 @@ were only assumed to be so.
 Mercier gives the following ayanamshas for Hipparchus and Ptolemy (who
 used the same star catalogue as Hipparchus):
 
-15\) Hipparchus ayanamsha:
+**15\) Hipparchus ayanamsha:**
 
 ayanamsha = -9°20' 27 June --128 (jd 1674484) zePsc 29pi33'49"
 Hipparchus
@@ -2366,11 +2037,9 @@ The same zero point near the star Revatî is also used by the so-called
 Ushâ-Shashî ayanamsha. It differs from the Hipparchan one by only 11 arc
 minutes.
 
-4\) Usha-Shashi ayanamsha:
+**4\) Usha-Shashi ayanamsha:**
 
-ayanamsha = 18°39'39.46 1 Jan. 1900
-
-zePsc (Revatî) 29pi50' (today), 29pi45' (Hipparchus' epoch)
+ayanamsha = 18°39'39.46 1 Jan. 1900 	zePsc (Revatî) 29pi50' (today), 29pi45' (Hipparchus' epoch)
 
 The Greek-Arabic-Hindu ayanamsha was zero around 560 CE. The tropical
 and the sidereal zero points were at exactly the same place.
@@ -2402,7 +2071,7 @@ After the Sassanian reform of astronomical tables, we have a new
 definition of the Greek-Arabic-Hindu sidereal zodiac (this is not
 explicitly stated by Mercier, however):
 
-16\) Sassanian ayanamsha:
+**16\) Sassanian ayanamsha:**
 
 ayanamsha = 0 18 Mar 564, 7:53:23 UT (jd /ET 1927135.8747793) Sassanian
 zePsc 29pi49\'59\"
@@ -2417,7 +2086,7 @@ Sources:
     in Archives Internationales d\'Histoire des Sciences, (1976)
     26:197-220 (part I), and (1977) 27:33-71 (part II)
 
-### Suryasiddhanta and Aryabhata
+### 2.8.4. Suryasiddhanta and Aryabhata
 
 The explanations given above are mainly derived from the article by
 Mercier. However, it is possible to derive ayanamshas from ancient
@@ -2455,31 +2124,31 @@ Algorithms for the mean Sun were taken from: Simon et alii, "Numerical
 expressions for precession formulae and mean elements for the Moon and
 the planets", in: Astron. Astrophys. 282,663-683 (1994).
 
-Suryasiddhanta/equinox ayanamshas with zero year 499 CE
+**Suryasiddhanta/equinox ayanamshas with zero year 499 CE**
 
 21\) ayanamsha = 0 21 Mar 499, 7:30:31.57 UT = 12:33:36 LMT at Ujjain,
 75.7684565 E
 
-> Based on Suryasiddhanta: ingress of mean Sun into Aries at point of
-> mean equinox of date.
+Based on Suryasiddhanta: ingress of mean Sun into Aries at point of
+mean equinox of date.
 
 22\) ayanamsha = -0.21463395
 
-> Based on Suryasiddhanta again, but assuming ingress of mean Sun into
-> Aries at true position of mean Sun at the same epoch.
+Based on Suryasiddhanta again, but assuming ingress of mean Sun into
+Aries at true position of mean Sun at the same epoch.
 
-Aryabhata/equinox ayanamshas with zero year 499 CE
+**Aryabhata/equinox ayanamshas with zero year 499 CE**
 
 23\) ayanamsha = 0 21 Mar 499, 6:56:55.57 UT = 12 LMT, local noon at
 Ujjain, 75.7684565 E.
 
-> Based on Aryabhata, ingress of mean Sun into Aries at point of mean
-> equinox of date.
+Based on Aryabhata, ingress of mean Sun into Aries at point of mean
+equinox of date.
 
 24\) ayanamsha = -0.23763238
 
-> Based on Aryabhata again, but assuming ingress of mean Sun into Aries
-> at true position of mean Sun at the same epoch.
+Based on Aryabhata again, but assuming ingress of mean Sun into Aries
+at true position of mean Sun at the same epoch.
 
 According to Govindasvamin (850 n. Chr.), Aryabhata and his disciples
 taught that the vernal point was at the beginning of sidereal Aries in
@@ -2489,7 +2158,7 @@ he was 23 years old when 3600 had elapsed after the beginning of the
 Kaliyuga. For the sake of completeness, we therefore add the following
 ayanamsha:
 
-37\) Aryabhata/equinox ayanamsha with zero year 522 CE
+**37\) Aryabhata/equinox ayanamsha with zero year 522 CE**
 
 ayanamsha = 0 21.3.522, 5:46:44 UT
 
@@ -2497,15 +2166,15 @@ Ayanamshas can also be derived from star positions given in the
 Suryasiddhanta. E.g., it states that the star Revati/zeta Piscium is at
 polar ecliptic longitude 359°50'.
 
-25\) Ayanamsha having Revati/zeta Piscium at polar longitude 359°50' in
-499 CE
+**25\) Ayanamsha having Revati/zeta Piscium at polar longitude 359°50' in**
+**499 CE**
 
 ayanamsha = -0.79167046 21 Mar 499, 7:30:31.57 UT = noon at Ujjain,
 75.7684565 E.
 
 Revati/zePsc at polar ecliptic longitude 359°50'
 
-28\) True Revati ayanamsha
+**28\) True Revati ayanamsha**
 
 Revati/zePsc is always exactly at longitude 359°50' (not polar!).
 
@@ -2526,32 +2195,34 @@ assigned to the heart, and according to Vedic spiritual literature, the
 root of human existence is in the heart. Mr. Narasimha Rao therefore
 proposed the following ayanamsha:
 
-29\) True Pushya paksha ayanamsha
+**29\) True Pushya paksha ayanamsha**
 
 Pushya/deCnC is always exactly at longitude 106°.
 
 Sources:
 
 -   Surya-Siddhanta: A Text Book of Hindu Astronomy by Ebenezer Burgess,
-    > ed. Phanindralal Gangooly (1989/1997) with a 45-page commentary
-    > by P. C. Sengupta (1935).
-
+    
+    ed. Phanindralal Gangooly (1989/1997) with a 45-page commentary
+    by P. C. Sengupta (1935).
+    
 -   D. Pingree, \"Precession and Trepidation in Indian Astronomy\", in
-    > JHA iii (1972), pp. 28f.
+    
+    JHA iii (1972), pp. 28f.
 
-### The Spica/Citra tradition and the Lahiri ayanamsha
+### 2.8.5. The Spica/Citra tradition and the Lahiri ayanamsha
 
 For instructions how to reproduce ayanamsha values given in IAE, IENA,
 Rashtriya Panchang, and the Report of the ICRC, please read Appendix E
 of this documentation.
 
-1\) Lahiri ayanamsha (according to IAE 1985, our standard Lahiri
-ayanamsha):
+**1\) Lahiri ayanamsha (according to IAE 1985, our standard Lahiri**
+**ayanamsha):**
 
 ayanamsha = 23°15\' 00\".658 21 March 1956, 0:00 TDT Lahiri, Spica
 (2000) 179°58\'58"
 
-46\) Lahiri ayanamsha (according to ICRC, and pre-1985 IAE and IENA):
+**46\) Lahiri ayanamsha (according to ICRC, and pre-1985 IAE and IENA):**
 
 ayanamsha = 23°15\' 00\".0 21 March 1956, 0:00 TDT Lahiri, Spica (2000)
 179°58\'59"
@@ -2621,10 +2292,10 @@ i.e. it includes nutation and is relative to the true equinox of date.
 This must be concluded, at least, from true ayanamsha values published
 in yearly editions of the *Indian Astronomical Ephemeris (IAE)*.
 
-For a comparison of Lahiri ayanamsa values and sidereal ephemerides with
-values given in *Indian Astronomical Ephemeris*, see Appendix E.
+**For a comparison of Lahiri ayanamsa values and sidereal ephemerides with**
+**values given in *Indian Astronomical Ephemeris*, see Appendix E.**
 
-43\) Lahiri (1940) ayanamsha:
+**43\) Lahiri (1940) ayanamsha:**
 
 ayanamsha = 22°26\'45\".50 J1900.0 = 31 Dec. 1899, 12:00 TT Spica (2000)
 at 179°59\'52\"
@@ -2636,8 +2307,7 @@ same date is 22°27'38". With the standard Lahiri ayanamsha, the position
 of Spica is "wrong", i.e. it deviates from 180° by about an arc minute,
 whereas with this other ayanamsha it is almost exact. Lahiri obviously
 wanted to place the star exactly at 180° for current years. The standard
-Lahiri position of Spica is 179°59'04 in the year 2000, and 179°59'08 in
-1900. According to the definition given in *Panchanga Darpan*, however
+Lahiri position of Spica is 179°59'04 in the year 2000, and 179°59'08 in 1900. According to the definition given in *Panchanga Darpan*, however
 calculated with rigorous precession algorithms, the position of Spica in
 2000 was 179°59\'52".
 
@@ -2647,15 +2317,15 @@ published by the Calendar Reform Committee. Thus, apparently, still
 considered this his definition of ayanamsha more correct than the one
 chosen by the ICRC.
 
-44\) Lahiri (1972, vernal equinox 285) ayanamsha:
+**44\) Lahiri (1972, vernal equinox 285) ayanamsha:**
 
 ayanamsha = 0° 22 March 285 17:54:02 TT (Lahiri original: 17:48 ET)
 Spica (2000) at 179°58\'35"
 
-> **mean** Sun's ingress in Aries (using formulae from Simon et alii
-> (1994))
->
-> (**true** Sun's ingress was on 20 March 19:18:33 TT)
+​	**mean** Sun's ingress in Aries (using formulae from Simon et alii
+(1994))
+
+​	(**true** Sun's ingress was on 20 March 19:18:33 TT)
 
 In his "Tables of the Sun", p. IX, however, which appeared in 1972,
 Lahiri again gave a different definition of his ayanamsha:
@@ -2707,7 +2377,7 @@ above.\"
 Apparently, this difference was small enough for him so that he
 considered it insignificant and, \"for the sake of uniformity\", took
 over the standard ayanamsha recommended by the CRC. The ayanamsha values
-and sidereal positions of the Sun and the Moon which he gives in his
+and sidereal positions of the Sun and the Moon which he gives in his
 ephemeris are in perfect agreement with the standard ayanamsha, not with
 the above-given definition.
 
@@ -2734,7 +2404,7 @@ From all this, it is obvious that there are several „Lahiri ayanamsha",
 and the standard Lahiri ayanamsha which was adopted by the ICRC is not
 exactly what he had intended.
 
-26\) Ayanamsha having Spica/Citra at polar longitude 180° in 499 CE
+**26\) Ayanamsha having Spica/Citra at polar longitude 180° in 499 CE**
 
 ayanamsha = 2.11070444 21 Mar 499, 7:30:31.57 UT = noon at Ujjain,
 75.7684565 E
@@ -2746,7 +2416,7 @@ As has been stated, the Suryasiddhanta gives the position of Spica/Citra
 as 180° in **polar** longitude (ecliptic longitude, but projection along
 meridian lines).
 
-27\) True Chitrapaksha ayanamsha
+**27\) True Chitrapaksha ayanamsha**
 
 Spica is always exactly at 180° or 0° Libra in ecliptic longitude (not
 polar!).
@@ -2758,7 +2428,7 @@ work this way because the star has some proper motion and is not really
 fixed relative to a fixed reference frame.
 
 In the year 285, when the star was conjunct the autumnal equinox, its
-position was 180°00'17 (swetest -b1.1.285 -pf -xfSpica  -sid1 -true
+position was 180°00'17 (swetest -b1.1.285 -pf -xfSpica  -sid1 -true
 -bary -head -fTPL -s365 -n2). Only in the year 675 CE, its position was
 exactly 180°. The motion of the star is partly caused by its proper
 motion. Another part of its motion is apparent only, due to the
@@ -2775,7 +2445,7 @@ Many thanks to Vinay Jha, PVR Narasimha Rao, and Avtar Krishen Kaul, and
 D. Senthilathiban for their help in our attempt to understand this
 complicated matter.
 
-### Krishnamurti ayanamshas
+### 2.8.6. Krishnamurti ayanamshas
 
 The Swiss Ephemeris also has two ayanamshas named after the Indian
 astrologer K.S. Krishnamurti (1908-1972). They are very close to the
@@ -2794,8 +2464,8 @@ Krishnamurti must have had in mind the date of the equinox. Based on
 this assumption, the Swiss Ephemeris offers an ayanamsha defined as
 follows:
 
-45\) Krishnamurti/Senthilathiban ayanamsha (derived from zero ayanamsha
-year 291)
+**45\) Krishnamurti/Senthilathiban ayanamsha (derived from zero ayanamsha**
+**year 291)**
 
 ayanamsha = 0, t0 = 21 March 291 CE, 6:10:29 TT (=4:02:45 UT) Spica at
 180° 5\'13
@@ -2823,7 +2493,7 @@ used, the comparison must of course be done using this precesion model.
 A better representation of the table values is given by our other
 Krishnamurti ayanamsha:
 
-5\) Krishnamurti ayanamsha (derived from his ayanamsha table)
+**5\) Krishnamurti ayanamsha (derived from his ayanamsha table)**
 
 ayanamsha = 22.363889, t0 = 1 Jan 1900, Spica at 180° 4\'52
 
@@ -2854,37 +2524,32 @@ better.
 
 Sources:
 
--   Burgess, E., *The Surya Siddanta*. A Text-book of Hindu Astronomy,
-    > Delhi, 2000 (MLBD).
-
--   Dikshit, S(ankara) B(alkrishna), *Bharatiya Jyotish Sastra (History
-    > of Indian Astronomy)* (Tr. from Marathi), Govt. of India, 1969,
-    > part I & II.
-
--   Kollerstrom, Nick, „The Star Zodiac of Antiquity", in: *Culture &
-    > Cosmos*, Vol. 1, No.2, 1997).
-
--   Lahiri, N. C., *Panchanga Darpan* (in Bengali), Calcutta, 1967
-    > (Astro Research Bureau).
-
--   Lahiri, N. C., *Tables of the Sun*, Calcutta, 1952 (Astro Research
-    > Bureau).
-
--   Saha, M. N., and Lahiri, N. C., *Report of the Calendar Reform
-    > Committee*, C.S.I.R., New Delhi, 1955.
-
--   The *Indian Astronomical Ephemeris* for the year 1989, Delhi
-    > (Positional Astronomy Centre, India Meteorological Department)
-
--   P.V.R. Narasimha Rao, \"Introducing Pushya-paksha Ayanamsha\"
-    > (2013),
-
+-   Burgess, E., *The Surya Siddanta*. A Text-book of Hindu Astronomy, Delhi, 2000 (MLBD).
+    
+-   Dikshit, S(ankara) B(alkrishna), *Bharatiya Jyotish Sastra (History of Indian Astronomy)* (Tr. from Marathi), Govt. of India, 1969,
+    part I & II.
+    
+-   Kollerstrom, Nick, „The Star Zodiac of Antiquity", in: *Culture & Cosmos*, Vol. 1, No.2, 1997).
+    
+-   Lahiri, N. C., *Panchanga Darpan* (in Bengali), Calcutta, 1967 (Astro Research Bureau).
+    
+-   Lahiri, N. C., *Tables of the Sun*, Calcutta, 1952 (Astro Research Bureau).
+    
+-   Saha, M. N., and Lahiri, N. C., *Report of the Calendar Reform Committee*, C.S.I.R., New Delhi, 1955.
+    
+-   The *Indian Astronomical Ephemeris* for the year 1989, Delhi (Positional Astronomy Centre, India Meteorological Department)
+    
+-   P.V.R. Narasimha Rao, \"Introducing Pushya-paksha Ayanamsha\" (2013),
+    
 -   http://www.vedicastrologer.org/articles/pp_ayanamsha.pdf.
 
--   D. Senthilathiban, *Study of KP Ayanamsa with Modern Precession
-    > Theories*, Seoul, 2019.
+-   D. Senthilathiban, *Study of KP Ayanamsa with Modern Precession Theories*, Seoul, 2019.
+    
+    
 
-### The sidereal zodiac and the Galactic Center
+
+
+### 2.8.7. The sidereal zodiac and the Galactic Center
 
 The definition of the tropical zodiac is very simple and convincing. It
 starts at one of the two intersection points of the ecliptic and the
@@ -2931,8 +2596,8 @@ always the same as the ruler of the sidereal sign of the vernal point
 (at the moment it is Jupiter, but it will be Saturn in a few hundred
 years).
 
-17\) Galactic Center at 0 Sagittarius (and the beginning of nakshatra
-Mula)
+**17\) Galactic Center at 0 Sagittarius (and the beginning of nakshatra**
+**Mula)**
 
 A correction of the Fagan ayanamsha by about 2 degrees or a correction
 of the Lahiri ayanamsha by 3 degrees would place the Galactic Center at
@@ -2941,13 +2606,13 @@ Therefore, we added an ayanamsha fixed at the Galactic Center in 1999 in
 Swiss Ephemeris 1.50, when we introduced sidereal ephemerides
 (suggestion by D. Koch, without any astrological background).
 
-40\) Galactic Center at 0 Capricorn (Cochrane Ayanamsha)
+**40\) Galactic Center at 0 Capricorn (Cochrane Ayanamsha)**
 
 A modification of this ayanamsha was proposed by David Cochrane in 2017.
 He believes that it makes more sense to put the Galactic Centre at 0°
 Capricorn.
 
-36\) Dhruva Galactic Center Middle Mula Ayanamsha (Ernst Wilhelm)
+**36\) Dhruva Galactic Center Middle Mula Ayanamsha (Ernst Wilhelm)**
 
 A different solution was proposed by the American astrologer Ernst
 Wilhelm in 2004. He projects the galactic centre on the ecliptic in
@@ -2973,8 +2638,8 @@ Sources:
 
 -   private communication with D. Koch.
 
-30\) Galactic Centre in the Golden Section Scorpio/Aquarius (Rafael Gil
-Brand)
+**30\) Galactic Centre in the Golden Section Scorpio/Aquarius (Rafael Gil**
+**Brand)**
 
 Another ayanamsha based on the galactic centre was proposed by the
 German-Spanish astrologer Rafael Gil Brand. Gil Brand places the
@@ -2994,7 +2659,7 @@ Sources:
     Positionen\",
     http://www.astrologie-zentrum.net/index.php/8-siderischer-tierkreis/5-umrechnung
 
-### The sidereal zodiac and the Galactic Equator
+### 2.8.8. The sidereal zodiac and the Galactic Equator
 
 Another way to define the ayanamsha based on our galaxy would be to
 start the sidereal ecliptic at the intersection point of the ecliptic
@@ -3009,7 +2674,7 @@ points.
 
 The following ayanamshas belong in this category:
 
-34\) Skydram Ayanamsha (Raymond Mardyks)
+**34\) Skydram Ayanamsha (Raymond Mardyks)**
 
 (also known as Galactic Alignment Ayanamsha)
 
@@ -3031,7 +2696,7 @@ Source:
 
 -   Private communication between R. Mardyks and D. Koch in April 2016.
 
-41\) Galactic Node at 5 Sagittarius (Fiorenza Ayanamsha)
+**41\) Galactic Node at 5 Sagittarius (Fiorenza Ayanamsha)**
 
 Another ayanamsha based on the galactic equator. It was invented by Nick
 Anthony Fiorenza and published in his book "The Star Chart. Sidereal
@@ -3044,7 +2709,7 @@ Source:
 
 -   https://www.lunarplanner.com/siderealastrology.html
 
-31\) Ayanamsha based on the Galactic Equator IAU 1958
+**31\) Ayanamsha based on the Galactic Equator IAU 1958**
 
 This ayanamsha is based on galactic pole as defined by the IAU in 1958,
 and it is assumed that the galactic equator intersects with the ecliptic
@@ -3065,7 +2730,7 @@ Source:
 -   Liu/Zhu/Zhang, „Reconsidering the galactic coordinate system",
     Astronomy & Astrophysics No. AA2010, Oct. 2010, p. 8.
 
-33\) Ardra Galactic Plane Ayanamsha
+**33\) Ardra Galactic Plane Ayanamsha**
 
 (= Galactic equator cuts ecliptic in the middle of Mula and the
 beginning of Ardra)
@@ -3085,9 +2750,9 @@ year 2001, which had a small error of 2 arc seconds. The current
 implementation of this ayanamsha is based on a new position of the
 Galactic pole found by Chinese astronomers in 2010.
 
-### Other ayanamshas
+### 2.8.9. Other ayanamshas
 
-35\) True Mula Ayanamsha (K. Chandra Hari)
+**35\) True Mula Ayanamsha (K. Chandra Hari)**
 
 With this ayanamsha, the star Mula (λ Scorpionis) is assumed at 0°
 Sagittarius.
@@ -3121,7 +2786,7 @@ The following ayanamshas were provided by Graham Dawson ("Solar Fire"),
 who had taken them over from Robert Hand's Program "Nova". Some were
 also contributed by David Cochrane. Explanations by D. Koch:
 
-2\) De Luce Ayanamsha
+**2\) De Luce Ayanamsha**
 
 This ayanamsha was proposed by the American astrologer Robert DeLuce
 (1877-1964). It is fixed at the birth of Jesus, theoretically at 1
@@ -3142,7 +2807,7 @@ Sources:
 -   Robert DeLuce, Constellational Astrology According to the Hindu
     System, Los Angeles, 1963, p. 5.
 
-3\) Raman Ayanamsha
+**3\) Raman Ayanamsha**
 
 This ayanamsha was used by the great Indian astrologer Bangalore Venkata
 Raman (1912-1998). It is based on a statement by the medieval astronomer
@@ -3163,7 +2828,7 @@ Sources:
 
 -   B.V. Raman, Hindu Predictive Astrology, pp. 378-379.
 
-7\) Shri Yukteshwar Ayanamsha
+**7\) Shri Yukteshwar Ayanamsha**
 
 This ayanamsha was allegedly recommended by Swami Shri Yukteshwar Giri
 (1855-1936). We have taken over its definition from Graham Dawson.
@@ -3195,12 +2860,12 @@ Source:
 -   Swami Sri Yukteswar, The Holy Science, 1949, Yogoda Satsanga Society
     of India, p. xx.
 
-8\) JN Bhasin Ayanamsha
+**8\) JN Bhasin Ayanamsha**
 
 This ayanamsha was used by the Indian astrologer J.N. Bhasin
 (1908-1983).
 
-6\) Djwhal Khul Ayanamsha
+**6\) Djwhal Khul Ayanamsha**
 
 This ayanamsha is based on the assumption that the Age of Aquarius will
 begin in the year 2117. This assumption is maintained by a theosophical
@@ -3236,7 +2901,7 @@ Sources:
 -   Esoteric Psychology, Volume 12, No 2, pp91-95, Fall 1998-1999 publ.
     Seven Ray Institute.
 
-39\) "Vedic Ayanamsha" according to Sunil Sheoran
+**39\) "Vedic Ayanamsha" according to Sunil Sheoran**
 
 This ayanamsha is derived from ancient Indian time cycles and
 astronomical information given in the Mahabharata. Its author, Mr. Sunil
@@ -3274,7 +2939,7 @@ Source:
 -   Sunil Sheoran, \"The Science of Time and Timeline of World
     History\", 2017, http://goo.gl/av6vEH .
 
-### Conclusions
+### 2.8.10. Conclusions
 
 We have found that there are basically five definitions, not counting
 the manifold variations:
@@ -3282,59 +2947,44 @@ the manifold variations:
 1.  the Babylonian zodiac with Spica at 29 Virgo or Aldebaran at 15
     Taurus:
 
-```{=html}
-<!-- -->
-```
-a)  Fagan/Bradley;
+- a)  Fagan/Bradley;
 
-b)  refined with Aldebaran at 15 Tau;
+- b)  refined with Aldebaran at 15 Tau;
 
-c)  P. Huber;
+- c)  P. Huber;
 
-d)  J.P. Britton.
+- d)  J.P. Britton.
 
-```{=html}
-<!-- -->
-```
-3.  the Greek-Hindu-Arabic zodiac with the zero point between 10 and 20'
-    east of zeta Piscium:
 
-```{=html}
-<!-- -->
-```
-e)  Hipparchus;
+2. the Greek-Hindu-Arabic zodiac with the zero point between 10 and 20'
+   east of zeta Piscium:
 
-f)  Ushâshashî;
+- e)  Hipparchus;
 
-g)  Sassanian;
+- f)  Ushâshashî;
 
-h)  true Revati ayanamsha
+- g)  Sassanian;
 
-```{=html}
-<!-- -->
-```
-4.  the Hindu astrological zodiac with Spica at 0 Libra:
+- h)  true Revati ayanamsha
 
-```{=html}
-<!-- -->
-```
-i)  Lahiri
 
-```{=html}
-<!-- -->
-```
-5.  ayanamshas based on the Kaliyuga year 3600 or the 23rd year of life
-    of Aryabhata.
+3. the Hindu astrological zodiac with Spica at 0 Libra:
 
-6.  galactic ayanamshas based on the position of the galactic centre or
-    the galactic nodes (= intersection points of the galactic equator
-    with the ecliptic).
+- i)  Lahiri
 
-1\. is historically the oldest one, but we are not sure about its
+
+4. ayanamshas based on the Kaliyuga year 3600 or the 23rd year of life
+   of Aryabhata.
+
+5. galactic ayanamshas based on the position of the galactic centre or
+   the galactic nodes (= intersection points of the galactic equator
+   with the ecliptic).
+
+No. 1 is historically the oldest one, but we are not sure about its
 precise astronomical definition. It could have been Aldebaran at 15
 Taurus and Antares at 15 Scorpio.
 
-### Ayanamshas with different precession rates
+### 2.8.11. Ayanamshas with different precession rates
 
 Some Hindu astrologers use ayanamshas based on a special precession rate
 which is different from the modern precession algorithm used by the
@@ -3373,57 +3023,36 @@ all the three for an ayanamsha that has its zero date on the equinox of
 the year 291 CE, on 21 March jul., 6:03 TT. (V stands for precession
 Vondrák; N for precession Newcomb):
 
-*diff. trop. long. Sun diff. ayanamsha diff. sid. long. Sun \~ minus*
+| *Year* | *diff. trop. long. Sun (prec V-N) in "* | *diff. ayanamsha (prec V-N) in "* | *diff. sid. long. Sun (prec V-N) in "* | *\~ minus 17.650216\"* |
+| ------ | --------------------------------------- | --------------------------------- | -------------------------------------- | ---------------------- |
+| -3000  | 81.648098                               | 64.059809                         | 17.588289                              | -0.061927              |
+| -2500  | 77.891205                               | 60.280286                         | 17.610918                              | -0.039297              |
+| -2000  | 67.756729                               | 50.128935                         | 17.627794                              | -0.022422              |
+| -1500  | 55.131415                               | 37.492205                         | 17.639210                              | -0.011006              |
+| -1000  | 42.521677                               | 24.875658                         | 17.646019                              | -0.004197              |
+| -500   | 31.328666                               | 13.679394                         | 17.649271                              | -0.000944              |
+| 0      | 22.109197                               | 4.458959                          | 17.650238                              | 0.000022               |
+| equ.   | 291                                     | 17.650216                         | 0.000000                               | 17.650216              |
+| 500    | 14.821773                               | -2.828337                         | 17.650110                              | -0.000106              |
+| 1000   | 9.060393                                | -8.589402                         | 17.649795                              | -0.000421              |
+| 1500   | 4.277578                                | -13.372189                        | 17.649767                              | -0.000449              |
+| 1600   | 3.393108                                | -14.256697                        | 17.649806                              | -0.000410              |
+| 1700   | 2.525093                                | -15.124766                        | 17.649859                              | -0.000357              |
+| 1800   | 1.671280                                | -15.978645                        | 17.649925                              | -0.000291              |
+| 1900   | 0.829937                                | -16.820066                        | 17.650003                              | -0.000213              |
+| 2000   | 0.000011                                | -17.650081                        | 17.650093                              | -0.000123              |
+| 2100   | -0.818850                               | -18.469044                        | 17.650194                              | -0.000022              |
+| 2200   | -1.626143                               | -19.276451                        | 17.650307                              | 0.000091               |
+| 2300   | -2.420577                               | -20.071012                        | 17.650435                              | 0.000219               |
+| 2400   | -3.199913                               | -20.850493                        | 17.650580                              | 0.000364               |
+| 2500   | -3.960945                               | -21.611692                        | 17.650747                              | 0.000531               |
+| 3000   | -7.300452                               | -24.952670                        | 17.652218                              | 0.002002               |
+| 3500   | -9.010479                               | -26.666760                        | 17.656281                              | 0.006065               |
+| 4000   | -7.165941                               | -24.832623                        | 17.666682                              | 0.016466               |
 
-*Year (prec V-N) in " (prec V-N) in " (prec V-N) in " 17.*650216*\"*
 
--3000 81.648098 64.059809 17.588289 -0.061927
 
--2500 77.891205 60.280286 17.610918 -0.039297
 
--2000 67.756729 50.128935 17.627794 -0.022422
-
--1500 55.131415 37.492205 17.639210 -0.011006
-
--1000 42.521677 24.875658 17.646019 -0.004197
-
--500 31.328666 13.679394 17.649271 -0.000944
-
-0 22.109197 4.458959 17.650238 0.000022
-
-equ. 291 17.650216 0.000000 17.650216 0.000000
-
-500 14.821773 -2.828337 17.650110 -0.000106
-
-1000 9.060393 -8.589402 17.649795 -0.000421
-
-1500 4.277578 -13.372189 17.649767 -0.000449
-
-1600 3.393108 -14.256697 17.649806 -0.000410
-
-1700 2.525093 -15.124766 17.649859 -0.000357
-
-1800 1.671280 -15.978645 17.649925 -0.000291
-
-1900 0.829937 -16.820066 17.650003 -0.000213
-
-2000 0.000011 -17.650081 17.650093 -0.000123
-
-2100 -0.818850 -18.469044 17.650194 -0.000022
-
-2200 -1.626143 -19.276451 17.650307 0.000091
-
-2300 -2.420577 -20.071012 17.650435 0.000219
-
-2400 -3.199913 -20.850493 17.650580 0.000364
-
-2500 -3.960945 -21.611692 17.650747 0.000531
-
-3000 -7.300452 -24.952670 17.652218 0.002002
-
-3500 -9.010479 -26.666760 17.656281 0.006065
-
-4000 -7.165941 -24.832623 17.666682 0.016466
 
 As can be seen, the choice of precession model has a noticeable impact
 on tropical ephemerides and the ayanamsha value. However, the difference
@@ -3450,23 +3079,16 @@ positions of the Sun based on both precession models Vondrák (V) and
 Newcomb (N) and also using the above-mentioned correction to the
 ayanamsha:
 
-*epoch tropical Sun sidereal Sun ayanamsha*
-
--1000 V 271°14\'15.75001 289°05\'52.63883 342°08\'23.11118
-
--1000 N 271°14\'58.27229 289°05\'52.63457 342°09\'05.63773
-
-eq291 V 359°59\'42.34978 0°00\'00.00000 359°59\'42.34978
-
-eq291 N 0°00\'00.00000 0°00\'00.00000 0°00\'00.00000
-
-1900 V 280°08\'54.75103 257°46\'10.69049 22°22\'44.06054
-
-1900 N 280°08\'55.58096 257°46\'10.69027 22°22\'44.89070
-
-2000 V 279°51\'44.39186 256°05\'12.79708 23°46\'31.59478
-
-2000 N 279°51\'44.39187 256°05\'12.79695 23°46\'31.59492
+*epoch*|*tropical Sun*|*sidereal Sun*|*ayanamsha*
+------|------------|------------|------------
+-1000 V|271°14\'15.75001|289°05\'52.63883|342°08\'23.11118
+-1000 N|271°14\'58.27229|289°05\'52.63457|342°09\'05.63773
+eq291 V|359°59\'42.34978|0°00\'00.00000|359°59\'42.34978
+eq291 N|0°00\'00.00000|0°00\'00.00000|0°00\'00.00000
+1900 V|280°08\'54.75103|257°46\'10.69049|22°22\'44.06054
+1900 N|280°08\'55.58096|257°46\'10.69027|22°22\'44.89070
+2000 V|279°51\'44.39186|256°05\'12.79708|23°46\'31.59478
+2000 N|279°51\'44.39187|256°05\'12.79695|23°46\'31.59492
 
 As can be seen, the tropical positions of the Sun and the ayanamshas,
 resulting from the two different precession models, are identical only
@@ -3530,22 +3152,19 @@ Ephemeris.
 The following ayanamshas have been corrected since version 2.09 by the
 following values:
 
-*ayanamsha correction prec. model*
+| *ayanamsha*      | *correction* | *prec. model*            |
+| ---------------- | ------------ | ------------------------ |
+| 0 Fagan-Bradley  | 0.41256"     | Newcomb                  |
+| 1 Lahiri         | -0.13036"    | IAU 1976                 |
+| 3 Raman          | 0.82800"     | Newcomb                  |
+| 5 Krishnamurti   | 0.82800"     | Newcomb                  |
+| 43 Lahiri (1967) | 0.82800"     | Newcomb (new ayanamsha!) |
 
-0 Fagan-Bradley 0.41256" Newcomb
 
-1 Lahiri -0.13036" IAU 1976
 
-3 Raman 0.82800" Newcomb
+### 2.8.12. On which ecliptic is the ayanamsha measured?
 
-5 Krishnamurti 0.82800" Newcomb
-
-43 Lahiri (1967) 0.82800" Newcomb (new ayanamsha!)
-
-### On which ecliptic is the ayanamsha measured?
-
-1\. The traditional algorithm (implemented in Swiss Ephemeris as default
-mode)
+##### 1\. The traditional algorithm (implemented in Swiss Ephemeris as default mode)
 
 As has been stated, sidereal planetary positions are computed from the
 following equation:
@@ -3567,21 +3186,20 @@ is too simplistic.
 The precession of the equinox is not only a matter of ecliptical
 longitude, but a more complex phenomenon. It has two components:
 
-a)  The soli-lunar precession: The combined gravitational pull of the
-    > Sun and the Moon on the equatorial bulge of the Earth causes the
-    > Earth axis to move very slowly, in the way of a spinning top. As a
-    > result of this movement, the vernal point moves around the
-    > ecliptic with a speed of about 50" per year. This cycle has a
-    > period of roughly 26000 years.
-
-b)  The planetary precession: The Earth orbit itself is not fixed. The
-    > gravitational influence from the planets causes it to slowly
-    > change its orientation. As a result, the obliquity of the ecliptic
-    > currently decreases by 47" per century. This change also has some
-    > impact on the position of the vernal point. (Note, however, that
-    > relative to the ecliptic of a fixed date, the equator keeps an
-    > almost constant angle, with a change of only a couple of 0.06"
-    > cty-2.)
+- a)  The soli-lunar precession: The combined gravitational pull of the
+      > Sun and the Moon on the equatorial bulge of the Earth causes the
+      > Earth axis to move very slowly, in the way of a spinning top. As a
+      > result of this movement, the vernal point moves around the
+      > ecliptic with a speed of about 50" per year. This cycle has a
+      > period of roughly 26000 years.
+- b)  The planetary precession: The Earth orbit itself is not fixed. The
+      > gravitational influence from the planets causes it to slowly
+      > change its orientation. As a result, the obliquity of the ecliptic
+      > currently decreases by 47" per century. This change also has some
+      > impact on the position of the vernal point. (Note, however, that
+      > relative to the ecliptic of a fixed date, the equator keeps an
+      > almost constant angle, with a change of only a couple of 0.06"
+      > cty-2.)
 
 Because the ecliptic plane is not fixed, it is not fully correct to
 subtract an ayanamsha from the tropical position in order to get a
@@ -3635,9 +3253,8 @@ periods of time. Let us give two examples to illustrate this phenomenon.
 Long-term ephemeris of some fictitious star near the ecliptic that has
 no proper motion (small change in longitude):
 
-  ------------------------------------------------------------------------
   **Date**               **Longitude**              **Latitude**
-  ---------------------- -------------------------- ----------------------
+
   -12000                 335°16\'55.2211            0°55\'48.9448
 
   -11000                 335°16\'54.9139            0°47\'55.3635
@@ -3669,14 +3286,12 @@ no proper motion (small change in longitude):
   2000                   335°15\'34.5249            -0°00\'00.0196
 
   3000                   335°15\'34.5216            0°01\'01.1573
-  ------------------------------------------------------------------------
 
 Long-term ephemeris of some fictitious star with high ecliptic latitude
 and no proper motion (bigger change in longitude value):
 
-  -----------------------------------------------------------------------
   **Date**                 **Longitude**            **Latitude**
-  ------------------------ ------------------------ ---------------------
+
   -12000                   25°48\'34.9812           58°55\'17.4484
 
   -11000                   25°33\'30.5709           58°53\'56.6536
@@ -3708,7 +3323,6 @@ and no proper motion (bigger change in longitude value):
   2000                     22°48\'02.6254           59°33\'32.3371
 
   3000                     22°40\'26.4786           59°39\'54.5816
-  -----------------------------------------------------------------------
 
 Exactly the same kind of thing happens to sidereal planetary positions
 if one calculates them in the traditional way. They are actually given
@@ -3719,7 +3333,8 @@ to wobble.
 The wobbling of the ecliptic plane also influences ayanamshas that are
 referred to the nodes of the galactic equator with the ecliptic.
 
-2\. Consistent ayanamsha relative to the ecliptic of date (implemented
+##### 2\. Consistent ayanamsha relative to the ecliptic of date (implemented
+
 in Swiss Ephemeris \>=2.09 as an option)
 
 As described above, the traditional approach is to calculate the
@@ -3876,7 +3491,8 @@ to 0.65" in 2020:
 
 4000 -0.572
 
-3\. Projection onto the ecliptic of t0 (implemented in Swiss Ephemeris
+##### 3\. Projection onto the ecliptic of t0 (implemented in Swiss Ephemeris
+
 as an option)
 
 The opposite solution, which would also be consistent, would be to
@@ -4082,8 +3698,7 @@ the ecliptic of date. Here, there are greater deviations from the
 traditional procedure. If t is 2000 years from t0, the difference
 between the ascendant positions might well be 1/2 degree.
 
-4\. Fixed-star-bound ecliptic (implemented in Swiss Ephemeris for some
-selected stars)
+##### 4\. Fixed-star-bound ecliptic (implemented in Swiss Ephemeris for some selected stars)
 
 One can use a stellar object as an anchor for the sidereal zodiac and
 make sure that a particular stellar object is always at a certain
@@ -4116,9 +3731,11 @@ positions:
 -   Galactic centre at 0° Capricorn (David Cochrane)
 
 -   Galactic centre at golden section between 0° Sco and 0° Aqu (R. Gil
+    
     > Brand)
-
+    
 -   Polar longitude of galactic centre in the middle of nakshatra Mula
+    
     > (E. Wilhelm)
 
 With Swiss Ephemeris versions before 2.05, the apparent position of the
@@ -4129,7 +3746,7 @@ true position was slightly different. Since version 2.05, the star is
 always exactly at 180°, not only its apparent, but also its true
 position.
 
-5\. Galactic-equator-based ayanamshas (implemented in Swiss Ephemeris)
+##### 5\. Galactic-equator-based ayanamshas (implemented in Swiss Ephemeris)
 
 Some ayanamshas are based on the galactic node, i.e. the intersection of
 the galactic equator with the mean ecliptic of date. These ayanamshas
@@ -4156,8 +3773,7 @@ ecliptic of date, which is moving, with the only difference that the
 initial point is defined by the intersection of the ecliptic with the
 galactic equator.
 
-6\. The long-term mean Earth-Sun plane (not implemented in Swiss
-Ephemeris)
+##### 6\. The long-term mean Earth-Sun plane (not implemented in Swiss Ephemeris)
 
 To avoid the problem of choice of a reference ecliptic, one could use a
 kind of "average ecliptic". The mechanism of the planetary precession
@@ -4178,8 +3794,7 @@ This is the time it takes the vernal point to return to the node of the
 ecliptic (its rotation point), and therefore the oscillation period of
 the ecliptic obliquity.)
 
-7\. The solar system rotation plane (implemented in Swiss Ephemeris as
-an option)
+##### 7\. The solar system rotation plane (implemented in Swiss Ephemeris as an option)
 
 The solar system as a whole has a rotation axis, too, and its equator is
 quite close to the ecliptic, with an inclination of 1°34'44" against the
@@ -4193,7 +3808,7 @@ choice of the zero point.
 It does not make much sense to use this algorithm for predefined
 sidereal modes. One can use it for user-defined ayanamshas.
 
-### More benefits from our new sidereal algorithms: standard equinoxes and precession-corrected transits
+### 2.8.13. More benefits from our new sidereal algorithms: standard equinoxes and precession-corrected transits
 
 Method no. 3, the transformation to the ecliptic of t0, opens two more
 possibilities:
@@ -4224,7 +3839,7 @@ the birth date, i.e. the so-called precession-corrected transits. This
 is more precise than just correcting for the precession in longitude
 (see details in the programmer\'s documentation swephprg.doc, Ch. 8.1).
 
-# Apparent versus true planetary positions
+# 3. Apparent versus true planetary positions
 
 The Swiss ephemeris provides the calculation of *apparent* or *true*
 planetary positions. Traditional astrology works with apparent
@@ -4248,7 +3863,7 @@ which are used by astronomers when they measure positions of celestial
 bodies with respect to fixed stars. These calculations are of no use for
 astrology, though.
 
-# Geocentric, topocentric, heliocentric, barycentric, and planetocentric positions
+# 4. Geocentric, topocentric, heliocentric, barycentric, and planetocentric positions
 
 More precisely speaking, common ephemerides tell us the position where
 we would see a planet if we stood in the center of the Earth and could
@@ -4296,11 +3911,11 @@ always close to but not identical to the center of the Sun. And
 *planetocentric* positions are relative to the center of some other
 object (planet, moon) of the solar system.
 
-# Heliacal Events, Eclipses, Occultations, and Other Planetary Phenomena
+# 5. Heliacal Events, Eclipses, Occultations, and Other Planetary Phenomena
 
-## Heliacal Events of the Moon, Planets and Stars
+## 5.1. Heliacal Events of the Moon, Planets and Stars
 
-### Introduction
+### 5.1.1. Introduction
 
 From Swiss Ephemeris version 1.76 on, heliacal events have been
 included. The heliacal rising and setting of planets and stars was very
@@ -4366,7 +3981,7 @@ In the following sections above aspects will be discussed briefly and an
 idea will be given what functions are available to calculate the
 heliacal events. Lastly the future developments will be discussed.
 
-### Aspect determining visibility
+### 5.1.2. Aspect determining visibility
 
 The theory behind this visibility criterion is explained by Schaefer
 \[1993, 2000\] and the implemented by Reijs \[2003\] and Koch \[2009\].
@@ -4417,7 +4032,7 @@ celestial object and its background sky. The contrast threshold between
 the studied object and the background will determine if the observer can
 detect the studied object.
 
-### Functions to determine the heliacal events
+### 5.1.3. Functions to determine the heliacal events
 
 Two functions are seen as the spill of calculating the heliacal events:
 
@@ -4485,7 +4100,7 @@ function swe_heliacal_ut() does not handle this case. If binoculars or a
 telescope is used, Venus may be even observable during most of the day
 on which it first appears in the east.
 
-### Future developments
+### 5.1.4. Future developments
 
 The section of the Swiss Ephemeris software is still under development.
 The acronychal events of superior planets and stars will be added. And
@@ -4493,7 +4108,7 @@ comparing other visibility criterions will be included; like Schoch's
 criterion \[1928\], Hoffman's overview \[2005\] and Caldwall & Laney
 criterion \[2005\].
 
-### References
+### 5.1.5. References
 
 -   Caldwell, J.A.R., Laney, C.D., First visibility of the lunar
     crescent,
@@ -4522,7 +4137,7 @@ criterion \[2005\].
     Babylonian chronology by means of Venus observations of the first
     dynasty, Oxford, 1928.
 
-## Eclipses, occultations, risings, settings, and other planetary phenomena
+## 5.2. Eclipses, occultations, risings, settings, and other planetary phenomena
 
 The Swiss Ephemeris also includes functions for many calculations
 concerning solar and lunar eclipses. You can:
@@ -4553,13 +4168,15 @@ Moreover, you can compute for all planets and asteroids:
 
 -   apparent magnitude.
 
-# Sidereal Time, Ascendant, MC, Houses, Vertex
+
+
+# 6. Sidereal Time, Ascendant, MC, Houses, Vertex
 
 The Swiss Ephemeris package also includes a function that computes the
 Ascendant, the MC, the houses, the Vertex, and the Equatorial Ascendant
 (sometimes called \"East Point\").
 
-## Sidereal Time
+## 6.1. Sidereal Time
 
 Swiss Ephemeris versions until 1.80 used the IAU 1976 formula for
 Sidereal time. Since version 2.00 it uses sidereal time based on the
@@ -4578,11 +4195,11 @@ time intervals\", in A&A 534, A22(2011).
 Simon & alii, \"Precession formulae and mean elements for the Moon and
 the Planets\", A&A 282 (1994), p. 675/678.
 
-## Astrological House Systems
+## 6.2. Astrological House Systems
 
 The following house methods have been implemented so far:
 
-### Placidus
+### 6.2.1. Placidus
 
 This system is named after the Italian monk Placidus de Titis
 (1590-1668). The cusps are defined by divisions of semidiurnal and
@@ -4591,7 +4208,7 @@ completed 2/3 of its semidiurnal arc, the 12th cusp the point that has
 completed 1/3 of it. The 2nd cusp has completed 2/3 of its seminocturnal
 arc, and the 3rd cusp 1/3.
 
-### Koch/GOH
+### 6.2.2. Koch/GOH
 
 This system is called after the German astrologer Walter Koch
 (1895-1970). Actually it was invented by Fiedrich Zanzinger and Heinz
@@ -4610,7 +4227,7 @@ culmination, divide this time into three and see what ecliptic degree
 was on the horizon at the thirds. There is no reason why this procedure
 should be more related to the birth place than other house methods.
 
-### Regiomontanus
+### 6.2.3. Regiomontanus
 
 Named after the Johannes Müller (called \"Regiomontanus\", because he
 stemmed from Königsberg) (1436-1476).
@@ -4620,7 +4237,7 @@ through these divisions and the north and south points on the horizon.
 The intersection points of these circles with the ecliptic are the house
 cusps.
 
-### Campanus
+### 6.2.4. Campanus
 
 Named after Giovanni di Campani (1233-1296).
 
@@ -4629,7 +4246,7 @@ parts and great circles are drawn through these divisions and the north
 and south points on the horizon. The intersection points of these
 circles with the ecliptic are the house cusps.
 
-### Equal Systems
+### 6.2.5. Equal Systems
 
 #### Equal houses from Ascendant
 
@@ -4656,7 +4273,7 @@ Hellenistic astrology and is still used in Hindu astrology.
 
 The first house starts at the beginning of Aries.
 
-### Porphyry Houses and Related House Systems
+### 6.2.6. Porphyry Houses and Related House Systems
 
 #### Porphyry Houses
 
@@ -4757,7 +4374,7 @@ quadrant size \"q\", given the equations rx + x + rx = q, r^3^x + r^4^x
 
 -   https://groups.yahoo.com/neo/groups/swisseph/conversations/topics/5579
 
-### Axial rotation systems
+### 6.2.7. Axial rotation systems
 
 #### Meridian system
 
@@ -4788,20 +4405,20 @@ Ptolemaic (equal) does not, distinctive cusps for each house \..."
 
 -   http://www.exeterastrologygroup.org.uk/2014/12/charles-carters-forgotten-house-system.html
 
-### The Morinus system
+### 6.2.8. The Morinus system
 
 The equator is divided into 12 equal parts starting from the ARMC. The
 resulting 12 points on the equator are transformed into ecliptic
 coordinates. Note: The Ascendant is different from the 1st cusp, and the
 MC is different from the 10th cusp.
 
-### Horizontal system
+### 6.2.9. Horizontal system
 
 The house cusps are defined by division of the horizon into 12
 directions. The first house cusp is not identical with the Ascendant but
 is located precisely in the east.
 
-### The Polich-Page ("topocentric") system
+### 6.2.10. The Polich-Page ("topocentric") system
 
 This system was introduced in 1961 by Wendel Polich and A.P. Nelson
 Page. Its construction is rather abstract: The tangens of the polar
@@ -4817,7 +4434,7 @@ Placidus system. However, the striking philosophical idea behind
 Placidus, i.e. the division of diurnal and nocturnal arcs of points of
 the zodiac, is completely abandoned.
 
-### Alcabitus system
+### 6.2.11. Alcabitus system
 
 A method of house division which first appears with the Hellenistic
 astrologer Rhetorius (500 A.D.) but is named after Alcabitius, an Arabic
@@ -4830,7 +4447,7 @@ arcs of the ascendant, measured on the celestial equator. The houses are
 formed by great circles that pass through these trisection points and
 the celestial north and south poles.
 
-### Gauquelin sectors
+### 6.2.12. Gauquelin sectors
 
 This is the "house" system used by the Gauquelin and their epigones and
 critics in statistical investigations in Astrology. Basically, it is
@@ -4852,7 +4469,7 @@ differences, though.
     position of a planet (see chapters 6.4 and 6.5 on house positions
     and Gauquelin sector positions of planets).
 
-### Krusinski/Pisa/Goelzer system
+### 6.2.13. Krusinski/Pisa/Goelzer system
 
 This house system was first published in 1994/1995 by three different
 authors independently of each other:
@@ -4929,7 +4546,7 @@ and published by Goelzer, but that Pisa and Krusinski also "discovered"
 it independently. We do not consider this a great miracle because the
 number of possible house constructions is quite limited.
 
-### APC house system
+### 6.2.14. APC house system
 
 This house system was introduced by the Dutch astrologer L. Knegt and is
 used by the Dutch Werkgemeenschap van Astrologen (WvA, also known as
@@ -4944,7 +4561,7 @@ intersect the ecliptic.
 **Note**, the house cusps 11, 12, 2, and 3 are not exactly opposite the
 cusps 5, 6, 8, and 9.
 
-### Sunshine house system
+### 6.2.15. Sunshine house system
 
 This house system was invented by Bob Makransky and published in 1988 in
 his book Primary Directions. A Primer of Calculation (free download:
@@ -4963,7 +4580,11 @@ meridian. If the nocturnal arc is 0°, the cusps 2 -- 6 coincide with the
 meridian. As with the closely related Regiomontanus system, an MC below
 the horizon and IC above the horizon are exchanged.
 
-## Vertex, Antivertex, East Point and Equatorial Ascendant etc.
+### 6.2.16. Savard A house system
+
+
+
+## 6.3. Vertex, Antivertex, East Point and Equatorial Ascendant etc.
 
 The *Vertex* is the point of the ecliptic that is located precisely in
 western direction. The *Antivertex* is the opposition point and
@@ -5018,25 +4639,20 @@ Ascendant computed for the birth time and one of the geographic poles of
 the Earth. At the geographic poles, the Ascendant is always 0 Aries or 0
 Libra. This is not the case for Munkasey\'s \"Polar Ascendant\".
 
-## House cusps beyond the polar circle
+## 6.4. House cusps beyond the polar circle
 
 Beyond the polar circle, we proceed as follows:
 
-1.  We make sure that the ascendant is always in the eastern hemisphere.
-
-```{=html}
-<!-- -->
-```
-7.  Placidus and Koch house cusps sometimes can, sometimes cannot be
-    computed beyond the polar circles. Even the MC doesn\'t exist
-    always, if one defines it in the Placidus manner. Our function
-    therefore automatically switches to Porphyry houses (each quadrant
-    is divided into three equal parts) and returns a warning.
-
-8.  Beyond the polar circles, the MC is sometimes below the horizon. The
-    geometrical definition of the Campanus and Regiomontanus systems
-    requires in such cases that the MC and the IC are swapped. The whole
-    house system is then oriented in clockwise direction.
+1. We make sure that the ascendant is always in the eastern hemisphere.
+2. Placidus and Koch house cusps sometimes can, sometimes cannot be
+   computed beyond the polar circles. Even the MC doesn\'t exist
+   always, if one defines it in the Placidus manner. Our function
+   therefore automatically switches to Porphyry houses (each quadrant
+   is divided into three equal parts) and returns a warning.
+3. Beyond the polar circles, the MC is sometimes below the horizon. The
+   geometrical definition of the Campanus and Regiomontanus systems
+   requires in such cases that the MC and the IC are swapped. The whole
+   house system is then oriented in clockwise direction.
 
 There are similar problems with the Vertex and the horizon house system
 for birth places in the tropics. The Vertex is defined as the point on
@@ -5050,7 +4666,7 @@ always 0 Aries or 0 Libra.
 Of course, there are no problems in the calculation of the Equatorial
 Ascendant for any place on Earth.
 
-### Implementation in other calculation modules:
+### 6.4.1. Implementation in other calculation modules:
 
 #### PLACALC
 
@@ -5085,7 +4701,7 @@ Placalc, it uses its own house calculation module by Walter Pullen.
 Various releases of Astrolog contain different approaches to this
 problem.
 
-#### ASTROLOG on our website
+#### ASTROLOG on www.astro.com
 
 ASTROLOG is also used on Astrodienst's website for displaying free
 charts. This version of Astrolog used on our website however is
@@ -5102,7 +4718,7 @@ follow the Placalc method for houses inside the polar circles. They give
 priority to keep the MC above the horizon and switch the Ascendant by
 180 degrees if necessary to keep the quadrants in order.
 
-## House position of a planet
+## 6.5. House position of a planet
 
 The Swiss Ephemeris DLL also provides a function to compute the house
 position of a given body, i.e. in which house it is. This function can
@@ -5158,7 +4774,7 @@ agree better with the Huber "hand calculation" method, if one sets the
 ecliptic latitude of the planets to zero. But this is not more correct
 from a geometrical point of view.
 
-## Gauquelin sector position of a planet
+## 6.6. Gauquelin sector position of a planet
 
 The calculation of the Gauquelin sector position of a planet is based on
 the same idea as the Placidus house system, i.e. diurnal and nocturnal
@@ -5198,7 +4814,7 @@ times. On the other hand, true culmination times are not always
 available. E.g. close to the geographic poles, the Sun culminates only
 twice a year.
 
-## Improvement of the Placidus house calculation in SE 2.09
+## 6.7. Improvement of the Placidus house calculation in SE 2.09
 
 Before Swiss Ephemeris 2.09, our calculation of Placidus house positions
 did not provide greatest possible precision with high geographic
@@ -5272,7 +4888,9 @@ house 5 99°34\' 5.9429
 
 house 6 109°14\' 4.4696
 
-# ΔT (Delta T)
+
+
+# 7. ΔT (Delta T)
 
 Ephemerides of planets are calculated using so called *Terrestrial Time*
 (which replaces former *Ephemeris Time* (ET)). Terrestrial time is a
@@ -5354,10 +4972,10 @@ Differences in ΔT, SE 2.06 -- SE 2.05 (new -- old)
 (with resulting differences for lunar and solar ephemerides calculated
 in UT)
 
-  -------------------------------------------------------------------------
+-------------------------------------------------------------------------
   **Year**     **ΔT sec**   **Difference in ΔT   **L (Moon)**   **L (Sun)**
                             (new-old)**                         
-  ------------ ------------ -------------------- -------------- -----------
+------------ ------------ -------------------- -------------- -----------
   -3000        75051        1174                 644\"          48\"
 
   -2500        60203        865                  475\"          36\"
@@ -5461,15 +5079,14 @@ in UT)
   2500         855          -558                 -307\"         -23\"
 
   3000         3292         -1004                -551\"         -41\"
-  -------------------------------------------------------------------------
 
 Differences in ΔT, SE 1.77 -- SE 1.76
 
-  -----------------------------------------------------------------------
+-----------------------------------------------------------------------
   **Year**           **Difference in\         
                      seconds\                 
                      (new - old)**            
-  ------------------ ------------------------ ---------------------------
+------------------ ------------------------ ---------------------------
   -3000              3                        
 
   -2000              2                        
@@ -5501,7 +5118,6 @@ Differences in ΔT, SE 1.77 -- SE 1.76
   until 1900         0.01                     
 
   until 2100         0.001                    
-  -----------------------------------------------------------------------
 
 The differences for --1000 to +1630 are explained as follows:
 
@@ -5513,11 +5129,11 @@ tabulated values.
 
 Differences in ΔT, SE 1.72 -- SE 1.71
 
-  -----------------------------------------------------------------------
+-----------------------------------------------------------------------
   **Year**                **Difference in\
                           seconds\
                           (new - old)**
-  ----------------------- -----------------------------------------------
+----------------------- -----------------------------------------------
   -3000                   -4127
 
   -2000                   -2130
@@ -5533,15 +5149,14 @@ Differences in ΔT, SE 1.72 -- SE 1.71
   1619                    0.5
 
   1620                    0
-  -----------------------------------------------------------------------
 
 Differences in ΔT, SE 1.64 -- SE 1.63
 
-  -----------------------------------------------------------------------
+-----------------------------------------------------------------------
   **Year**                **Difference in\
                           seconds\
                           (new - old)**
-  ----------------------- -----------------------------------------------
+----------------------- -----------------------------------------------
   -3000                   2900
 
   0                       1200
@@ -5569,7 +5184,6 @@ Differences in ΔT, SE 1.64 -- SE 1.63
   2100                    23
 
   3000                    -400
-  -----------------------------------------------------------------------
 
 In 1620, where the ΔT table of the Astronomical Almanac starts, there
 was a discontinuity of a whole minute in the old algorithms. This has
@@ -5628,7 +5242,7 @@ References
     R.H. van Gent at\
     http://www.phys.uu.nl/\~vgent/astro/deltatime.htm.
 
-#  Programming Environment
+#  8. Programming Environment
 
 Swiss Ephemeris is written in portable C and the same code is used for
 creation of the 32-bit Windows DLL and the link library. All data files
@@ -5653,16 +5267,18 @@ users are informed via an email mailing list.
 Earlier version up to version 1.61 supported 16-bit Windows programming.
 Since then, 16-bit support has been dropped.
 
-#  Swiss Ephemeris Functions
 
-## Swiss Ephemeris API
+
+#  9. Swiss Ephemeris Functions
+
+## 9.1. Swiss Ephemeris API
 
 We give a short overview of the most important functions contained in
 the Swiss Ephemeris DLL. The detailed description of the programming
 interface is contained in the document swephprg.doc which is distributed
 together with the file you are reading.
 
-### Calculation of planets and stars
+### 9.1.1. Calculation of planets and stars
 
 /\* planets, Moon, asteroids, lunar nodes, apogees, fictitious bodies;
 
@@ -5682,7 +5298,7 @@ together with the file you are reading.
 
 **swe_fixstar_ut()**;
 
-### Date and time conversion
+### 9.1.2. Date and time conversion
 
 /\* delta t from Julian day number
 
@@ -5726,7 +5342,7 @@ together with the file you are reading.
 
 **swe_set_tid_acc()**;
 
-### Initialization, setup, and closing functions
+### 9.1.3. Initialization, setup, and closing functions
 
 /\* set directory path of ephemeris files \*/
 
@@ -5740,7 +5356,7 @@ together with the file you are reading.
 
 **swe_close()**;
 
-### House calculation
+### 9.1.4. House calculation
 
 /\* sidereal time \*/
 
@@ -5750,7 +5366,7 @@ together with the file you are reading.
 
 **swe_houses()**;
 
-### Auxiliary functions
+### 9.1.5. Auxiliary functions
 
 /\* coordinate transformation, from ecliptic to equator or vice-versa.
 \*/
@@ -5771,7 +5387,7 @@ together with the file you are reading.
 
 **swe_degnorm()**;
 
-### Other functions that may be useful
+### 9.1.6. Other functions that may be useful
 
 PLACALC, the predecessor of SWISSEPH, included several functions that we
 do not need for SWISSEPH anymore. Nevertheless we include them again in
@@ -5852,29 +5468,323 @@ double (64-bit floating point) for all angular measurements.
 
 **swe_cs2degstr();**
 
-## Placalc API
 
-Placalc is a planetary calculation module which was made available by
-Astrodienst since 1988 to other programmers under a source code license.
-Placalc is less well designed, less complete and not as precise as the
-Swiss Ephemeris module. However, many developers of astrological
-software have used it over many years and like it. Astrodienst has used
-it internally since 1989 for a large set of application programs.
 
-To simplify the introduction of Swiss Ephemeris in 1997 in
-Astrodienst\'s internal operation, we wrote an interface module which
-translates all calls to Placalc functions into Swiss Ephemeris
-functions, and translates the results back into the format expected in
-the Placalc Application Interface (API).
+#  Appendix 
 
-This interface (swepcalc.c and swepcalc.h) is part of the source code
-distribution of Swiss Ephemeris; it is not contained in the DLL. All new
-software should be written directly for the SwissEph API, but porting
-old Placalc software is convenient and very simple with the Placalc API.
+##  A. Discussion of Differences between Versions
 
-#  Appendix {#appendix .list-paragraph}
+#### Differences between Swiss Ephemeris 1.70 and older versions
 
-## A. The gravity deflection for a planet passing behind the Sun {#a.-the-gravity-deflection-for-a-planet-passing-behind-the-sun .list-paragraph}
+With version 1.70, the standard algorithms recommended by the IAU
+resolutions up to 2005 were implemented. The following calculations have
+been added or changed with Swiss Ephemeris version 1.70:
+
+-   \"Frame Bias\" transformation from ICRS to J2000;
+
+-   Nutation IAU 2000B (could be switched to 2000A by the user);
+
+-   Precession model P03 (Capitaine/Wallace/Chapront 2003), including
+    improvements in ecliptic obliquity and sidereal time that were
+    achieved by this model.
+
+The differences between the old and new planetary positions in ecliptic
+longitude (arc seconds) are:
+
+  **Year**                    **New -- Old**
+
+  2000                        -0.00108
+
+  1995                        0.02448
+
+  1980                        0.05868
+
+  1970                        0.10224
+
+  1950                        0.15768
+
+  1900                        0.30852
+
+  1800                        0.58428
+
+  1799                        -0.04644
+
+  1700                        -0.07524
+
+  1500                        -0.12636
+
+  1000                        -0.25344
+
+  0                           -0.53316
+
+  -1000                       -0.85824
+
+  -2000                       -1.40796
+
+  -3000                       -3.33684
+
+  -4000                       -10.64808
+
+  -5000                       -32.68944
+
+  -5400                       -49.15188
+
+The discontinuity of the curve between 1800 and 1799 is explained by the
+fact that old versions of the Swiss Ephemeris used different precession
+models for different time ranges: the model IAU 1976 by Lieske for
+1800-2200, and the precession model by Williams 1994 outside that time
+range.
+
+**Note**: Precession model P03 is said to be accurate to 0.00005 arc
+second for CE 1000-3000.
+
+The differences between version 1.70 and older versions for the future
+are as follows:
+
+  **Year**                 **Difference**
+
+  2000                     -0.00108
+
+  2010                     -0.01620
+
+  2050                     -0.14004
+
+  2100                     -0.29448
+
+  2200                     -0.61452
+
+  2201                     0.05940
+
+  3000                     0.27252
+
+  4000                     0.48708
+
+  5000                     0.47592
+
+  5400                     0.40032
+
+The discontinuity in 2200 has the same explanation as the one in 1800.
+
+##### Jyotish / sidereal ephemerides
+
+The ephemeris changes by a constant value of about +0.3 arc second. This
+is because all our ayanamshas have the start epoch 1900, for which epoch
+precession was corrected by the same amount.
+
+##### Fictitious planets / bodies from the orbital elements file seorbel.txt
+
+There are changes of several 0.1 arcsec, depending on the epoch of the
+orbital elements and the correction of precession as can be seen in the
+tables above.
+
+##### The differences for ecliptic obliquity in arc seconds (new - old) are:
+
+  **Year**                   **Difference**
+
+  5400                       -1.71468
+
+  5000                       -1.25244
+
+  4000                       -0.63612
+
+  3000                       -0.31788
+
+  2100                       -0.06336
+
+  2000                       -0.04212
+
+  1900                       -0.02016
+
+  1800                       0.01296
+
+  1700                       0.04032
+
+  1600                       0.06696
+
+  1500                       0.09432
+
+  1000                       0.22716
+
+  0                          0.51444
+
+  -1000                      1.07064
+
+  -2000                      2.62908
+
+  -3000                      6.68016
+
+  -4000                      15.73272
+
+  -5000                      33.54480
+
+  -5400                      44.22924
+
+##### The differences for sidereal time in seconds (new - old) are:
+
+  **Year**                   **Difference**
+
+  5400                       -2.544
+
+  5000                       -1.461
+
+  4000                       -0.122
+
+  3000                       0.126
+
+  2100                       0.019
+
+  2000                       0.001
+
+  1900                       0.019
+
+  1000                       0.126
+
+  0                          -0.122
+
+  -500                       -0.594
+
+  -1000                      -1.461
+
+  -2000                      -5.029
+
+  -3000                      -12.355
+
+  -4000                      -25.330
+
+  -5000                      -46.175
+
+  -5400                      -57.273
+
+#### Differences between Swiss Ephemeris 1.78 and 1.77
+
+Former versions of the Swiss Ephemeris had used the precession model by
+Capitaine, Wallace, and Chapront of 2003 for the time range -5500 until
+9500 and the precession model Laskar 1986 for epochs outside this time
+range. (Since planetary ephemerides are restricted to -5400 to +5400,
+Laskar precession is only relevant for calculations of fixed stars.)
+
+Version 1.78 calculates precession and ecliptic obliquity according to
+Vondrák, Capitaine, and Wallace, "New precession expressions, valid for
+long time intervals", A&A 534, A22 (2011), which is good for +- 200
+millennia.
+
+This change has almost no ramifications for historical epochs. Planetary
+positions and the obliquity of the ecliptic change by less than an arc
+minute in 5400 BCE. However, for research concerning the prehistoric
+cave paintings (Lascaux, Altamira, etc., some of which may represent
+celestial constellations), fixed star positions are required for 15.000
+BCE or even earlier (the Chauvet cave was painted in 33.000 BCE). Such
+calculations are now possible using the Swiss Ephemeris version 1.78 or
+higher. However, the Sun, Moon, and the planets remain restricted to the
+time range 5400 BCE to 5400 CE.
+
+Differences (in arc sec) in precession (v. 1.78 -- v. 1.77, test star
+was Aldebaran)
+
+Only differences between -5500 and +9500 are differences Vondrák -- P03.
+Those outside this time range are actually differences Vondrák -- Laskar
+1986.
+
+  **Year**                      **Difference**
+
+  -20000                        -26716\"
+
+  -15000                        -2691\"
+
+  -10000                        -256\"
+
+  -5000                         -3.95352\"
+
+  -4000                         -9.77940\"
+
+  -3000                         -7.00524\"
+
+  -2000                         -3.40524\"
+
+  -1000                         -1.23732\"
+
+  0                             -0.33948\"
+
+  1000                          -0.05400\"
+
+  1800                          -0.00108\"
+
+  1900                          -0.00036\"
+
+  2000                          0.00000\"
+
+  2100                          -0.00036\"
+
+  2200                          -0.00072\"
+
+  3000                          0.03528\"
+
+  4000                          0.59904\"
+
+  5000                          2.90160\"
+
+  10000                         77\"
+
+  15000                         228\"
+
+  19000                         2839\"
+
+  20000                         5218\"
+
+##### Differences (in arc sec) in ecliptic obliquity:
+
+  **Year**                   **Difference**
+
+  -20000                     11074.43664\"
+
+  -15000                     3321.50652\"
+
+  -10000                     632.60532\"
+
+  -5000                      -33.42636\"
+
+  0                          0.01008\"
+
+  1000                       0.00972\"
+
+  2000                       0.00000\"
+
+  3000                       -0.01008\"
+
+  4000                       -0.05868\"
+
+  10000                      -72.91980\"
+
+  15000                      -772.91712\"
+
+  20000                      -3521.23488"
+
+#### Differences between Swiss Ephemeris 2.00 and 1.80
+
+These differences are explained by the fact that the Swiss Ephemeris is
+now based on JPL Ephemeris DE431, whereas before release 2.00 it was
+based on DE406. The differences are listed above in Ch. 2.1.1.3, see
+paragraph on "Comparison of JPL ephemerides DE406 (1998) with DE431
+(2013)".
+
+#### Differences between Swiss Ephemeris 2.05.01 and 2.06
+
+Swiss Ephemeris 2.06 has a new Delta T algorithm based on:
+
+-   Stephenson, F.R., Morrison, L.V., and Hohenkerk, C.Y., \"Measurement
+    of the Earth\'s Rotation: 720 BCE to CE 2015\", Royal Society
+    Proceedings A, 7 Dec 2016,
+
+http://rspa.royalsocietypublishing.org/lookup/doi/10.1098/rspa.2016.0404
+
+The Swiss Ephemeris uses it for calculations before 1948.
+
+Differences resulting from this update are shown in Chapter 7 on Delta
+T.
+
+#  {#appendix .list-paragraph}
+
+## B. The gravity deflection for a planet passing behind the Sun {#a.-the-gravity-deflection-for-a-planet-passing-behind-the-sun .list-paragraph}
 
 The calculation of the apparent position of a planet involves a
 relativistic effect, which is the curvature of space by the gravity
@@ -5975,7 +5885,7 @@ is his comment (private email to Alois Treindl, 12-Sep-1997):
 > ellipsoidal Sun is considered, but certainly that is an additional
 > refinement which cannot be crucial."*
 
-## B. A list of asteroids {#b.-a-list-of-asteroids .list-paragraph}
+## C. A list of asteroids 
 
 > \# ====================================
 >
@@ -6641,7 +6551,7 @@ is his comment (private email to Alois Treindl, 12-Sep-1997):
 >
 > \# Plants, trees, animals 63
 
-##  C. How to Compare the Swiss Ephemeris with Ephemerides of the JPL Horizons System {#c.-how-to-compare-the-swiss-ephemeris-with-ephemerides-of-the-jpl-horizons-system .list-paragraph}
+##  D. How to Compare the Swiss Ephemeris with Ephemerides of the JPL Horizons System {#c.-how-to-compare-the-swiss-ephemeris-with-ephemerides-of-the-jpl-horizons-system .list-paragraph}
 
 Time and again people complain that they find serious differences
 between the Swiss Ephemeris and JPL Horizons.
@@ -7346,7 +7256,7 @@ Significant deviations from Horizons only appear with the topocentric
 Moon, where our error can amount to 0.2 arcsec. We have not studied this
 difference so far, so do not know its exact cause.
 
-##  D. How to compare the Swiss Ephemeris with Ephemerides of the Astronomical Almanac (apparent positions) {#d.-how-to-compare-the-swiss-ephemeris-with-ephemerides-of-the-astronomical-almanac-apparent-positions .list-paragraph}
+##  E. How to compare the Swiss Ephemeris with Ephemerides of the Astronomical Almanac (apparent positions) {#d.-how-to-compare-the-swiss-ephemeris-with-ephemerides-of-the-astronomical-almanac-apparent-positions .list-paragraph}
 
 ### Test 1: Astronomical Almanac online {#test-1-astronomical-almanac-online .list-paragraph}
 
@@ -7432,7 +7342,7 @@ Swiss Ephemeris:
 
 (2.1.2.2 Swiss Ephemeris and JPL Horizons System)
 
-## E. How to compare the Swiss Ephemeris Lahiri Ayanamsha with *Indian Astronomical Ephemeris* (IAE) {#e.-how-to-compare-the-swiss-ephemeris-lahiri-ayanamsha-with-indian-astronomical-ephemeris-iae .list-paragraph}
+## F. How to compare the Swiss Ephemeris Lahiri Ayanamsha with *Indian Astronomical Ephemeris* (IAE) {#e.-how-to-compare-the-swiss-ephemeris-lahiri-ayanamsha-with-indian-astronomical-ephemeris-iae .list-paragraph}
 
 *Problems*
 
@@ -7598,15 +7508,15 @@ Jan., our results compare as follows with the mean ayanamshas in IAE
 calculations):
 
 swetest -b1.1.1950 -nonut -fPZ -p -sid1 -sidbit8192 \|grep ayanamsa\
-TT:  2433282.500000000   ayanamsa =   23°09\'31.2539 (Lahiri) (IAE 1989:
+TT:  2433282.500000000   ayanamsa =   23°09\'31.2539 (Lahiri) (IAE 1989:
 23°09\'30.79\") diff = 0.46\"
 
 swetest -b1.1.1989 -nonut -fPZ -p -sid1 -sidbit8192 \|grep ayanamsa\
-TT:  2447527.500000000   ayanamsa =   23°42\'12.3717 (Lahiri) (IAE 1989:
+TT:  2447527.500000000   ayanamsa =   23°42\'12.3717 (Lahiri) (IAE 1989:
 23°42\'12.34\") diff = 0.03\"
 
 swetest -b1.1.1990 -nonut -fPZ -p -sid1 -sidbit8192 \|grep ayanamsa\
-TT:  2447892.500000000   ayanamsa =   23°43\'02.6259 (Lahiri) (IAE 1989:
+TT:  2447892.500000000   ayanamsa =   23°43\'02.6259 (Lahiri) (IAE 1989:
 23°43\'02.62\") diff = 0.01\"
 
 The 1950 value has a considerably greater difference. This is explained
