@@ -26,6 +26,13 @@
 # define IS_PHP7	1
 #else
 # define IS_PHP7	0
+
+#ifndef TSRMLS_D
+#define TSRMLS_D void
+#define TSRMLS_DC
+#define TSRMLS_C
+#define TSRMLS_CC
+#define TSRMLS_FETCH()
 #endif
 
 /* If you declare any globals in php_swephp.h uncomment this:
