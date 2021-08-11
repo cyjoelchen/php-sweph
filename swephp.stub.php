@@ -302,59 +302,59 @@ function swe_utc_time_zone(
 ): array {}
 
 /**
- * @param float $tjd_ut
- * @param float $geolat
- * @param float $geolon
+ * @param double $tjd_ut
+ * @param double $geolat
+ * @param double $geolon
  * @param string $hsys
  * @return array
  */
 function swe_houses(double $tjd_ut, double $geolat, double $geolon, string $hsys): array {}
 
 /**
- * @param float $tjd_ut
+ * @param double $tjd_ut
  * @param int $iflag
- * @param float $geolat
- * @param float $geolon
+ * @param double $geolat
+ * @param double $geolon
  * @param string $hsys
  * @return array
  */
 function swe_houses_ex(double $tjd_ut, int $iflag, double $geolat, double $geolon, string $hsys): array {}
 
 /**
- * @param float $tjd_ut
+ * @param double $tjd_ut
  * @param int $iflag
- * @param float $geolat
- * @param float $geolon
+ * @param double $geolat
+ * @param double $geolon
  * @param string $hsys
  * @return array
  */
 function swe_houses_ex2(double $tjd_ut, int $iflag, double $geolat, double $geolon, string $hsys): array {}
 
 /**
- * @param float $armc
- * @param float $geolat
- * @param float $eps
+ * @param double $armc
+ * @param double $geolat
+ * @param double $eps
  * @param string $hsys
  * @return array
  */
 function swe_houses_armc(double $armc, double $geolat, double $eps, string $hsys): array {}
 
 /**
- * @param float $armc
- * @param float $geolat
- * @param float $eps
+ * @param double $armc
+ * @param double $geolat
+ * @param double $eps
  * @param string $hsys
  * @return array
  */
 function swe_houses_armc_ex2(double $armc, double $geolat, double $eps, string $hsys): array {}
 
 /**
- * @param float $armc
- * @param float $geolat
- * @param float $eps
+ * @param double $armc
+ * @param double $geolat
+ * @param double $eps
  * @param string $hsys
- * @param float $xpin0
- * @param float $xpin1
+ * @param double $xpin0
+ * @param double $xpin1
  * @return double|string
  */
 function swe_house_pos(
@@ -371,3 +371,441 @@ function swe_house_pos(
  * @return string
  */
 function swe_house_name(string $hsys): string {}
+
+/**
+ * @param double $tjd_ut
+ * @param int $ipl
+ * @param string $starname
+ * @param int $iflag
+ * @param int $imeth
+ * @param double $geolon
+ * @param double $geolat
+ * @param double $geoalt
+ * @param double $atpress
+ * @param double $attemp
+ * @return array
+ */
+function swe_gauquelin_sector(
+    double $tjd_ut,
+    int $ipl,
+    string $starname,
+    int $iflag,
+    int $imeth,
+    double $geolon,
+    double $geolat,
+    double $geoalt,
+    double $atpress,
+    double $attemp
+): array {}
+
+/**
+ * @param double $tjd_ut
+ * @param int $iflag
+ * @return array
+ */
+function swe_sol_eclipse_where(double $tjd_ut, int $iflag): array {}
+
+/**
+ * @param double $tjd_ut
+ * @param int $ipl
+ * @param string $star
+ * @param int $iflag
+ * @return array
+ */
+function swe_lun_occult_where(double $tjd_ut, int $ipl, string $star, int $iflag): array {}
+
+/**
+ * @param double $tjd_ut
+ * @param int $iflag
+ * @param double $geolng
+ * @param double $geolat
+ * @param double $geoalt
+ * @return array
+ */
+function swe_sol_eclipse_how(double $tjd_ut, int $iflag, double $geolng, double $geolat, double $geoalt): array {}
+
+/**
+ * @param double $tjd_start
+ * @param int $iflag
+ * @param double $geolng
+ * @param double $geolat
+ * @param double $geoalt
+ * @param int $backw
+ * @return array
+ */
+function swe_sol_eclipse_when_loc(
+    double $tjd_start,
+    int $iflag,
+    double $geolng,
+    double $geolat,
+    double $geoalt,
+    int $backw
+): array {}
+
+/**
+ * @param double $tjd_ut
+ * @param int $ipl
+ * @param string $star
+ * @param int $iflag
+ * @param double $geolng
+ * @param double $geolat
+ * @param double $geoalt
+ * @param int $backw
+ * @return array
+ */
+function swe_lun_occult_when_loc(
+    double $tjd_ut,
+    int $ipl,
+    string $star,
+    int $iflag,
+    double $geolng,
+    double $geolat,
+    double $geoalt,
+    int $backw
+): array {}
+
+/**
+ * @param double $tjd_start
+ * @param int $iflag
+ * @param int $ifltype
+ * @param int $backw
+ * @return array
+ */
+function swe_sol_eclipse_when_glob(double $tjd_start, int $iflag, int $ifltype, int $backw): array {}
+
+/**
+ * @param double $tjd_ut
+ * @param int $ipl
+ * @param string $star
+ * @param int $iflag
+ * @param int $ifltype
+ * @param int $backw
+ * @return array
+ */
+function swe_lun_occult_when_glob(
+    double $tjd_ut,
+    int $ipl,
+    string $star,
+    int $iflag,
+    int $ifltype,
+    int $backw)
+: array {}
+
+/**
+ * @param double $tjd_ut
+ * @param int $iflag
+ * @param double $geolng
+ * @param double $geolat
+ * @param double $geoalt
+ * @return array
+ */
+function swe_lun_eclipse_how(double $tjd_ut, int $iflag, double $geolng, double $geolat, double $geoalt): array {}
+
+/**
+ * @param double $tjd_ut
+ * @param int $iflag
+ * @param int $ifltype
+ * @param int $backw
+ * @return array
+ */
+function swe_lun_eclipse_when(double $tjd_ut, int $iflag, int $ifltype, int $backw): array {}
+
+/**
+ * @param double $tjd_start
+ * @param int $iflag
+ * @param double $geolng
+ * @param double $geolat
+ * @param double $geoalt
+ * @param int $backw
+ * @return array
+ */
+function swe_lun_eclipse_when_loc(
+    double $tjd_start,
+    int $iflag,
+    double $geolng,
+    double $geolat,
+    double $geoalt,
+    int $backw
+): array {}
+
+/**
+ * @param double $tjd_et
+ * @param int $ipl
+ * @param int $iflag
+ * @return array
+ */
+function swe_pheno(double $tjd_et, int $ipl, int $iflag): array {}
+
+/**
+ * @param double $tjd_ut
+ * @param int $ipl
+ * @param int $iflag
+ * @return array
+ */
+function swe_pheno_ut(double $tjd_ut, int $ipl, int $iflag): array {}
+
+/**
+ * @param double $inalt
+ * @param double $atpress
+ * @param double $attemp
+ * @param int $calc_flag
+ * @return array
+ */
+function swe_refrac(double $inalt, double $atpress, double $attemp, int $calc_flag): array {}
+
+/**
+ * @param double $inalt
+ * @param double $geoalt
+ * @param double $atpress
+ * @param double $attemp
+ * @param double $lapse_rate
+ * @param int $calc_flag
+ * @return array
+ */
+function swe_refrac_extended(
+    double $inalt,
+    double $geoalt,
+    double $atpress,
+    double $attemp,
+    double $lapse_rate,
+    int $calc_flag
+): array {}
+
+/**
+ * @param double $tjdstart
+ * @param double $geolon
+ * @param double $geolat
+ * @param double $geoalt
+ * @param double $atpress
+ * @param double $attemp
+ * @param double $athum
+ * @param double $atuom
+ * @param double $oage
+ * @param double $oeyes
+ * @param double $omono
+ * @param double $ozoom
+ * @param double $odia
+ * @param double $otrans
+ * @param string $objectname
+ * @param int $event_type
+ * @param int $helflag
+ * @return array
+ */
+function swe_heliacal_ut(
+    double $tjdstart,
+    double $geolon,
+    double $geolat,
+    double $geoalt,
+    double $atpress,
+    double $attemp,
+    double $athum,
+    double $atuom,
+    double $oage,
+    double $oeyes,
+    double $omono,
+    double $ozoom,
+    double $odia,
+    double $otrans,
+    string $objectname,
+    int $event_type,
+    int $helflag
+): array {}
+
+/**
+ * @param double $tjdstart
+ * @param double $geolon
+ * @param double $geolat
+ * @param double $geoalt
+ * @param double $atpress
+ * @param double $attemp
+ * @param double $athum
+ * @param double $atuom
+ * @param double $oage
+ * @param double $oeyes
+ * @param double $omono
+ * @param double $ozoom
+ * @param double $odia
+ * @param double $otrans
+ * @param string $objectname
+ * @param int $event_type
+ * @param int $helflag
+ * @return array
+ */
+function swe_heliacal_pheno_ut(
+    double $tjdstart,
+    double $geolon,
+    double $geolat,
+    double $geoalt,
+    double $atpress,
+    double $attemp,
+    double $athum,
+    double $atuom,
+    double $oage,
+    double $oeyes,
+    double $omono,
+    double $ozoom,
+    double $odia,
+    double $otrans,
+    string $objectname,
+    int $event_type,
+    int $helflag
+): array {}
+
+/**
+ * @param double $tjdstart
+ * @param double $geolon
+ * @param double $geolat
+ * @param double $geoalt
+ * @param double $atpress
+ * @param double $attemp
+ * @param double $athum
+ * @param double $atuom
+ * @param double $oage
+ * @param double $oeyes
+ * @param double $omono
+ * @param double $ozoom
+ * @param double $odia
+ * @param double $otrans
+ * @param string $objectname
+ * @param int $helflag
+ * @return array
+ */
+function swe_vis_limit_mag(
+    double $tjdstart,
+    double $geolon,
+    double $geolat,
+    double $geoalt,
+    double $atpress,
+    double $attemp,
+    double $athum,
+    double $atuom,
+    double $oage,
+    double $oeyes,
+    double $omono,
+    double $ozoom,
+    double $odia,
+    double $otrans,
+    string $objectname,
+    int $helflag
+): array {}
+
+/**
+ * @param double $tjd_ut
+ * @param int $calc_flag
+ * @param double $geolon
+ * @param double $geolat
+ * @param double $geoalt
+ * @param double $atpress
+ * @param double $attemp
+ * @param double $xin0
+ * @param double $xin1
+ * @return array
+ */
+function swe_azalt(
+    double $tjd_ut,
+    int $calc_flag,
+    double $geolon,
+    double $geolat,
+    double $geoalt,
+    double $atpress,
+    double $attemp,
+    double $xin0,
+    double $xin1
+): array {}
+
+/**
+ * @param double $tjd_ut
+ * @param int $calc_flag
+ * @param double $xin0
+ * @param double $xin1
+ * @return array
+ */
+function swe_azalt_rev(double $tjd_ut, int $calc_flag, double $xin0, double $xin1): array {}
+
+/**
+ * @param double $tjd_ut
+ * @param int $ipl
+ * @param string|null $starname
+ * @param int $epheflag
+ * @param int $rsmi
+ * @param double $geolon
+ * @param double $geolat
+ * @param double $geoalt
+ * @param double $atpress
+ * @param double $attemp
+ * @return array
+ */
+function swe_rise_trans(
+    double $tjd_ut,
+    int $ipl,
+    ?string $starname = null,
+    int $epheflag,
+    int $rsmi,
+    double $geolon,
+    double $geolat,
+    double $geoalt,
+    double $atpress,
+    double $attemp
+): array {}
+
+/**
+ * @param double $tjd_ut
+ * @param int $ipl
+ * @param string|null $starname
+ * @param int $epheflag
+ * @param int $rsmi
+ * @param double $geolon
+ * @param double $geolat
+ * @param double $geoalt
+ * @param double $atpress
+ * @param double $attemp
+ * @param double $horhgt
+ * @return array
+ */
+function swe_rise_trans_true_hor(
+    double $tjd_ut,
+    int $ipl,
+    ?string $starname = null,
+    int $epheflag,
+    int $rsmi,
+    double $geolon,
+    double $geolat,
+    double $geoalt,
+    double $atpress,
+    double $attemp,
+    double $horhgt
+): array {}
+
+/**
+ * @param double $tjd_et
+ * @param int $ipl
+ * @param int $iflag
+ * @param int $method
+ * @return array
+ */
+function swe_nod_aps(double $tjd_et, int $ipl, int $iflag, int $method): array {}
+
+/**
+ * @param double $tjd_ut
+ * @param int $ipl
+ * @param int $iflag
+ * @param int $method
+ * @return array
+ */
+function swe_nod_aps_ut(double $tjd_ut, int $ipl, int $iflag, int $method): array {}
+
+/**
+ * @param double $tjd_et
+ * @param int $ipl
+ * @param int $iflag
+ * @return array
+ */
+function swe_get_orbital_elements(double $tjd_et, int $ipl, int $iflag): array {}
+
+/**
+ * @param double $tjd_et
+ * @param int $ipl
+ * @param int $iflag
+ * @return array
+ */
+function swe_orbit_max_min_true_distance(double $tjd_et, int $ipl, int $iflag): array {}

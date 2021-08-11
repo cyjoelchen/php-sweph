@@ -1,5 +1,5 @@
 /* This is a generated file, edit the .stub.php file instead.
- * Stub hash: c5fbfe98aef56b4f455d1d7c680f8626117ce95f */
+ * Stub hash: e3fcb85b5bdcdd841a2f95a5ad0c04f3e93a7b9e */
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_calc, 0, 3, IS_ARRAY, 0)
 	ZEND_ARG_OBJ_INFO(0, tjd_et, double, 0)
@@ -228,6 +228,212 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_house_name, 0, 1, IS_STRING,
 	ZEND_ARG_TYPE_INFO(0, hsys, IS_STRING, 0)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_gauquelin_sector, 0, 10, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_ut, double, 0)
+	ZEND_ARG_TYPE_INFO(0, ipl, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, starname, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, iflag, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, imeth, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, geolon, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geolat, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geoalt, double, 0)
+	ZEND_ARG_OBJ_INFO(0, atpress, double, 0)
+	ZEND_ARG_OBJ_INFO(0, attemp, double, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_swe_sol_eclipse_where arginfo_swe_get_ayanamsa_ex_ut
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_lun_occult_where, 0, 4, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_ut, double, 0)
+	ZEND_ARG_TYPE_INFO(0, ipl, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, star, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, iflag, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_sol_eclipse_how, 0, 5, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_ut, double, 0)
+	ZEND_ARG_TYPE_INFO(0, iflag, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, geolng, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geolat, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geoalt, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_sol_eclipse_when_loc, 0, 6, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_start, double, 0)
+	ZEND_ARG_TYPE_INFO(0, iflag, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, geolng, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geolat, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geoalt, double, 0)
+	ZEND_ARG_TYPE_INFO(0, backw, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_lun_occult_when_loc, 0, 8, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_ut, double, 0)
+	ZEND_ARG_TYPE_INFO(0, ipl, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, star, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, iflag, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, geolng, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geolat, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geoalt, double, 0)
+	ZEND_ARG_TYPE_INFO(0, backw, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_sol_eclipse_when_glob, 0, 4, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_start, double, 0)
+	ZEND_ARG_TYPE_INFO(0, iflag, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, ifltype, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, backw, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_lun_occult_when_glob, 0, 6, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_ut, double, 0)
+	ZEND_ARG_TYPE_INFO(0, ipl, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, star, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, iflag, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, ifltype, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, backw, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_swe_lun_eclipse_how arginfo_swe_sol_eclipse_how
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_lun_eclipse_when, 0, 4, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_ut, double, 0)
+	ZEND_ARG_TYPE_INFO(0, iflag, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, ifltype, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, backw, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_swe_lun_eclipse_when_loc arginfo_swe_sol_eclipse_when_loc
+
+#define arginfo_swe_pheno arginfo_swe_calc
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_pheno_ut, 0, 3, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_ut, double, 0)
+	ZEND_ARG_TYPE_INFO(0, ipl, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, iflag, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_refrac, 0, 4, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, inalt, double, 0)
+	ZEND_ARG_OBJ_INFO(0, atpress, double, 0)
+	ZEND_ARG_OBJ_INFO(0, attemp, double, 0)
+	ZEND_ARG_TYPE_INFO(0, calc_flag, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_refrac_extended, 0, 6, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, inalt, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geoalt, double, 0)
+	ZEND_ARG_OBJ_INFO(0, atpress, double, 0)
+	ZEND_ARG_OBJ_INFO(0, attemp, double, 0)
+	ZEND_ARG_OBJ_INFO(0, lapse_rate, double, 0)
+	ZEND_ARG_TYPE_INFO(0, calc_flag, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_heliacal_ut, 0, 17, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjdstart, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geolon, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geolat, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geoalt, double, 0)
+	ZEND_ARG_OBJ_INFO(0, atpress, double, 0)
+	ZEND_ARG_OBJ_INFO(0, attemp, double, 0)
+	ZEND_ARG_OBJ_INFO(0, athum, double, 0)
+	ZEND_ARG_OBJ_INFO(0, atuom, double, 0)
+	ZEND_ARG_OBJ_INFO(0, oage, double, 0)
+	ZEND_ARG_OBJ_INFO(0, oeyes, double, 0)
+	ZEND_ARG_OBJ_INFO(0, omono, double, 0)
+	ZEND_ARG_OBJ_INFO(0, ozoom, double, 0)
+	ZEND_ARG_OBJ_INFO(0, odia, double, 0)
+	ZEND_ARG_OBJ_INFO(0, otrans, double, 0)
+	ZEND_ARG_TYPE_INFO(0, objectname, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, event_type, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, helflag, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_swe_heliacal_pheno_ut arginfo_swe_heliacal_ut
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_vis_limit_mag, 0, 16, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjdstart, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geolon, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geolat, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geoalt, double, 0)
+	ZEND_ARG_OBJ_INFO(0, atpress, double, 0)
+	ZEND_ARG_OBJ_INFO(0, attemp, double, 0)
+	ZEND_ARG_OBJ_INFO(0, athum, double, 0)
+	ZEND_ARG_OBJ_INFO(0, atuom, double, 0)
+	ZEND_ARG_OBJ_INFO(0, oage, double, 0)
+	ZEND_ARG_OBJ_INFO(0, oeyes, double, 0)
+	ZEND_ARG_OBJ_INFO(0, omono, double, 0)
+	ZEND_ARG_OBJ_INFO(0, ozoom, double, 0)
+	ZEND_ARG_OBJ_INFO(0, odia, double, 0)
+	ZEND_ARG_OBJ_INFO(0, otrans, double, 0)
+	ZEND_ARG_TYPE_INFO(0, objectname, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, helflag, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_azalt, 0, 9, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_ut, double, 0)
+	ZEND_ARG_TYPE_INFO(0, calc_flag, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, geolon, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geolat, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geoalt, double, 0)
+	ZEND_ARG_OBJ_INFO(0, atpress, double, 0)
+	ZEND_ARG_OBJ_INFO(0, attemp, double, 0)
+	ZEND_ARG_OBJ_INFO(0, xin0, double, 0)
+	ZEND_ARG_OBJ_INFO(0, xin1, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_azalt_rev, 0, 4, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_ut, double, 0)
+	ZEND_ARG_TYPE_INFO(0, calc_flag, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, xin0, double, 0)
+	ZEND_ARG_OBJ_INFO(0, xin1, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_rise_trans, 0, 10, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_ut, double, 0)
+	ZEND_ARG_TYPE_INFO(0, ipl, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, starname, IS_STRING, 1, "null")
+	ZEND_ARG_TYPE_INFO(0, epheflag, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, rsmi, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, geolon, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geolat, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geoalt, double, 0)
+	ZEND_ARG_OBJ_INFO(0, atpress, double, 0)
+	ZEND_ARG_OBJ_INFO(0, attemp, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_rise_trans_true_hor, 0, 11, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_ut, double, 0)
+	ZEND_ARG_TYPE_INFO(0, ipl, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, starname, IS_STRING, 1, "null")
+	ZEND_ARG_TYPE_INFO(0, epheflag, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, rsmi, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, geolon, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geolat, double, 0)
+	ZEND_ARG_OBJ_INFO(0, geoalt, double, 0)
+	ZEND_ARG_OBJ_INFO(0, atpress, double, 0)
+	ZEND_ARG_OBJ_INFO(0, attemp, double, 0)
+	ZEND_ARG_OBJ_INFO(0, horhgt, double, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_nod_aps, 0, 4, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_et, double, 0)
+	ZEND_ARG_TYPE_INFO(0, ipl, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, iflag, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, method, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_nod_aps_ut, 0, 4, IS_ARRAY, 0)
+	ZEND_ARG_OBJ_INFO(0, tjd_ut, double, 0)
+	ZEND_ARG_TYPE_INFO(0, ipl, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, iflag, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO(0, method, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+#define arginfo_swe_get_orbital_elements arginfo_swe_calc
+
+#define arginfo_swe_orbit_max_min_true_distance arginfo_swe_calc
+
 
 ZEND_FUNCTION(swe_calc);
 ZEND_FUNCTION(swe_calc_ut);
@@ -274,6 +480,32 @@ ZEND_FUNCTION(swe_houses_armc);
 ZEND_FUNCTION(swe_houses_armc_ex2);
 ZEND_FUNCTION(swe_house_pos);
 ZEND_FUNCTION(swe_house_name);
+ZEND_FUNCTION(swe_gauquelin_sector);
+ZEND_FUNCTION(swe_sol_eclipse_where);
+ZEND_FUNCTION(swe_lun_occult_where);
+ZEND_FUNCTION(swe_sol_eclipse_how);
+ZEND_FUNCTION(swe_sol_eclipse_when_loc);
+ZEND_FUNCTION(swe_lun_occult_when_loc);
+ZEND_FUNCTION(swe_sol_eclipse_when_glob);
+ZEND_FUNCTION(swe_lun_occult_when_glob);
+ZEND_FUNCTION(swe_lun_eclipse_how);
+ZEND_FUNCTION(swe_lun_eclipse_when);
+ZEND_FUNCTION(swe_lun_eclipse_when_loc);
+ZEND_FUNCTION(swe_pheno);
+ZEND_FUNCTION(swe_pheno_ut);
+ZEND_FUNCTION(swe_refrac);
+ZEND_FUNCTION(swe_refrac_extended);
+ZEND_FUNCTION(swe_heliacal_ut);
+ZEND_FUNCTION(swe_heliacal_pheno_ut);
+ZEND_FUNCTION(swe_vis_limit_mag);
+ZEND_FUNCTION(swe_azalt);
+ZEND_FUNCTION(swe_azalt_rev);
+ZEND_FUNCTION(swe_rise_trans);
+ZEND_FUNCTION(swe_rise_trans_true_hor);
+ZEND_FUNCTION(swe_nod_aps);
+ZEND_FUNCTION(swe_nod_aps_ut);
+ZEND_FUNCTION(swe_get_orbital_elements);
+ZEND_FUNCTION(swe_orbit_max_min_true_distance);
 
 
 static const zend_function_entry ext_functions[] = {
@@ -322,5 +554,31 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(swe_houses_armc_ex2, arginfo_swe_houses_armc_ex2)
 	ZEND_FE(swe_house_pos, arginfo_swe_house_pos)
 	ZEND_FE(swe_house_name, arginfo_swe_house_name)
+	ZEND_FE(swe_gauquelin_sector, arginfo_swe_gauquelin_sector)
+	ZEND_FE(swe_sol_eclipse_where, arginfo_swe_sol_eclipse_where)
+	ZEND_FE(swe_lun_occult_where, arginfo_swe_lun_occult_where)
+	ZEND_FE(swe_sol_eclipse_how, arginfo_swe_sol_eclipse_how)
+	ZEND_FE(swe_sol_eclipse_when_loc, arginfo_swe_sol_eclipse_when_loc)
+	ZEND_FE(swe_lun_occult_when_loc, arginfo_swe_lun_occult_when_loc)
+	ZEND_FE(swe_sol_eclipse_when_glob, arginfo_swe_sol_eclipse_when_glob)
+	ZEND_FE(swe_lun_occult_when_glob, arginfo_swe_lun_occult_when_glob)
+	ZEND_FE(swe_lun_eclipse_how, arginfo_swe_lun_eclipse_how)
+	ZEND_FE(swe_lun_eclipse_when, arginfo_swe_lun_eclipse_when)
+	ZEND_FE(swe_lun_eclipse_when_loc, arginfo_swe_lun_eclipse_when_loc)
+	ZEND_FE(swe_pheno, arginfo_swe_pheno)
+	ZEND_FE(swe_pheno_ut, arginfo_swe_pheno_ut)
+	ZEND_FE(swe_refrac, arginfo_swe_refrac)
+	ZEND_FE(swe_refrac_extended, arginfo_swe_refrac_extended)
+	ZEND_FE(swe_heliacal_ut, arginfo_swe_heliacal_ut)
+	ZEND_FE(swe_heliacal_pheno_ut, arginfo_swe_heliacal_pheno_ut)
+	ZEND_FE(swe_vis_limit_mag, arginfo_swe_vis_limit_mag)
+	ZEND_FE(swe_azalt, arginfo_swe_azalt)
+	ZEND_FE(swe_azalt_rev, arginfo_swe_azalt_rev)
+	ZEND_FE(swe_rise_trans, arginfo_swe_rise_trans)
+	ZEND_FE(swe_rise_trans_true_hor, arginfo_swe_rise_trans_true_hor)
+	ZEND_FE(swe_nod_aps, arginfo_swe_nod_aps)
+	ZEND_FE(swe_nod_aps_ut, arginfo_swe_nod_aps_ut)
+	ZEND_FE(swe_get_orbital_elements, arginfo_swe_get_orbital_elements)
+	ZEND_FE(swe_orbit_max_min_true_distance, arginfo_swe_orbit_max_min_true_distance)
 	ZEND_FE_END
 };

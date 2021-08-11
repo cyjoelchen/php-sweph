@@ -107,32 +107,32 @@ zend_function_entry swephp_functions[] = {
 	/**************************** 
 	 * exports from swecl.c 
 	 ****************************/
-	PHP_FE(swe_gauquelin_sector, NULL)
-	PHP_FE(swe_sol_eclipse_where, NULL)
-	PHP_FE(swe_sol_eclipse_how, NULL)
-	PHP_FE(swe_sol_eclipse_when_loc, NULL)
-	PHP_FE(swe_sol_eclipse_when_glob, NULL)
-	PHP_FE(swe_lun_occult_where, NULL)
-	PHP_FE(swe_lun_occult_when_loc, NULL)
-	PHP_FE(swe_lun_occult_when_glob, NULL)
-	PHP_FE(swe_lun_eclipse_how, NULL)
-	PHP_FE(swe_lun_eclipse_when, NULL)	
-	PHP_FE(swe_lun_eclipse_when_loc, NULL)
-	PHP_FE(swe_pheno, NULL)
-	PHP_FE(swe_pheno_ut, NULL)
-	PHP_FE(swe_refrac, NULL)
-	PHP_FE(swe_refrac_extended, NULL)
-	PHP_FE(swe_azalt, NULL)
-	PHP_FE(swe_azalt_rev, NULL)
-	PHP_FE(swe_rise_trans, NULL)
-	PHP_FE(swe_rise_trans_true_hor, NULL)
-	PHP_FE(swe_nod_aps, NULL)
-	PHP_FE(swe_nod_aps_ut, NULL)
-	PHP_FE(swe_get_orbital_elements, NULL)
-	PHP_FE(swe_orbit_max_min_true_distance, NULL)
-	PHP_FE(swe_heliacal_ut, NULL)
-	PHP_FE(swe_heliacal_pheno_ut, NULL)
-	PHP_FE(swe_vis_limit_mag, NULL)
+	PHP_FE(swe_gauquelin_sector, arginfo_swe_gauquelin_sector)
+	PHP_FE(swe_sol_eclipse_where, arginfo_swe_sol_eclipse_where)
+	PHP_FE(swe_sol_eclipse_how, arginfo_swe_sol_eclipse_how)
+	PHP_FE(swe_sol_eclipse_when_loc, arginfo_swe_sol_eclipse_when_loc)
+	PHP_FE(swe_sol_eclipse_when_glob, arginfo_swe_sol_eclipse_when_glob)
+	PHP_FE(swe_lun_occult_where, arginfo_swe_lun_occult_where)
+	PHP_FE(swe_lun_occult_when_loc, arginfo_swe_lun_occult_when_loc)
+	PHP_FE(swe_lun_occult_when_glob, arginfo_swe_lun_occult_when_glob)
+	PHP_FE(swe_lun_eclipse_how, arginfo_swe_lun_eclipse_how)
+	PHP_FE(swe_lun_eclipse_when, arginfo_swe_lun_eclipse_when)
+	PHP_FE(swe_lun_eclipse_when_loc, arginfo_swe_lun_eclipse_when_loc)
+	PHP_FE(swe_pheno, arginfo_swe_pheno)
+	PHP_FE(swe_pheno_ut, arginfo_swe_pheno_ut)
+	PHP_FE(swe_refrac, arginfo_swe_refrac)
+	PHP_FE(swe_refrac_extended, arginfo_swe_refrac_extended)
+	PHP_FE(swe_azalt, arginfo_swe_azalt)
+	PHP_FE(swe_azalt_rev, arginfo_swe_azalt_rev)
+	PHP_FE(swe_rise_trans, arginfo_swe_rise_trans)
+	PHP_FE(swe_rise_trans_true_hor, arginfo_swe_rise_trans_true_hor)
+	PHP_FE(swe_nod_aps, arginfo_swe_nod_aps)
+	PHP_FE(swe_nod_aps_ut, arginfo_swe_nod_aps_ut)
+	PHP_FE(swe_get_orbital_elements, arginfo_swe_get_orbital_elements)
+	PHP_FE(swe_orbit_max_min_true_distance, arginfo_swe_orbit_max_min_true_distance)
+	PHP_FE(swe_heliacal_ut, arginfo_swe_heliacal_ut)
+	PHP_FE(swe_heliacal_pheno_ut, arginfo_swe_heliacal_pheno_ut)
+	PHP_FE(swe_vis_limit_mag, arginfo_swe_vis_limit_mag)
 		
 	/**************************** 
 	 * exports from swephlib.c 
@@ -3130,7 +3130,7 @@ PHP_FUNCTION(swe_lun_occult_where)
 /* {{{ pod
 =pod
 
-=head1 function swe_sol_eclipse_how(tjd_ut, iflag, geopos[0], geopos[1], geopos[2]);
+=head1 function swe_sol_eclipse_how(tjd_ut, iflag, geolng, geolat, geoalt);
 
 Computes attributes of a solar eclipse for given tjd, geo. longitude, geo. latitude, and geo. height.
 
@@ -3138,9 +3138,9 @@ Computes attributes of a solar eclipse for given tjd, geo. longitude, geo. latit
 
   tjd_ut	double   Julian day number, Universal Time
   iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
-  geopos[0] double	 geographic longitude
-  geopos[1] double	 geographic latitude
-  geopos[2] double	 altitude above sea level, in meters
+  geolng    double	 geographic longitude
+  geolat    double	 geographic latitude
+  geoalt    double	 altitude above sea level, in meters
 
 =head3 return array
 
@@ -3986,8 +3986,8 @@ It is more correct and more skilled than the old function swe_refrac():
   double	inalt		altitude of object in degrees 
   double	geoalt      altitude of observer above sea level in meters 
   double	atpress		atmospheric pressure (hectopascal)
-  double	lapse_rate  (dT/dh) [deg K/m]
   double	attemp		atmospheric temperature °C
+  double	lapse_rate  (dT/dh) [deg K/m]
   int       calc_flag   either SE_APP_TO_TRUE or  SE_TRUE_TO_APP
 
 =head3 return array
@@ -4658,7 +4658,7 @@ PHP_FUNCTION(swe_nod_aps_ut)
 /* {{{ pod
 =pod
 
-=head1 function swe_get_orbital_elements(tjd_1t, ipl, iflag)
+=head1 function swe_get_orbital_elements(tjd_et, ipl, iflag)
 
 Calculates osculating orbital elements (Kepler elements) of a planet 
 or asteroid or the Earth-Moon barycentre. 
