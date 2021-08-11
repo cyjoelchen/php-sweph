@@ -28,14 +28,6 @@
 #include "swephp_arginfo.h"
 #endif
 
-#ifndef TSRMLS_D
-#define TSRMLS_D void
-#define TSRMLS_DC
-#define TSRMLS_C
-#define TSRMLS_CC
-#define TSRMLS_FETCH()
-#endif
-
 /* If you declare any globals in php_swephp.h uncomment this:
 ZEND_DECLARE_MODULE_GLOBALS(swephp)
 */
@@ -599,7 +591,7 @@ PHP_FUNCTION(swe_calc)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dll",
 			&tjd_et, &ipl, &iflag) == FAILURE) {
 		return;
 	}
@@ -649,7 +641,7 @@ PHP_FUNCTION(swe_calc_ut)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dll",
 			&tjd_ut, &ipl, &iflag) == FAILURE) {
 		return;
 	}
@@ -700,7 +692,7 @@ PHP_FUNCTION(swe_calc_pctr)
 	
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlll",
 			&tjd_et, &ipl, &iplctr, &iflag) == FAILURE) {
 		return;
 	}
@@ -754,7 +746,7 @@ PHP_FUNCTION(swe_solcross)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddl",
 			&x2cross, &jd_et, &iflag) == FAILURE) {
 		return;
 	}
@@ -808,7 +800,7 @@ PHP_FUNCTION(swe_solcross_ut)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddl",
 			&x2cross, &jd_ut, &iflag) == FAILURE) {
 		return;
 	}
@@ -862,7 +854,7 @@ PHP_FUNCTION(swe_mooncross)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddl",
 			&x2cross, &jd_et, &iflag) == FAILURE) {
 		return;
 	}
@@ -916,7 +908,7 @@ PHP_FUNCTION(swe_mooncross_ut)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddl",
 			&x2cross, &jd_ut, &iflag) == FAILURE) {
 		return;
 	}
@@ -967,7 +959,7 @@ PHP_FUNCTION(swe_mooncross_node)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&jd_et, &iflag) == FAILURE) {
 		return;
 	}
@@ -1020,7 +1012,7 @@ PHP_FUNCTION(swe_mooncross_node_ut)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&jd_ut, &iflag) == FAILURE) {
 		return;
 	}
@@ -1081,7 +1073,7 @@ PHP_FUNCTION(swe_helio_cross)
 	
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lddll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "lddll",
 			&ipl, &x2cross, &jd_et, &iflag, &dir) == FAILURE) {
 		return;
 	}
@@ -1137,7 +1129,7 @@ PHP_FUNCTION(swe_helio_cross_ut)
 	
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lddll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "lddll",
 			&ipl, &x2cross, &jd_ut, &iflag, &dir) == FAILURE) {
 		return;
 	}
@@ -1189,7 +1181,7 @@ PHP_FUNCTION(swe_fixstar)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sdl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "sdl",
 			&star_ptr, &star_len, &tjd_et, &iflag) == FAILURE) {
 		return;
 	}
@@ -1245,7 +1237,7 @@ PHP_FUNCTION(swe_fixstar2)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sdl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "sdl",
 			&star_ptr, &star_len, &tjd_et, &iflag) == FAILURE) {
 		return;
 	}
@@ -1302,7 +1294,7 @@ PHP_FUNCTION(swe_fixstar_ut)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sdl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "sdl",
 			&star_ptr, &star_len, &tjd_ut, &iflag) == FAILURE) {
 		return;
 	}
@@ -1357,7 +1349,7 @@ PHP_FUNCTION(swe_fixstar2_ut)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sdl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "sdl",
 			&star_ptr, &star_len, &tjd_ut, &iflag) == FAILURE) {
 		return;
 	}
@@ -1410,7 +1402,7 @@ PHP_FUNCTION(swe_fixstar_mag)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s",
 			&star_ptr, &star_len) == FAILURE) {
 		return;
 	}
@@ -1461,7 +1453,7 @@ PHP_FUNCTION(swe_fixstar2_mag)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s",
 			&star_ptr, &star_len) == FAILURE) {
 		return;
 	}
@@ -1528,7 +1520,7 @@ PHP_FUNCTION(swe_set_ephe_path)
 
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s", &arg, &arg_len) == FAILURE) {
 		return;
 	}
 	
@@ -1562,7 +1554,7 @@ PHP_FUNCTION(swe_set_jpl_file)
 
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s", &arg, &arg_len) == FAILURE) {
 		return;
 	}
 
@@ -1598,7 +1590,7 @@ PHP_FUNCTION(swe_get_planet_name)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &ipl) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "l", &ipl) == FAILURE) {
 		return;
 	}
 
@@ -1634,7 +1626,7 @@ PHP_FUNCTION(swe_set_topo)
 
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddd",
 		&geo_lon, &geo_lat, &geo_alt) == FAILURE) {
 		return;
 	}
@@ -1670,7 +1662,7 @@ PHP_FUNCTION(swe_set_sid_mode)
 		
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ldd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ldd",
 		&sid_mode, &t0, &ayan_t0) == FAILURE) {
 		return;
 	}
@@ -1703,7 +1695,7 @@ PHP_FUNCTION(swe_get_ayanamsa)
 		
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 		&tjd_et) == FAILURE) {
 		return;
 	}
@@ -1746,7 +1738,7 @@ PHP_FUNCTION(swe_get_ayanamsa_ex)
 
 	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 		&tjd_et, &iflag) == FAILURE) {
 		return;
 	}
@@ -1788,7 +1780,7 @@ PHP_FUNCTION(swe_get_ayanamsa_ut)
 		
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 		&tjd_ut) == FAILURE) {
 		return;
 	}
@@ -1831,7 +1823,7 @@ PHP_FUNCTION(swe_get_ayanamsa_ex_ut)
 
 	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 		&tjd_ut, &iflag) == FAILURE) {
 		return;
 	}
@@ -1872,7 +1864,7 @@ PHP_FUNCTION(swe_get_ayanamsa_name)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &isidmode) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "l", &isidmode) == FAILURE) {
 		return;
 	}
 
@@ -1981,7 +1973,7 @@ PHP_FUNCTION(swe_get_current_file_data)
 
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "l",
 			&ifno) == FAILURE) {
 		return;
 	}
@@ -2040,7 +2032,7 @@ PHP_FUNCTION(swe_date_conversion)
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lllds",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "lllds",
 			&year, &month, &day, &hour, &gregflag, &arg_len) == FAILURE) {
 		return;
 	}
@@ -2090,7 +2082,7 @@ PHP_FUNCTION(swe_julday)
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "llldl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "llldl",
 			&year, &month, &day, &hour, &gregflag) == FAILURE) {
 		return;
 	}
@@ -2132,7 +2124,7 @@ PHP_FUNCTION(swe_revjul)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&jd, &gregflag) == FAILURE) {
 		return;
 	}
@@ -2185,7 +2177,7 @@ PHP_FUNCTION(swe_jdet_to_utc)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&tjd_et, &gregflag) == FAILURE) {
 		return;
 	}
@@ -2238,7 +2230,7 @@ PHP_FUNCTION(swe_jdut1_to_utc)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&tjd_ut, &gregflag) == FAILURE) {
 		return;
 	}
@@ -2303,7 +2295,7 @@ PHP_FUNCTION(swe_utc_to_jd)
 	
 	if(ZEND_NUM_ARGS() != 7) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "llllldl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "llllldl",
 			&iyear, &imonth, &iday, &ihour, &imin, &dsec, &gregflag) == FAILURE) {
 		return;
 	}
@@ -2363,7 +2355,7 @@ PHP_FUNCTION(swe_utc_time_zone)
 	
 	if(ZEND_NUM_ARGS() != 7) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "llllldd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "llllldd",
 			&iyear, &imonth, &iday, &ihour, &imin, &dsec, &d_timezone) == FAILURE) {
 		return;
 	}
@@ -2425,7 +2417,7 @@ PHP_FUNCTION(swe_houses)
 	
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddds",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddds",
 			&tjd_ut, &geolat, &geolon, &hsys, &hsys_len) == FAILURE) {
 		return;
 	}
@@ -2495,7 +2487,7 @@ PHP_FUNCTION(swe_houses_ex)
 	
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dldds",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dldds",
 			&tjd_ut, &iflag, &geolat, &geolon, &hsys, &hsys_len) == FAILURE) {
 		return;
 	}
@@ -2570,7 +2562,7 @@ PHP_FUNCTION(swe_houses_ex2)
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dldds",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dldds",
 			&tjd_ut, &iflag, &geolat, &geolon, &hsys, &hsys_len) == FAILURE) {
 		return;
 	}
@@ -2648,7 +2640,7 @@ PHP_FUNCTION(swe_houses_armc)
 	
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddds",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddds",
 			&armc, &geolat, &eps, &hsys, &hsys_len) == FAILURE) {
 		return;
 	}
@@ -2721,7 +2713,7 @@ PHP_FUNCTION(swe_houses_armc_ex2)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddds",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddds",
 			&armc, &geolat, &eps, &hsys, &hsys_len) == FAILURE) {
 		return;
 	}
@@ -2801,7 +2793,7 @@ PHP_FUNCTION(swe_house_pos)
 	
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dddsdd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dddsdd",
 			&armc, &geolat, &eps, &hsys, &hsys_len, &xpin[0], &xpin[1]) == FAILURE) {
 		return;
 	}
@@ -2853,7 +2845,7 @@ PHP_FUNCTION(swe_house_name)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &hsys, &hsys_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s", &hsys, &hsys_len) == FAILURE) {
 		return;
 	}
 
@@ -2918,7 +2910,7 @@ PHP_FUNCTION(swe_gauquelin_sector)
 	
 	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsllddddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlsllddddd",
 			&t_ut, &ipl, &starname, &s_len, &iflag, &imeth, &geopos[0],
 			&geopos[1], &geopos[2], &atpress, &attemp) == FAILURE) {
 		return;
@@ -3023,7 +3015,7 @@ PHP_FUNCTION(swe_sol_eclipse_where)
 
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&tjd_ut, &ifl, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3100,7 +3092,7 @@ PHP_FUNCTION(swe_lun_occult_where)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlsd",
 			&tjd_ut, &ipl, &starname, &s_len, &ifl, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3184,7 +3176,7 @@ PHP_FUNCTION(swe_sol_eclipse_how)
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlddd",
 			&tjd_ut, &ifl, &geopos[0], &geopos[1], &geopos[2], &arg_len) == FAILURE) {
 		return;
 	}
@@ -3275,7 +3267,7 @@ PHP_FUNCTION(swe_sol_eclipse_when_loc)
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dldddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dldddl",
 			&tjd_start, &ifl, &geopos[0], &geopos[1], &geopos[2], &backward, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3376,7 +3368,7 @@ PHP_FUNCTION(swe_lun_occult_when_loc)
 
 	if(ZEND_NUM_ARGS() != 8) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsldddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlsldddl",
 			&tjd_start, &ipl, &starname, &s_len, &ifl, &geopos[0], &geopos[1],
 			&geopos[2], &backward, &arg_len) == FAILURE) {
 		return;
@@ -3455,7 +3447,7 @@ PHP_FUNCTION(swe_sol_eclipse_when_glob)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlll",
 			&tjd_start, &ifl, &ifltype, &backward, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3535,7 +3527,7 @@ PHP_FUNCTION(swe_lun_occult_when_glob)
 	*star = '\0';
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlslll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlslll",
 			&tjd_start, &ipl, &starname, &s_len, &ifl, &ifltype, 
 			&backward, &arg_len) == FAILURE) {
 		return;
@@ -3617,7 +3609,7 @@ PHP_FUNCTION(swe_lun_eclipse_how)
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlddd",
 			&tjd_ut, &ifl, &geopos[0], &geopos[1], &geopos[2], &arg_len) == FAILURE) {
 		return;
 	}
@@ -3686,7 +3678,7 @@ PHP_FUNCTION(swe_lun_eclipse_when)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlll",
 			&tjd_start, &ifl, &ifltype, &backward, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3767,7 +3759,7 @@ PHP_FUNCTION(swe_lun_eclipse_when_loc)
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dldddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dldddl",
 			&tjd_start, &ifl, &geopos[0], &geopos[1], &geopos[2], &backward, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3837,7 +3829,7 @@ PHP_FUNCTION(swe_pheno)
 
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dll",
 			&tjd_et, &ipl, &iflag, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3901,7 +3893,7 @@ PHP_FUNCTION(swe_pheno_ut)
 
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dll",
 			&tjd_ut, &ipl, &iflag, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3955,7 +3947,7 @@ PHP_FUNCTION(swe_refrac)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dddl",
 			&inalt, &atpress, &attemp, &calc_flag, &arg_len) == FAILURE) {
 		return;
 	}
@@ -4016,7 +4008,7 @@ PHP_FUNCTION(swe_refrac_extended)
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dddddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dddddl",
 			&inalt, &geoalt, &atpress, &attemp, &lapse_rate, &calc_flag, &arg_len) == FAILURE) {
 		return;
 	}
@@ -4104,7 +4096,7 @@ PHP_FUNCTION(swe_heliacal_ut)
 	long event_type, helflag;
 	*serr = '\0';
 	if(ZEND_NUM_ARGS() != 17) WRONG_PARAM_COUNT;
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddddddddddddddsll",
 			&tjdstart, &dgeo[0], &dgeo[1], &dgeo[2], &datm[0], &datm[1], &datm[2], &datm[3],  &dobs[0], &dobs[1], &dobs[2], &dobs[3], &dobs[4], &dobs[5],  &objectname, &olen, &event_type, &helflag,  &arg_len) == FAILURE) {
 		return;
 	}
@@ -4155,7 +4147,7 @@ PHP_FUNCTION(swe_heliacal_pheno_ut)
 	long event_type, helflag;
 	*serr = '\0';
 	if(ZEND_NUM_ARGS() != 17) WRONG_PARAM_COUNT;
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddddddddddddddsll",
 			&tjdstart, &dgeo[0], &dgeo[1], &dgeo[2], &datm[0], &datm[1], &datm[2], &datm[3],  &dobs[0], &dobs[1], &dobs[2], &dobs[3], &dobs[4], &dobs[5],  &objectname, &olen, &event_type, &helflag,  &arg_len) == FAILURE) {
 		return;
 	}
@@ -4211,7 +4203,7 @@ PHP_FUNCTION(swe_vis_limit_mag)
 	long helflag;
 	*serr = '\0';
 	if(ZEND_NUM_ARGS() != 16) WRONG_PARAM_COUNT;
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddddddddddddddsl",
 			&tjdstart, &dgeo[0], &dgeo[1], &dgeo[2], &datm[0], &datm[1], &datm[2], &datm[3],  &dobs[0], &dobs[1], &dobs[2], &dobs[3], &dobs[4], &dobs[5],  &objectname, &olen, &helflag,  &arg_len) == FAILURE) {
 		return;
 	}
@@ -4268,7 +4260,7 @@ PHP_FUNCTION(swe_azalt)
 
 	if(ZEND_NUM_ARGS() != 9) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlddddddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlddddddd",
 			&tjd_ut, &calc_flag, 
 			&geopos[0], &geopos[1], &geopos[2], 
 			&atpress, &attemp,
@@ -4319,7 +4311,7 @@ PHP_FUNCTION(swe_azalt_rev)
 
 	if(ZEND_NUM_ARGS() != 7) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlddddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlddddd",
 			&tjd_ut, &calc_flag, 
 			&geopos[0], &geopos[1], &geopos[2], 
 			&xin[0], &xin[1], 
@@ -4384,7 +4376,7 @@ PHP_FUNCTION(swe_rise_trans)
 
 	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsllddddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlsllddddd",
 			&tjd_ut, &ipl, &starname, &s_len, &epheflag, &rsmi,
 			&(geopos[0]), &(geopos[1]), &(geopos[2]),
 			&atpress, &attemp, 
@@ -4467,7 +4459,7 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 
 	if(ZEND_NUM_ARGS() != 11) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlslldddddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlslldddddd",
 			&tjd_ut, &ipl, &starname, &s_len, &epheflag, &rsmi,
 			&geopos[0], &geopos[1], &geopos[2],
 			&atpress, &attemp, &horhgt,
@@ -4544,7 +4536,7 @@ PHP_FUNCTION(swe_nod_aps)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlll",
 			&tjd_et, &ipl, &iflag, &method,
 			&arg_len) == FAILURE) {
 		return;
@@ -4623,7 +4615,7 @@ PHP_FUNCTION(swe_nod_aps_ut)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlll",
 			&tjd_ut, &ipl, &iflag, &method,
 			&arg_len) == FAILURE) {
 		return;
@@ -4693,7 +4685,7 @@ PHP_FUNCTION(swe_get_orbital_elements)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dll",
 			&tjd_et, &ipl, &iflag) == FAILURE) {
 		return;
 	}
@@ -4747,7 +4739,7 @@ PHP_FUNCTION(swe_orbit_max_min_true_distance)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dll",
 			&tjd_et, &ipl, &iflag) == FAILURE) {
 		return;
 	}
@@ -4795,7 +4787,7 @@ PHP_FUNCTION(swe_deltat)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&tjd_ut) == FAILURE) {
 		return;
 	}
@@ -4841,7 +4833,7 @@ PHP_FUNCTION(swe_deltat_ex)
 
 	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&tjd_ut, &ephe_flag) == FAILURE) {
 		return;
 	}
@@ -4888,7 +4880,7 @@ PHP_FUNCTION(swe_time_equ)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&tjd) == FAILURE) {
 		return;
 	}
@@ -4936,7 +4928,7 @@ PHP_FUNCTION(swe_lmt_to_lat)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dd",
 			&tjd_lmt, &geolon) == FAILURE) {
 		return;
 	}
@@ -4983,7 +4975,7 @@ PHP_FUNCTION(swe_lat_to_lmt)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dd",
 			&tjd_lat, &geolon) == FAILURE) {
 		return;
 	}
@@ -5024,7 +5016,7 @@ PHP_FUNCTION(swe_sidtime0)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddd",
 			&tjd_ut, &eps, &nut) == FAILURE) {
 		return;
 	}
@@ -5058,7 +5050,7 @@ PHP_FUNCTION(swe_sidtime)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&tjd_ut) == FAILURE) {
 		return;
 	}
@@ -5103,7 +5095,7 @@ PHP_FUNCTION(swe_cotrans)
 	
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dddd",
 			&xpo[0], &xpo[1], &xpo[2], &eps) == FAILURE) {
 		return;
 	}
@@ -5159,7 +5151,7 @@ PHP_FUNCTION(swe_cotrans_sp)
 	
 	if(ZEND_NUM_ARGS() != 7) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddddddd",
 			&xpo[0], &xpo[1], &xpo[2], &xpo[3], &xpo[4], &xpo[5], &eps) == FAILURE) {
 		return;
 	}
@@ -5223,7 +5215,7 @@ PHP_FUNCTION(swe_set_tid_acc)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&t_acc) == FAILURE) {
 		return;
 	}
@@ -5257,7 +5249,7 @@ PHP_FUNCTION(swe_set_delta_t_userdef)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&dt) == FAILURE) {
 		return;
 	}
@@ -5293,7 +5285,7 @@ PHP_FUNCTION(swe_degnorm)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d", &x) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d", &x) == FAILURE) {
 		return;
 	}
 
@@ -5327,7 +5319,7 @@ PHP_FUNCTION(swe_radnorm)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&x) == FAILURE) {
 		return;
 	}
@@ -5366,7 +5358,7 @@ PHP_FUNCTION(swe_rad_midp)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dd",
 			&x1, &x0) == FAILURE) {
 		return;
 	}
@@ -5405,7 +5397,7 @@ PHP_FUNCTION(swe_deg_midp)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dd",
 			&x1, &x0) == FAILURE) {
 		return;
 	}
@@ -5458,7 +5450,7 @@ PHP_FUNCTION(swe_split_deg)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&ddeg, &roundflag) == FAILURE) {
 		return;
 	}
@@ -5498,7 +5490,7 @@ PHP_FUNCTION(swe_csnorm)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "l",
 			&p) == FAILURE) {
 		return;
 	}
@@ -5533,7 +5525,7 @@ PHP_FUNCTION(swe_difcsn)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ll",
 			&p1, &p2) == FAILURE) {
 		return;
 	}
@@ -5568,7 +5560,7 @@ PHP_FUNCTION(swe_difdegn)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dd",
 			&p1, &p2) == FAILURE) {
 		return;
 	}
@@ -5603,7 +5595,7 @@ PHP_FUNCTION(swe_difcs2n)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ll",
 			&p1, &p2) == FAILURE) {
 		return;
 	}
@@ -5638,7 +5630,7 @@ PHP_FUNCTION(swe_difdeg2n)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dd",
 			&p1, &p2) == FAILURE) {
 		return;
 	}
@@ -5673,7 +5665,7 @@ PHP_FUNCTION(swe_difrad2n)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dd",
 			&p1, &p2) == FAILURE) {
 		return;
 	}
@@ -5707,7 +5699,7 @@ PHP_FUNCTION(swe_csroundsec)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "l",
 			&x) == FAILURE) {
 		return;
 	}
@@ -5741,7 +5733,7 @@ PHP_FUNCTION(swe_d2l)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&x) == FAILURE) {
 		return;
 	}
@@ -5775,7 +5767,7 @@ PHP_FUNCTION(swe_day_of_week)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&jd) == FAILURE) {
 		return;
 	}
@@ -5812,7 +5804,7 @@ PHP_FUNCTION(swe_cs2timestr)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "lll",
 			&t, &sep, &suppressZero) == FAILURE) {
 		return;
 	}
@@ -5854,7 +5846,7 @@ PHP_FUNCTION(swe_cs2lonlatstr)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lss",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "lss",
 			&t, &pchar, &pchar_len, &mchar, &mchar_len) == FAILURE) {
 		return;
 	}
@@ -5892,7 +5884,7 @@ PHP_FUNCTION(swe_cs2degstr)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "l",
 			&t) == FAILURE) {
 		return;
 	}
@@ -5915,7 +5907,7 @@ PHP_FUNCTION(confirm_swephp_compiled)
 	int arg_len, len;
 	char string[256];
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s", &arg, &arg_len) == FAILURE) {
 		return;
 	}
 
