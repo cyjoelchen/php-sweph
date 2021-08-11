@@ -8,7 +8,7 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
-var_dump(swe_house_pos(0, 0, 0, 'P', 0, 0));
+var_dump(round(swe_house_pos(0, 0, 0, 'P', 0, 0), 6));
 ?>
 --EXPECT--
-float(10.000000009259)
+float(10)

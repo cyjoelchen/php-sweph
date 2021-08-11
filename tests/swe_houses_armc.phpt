@@ -8,7 +8,8 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
-var_dump(swe_houses_armc(0, 0, 23.4, 'P'));
+include 'utility/Format.php';
+var_dump(Format::round(swe_houses_armc(0, 0, 23.4, 'P')));
 ?>
 --EXPECT--
 array(3) {
@@ -19,27 +20,27 @@ array(3) {
     [1]=>
     float(90)
     [2]=>
-    float(117.91759008551)
+    float(117.91759)
     [3]=>
-    float(147.82641197635)
+    float(147.826412)
     [4]=>
     float(180)
     [5]=>
-    float(212.17358802365)
+    float(212.173588)
     [6]=>
-    float(242.08240991449)
+    float(242.08241)
     [7]=>
     float(270)
     [8]=>
-    float(297.91759008551)
+    float(297.91759)
     [9]=>
-    float(327.82641197635)
+    float(327.826412)
     [10]=>
     float(0)
     [11]=>
-    float(32.173588023652)
+    float(32.173588)
     [12]=>
-    float(62.082409914485)
+    float(62.08241)
   }
   ["ascmc"]=>
   array(10) {
