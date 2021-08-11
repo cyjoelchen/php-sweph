@@ -300,3 +300,74 @@ function swe_utc_time_zone(
     double $dsec,
     double $d_timezone
 ): array {}
+
+/**
+ * @param float $tjd_ut
+ * @param float $geolat
+ * @param float $geolon
+ * @param string $hsys
+ * @return array
+ */
+function swe_houses(double $tjd_ut, double $geolat, double $geolon, string $hsys): array {}
+
+/**
+ * @param float $tjd_ut
+ * @param int $iflag
+ * @param float $geolat
+ * @param float $geolon
+ * @param string $hsys
+ * @return array
+ */
+function swe_houses_ex(double $tjd_ut, int $iflag, double $geolat, double $geolon, string $hsys): array {}
+
+/**
+ * @param float $tjd_ut
+ * @param int $iflag
+ * @param float $geolat
+ * @param float $geolon
+ * @param string $hsys
+ * @return array
+ */
+function swe_houses_ex2(double $tjd_ut, int $iflag, double $geolat, double $geolon, string $hsys): array {}
+
+/**
+ * @param float $armc
+ * @param float $geolat
+ * @param float $eps
+ * @param string $hsys
+ * @return array
+ */
+function swe_houses_armc(double $armc, double $geolat, double $eps, string $hsys): array {}
+
+/**
+ * @param float $armc
+ * @param float $geolat
+ * @param float $eps
+ * @param string $hsys
+ * @return array
+ */
+function swe_houses_armc_ex2(double $armc, double $geolat, double $eps, string $hsys): array {}
+
+/**
+ * @param float $armc
+ * @param float $geolat
+ * @param float $eps
+ * @param string $hsys
+ * @param float $xpin0
+ * @param float $xpin1
+ * @return double|string
+ */
+function swe_house_pos(
+    double $armc,
+    double $geolat,
+    double $eps,
+    string $hsys,
+    double $xpin0,
+    double $xpin1
+): double|string {}
+
+/**
+ * @param string $hsys
+ * @return string
+ */
+function swe_house_name(string $hsys): string {}

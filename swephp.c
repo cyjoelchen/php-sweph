@@ -96,18 +96,18 @@ zend_function_entry swephp_functions[] = {
 	/**************************** 
 	 * exports from swehouse.c 
 	 ****************************/
-	PHP_FE(swe_houses, NULL)
-	PHP_FE(swe_houses_ex, NULL)
-	PHP_FE(swe_houses_ex2, NULL)
-	PHP_FE(swe_houses_armc, NULL)
-	PHP_FE(swe_houses_armc_ex2, NULL)
-	PHP_FE(swe_house_pos, NULL)
-	PHP_FE(swe_gauquelin_sector, NULL)
-	PHP_FE(swe_house_name, NULL)
+	PHP_FE(swe_houses, arginfo_swe_houses)
+	PHP_FE(swe_houses_ex, arginfo_swe_houses_ex)
+	PHP_FE(swe_houses_ex2, arginfo_swe_houses_ex2)
+	PHP_FE(swe_houses_armc, arginfo_swe_houses_armc)
+	PHP_FE(swe_houses_armc_ex2, arginfo_swe_houses_armc_ex2)
+	PHP_FE(swe_house_pos, arginfo_swe_house_pos)
+	PHP_FE(swe_house_name, arginfo_swe_house_name)
 	
 	/**************************** 
 	 * exports from swecl.c 
 	 ****************************/
+	PHP_FE(swe_gauquelin_sector, NULL)
 	PHP_FE(swe_sol_eclipse_where, NULL)
 	PHP_FE(swe_sol_eclipse_how, NULL)
 	PHP_FE(swe_sol_eclipse_when_loc, NULL)

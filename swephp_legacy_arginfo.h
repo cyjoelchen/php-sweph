@@ -1,5 +1,5 @@
 /* This is a generated file, edit the .stub.php file instead.
- * Stub hash: 5023e53ce38d952a6297e3335e6c5caf871f11c2 */
+ * Stub hash: c5fbfe98aef56b4f455d1d7c680f8626117ce95f */
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_calc, 0, 0, 3)
 	ZEND_ARG_INFO(0, tjd_et)
@@ -188,6 +188,45 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_utc_time_zone, 0, 0, 7)
 	ZEND_ARG_INFO(0, d_timezone)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_houses, 0, 0, 4)
+	ZEND_ARG_INFO(0, tjd_ut)
+	ZEND_ARG_INFO(0, geolat)
+	ZEND_ARG_INFO(0, geolon)
+	ZEND_ARG_INFO(0, hsys)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_houses_ex, 0, 0, 5)
+	ZEND_ARG_INFO(0, tjd_ut)
+	ZEND_ARG_INFO(0, iflag)
+	ZEND_ARG_INFO(0, geolat)
+	ZEND_ARG_INFO(0, geolon)
+	ZEND_ARG_INFO(0, hsys)
+ZEND_END_ARG_INFO()
+
+#define arginfo_swe_houses_ex2 arginfo_swe_houses_ex
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_houses_armc, 0, 0, 4)
+	ZEND_ARG_INFO(0, armc)
+	ZEND_ARG_INFO(0, geolat)
+	ZEND_ARG_INFO(0, eps)
+	ZEND_ARG_INFO(0, hsys)
+ZEND_END_ARG_INFO()
+
+#define arginfo_swe_houses_armc_ex2 arginfo_swe_houses_armc
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_house_pos, 0, 0, 6)
+	ZEND_ARG_INFO(0, armc)
+	ZEND_ARG_INFO(0, geolat)
+	ZEND_ARG_INFO(0, eps)
+	ZEND_ARG_INFO(0, hsys)
+	ZEND_ARG_INFO(0, xpin0)
+	ZEND_ARG_INFO(0, xpin1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_house_name, 0, 0, 1)
+	ZEND_ARG_INFO(0, hsys)
+ZEND_END_ARG_INFO()
+
 
 ZEND_FUNCTION(swe_calc);
 ZEND_FUNCTION(swe_calc_ut);
@@ -227,6 +266,13 @@ ZEND_FUNCTION(swe_jdet_to_utc);
 ZEND_FUNCTION(swe_jdut1_to_utc);
 ZEND_FUNCTION(swe_utc_to_jd);
 ZEND_FUNCTION(swe_utc_time_zone);
+ZEND_FUNCTION(swe_houses);
+ZEND_FUNCTION(swe_houses_ex);
+ZEND_FUNCTION(swe_houses_ex2);
+ZEND_FUNCTION(swe_houses_armc);
+ZEND_FUNCTION(swe_houses_armc_ex2);
+ZEND_FUNCTION(swe_house_pos);
+ZEND_FUNCTION(swe_house_name);
 
 
 static const zend_function_entry ext_functions[] = {
@@ -268,5 +314,12 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(swe_jdut1_to_utc, arginfo_swe_jdut1_to_utc)
 	ZEND_FE(swe_utc_to_jd, arginfo_swe_utc_to_jd)
 	ZEND_FE(swe_utc_time_zone, arginfo_swe_utc_time_zone)
+	ZEND_FE(swe_houses, arginfo_swe_houses)
+	ZEND_FE(swe_houses_ex, arginfo_swe_houses_ex)
+	ZEND_FE(swe_houses_ex2, arginfo_swe_houses_ex2)
+	ZEND_FE(swe_houses_armc, arginfo_swe_houses_armc)
+	ZEND_FE(swe_houses_armc_ex2, arginfo_swe_houses_armc_ex2)
+	ZEND_FE(swe_house_pos, arginfo_swe_house_pos)
+	ZEND_FE(swe_house_name, arginfo_swe_house_name)
 	ZEND_FE_END
 };
