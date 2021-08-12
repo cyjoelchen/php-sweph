@@ -2,8 +2,8 @@
 Basic test
 --SKIPIF--
 <?php
-if (!extension_loaded(‘swephp’)) {
-echo ‘skip’;
+if (!extension_loaded('swephp')) {
+echo 'skip';
 }
 ?>
 --FILE--

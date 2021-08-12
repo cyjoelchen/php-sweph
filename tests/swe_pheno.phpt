@@ -15,7 +15,7 @@ swe_set_ephe_path('./sweph/ephe');
 for ($p = SE_SUN; $p <= SE_PLUTO; $p++) {
   $pnam = swe_get_planet_name($p);
   echo "swe_pheno(2454503.6, $p, SEFLG_SWIEPH)\n";
-  $rv = swe_pheno(2454503.6, $p, SEFLG_SWIEPH);\
+  $rv = swe_pheno(2454503.6, $p, SEFLG_SWIEPH);
   printf( "%s\tretflag = %d %b\n", $pnam, $rv['retflag'], $rv['retflag']);
   var_dump(Format::round($rv['attr']));
 }
@@ -23,7 +23,7 @@ for ($p = SE_SUN; $p <= SE_PLUTO; $p++) {
 for ($p = SE_SUN; $p <= SE_PLUTO; $p++) {
   $pnam = swe_get_planet_name($p);
   echo "swe_pheno_ut(2453503.6, $p, SEFLG_SWIEPH)\n";
-  $rv = swe_pheno_ut(2453503.6, $p, SEFLG_SWIEPH);\
+  $rv = swe_pheno_ut(2453503.6, $p, SEFLG_SWIEPH);
   printf( "%s\tretflag = %d %b\n", $pnam, $rv['retflag'], $rv['retflag']);
   var_dump(Format::round($rv['attr']));
 }

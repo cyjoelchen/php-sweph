@@ -8,9 +8,10 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
+include 'utility/Format.php';
 swe_set_ephe_path('./sweph/ephe');
-var_dump(swe_solcross(30, 2455334.0, SEFLG_SWIEPH));
-var_dump(swe_solcross_ut(30, 2455334.0, SEFLG_SWIEPH));
+var_dump(Format::round(swe_solcross(30, 2455334.0, SEFLG_SWIEPH)));
+var_dump(Format::round(swe_solcross_ut(30, 2455334.0, SEFLG_SWIEPH)));
 ?>
 --EXPECT--
 array(3) {
@@ -19,7 +20,7 @@ array(3) {
   ["rc"]=>
   int(0)
   ["jx"]=>
-  float(2455671.9295329)
+  float(2455671.929533)
 }
 array(3) {
   ["serr"]=>
@@ -27,5 +28,5 @@ array(3) {
   ["rc"]=>
   int(0)
   ["jx"]=>
-  float(2455671.9287643)
+  float(2455671.928764)
 }

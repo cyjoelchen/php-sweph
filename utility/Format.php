@@ -63,7 +63,16 @@ class Format
     public static function round(array $input, int $precision = Format::PRECISION): array
     {
         return array_map(function ($value) use ($precision) {
-            return is_double($value) ? round($value, $precision) : $value;
+            switch (gettype($value)) {
+                case 'double':
+                    return round($value, $precision);
+
+                case 'array':
+                    return Format::round($value, $precision);
+
+                default:
+                    return $value;
+            }
         }, $input);
     }
 }

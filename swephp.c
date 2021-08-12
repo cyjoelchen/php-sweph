@@ -23,9 +23,9 @@
 #define SWEPH_EXTENSION_VERSION "2.0 Rev: 29"
 
 #if PHP_MAJOR_VERSION < 8
-# define IS_PHP7	1
+#include "swephp_legacy_arginfo.h"
 #else
-# define IS_PHP7	0
+#include "swephp_arginfo.h"
 #endif
 
 /* If you declare any globals in php_swephp.h uncomment this:
@@ -42,128 +42,128 @@ zend_function_entry swephp_functions[] = {
 	/**************************** 
 	 * exports from sweph.c 
 	 ****************************/
-	PHP_FE(swe_calc, NULL)
-	PHP_FE(swe_calc_ut, NULL)
-	PHP_FE(swe_calc_pctr, NULL)
-	PHP_FE(swe_solcross, NULL)
-	PHP_FE(swe_solcross_ut, NULL)
-	PHP_FE(swe_mooncross, NULL)
-	PHP_FE(swe_mooncross_ut, NULL)
-	PHP_FE(swe_mooncross_node, NULL)
-	PHP_FE(swe_mooncross_node_ut, NULL)
-	PHP_FE(swe_helio_cross, NULL)
-	PHP_FE(swe_helio_cross_ut, NULL)
-	PHP_FE(swe_fixstar, NULL)
-	PHP_FE(swe_fixstar_ut, NULL)
-	PHP_FE(swe_fixstar_mag, NULL)
-	PHP_FE(swe_fixstar2, NULL)
-	PHP_FE(swe_fixstar2_ut, NULL)
-	PHP_FE(swe_fixstar2_mag, NULL)
-	PHP_FE(swe_close, NULL)
-	PHP_FE(swe_set_ephe_path, NULL)
-	PHP_FE(swe_set_jpl_file, NULL)
-	PHP_FE(swe_get_planet_name, NULL)
-	PHP_FE(swe_set_topo, NULL)
-	PHP_FE(swe_set_sid_mode, NULL)
-	PHP_FE(swe_get_ayanamsa, NULL)
-	PHP_FE(swe_get_ayanamsa_ut, NULL)
-	PHP_FE(swe_get_ayanamsa_ex, NULL)
-	PHP_FE(swe_get_ayanamsa_ex_ut, NULL)
-	PHP_FE(swe_get_ayanamsa_name, NULL)
-	PHP_FE(swe_version, NULL)
-	PHP_FE(swe_get_library_path, NULL)
-	PHP_FE(swe_get_current_file_data, NULL)
+	PHP_FE(swe_calc, arginfo_swe_calc)
+	PHP_FE(swe_calc_ut, arginfo_swe_calc_ut)
+	PHP_FE(swe_calc_pctr, arginfo_swe_calc_pctr)
+	PHP_FE(swe_solcross, arginfo_swe_solcross)
+	PHP_FE(swe_solcross_ut, arginfo_swe_solcross_ut)
+	PHP_FE(swe_mooncross, arginfo_swe_mooncross)
+	PHP_FE(swe_mooncross_ut, arginfo_swe_mooncross_ut)
+	PHP_FE(swe_mooncross_node, arginfo_swe_mooncross_node)
+	PHP_FE(swe_mooncross_node_ut, arginfo_swe_mooncross_node_ut)
+	PHP_FE(swe_helio_cross, arginfo_swe_helio_cross)
+	PHP_FE(swe_helio_cross_ut, arginfo_swe_helio_cross_ut)
+	PHP_FE(swe_fixstar, arginfo_swe_fixstar)
+	PHP_FE(swe_fixstar_ut, arginfo_swe_fixstar_ut)
+	PHP_FE(swe_fixstar_mag, arginfo_swe_fixstar_mag)
+	PHP_FE(swe_fixstar2, arginfo_swe_fixstar2)
+	PHP_FE(swe_fixstar2_ut, arginfo_swe_fixstar2_ut)
+	PHP_FE(swe_fixstar2_mag, arginfo_swe_fixstar2_mag)
+	PHP_FE(swe_close, arginfo_swe_close)
+	PHP_FE(swe_set_ephe_path, arginfo_swe_set_ephe_path)
+	PHP_FE(swe_set_jpl_file, arginfo_swe_set_jpl_file)
+	PHP_FE(swe_get_planet_name, arginfo_swe_get_planet_name)
+	PHP_FE(swe_set_topo, arginfo_swe_set_topo)
+	PHP_FE(swe_set_sid_mode, arginfo_swe_set_sid_mode)
+	PHP_FE(swe_get_ayanamsa, arginfo_swe_get_ayanamsa)
+	PHP_FE(swe_get_ayanamsa_ut, arginfo_swe_get_ayanamsa_ut)
+	PHP_FE(swe_get_ayanamsa_ex, arginfo_swe_get_ayanamsa_ex)
+	PHP_FE(swe_get_ayanamsa_ex_ut, arginfo_swe_get_ayanamsa_ex_ut)
+	PHP_FE(swe_get_ayanamsa_name, arginfo_swe_get_ayanamsa_name)
+	PHP_FE(swe_version, arginfo_swe_version)
+	PHP_FE(swe_get_library_path, arginfo_swe_get_library_path)
+	PHP_FE(swe_get_current_file_data, arginfo_swe_get_current_file_data)
 
 	/**************************** 
 	 * exports from swedate.c 
 	 ****************************/
-	PHP_FE(swe_date_conversion, NULL)
-	PHP_FE(swe_julday, NULL)
-	PHP_FE(swe_revjul, NULL)
-	PHP_FE(swe_jdet_to_utc, NULL)
-	PHP_FE(swe_jdut1_to_utc, NULL)
-	PHP_FE(swe_utc_to_jd, NULL)
-	PHP_FE(swe_utc_time_zone, NULL)
+	PHP_FE(swe_date_conversion, arginfo_swe_date_conversion)
+	PHP_FE(swe_julday, arginfo_swe_julday)
+	PHP_FE(swe_revjul, arginfo_swe_revjul)
+	PHP_FE(swe_jdet_to_utc, arginfo_swe_jdet_to_utc)
+	PHP_FE(swe_jdut1_to_utc, arginfo_swe_jdut1_to_utc)
+	PHP_FE(swe_utc_to_jd, arginfo_swe_utc_to_jd)
+	PHP_FE(swe_utc_time_zone, arginfo_swe_utc_time_zone)
 	
 	/**************************** 
 	 * exports from swehouse.c 
 	 ****************************/
-	PHP_FE(swe_houses, NULL)
-	PHP_FE(swe_houses_ex, NULL)
-	PHP_FE(swe_houses_ex2, NULL)
-	PHP_FE(swe_houses_armc, NULL)
-	PHP_FE(swe_houses_armc_ex2, NULL)
-	PHP_FE(swe_house_pos, NULL)
-	PHP_FE(swe_gauquelin_sector, NULL)
-	PHP_FE(swe_house_name, NULL)
+	PHP_FE(swe_houses, arginfo_swe_houses)
+	PHP_FE(swe_houses_ex, arginfo_swe_houses_ex)
+	PHP_FE(swe_houses_ex2, arginfo_swe_houses_ex2)
+	PHP_FE(swe_houses_armc, arginfo_swe_houses_armc)
+	PHP_FE(swe_houses_armc_ex2, arginfo_swe_houses_armc_ex2)
+	PHP_FE(swe_house_pos, arginfo_swe_house_pos)
+	PHP_FE(swe_house_name, arginfo_swe_house_name)
 	
 	/**************************** 
 	 * exports from swecl.c 
 	 ****************************/
-	PHP_FE(swe_sol_eclipse_where, NULL)
-	PHP_FE(swe_sol_eclipse_how, NULL)
-	PHP_FE(swe_sol_eclipse_when_loc, NULL)
-	PHP_FE(swe_sol_eclipse_when_glob, NULL)
-	PHP_FE(swe_lun_occult_where, NULL)
-	PHP_FE(swe_lun_occult_when_loc, NULL)
-	PHP_FE(swe_lun_occult_when_glob, NULL)
-	PHP_FE(swe_lun_eclipse_how, NULL)
-	PHP_FE(swe_lun_eclipse_when, NULL)	
-	PHP_FE(swe_lun_eclipse_when_loc, NULL)
-	PHP_FE(swe_pheno, NULL)
-	PHP_FE(swe_pheno_ut, NULL)
-	PHP_FE(swe_refrac, NULL)
-	PHP_FE(swe_refrac_extended, NULL)
-	PHP_FE(swe_azalt, NULL)
-	PHP_FE(swe_azalt_rev, NULL)
-	PHP_FE(swe_rise_trans, NULL)
-	PHP_FE(swe_rise_trans_true_hor, NULL)
-	PHP_FE(swe_nod_aps, NULL)
-	PHP_FE(swe_nod_aps_ut, NULL)
-	PHP_FE(swe_get_orbital_elements, NULL)
-	PHP_FE(swe_orbit_max_min_true_distance, NULL)
-	PHP_FE(swe_heliacal_ut, NULL)
-	PHP_FE(swe_heliacal_pheno_ut, NULL)
-	PHP_FE(swe_vis_limit_mag, NULL)
+	PHP_FE(swe_gauquelin_sector, arginfo_swe_gauquelin_sector)
+	PHP_FE(swe_sol_eclipse_where, arginfo_swe_sol_eclipse_where)
+	PHP_FE(swe_sol_eclipse_how, arginfo_swe_sol_eclipse_how)
+	PHP_FE(swe_sol_eclipse_when_loc, arginfo_swe_sol_eclipse_when_loc)
+	PHP_FE(swe_sol_eclipse_when_glob, arginfo_swe_sol_eclipse_when_glob)
+	PHP_FE(swe_lun_occult_where, arginfo_swe_lun_occult_where)
+	PHP_FE(swe_lun_occult_when_loc, arginfo_swe_lun_occult_when_loc)
+	PHP_FE(swe_lun_occult_when_glob, arginfo_swe_lun_occult_when_glob)
+	PHP_FE(swe_lun_eclipse_how, arginfo_swe_lun_eclipse_how)
+	PHP_FE(swe_lun_eclipse_when, arginfo_swe_lun_eclipse_when)
+	PHP_FE(swe_lun_eclipse_when_loc, arginfo_swe_lun_eclipse_when_loc)
+	PHP_FE(swe_pheno, arginfo_swe_pheno)
+	PHP_FE(swe_pheno_ut, arginfo_swe_pheno_ut)
+	PHP_FE(swe_refrac, arginfo_swe_refrac)
+	PHP_FE(swe_refrac_extended, arginfo_swe_refrac_extended)
+	PHP_FE(swe_azalt, arginfo_swe_azalt)
+	PHP_FE(swe_azalt_rev, arginfo_swe_azalt_rev)
+	PHP_FE(swe_rise_trans, arginfo_swe_rise_trans)
+	PHP_FE(swe_rise_trans_true_hor, arginfo_swe_rise_trans_true_hor)
+	PHP_FE(swe_nod_aps, arginfo_swe_nod_aps)
+	PHP_FE(swe_nod_aps_ut, arginfo_swe_nod_aps_ut)
+	PHP_FE(swe_get_orbital_elements, arginfo_swe_get_orbital_elements)
+	PHP_FE(swe_orbit_max_min_true_distance, arginfo_swe_orbit_max_min_true_distance)
+	PHP_FE(swe_heliacal_ut, arginfo_swe_heliacal_ut)
+	PHP_FE(swe_heliacal_pheno_ut, arginfo_swe_heliacal_pheno_ut)
+	PHP_FE(swe_vis_limit_mag, arginfo_swe_vis_limit_mag)
 		
 	/**************************** 
 	 * exports from swephlib.c 
 	 ****************************/
-	PHP_FE(swe_deltat, NULL)
-	PHP_FE(swe_deltat_ex, NULL)
-	PHP_FE(swe_time_equ, NULL)
-	PHP_FE(swe_lmt_to_lat, NULL)
-	PHP_FE(swe_lat_to_lmt, NULL)
-	PHP_FE(swe_sidtime0, NULL)
-	PHP_FE(swe_sidtime, NULL)
-	PHP_FE(swe_cotrans, NULL)
-	PHP_FE(swe_cotrans_sp, NULL)
-	PHP_FE(swe_get_tid_acc, NULL)
-	PHP_FE(swe_set_tid_acc, NULL)
-	PHP_FE(swe_set_delta_t_userdef, NULL)
-	PHP_FE(swe_degnorm, NULL)
-	PHP_FE(swe_radnorm, NULL)
-	PHP_FE(swe_rad_midp, NULL)
-	PHP_FE(swe_deg_midp, NULL)
-	PHP_FE(swe_split_deg, NULL)
+	PHP_FE(swe_deltat, arginfo_swe_deltat)
+	PHP_FE(swe_deltat_ex, arginfo_swe_deltat_ex)
+	PHP_FE(swe_time_equ, arginfo_swe_time_equ)
+	PHP_FE(swe_lmt_to_lat, arginfo_swe_lmt_to_lat)
+	PHP_FE(swe_lat_to_lmt, arginfo_swe_lat_to_lmt)
+	PHP_FE(swe_sidtime0, arginfo_swe_sidtime0)
+	PHP_FE(swe_sidtime, arginfo_swe_sidtime)
+	PHP_FE(swe_cotrans, arginfo_swe_cotrans)
+	PHP_FE(swe_cotrans_sp, arginfo_swe_cotrans_sp)
+	PHP_FE(swe_get_tid_acc, arginfo_swe_get_tid_acc)
+	PHP_FE(swe_set_tid_acc, arginfo_swe_set_tid_acc)
+	PHP_FE(swe_set_delta_t_userdef, arginfo_swe_set_delta_t_userdef)
+	PHP_FE(swe_degnorm, arginfo_swe_degnorm)
+	PHP_FE(swe_radnorm, arginfo_swe_radnorm)
+	PHP_FE(swe_rad_midp, arginfo_swe_rad_midp)
+	PHP_FE(swe_deg_midp, arginfo_swe_deg_midp)
+	PHP_FE(swe_split_deg, arginfo_swe_split_deg)
 
 	/******************************************************* 
 	 * other functions from swephlib.c;
 	 * they are not needed for Swiss Ephemeris,
 	 * but may be useful to former Placalc users.
 	 ********************************************************/
-	PHP_FE(swe_csnorm, NULL)
-	PHP_FE(swe_difcsn, NULL)
-	PHP_FE(swe_difdegn, NULL)
-	PHP_FE(swe_difcs2n, NULL)
-	PHP_FE(swe_difdeg2n, NULL)
-	PHP_FE(swe_difrad2n, NULL)
-	PHP_FE(swe_csroundsec, NULL)
-	PHP_FE(swe_d2l, NULL)
-	PHP_FE(swe_day_of_week, NULL)
-	PHP_FE(swe_cs2timestr, NULL)
-	PHP_FE(swe_cs2lonlatstr, NULL)
-	PHP_FE(swe_cs2degstr, NULL)
+	PHP_FE(swe_csnorm, arginfo_swe_csnorm)
+	PHP_FE(swe_difcsn, arginfo_swe_difcsn)
+	PHP_FE(swe_difdegn, arginfo_swe_difdegn)
+	PHP_FE(swe_difcs2n, arginfo_swe_difcs2n)
+	PHP_FE(swe_difdeg2n, arginfo_swe_difdeg2n)
+	PHP_FE(swe_difrad2n, arginfo_swe_difrad2n)
+	PHP_FE(swe_csroundsec, arginfo_swe_csroundsec)
+	PHP_FE(swe_d2l, arginfo_swe_d2l)
+	PHP_FE(swe_day_of_week, arginfo_swe_day_of_week)
+	PHP_FE(swe_cs2timestr, arginfo_swe_cs2timestr)
+	PHP_FE(swe_cs2lonlatstr, arginfo_swe_cs2lonlatstr)
+	PHP_FE(swe_cs2degstr, arginfo_swe_cs2degstr)
 
 //	PHP_FE(confirm_sweph_compiled,	NULL)		/* For testing, remove later. */
 	{NULL, NULL, NULL}	/* Must be the last line in swephp_functions[] */
@@ -591,7 +591,7 @@ PHP_FUNCTION(swe_calc)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dll",
 			&tjd_et, &ipl, &iflag) == FAILURE) {
 		return;
 	}
@@ -641,7 +641,7 @@ PHP_FUNCTION(swe_calc_ut)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dll",
 			&tjd_ut, &ipl, &iflag) == FAILURE) {
 		return;
 	}
@@ -692,7 +692,7 @@ PHP_FUNCTION(swe_calc_pctr)
 	
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlll",
 			&tjd_et, &ipl, &iplctr, &iflag) == FAILURE) {
 		return;
 	}
@@ -746,7 +746,7 @@ PHP_FUNCTION(swe_solcross)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddl",
 			&x2cross, &jd_et, &iflag) == FAILURE) {
 		return;
 	}
@@ -800,7 +800,7 @@ PHP_FUNCTION(swe_solcross_ut)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddl",
 			&x2cross, &jd_ut, &iflag) == FAILURE) {
 		return;
 	}
@@ -854,7 +854,7 @@ PHP_FUNCTION(swe_mooncross)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddl",
 			&x2cross, &jd_et, &iflag) == FAILURE) {
 		return;
 	}
@@ -908,7 +908,7 @@ PHP_FUNCTION(swe_mooncross_ut)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddl",
 			&x2cross, &jd_ut, &iflag) == FAILURE) {
 		return;
 	}
@@ -959,7 +959,7 @@ PHP_FUNCTION(swe_mooncross_node)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&jd_et, &iflag) == FAILURE) {
 		return;
 	}
@@ -1012,7 +1012,7 @@ PHP_FUNCTION(swe_mooncross_node_ut)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&jd_ut, &iflag) == FAILURE) {
 		return;
 	}
@@ -1073,7 +1073,7 @@ PHP_FUNCTION(swe_helio_cross)
 	
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lddll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "lddll",
 			&ipl, &x2cross, &jd_et, &iflag, &dir) == FAILURE) {
 		return;
 	}
@@ -1129,7 +1129,7 @@ PHP_FUNCTION(swe_helio_cross_ut)
 	
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lddll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "lddll",
 			&ipl, &x2cross, &jd_ut, &iflag, &dir) == FAILURE) {
 		return;
 	}
@@ -1181,7 +1181,7 @@ PHP_FUNCTION(swe_fixstar)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sdl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "sdl",
 			&star_ptr, &star_len, &tjd_et, &iflag) == FAILURE) {
 		return;
 	}
@@ -1237,7 +1237,7 @@ PHP_FUNCTION(swe_fixstar2)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sdl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "sdl",
 			&star_ptr, &star_len, &tjd_et, &iflag) == FAILURE) {
 		return;
 	}
@@ -1294,7 +1294,7 @@ PHP_FUNCTION(swe_fixstar_ut)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sdl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "sdl",
 			&star_ptr, &star_len, &tjd_ut, &iflag) == FAILURE) {
 		return;
 	}
@@ -1349,7 +1349,7 @@ PHP_FUNCTION(swe_fixstar2_ut)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sdl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "sdl",
 			&star_ptr, &star_len, &tjd_ut, &iflag) == FAILURE) {
 		return;
 	}
@@ -1402,7 +1402,7 @@ PHP_FUNCTION(swe_fixstar_mag)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s",
 			&star_ptr, &star_len) == FAILURE) {
 		return;
 	}
@@ -1453,7 +1453,7 @@ PHP_FUNCTION(swe_fixstar2_mag)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s",
 			&star_ptr, &star_len) == FAILURE) {
 		return;
 	}
@@ -1520,7 +1520,7 @@ PHP_FUNCTION(swe_set_ephe_path)
 
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s", &arg, &arg_len) == FAILURE) {
 		return;
 	}
 	
@@ -1554,7 +1554,7 @@ PHP_FUNCTION(swe_set_jpl_file)
 
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s", &arg, &arg_len) == FAILURE) {
 		return;
 	}
 
@@ -1590,7 +1590,7 @@ PHP_FUNCTION(swe_get_planet_name)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &ipl) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "l", &ipl) == FAILURE) {
 		return;
 	}
 
@@ -1626,7 +1626,7 @@ PHP_FUNCTION(swe_set_topo)
 
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddd",
 		&geo_lon, &geo_lat, &geo_alt) == FAILURE) {
 		return;
 	}
@@ -1637,7 +1637,7 @@ PHP_FUNCTION(swe_set_topo)
 /* {{{ pod
 =pod
 
-=head1 function swe_set_sid_mode(sid_mode, &t0, &ayan_t0)
+=head1 function swe_set_sid_mode(sid_mode, t0, ayan_t0)
 
 Set one of the numerous sidereal modes, used with flag SEFLG_SIDEREAL and some functions
 
@@ -1662,7 +1662,7 @@ PHP_FUNCTION(swe_set_sid_mode)
 		
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ldd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ldd",
 		&sid_mode, &t0, &ayan_t0) == FAILURE) {
 		return;
 	}
@@ -1695,7 +1695,7 @@ PHP_FUNCTION(swe_get_ayanamsa)
 		
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 		&tjd_et) == FAILURE) {
 		return;
 	}
@@ -1738,7 +1738,7 @@ PHP_FUNCTION(swe_get_ayanamsa_ex)
 
 	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 		&tjd_et, &iflag) == FAILURE) {
 		return;
 	}
@@ -1780,7 +1780,7 @@ PHP_FUNCTION(swe_get_ayanamsa_ut)
 		
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 		&tjd_ut) == FAILURE) {
 		return;
 	}
@@ -1823,7 +1823,7 @@ PHP_FUNCTION(swe_get_ayanamsa_ex_ut)
 
 	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 		&tjd_ut, &iflag) == FAILURE) {
 		return;
 	}
@@ -1864,7 +1864,7 @@ PHP_FUNCTION(swe_get_ayanamsa_name)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &isidmode) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "l", &isidmode) == FAILURE) {
 		return;
 	}
 
@@ -1973,7 +1973,7 @@ PHP_FUNCTION(swe_get_current_file_data)
 
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "l",
 			&ifno) == FAILURE) {
 		return;
 	}
@@ -2032,7 +2032,7 @@ PHP_FUNCTION(swe_date_conversion)
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lllds",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "lllds",
 			&year, &month, &day, &hour, &gregflag, &arg_len) == FAILURE) {
 		return;
 	}
@@ -2082,7 +2082,7 @@ PHP_FUNCTION(swe_julday)
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "llldl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "llldl",
 			&year, &month, &day, &hour, &gregflag) == FAILURE) {
 		return;
 	}
@@ -2124,7 +2124,7 @@ PHP_FUNCTION(swe_revjul)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&jd, &gregflag) == FAILURE) {
 		return;
 	}
@@ -2177,7 +2177,7 @@ PHP_FUNCTION(swe_jdet_to_utc)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&tjd_et, &gregflag) == FAILURE) {
 		return;
 	}
@@ -2230,7 +2230,7 @@ PHP_FUNCTION(swe_jdut1_to_utc)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&tjd_ut, &gregflag) == FAILURE) {
 		return;
 	}
@@ -2295,7 +2295,7 @@ PHP_FUNCTION(swe_utc_to_jd)
 	
 	if(ZEND_NUM_ARGS() != 7) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "llllldl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "llllldl",
 			&iyear, &imonth, &iday, &ihour, &imin, &dsec, &gregflag) == FAILURE) {
 		return;
 	}
@@ -2355,7 +2355,7 @@ PHP_FUNCTION(swe_utc_time_zone)
 	
 	if(ZEND_NUM_ARGS() != 7) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "llllldd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "llllldd",
 			&iyear, &imonth, &iday, &ihour, &imin, &dsec, &d_timezone) == FAILURE) {
 		return;
 	}
@@ -2417,7 +2417,7 @@ PHP_FUNCTION(swe_houses)
 	
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddds",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddds",
 			&tjd_ut, &geolat, &geolon, &hsys, &hsys_len) == FAILURE) {
 		return;
 	}
@@ -2487,7 +2487,7 @@ PHP_FUNCTION(swe_houses_ex)
 	
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dldds",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dldds",
 			&tjd_ut, &iflag, &geolat, &geolon, &hsys, &hsys_len) == FAILURE) {
 		return;
 	}
@@ -2562,7 +2562,7 @@ PHP_FUNCTION(swe_houses_ex2)
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dldds",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dldds",
 			&tjd_ut, &iflag, &geolat, &geolon, &hsys, &hsys_len) == FAILURE) {
 		return;
 	}
@@ -2640,7 +2640,7 @@ PHP_FUNCTION(swe_houses_armc)
 	
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddds",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddds",
 			&armc, &geolat, &eps, &hsys, &hsys_len) == FAILURE) {
 		return;
 	}
@@ -2713,7 +2713,7 @@ PHP_FUNCTION(swe_houses_armc_ex2)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddds",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddds",
 			&armc, &geolat, &eps, &hsys, &hsys_len) == FAILURE) {
 		return;
 	}
@@ -2793,7 +2793,7 @@ PHP_FUNCTION(swe_house_pos)
 	
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dddsdd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dddsdd",
 			&armc, &geolat, &eps, &hsys, &hsys_len, &xpin[0], &xpin[1]) == FAILURE) {
 		return;
 	}
@@ -2845,7 +2845,7 @@ PHP_FUNCTION(swe_house_name)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &hsys, &hsys_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s", &hsys, &hsys_len) == FAILURE) {
 		return;
 	}
 
@@ -2910,7 +2910,7 @@ PHP_FUNCTION(swe_gauquelin_sector)
 	
 	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsllddddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlsllddddd",
 			&t_ut, &ipl, &starname, &s_len, &iflag, &imeth, &geopos[0],
 			&geopos[1], &geopos[2], &atpress, &attemp) == FAILURE) {
 		return;
@@ -3015,7 +3015,7 @@ PHP_FUNCTION(swe_sol_eclipse_where)
 
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&tjd_ut, &ifl, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3092,7 +3092,7 @@ PHP_FUNCTION(swe_lun_occult_where)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlsd",
 			&tjd_ut, &ipl, &starname, &s_len, &ifl, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3122,7 +3122,7 @@ PHP_FUNCTION(swe_lun_occult_where)
 /* {{{ pod
 =pod
 
-=head1 function swe_sol_eclipse_how(tjd_ut, iflag, geopos[0], geopos[1], geopos[2]);
+=head1 function swe_sol_eclipse_how(tjd_ut, iflag, geolng, geolat, geoalt);
 
 Computes attributes of a solar eclipse for given tjd, geo. longitude, geo. latitude, and geo. height.
 
@@ -3130,9 +3130,9 @@ Computes attributes of a solar eclipse for given tjd, geo. longitude, geo. latit
 
   tjd_ut	double   Julian day number, Universal Time
   iflag   	int      (specify ephemeris to be used, cf. swe_calc( ))
-  geopos[0] double	 geographic longitude
-  geopos[1] double	 geographic latitude
-  geopos[2] double	 altitude above sea level, in meters
+  geolng    double	 geographic longitude
+  geolat    double	 geographic latitude
+  geoalt    double	 altitude above sea level, in meters
 
 =head3 return array
 
@@ -3176,7 +3176,7 @@ PHP_FUNCTION(swe_sol_eclipse_how)
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlddd",
 			&tjd_ut, &ifl, &geopos[0], &geopos[1], &geopos[2], &arg_len) == FAILURE) {
 		return;
 	}
@@ -3267,7 +3267,7 @@ PHP_FUNCTION(swe_sol_eclipse_when_loc)
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dldddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dldddl",
 			&tjd_start, &ifl, &geopos[0], &geopos[1], &geopos[2], &backward, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3368,7 +3368,7 @@ PHP_FUNCTION(swe_lun_occult_when_loc)
 
 	if(ZEND_NUM_ARGS() != 8) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsldddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlsldddl",
 			&tjd_start, &ipl, &starname, &s_len, &ifl, &geopos[0], &geopos[1],
 			&geopos[2], &backward, &arg_len) == FAILURE) {
 		return;
@@ -3447,7 +3447,7 @@ PHP_FUNCTION(swe_sol_eclipse_when_glob)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlll",
 			&tjd_start, &ifl, &ifltype, &backward, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3527,7 +3527,7 @@ PHP_FUNCTION(swe_lun_occult_when_glob)
 	*star = '\0';
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlslll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlslll",
 			&tjd_start, &ipl, &starname, &s_len, &ifl, &ifltype, 
 			&backward, &arg_len) == FAILURE) {
 		return;
@@ -3609,7 +3609,7 @@ PHP_FUNCTION(swe_lun_eclipse_how)
 
 	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlddd",
 			&tjd_ut, &ifl, &geopos[0], &geopos[1], &geopos[2], &arg_len) == FAILURE) {
 		return;
 	}
@@ -3678,7 +3678,7 @@ PHP_FUNCTION(swe_lun_eclipse_when)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlll",
 			&tjd_start, &ifl, &ifltype, &backward, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3759,7 +3759,7 @@ PHP_FUNCTION(swe_lun_eclipse_when_loc)
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dldddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dldddl",
 			&tjd_start, &ifl, &geopos[0], &geopos[1], &geopos[2], &backward, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3829,7 +3829,7 @@ PHP_FUNCTION(swe_pheno)
 
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dll",
 			&tjd_et, &ipl, &iflag, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3893,7 +3893,7 @@ PHP_FUNCTION(swe_pheno_ut)
 
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dll",
 			&tjd_ut, &ipl, &iflag, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3947,7 +3947,7 @@ PHP_FUNCTION(swe_refrac)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dddl",
 			&inalt, &atpress, &attemp, &calc_flag, &arg_len) == FAILURE) {
 		return;
 	}
@@ -3978,8 +3978,8 @@ It is more correct and more skilled than the old function swe_refrac():
   double	inalt		altitude of object in degrees 
   double	geoalt      altitude of observer above sea level in meters 
   double	atpress		atmospheric pressure (hectopascal)
-  double	lapse_rate  (dT/dh) [deg K/m]
   double	attemp		atmospheric temperature °C
+  double	lapse_rate  (dT/dh) [deg K/m]
   int       calc_flag   either SE_APP_TO_TRUE or  SE_TRUE_TO_APP
 
 =head3 return array
@@ -4008,7 +4008,7 @@ PHP_FUNCTION(swe_refrac_extended)
 
 	if(ZEND_NUM_ARGS() != 6) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dddddl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dddddl",
 			&inalt, &geoalt, &atpress, &attemp, &lapse_rate, &calc_flag, &arg_len) == FAILURE) {
 		return;
 	}
@@ -4096,7 +4096,7 @@ PHP_FUNCTION(swe_heliacal_ut)
 	long event_type, helflag;
 	*serr = '\0';
 	if(ZEND_NUM_ARGS() != 17) WRONG_PARAM_COUNT;
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddddddddddddddsll",
 			&tjdstart, &dgeo[0], &dgeo[1], &dgeo[2], &datm[0], &datm[1], &datm[2], &datm[3],  &dobs[0], &dobs[1], &dobs[2], &dobs[3], &dobs[4], &dobs[5],  &objectname, &olen, &event_type, &helflag,  &arg_len) == FAILURE) {
 		return;
 	}
@@ -4147,7 +4147,7 @@ PHP_FUNCTION(swe_heliacal_pheno_ut)
 	long event_type, helflag;
 	*serr = '\0';
 	if(ZEND_NUM_ARGS() != 17) WRONG_PARAM_COUNT;
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddddddddddddddsll",
 			&tjdstart, &dgeo[0], &dgeo[1], &dgeo[2], &datm[0], &datm[1], &datm[2], &datm[3],  &dobs[0], &dobs[1], &dobs[2], &dobs[3], &dobs[4], &dobs[5],  &objectname, &olen, &event_type, &helflag,  &arg_len) == FAILURE) {
 		return;
 	}
@@ -4203,7 +4203,7 @@ PHP_FUNCTION(swe_vis_limit_mag)
 	long helflag;
 	*serr = '\0';
 	if(ZEND_NUM_ARGS() != 16) WRONG_PARAM_COUNT;
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddddddddddsl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddddddddddddddsl",
 			&tjdstart, &dgeo[0], &dgeo[1], &dgeo[2], &datm[0], &datm[1], &datm[2], &datm[3],  &dobs[0], &dobs[1], &dobs[2], &dobs[3], &dobs[4], &dobs[5],  &objectname, &olen, &helflag,  &arg_len) == FAILURE) {
 		return;
 	}
@@ -4260,7 +4260,7 @@ PHP_FUNCTION(swe_azalt)
 
 	if(ZEND_NUM_ARGS() != 9) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlddddddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlddddddd",
 			&tjd_ut, &calc_flag, 
 			&geopos[0], &geopos[1], &geopos[2], 
 			&atpress, &attemp,
@@ -4311,7 +4311,7 @@ PHP_FUNCTION(swe_azalt_rev)
 
 	if(ZEND_NUM_ARGS() != 7) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlddddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlddddd",
 			&tjd_ut, &calc_flag, 
 			&geopos[0], &geopos[1], &geopos[2], 
 			&xin[0], &xin[1], 
@@ -4376,7 +4376,7 @@ PHP_FUNCTION(swe_rise_trans)
 
 	if(ZEND_NUM_ARGS() != 10) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlsllddddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlsllddddd",
 			&tjd_ut, &ipl, &starname, &s_len, &epheflag, &rsmi,
 			&(geopos[0]), &(geopos[1]), &(geopos[2]),
 			&atpress, &attemp, 
@@ -4459,7 +4459,7 @@ PHP_FUNCTION(swe_rise_trans_true_hor)
 
 	if(ZEND_NUM_ARGS() != 11) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlslldddddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlslldddddd",
 			&tjd_ut, &ipl, &starname, &s_len, &epheflag, &rsmi,
 			&geopos[0], &geopos[1], &geopos[2],
 			&atpress, &attemp, &horhgt,
@@ -4536,7 +4536,7 @@ PHP_FUNCTION(swe_nod_aps)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlll",
 			&tjd_et, &ipl, &iflag, &method,
 			&arg_len) == FAILURE) {
 		return;
@@ -4615,7 +4615,7 @@ PHP_FUNCTION(swe_nod_aps_ut)
 
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dlll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dlll",
 			&tjd_ut, &ipl, &iflag, &method,
 			&arg_len) == FAILURE) {
 		return;
@@ -4650,7 +4650,7 @@ PHP_FUNCTION(swe_nod_aps_ut)
 /* {{{ pod
 =pod
 
-=head1 function swe_get_orbital_elements(tjd_1t, ipl, iflag)
+=head1 function swe_get_orbital_elements(tjd_et, ipl, iflag)
 
 Calculates osculating orbital elements (Kepler elements) of a planet 
 or asteroid or the Earth-Moon barycentre. 
@@ -4685,7 +4685,7 @@ PHP_FUNCTION(swe_get_orbital_elements)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dll",
 			&tjd_et, &ipl, &iflag) == FAILURE) {
 		return;
 	}
@@ -4739,7 +4739,7 @@ PHP_FUNCTION(swe_orbit_max_min_true_distance)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 		
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dll",
 			&tjd_et, &ipl, &iflag) == FAILURE) {
 		return;
 	}
@@ -4787,7 +4787,7 @@ PHP_FUNCTION(swe_deltat)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&tjd_ut) == FAILURE) {
 		return;
 	}
@@ -4833,7 +4833,7 @@ PHP_FUNCTION(swe_deltat_ex)
 
 	if (ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&tjd_ut, &ephe_flag) == FAILURE) {
 		return;
 	}
@@ -4880,7 +4880,7 @@ PHP_FUNCTION(swe_time_equ)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&tjd) == FAILURE) {
 		return;
 	}
@@ -4928,7 +4928,7 @@ PHP_FUNCTION(swe_lmt_to_lat)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dd",
 			&tjd_lmt, &geolon) == FAILURE) {
 		return;
 	}
@@ -4975,7 +4975,7 @@ PHP_FUNCTION(swe_lat_to_lmt)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dd",
 			&tjd_lat, &geolon) == FAILURE) {
 		return;
 	}
@@ -5016,7 +5016,7 @@ PHP_FUNCTION(swe_sidtime0)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddd",
 			&tjd_ut, &eps, &nut) == FAILURE) {
 		return;
 	}
@@ -5050,7 +5050,7 @@ PHP_FUNCTION(swe_sidtime)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&tjd_ut) == FAILURE) {
 		return;
 	}
@@ -5072,6 +5072,7 @@ Convert ecliptic to equatorial if eps is negative.
   double        lng     Longitude/right ascension position.
   double        lat     Latitude/declination position.
   double        dist    Distance (ignored).
+  double        eps     Obliquity of ecliptic, in degrees.
 
 =head3 return array
 
@@ -5094,7 +5095,7 @@ PHP_FUNCTION(swe_cotrans)
 	
 	if(ZEND_NUM_ARGS() != 4) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dddd",
 			&xpo[0], &xpo[1], &xpo[2], &eps) == FAILURE) {
 		return;
 	}
@@ -5124,6 +5125,7 @@ Convert ecliptic to equatorial if eps is negative.
   double        lngs    Longitude/right ascension velocity.
   double        lat     Latitude/declination velocity.
   double        dists   Distance velocity (ignored).
+  double        eps     Obliquity of ecliptic, in degrees.
 
 =head3 return array
 
@@ -5149,7 +5151,7 @@ PHP_FUNCTION(swe_cotrans_sp)
 	
 	if(ZEND_NUM_ARGS() != 7) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ddddddd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ddddddd",
 			&xpo[0], &xpo[1], &xpo[2], &xpo[3], &xpo[4], &xpo[5], &eps) == FAILURE) {
 		return;
 	}
@@ -5213,7 +5215,7 @@ PHP_FUNCTION(swe_set_tid_acc)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&t_acc) == FAILURE) {
 		return;
 	}
@@ -5247,7 +5249,7 @@ PHP_FUNCTION(swe_set_delta_t_userdef)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&dt) == FAILURE) {
 		return;
 	}
@@ -5283,7 +5285,7 @@ PHP_FUNCTION(swe_degnorm)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d", &x) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d", &x) == FAILURE) {
 		return;
 	}
 
@@ -5317,7 +5319,7 @@ PHP_FUNCTION(swe_radnorm)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&x) == FAILURE) {
 		return;
 	}
@@ -5356,7 +5358,7 @@ PHP_FUNCTION(swe_rad_midp)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dd",
 			&x1, &x0) == FAILURE) {
 		return;
 	}
@@ -5395,7 +5397,7 @@ PHP_FUNCTION(swe_deg_midp)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dd",
 			&x1, &x0) == FAILURE) {
 		return;
 	}
@@ -5416,7 +5418,7 @@ It can also round to seconds, minutes, degrees.
 =head3 Parameters
 
     double      ddeg            Decimal degree value to "split".
-    double      roundflag       Default is no rounding; otherwise use flags:
+    int         roundflag       Default is no rounding; otherwise use flags:
                                 SE_SPLIT_DEG_ROUND_SEC
                                 SE_SPLIT_DEG_ROUND_MIN
                                 SE_SPLIT_DEG_ROUND_DEG
@@ -5448,7 +5450,7 @@ PHP_FUNCTION(swe_split_deg)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
 			&ddeg, &roundflag) == FAILURE) {
 		return;
 	}
@@ -5488,7 +5490,7 @@ PHP_FUNCTION(swe_csnorm)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "l",
 			&p) == FAILURE) {
 		return;
 	}
@@ -5523,7 +5525,7 @@ PHP_FUNCTION(swe_difcsn)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ll",
 			&p1, &p2) == FAILURE) {
 		return;
 	}
@@ -5558,7 +5560,7 @@ PHP_FUNCTION(swe_difdegn)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dd",
 			&p1, &p2) == FAILURE) {
 		return;
 	}
@@ -5593,7 +5595,7 @@ PHP_FUNCTION(swe_difcs2n)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "ll",
 			&p1, &p2) == FAILURE) {
 		return;
 	}
@@ -5628,7 +5630,7 @@ PHP_FUNCTION(swe_difdeg2n)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dd",
 			&p1, &p2) == FAILURE) {
 		return;
 	}
@@ -5663,7 +5665,7 @@ PHP_FUNCTION(swe_difrad2n)
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "dd",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dd",
 			&p1, &p2) == FAILURE) {
 		return;
 	}
@@ -5697,7 +5699,7 @@ PHP_FUNCTION(swe_csroundsec)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "l",
 			&x) == FAILURE) {
 		return;
 	}
@@ -5731,7 +5733,7 @@ PHP_FUNCTION(swe_d2l)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&x) == FAILURE) {
 		return;
 	}
@@ -5765,7 +5767,7 @@ PHP_FUNCTION(swe_day_of_week)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d",
 			&jd) == FAILURE) {
 		return;
 	}
@@ -5802,7 +5804,7 @@ PHP_FUNCTION(swe_cs2timestr)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lll",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "lll",
 			&t, &sep, &suppressZero) == FAILURE) {
 		return;
 	}
@@ -5844,7 +5846,7 @@ PHP_FUNCTION(swe_cs2lonlatstr)
 	
 	if(ZEND_NUM_ARGS() != 3) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lss",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "lss",
 			&t, &pchar, &pchar_len, &mchar, &mchar_len) == FAILURE) {
 		return;
 	}
@@ -5882,7 +5884,7 @@ PHP_FUNCTION(swe_cs2degstr)
 	
 	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "l",
 			&t) == FAILURE) {
 		return;
 	}
@@ -5905,7 +5907,7 @@ PHP_FUNCTION(confirm_swephp_compiled)
 	int arg_len, len;
 	char string[256];
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s", &arg, &arg_len) == FAILURE) {
 		return;
 	}
 

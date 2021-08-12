@@ -8,23 +8,24 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
+include 'utility/Format.php';
 swe_set_ephe_path('./sweph/ephe');
-var_dump(swe_calc_ut(2452275.499255786, 0, SEFLG_SWIEPH|SEFLG_SPEED));
+var_dump(Format::round(swe_calc_ut(2452275.499255786, 0, SEFLG_SWIEPH|SEFLG_SPEED)));
 ?>
 --EXPECT--
 array(8) {
   [0]=>
-  float(280.38296810621)
+  float(280.382968)
   [1]=>
-  float(0.00014968070565525)
+  float(0.00015)
   [2]=>
-  float(0.98329783914845)
+  float(0.983298)
   [3]=>
-  float(1.0188772348975)
+  float(1.018877)
   [4]=>
-  float(1.7232637573749E-5)
+  float(1.7E-5)
   [5]=>
-  float(-1.0220875853441E-5)
+  float(-1.0E-5)
   ["serr"]=>
   string(0) ""
   ["rc"]=>
