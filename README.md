@@ -75,10 +75,12 @@ To create a html documentation page, use this command:
 
 pod2html swephp.c > php-sweph-doc.html
 
-_The HTML version of this documentation is included in this repository here:_
+_Documentation is included in this repository here:_
 ```
 /doc/doc.html
+/doc/doc.md
 ```
+[Read it here on GitHub &raquo;](https://github.com/cyjoelchen/php-sweph/blob/master/doc/doc.md)
 
 ## Example
 
