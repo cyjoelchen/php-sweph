@@ -1,5 +1,5 @@
 /* This is a generated file, edit the .stub.php file instead.
- * Stub hash: e6d6e77eaa491fad0c4501239f4ce7c879569fe6 */
+ * Stub hash: c8316eec6b859be423c29aeabf2f3b62495407c9 */
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_calc, 0, 3, IS_ARRAY, 0)
 	ZEND_ARG_OBJ_INFO(0, tjd_et, double, 0)
@@ -313,7 +313,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_pheno_ut, 0, 3, IS_ARRAY, 0)
 	ZEND_ARG_TYPE_INFO(0, iflag, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_refrac, 0, 4, IS_ARRAY, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_swe_refrac, 0, 4, double, 0)
 	ZEND_ARG_OBJ_INFO(0, inalt, double, 0)
 	ZEND_ARG_OBJ_INFO(0, atpress, double, 0)
 	ZEND_ARG_OBJ_INFO(0, attemp, double, 0)
@@ -382,9 +382,12 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_azalt, 0, 9, IS_ARRAY, 0)
 	ZEND_ARG_OBJ_INFO(0, xin1, double, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_azalt_rev, 0, 4, IS_ARRAY, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_azalt_rev, 0, 7, IS_ARRAY, 0)
 	ZEND_ARG_OBJ_INFO(0, tjd_ut, double, 0)
 	ZEND_ARG_TYPE_INFO(0, calc_flag, IS_LONG, 0)
+	ZEND_ARG_OBJ_INFO(0, lng, double, 0)
+	ZEND_ARG_OBJ_INFO(0, lat, double, 0)
+	ZEND_ARG_OBJ_INFO(0, alt, double, 0)
 	ZEND_ARG_OBJ_INFO(0, xin0, double, 0)
 	ZEND_ARG_OBJ_INFO(0, xin1, double, 0)
 ZEND_END_ARG_INFO()

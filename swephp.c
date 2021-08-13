@@ -1189,6 +1189,9 @@ PHP_FUNCTION(swe_fixstar)
 	strncpy(star, star_ptr, star_len);
 	// php_printf("%s", star);
 	rc = swe_fixstar(star, tjd_et, (int)iflag, xx, serr);
+	if (! (iflag & SEFLG_SPEED)) {
+		for (i =3; i < 6; i++) xx[i] = 0; 
+	}  
 	// php_printf("%s %s %d\n", star, serr, rc);
 
 	array_init(return_value);
@@ -1301,6 +1304,9 @@ PHP_FUNCTION(swe_fixstar_ut)
 	memset(star, 0, MAX_FIXSTAR_NAME);
 	strncpy(star, star_ptr, star_len);
 	rc = swe_fixstar_ut(star, tjd_ut, (int)iflag, xx, serr);
+	if (! (iflag & SEFLG_SPEED)) {
+		for (i =3; i < 6; i++) xx[i] = 0; 
+	}  
 
 	array_init(return_value);
 	for(i = 0; i < 6; i++)
@@ -4278,16 +4284,19 @@ PHP_FUNCTION(swe_azalt)
 /* {{{ pod
 =pod
 
-=head1 function swe_azalt_rev(tjd_ut, calc_flag, xin0, xin1)
+=head1 function swe_azalt_rev(tjd_ut, calc_flag, lng, lat, alt, xin0, xin1)
 
 computes either ecliptical or equatorial coordinates from azimuth and true altitude in degrees.
 
 =head3 Parameters
 
   double        tjd_ut      
-  int           calc_flag		either SE_HOR2ECL or SE_HOR2EQU
-  double		xin0		azimut, in degrees
-  double		xin1		true altitude, in degrees
+  int           calc_flag   Either SE_HOR2ECL or SE_HOR2EQU
+  double        lng         Longitude position of observer.
+  double        lat         Latitude position of observer.
+  double        alt         Altitude of observer.
+  double        xin0        azimut, in degrees
+  double        xin1        true altitude, in degrees
 
 =head3 return array
 

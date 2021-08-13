@@ -11,13 +11,13 @@ if (!extension_loaded('swephp')) {
 include 'utility/Format.php';
 swe_set_ephe_path('./sweph/ephe');
 echo "swe_fixstar\n";
-var_dump(Format::round(swe_fixstar('Sirius', 2452275.5, SEFLG_SWIEPH|SEFLG_SPEED)));
+var_dump(Format::round(swe_fixstar('Sirius', 2452275.5, SEFLG_SWIEPH)));
 echo "swe_fixstar2\n";
-var_dump(Format::round(swe_fixstar2('Sirius', 2452275.5, SEFLG_SWIEPH|SEFLG_SPEED)));
+var_dump(Format::round(swe_fixstar2('Sirius', 2452275.5, SEFLG_SWIEPH)));
 echo "swe_fixstar_ut\n";
-var_dump(Format::round(swe_fixstar_ut('Polaris', 2452275.5, SEFLG_SWIEPH|SEFLG_SPEED)));
+var_dump(Format::round(swe_fixstar_ut('Polaris', 2452275.5, SEFLG_SWIEPH | SEFLG_EQUATORIAL)));
 echo "swe_fixstar2_ut\n";
-var_dump(Format::round(swe_fixstar2_ut('Polaris', 2452275.5, SEFLG_SWIEPH|SEFLG_SPEED)));
+var_dump(Format::round(swe_fixstar2_ut('Polaris', 2452275.5, SEFLG_SWIEPH | SEFLG_EQUATORIAL)));
 echo "swe_fixstar2_mag\n";
 var_dump(Format::round(swe_fixstar2_mag('Sirius')));
 ?>
@@ -31,17 +31,17 @@ array(9) {
   [2]=>
   float(543929.857183)
   [3]=>
-  float(8.0E-5)
+  float(0)
   [4]=>
-  float(-4.9E-5)
+  float(0)
   [5]=>
-  float(-0.004142)
+  float(0)
   ["star"]=>
   string(12) "Sirius,alCMa"
   ["serr"]=>
   string(0) ""
   ["rc"]=>
-  int(258)
+  int(2)
 }
 swe_fixstar2
 array(9) {
@@ -52,59 +52,59 @@ array(9) {
   [2]=>
   float(543929.857183)
   [3]=>
-  float(8.0E-5)
+  float(0)
   [4]=>
-  float(-4.9E-5)
+  float(0)
   [5]=>
-  float(-0.004142)
+  float(0)
   ["star"]=>
   string(12) "Sirius,alCMa"
   ["serr"]=>
   string(0) ""
   ["rc"]=>
-  int(258)
+  int(2)
 }
 swe_fixstar_ut
 array(9) {
   [0]=>
-  float(88.604974)
+  float(38.647425)
   [1]=>
-  float(66.102794)
+  float(89.276469)
   [2]=>
   float(27356067.783758)
   [3]=>
-  float(2.6E-5)
+  float(0)
   [4]=>
-  float(0.000107)
+  float(0)
   [5]=>
-  float(-0.008465)
+  float(0)
   ["star"]=>
   string(13) "Polaris,alUMi"
   ["serr"]=>
   string(0) ""
   ["rc"]=>
-  int(258)
+  int(2050)
 }
 swe_fixstar2_ut
 array(9) {
   [0]=>
-  float(88.604974)
+  float(38.647425)
   [1]=>
-  float(66.102794)
+  float(89.276469)
   [2]=>
   float(27356067.783758)
   [3]=>
-  float(2.6E-5)
+  float(0)
   [4]=>
-  float(0.000107)
+  float(0)
   [5]=>
-  float(-0.008465)
+  float(0)
   ["star"]=>
   string(13) "Polaris,alUMi"
   ["serr"]=>
   string(0) ""
   ["rc"]=>
-  int(258)
+  int(2050)
 }
 swe_fixstar2_mag
 array(4) {

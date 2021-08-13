@@ -549,9 +549,9 @@ function swe_pheno_ut(double $tjd_ut, int $ipl, int $iflag): array {}
  * @param double $atpress
  * @param double $attemp
  * @param int $calc_flag
- * @return array
+ * @return double
  */
-function swe_refrac(double $inalt, double $atpress, double $attemp, int $calc_flag): array {}
+function swe_refrac(double $inalt, double $atpress, double $attemp, int $calc_flag): double {}
 
 /**
  * @param double $inalt
@@ -716,11 +716,22 @@ function swe_azalt(
 /**
  * @param double $tjd_ut
  * @param int $calc_flag
+ * @param double $lng
+ * @param double $lat
+ * @param double $alt
  * @param double $xin0
  * @param double $xin1
  * @return array
  */
-function swe_azalt_rev(double $tjd_ut, int $calc_flag, double $xin0, double $xin1): array {}
+function swe_azalt_rev(
+    double $tjd_ut,
+    int $calc_flag,
+    double $lng,
+    double $lat,
+    double $alt,
+    double $xin0,
+    double $xin1
+): array {}
 
 /**
  * @param double $tjd_ut
