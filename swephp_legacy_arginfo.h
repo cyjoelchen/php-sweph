@@ -1,5 +1,5 @@
 /* This is a generated file, edit the .stub.php file instead.
- * Stub hash: 635d6555de3d45e4bed3e29f5a2b16cf2a4b907a */
+ * Stub hash: c8316eec6b859be423c29aeabf2f3b62495407c9 */
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_calc, 0, 0, 3)
 	ZEND_ARG_INFO(0, tjd_et)
@@ -381,9 +381,12 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_azalt, 0, 0, 9)
 	ZEND_ARG_INFO(0, xin1)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_azalt_rev, 0, 0, 4)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_azalt_rev, 0, 0, 7)
 	ZEND_ARG_INFO(0, tjd_ut)
 	ZEND_ARG_INFO(0, calc_flag)
+	ZEND_ARG_INFO(0, lng)
+	ZEND_ARG_INFO(0, lat)
+	ZEND_ARG_INFO(0, alt)
 	ZEND_ARG_INFO(0, xin0)
 	ZEND_ARG_INFO(0, xin1)
 ZEND_END_ARG_INFO()

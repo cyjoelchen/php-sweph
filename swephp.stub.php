@@ -716,11 +716,22 @@ function swe_azalt(
 /**
  * @param double $tjd_ut
  * @param int $calc_flag
+ * @param double $lng
+ * @param double $lat
+ * @param double $alt
  * @param double $xin0
  * @param double $xin1
  * @return array
  */
-function swe_azalt_rev(double $tjd_ut, int $calc_flag, double $xin0, double $xin1): array {}
+function swe_azalt_rev(
+    double $tjd_ut,
+    int $calc_flag,
+    double $lng,
+    double $lat,
+    double $alt,
+    double $xin0,
+    double $xin1
+): array {}
 
 /**
  * @param double $tjd_ut
