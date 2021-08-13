@@ -136,6 +136,31 @@ var_dump($out);
 echo '</pre>';
 ```
 
+Functions can also be tested and executed directly from the command line:                                    
+```                                                                                                          
+php -r '$jd=swe_julday(2002, 1, 1, 0, 1);var_dump(swe_calc_ut($jd,SE_SUN,SEFLG_SPEED));'                     
+                                                                                                             
+output:                                                                                                      
+array(8) {
+  [0]=>
+  float(280.38372636858)
+  [1]=>
+  float(0.00014970535610325)
+  [2]=>
+  float(0.98329783154375)
+  [3]=>
+  float(1.0188772684611)
+  [4]=>
+  float(1.7224710342829E-5)
+  [5]=>
+  float(-1.0215998283642E-5)
+  ["serr"]=>
+  string(0) ""
+  ["rc"]=>
+  int(258)
+}
+```                                                                                                          
+
 ## Development
 
 This repository ships with a simple Docker setup for easy development.
