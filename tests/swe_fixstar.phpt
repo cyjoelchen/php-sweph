@@ -15,9 +15,9 @@ var_dump(Format::round(swe_fixstar('Sirius', 2452275.5, SEFLG_SWIEPH)));
 echo "swe_fixstar2\n";
 var_dump(Format::round(swe_fixstar2('Sirius', 2452275.5, SEFLG_SWIEPH)));
 echo "swe_fixstar_ut\n";
-var_dump(Format::round(swe_fixstar_ut('Polaris', 2452275.5, SEFLG_SWIEPH)));
+var_dump(Format::round(swe_fixstar_ut('Polaris', 2452275.5, SEFLG_SWIEPH | SEFLG_EQUATORIAL)));
 echo "swe_fixstar2_ut\n";
-var_dump(Format::round(swe_fixstar2_ut('Polaris', 2452275.5, SEFLG_SWIEPH)));
+var_dump(Format::round(swe_fixstar2_ut('Polaris', 2452275.5, SEFLG_SWIEPH | SEFLG_EQUATORIAL)));
 echo "swe_fixstar2_mag\n";
 var_dump(Format::round(swe_fixstar2_mag('Sirius')));
 ?>
@@ -67,15 +67,15 @@ array(9) {
 swe_fixstar_ut
 array(9) {
   [0]=>
-  float(88.604974)
+  float(38.647425)
   [1]=>
-  float(66.102794)
+  float(89.276469)
   [2]=>
   float(27356067.783758)
   [3]=>
-  float(2.6E-5)
+  float(-0.005939)
   [4]=>
-  float(0.000107)
+  float(7.7E-5)
   [5]=>
   float(-0.008465)
   ["star"]=>
@@ -83,14 +83,14 @@ array(9) {
   ["serr"]=>
   string(0) ""
   ["rc"]=>
-  int(2)
+  int(2050)
 }
 swe_fixstar2_ut
 array(9) {
   [0]=>
-  float(88.604974)
+  float(38.647425)
   [1]=>
-  float(66.102794)
+  float(89.276469)
   [2]=>
   float(27356067.783758)
   [3]=>
@@ -104,7 +104,7 @@ array(9) {
   ["serr"]=>
   string(0) ""
   ["rc"]=>
-  int(2)
+  int(2050)
 }
 swe_fixstar2_mag
 array(4) {
