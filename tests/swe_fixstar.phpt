@@ -31,11 +31,11 @@ array(9) {
   [2]=>
   float(543929.857183)
   [3]=>
-  float(8.0E-5)
+  float(0)
   [4]=>
-  float(-4.9E-5)
+  float(0)
   [5]=>
-  float(-0.004142)
+  float(0)
   ["star"]=>
   string(12) "Sirius,alCMa"
   ["serr"]=>
@@ -73,11 +73,11 @@ array(9) {
   [2]=>
   float(27356067.783758)
   [3]=>
-  float(-0.005939)
+  float(0)
   [4]=>
-  float(7.7E-5)
+  float(0)
   [5]=>
-  float(-0.008465)
+  float(0)
   ["star"]=>
   string(13) "Polaris,alUMi"
   ["serr"]=>
