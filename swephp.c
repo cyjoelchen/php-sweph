@@ -4284,16 +4284,19 @@ PHP_FUNCTION(swe_azalt)
 /* {{{ pod
 =pod
 
-=head1 function swe_azalt_rev(tjd_ut, calc_flag, xin0, xin1)
+=head1 function swe_azalt_rev(tjd_ut, calc_flag, lng, lat, alt, xin0, xin1)
 
 computes either ecliptical or equatorial coordinates from azimuth and true altitude in degrees.
 
 =head3 Parameters
 
   double        tjd_ut      
-  int           calc_flag		either SE_HOR2ECL or SE_HOR2EQU
-  double		xin0		azimut, in degrees
-  double		xin1		true altitude, in degrees
+  int           calc_flag   Either SE_HOR2ECL or SE_HOR2EQU
+  double        lng         Longitude position of observer.
+  double        lat         Latitude position of observer.
+  double        alt         Altitude of observer.
+  double        xin0        azimut, in degrees
+  double        xin1        true altitude, in degrees
 
 =head3 return array
 
