@@ -126,7 +126,7 @@ echo "houses: \n" . json_encode($houses, $options = JSON_PRETTY_PRINT) . "\n";
 
 Functions can also be tested and executed directly from the command line:
 ```
-php -r '$jd=swe_julday(2002, 1, 1, 0, 1);var_dump(swe_calc_ut($jd,0,0));'
+php -r '$jd=swe_julday(2002, 1, 1, 0, 1);var_dump(swe_calc_ut($jd,SE_SUN,SEFLG_SPEED));'
 
 output:
 array(8) {
