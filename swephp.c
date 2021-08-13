@@ -1189,6 +1189,9 @@ PHP_FUNCTION(swe_fixstar)
 	strncpy(star, star_ptr, star_len);
 	// php_printf("%s", star);
 	rc = swe_fixstar(star, tjd_et, (int)iflag, xx, serr);
+	if (! (iflag & SEFLG_SPEED)) {
+		for (i =3; i < 6; i++) xx[i] = 0; 
+	}  
 	// php_printf("%s %s %d\n", star, serr, rc);
 
 	array_init(return_value);
@@ -1301,6 +1304,9 @@ PHP_FUNCTION(swe_fixstar_ut)
 	memset(star, 0, MAX_FIXSTAR_NAME);
 	strncpy(star, star_ptr, star_len);
 	rc = swe_fixstar_ut(star, tjd_ut, (int)iflag, xx, serr);
+	if (! (iflag & SEFLG_SPEED)) {
+		for (i =3; i < 6; i++) xx[i] = 0; 
+	}  
 
 	array_init(return_value);
 	for(i = 0; i < 6; i++)
