@@ -549,9 +549,9 @@ function swe_pheno_ut(double $tjd_ut, int $ipl, int $iflag): array {}
  * @param double $atpress
  * @param double $attemp
  * @param int $calc_flag
- * @return array
+ * @return double
  */
-function swe_refrac(double $inalt, double $atpress, double $attemp, int $calc_flag): array {}
+function swe_refrac(double $inalt, double $atpress, double $attemp, int $calc_flag): double {}
 
 /**
  * @param double $inalt
