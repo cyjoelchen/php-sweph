@@ -1188,9 +1188,9 @@ PHP_FUNCTION(swe_fixstar)
 			&star_ptr, &star_len, &tjd_et, &iflag) == FAILURE) {
 		return;
 	}
-	memset(star, 0, MAX_FIXSTAR_NAME + 1);
-	if (star_len > MAX_FIXSTAR_NAME) star_len = MAX_FIXSTAR_NAME;
-	strncpy(star, star_ptr, star_len);
+	// zend_parse_parameters null-terminates the string it has read
+	if (star_len > MAX_FIXSTAR_NAME) star_ptr[MAX_FIXSTAR_NAME] ='\0';
+	strcpy(star, star_ptr);
 	// php_printf("%s", star);
 	rc = swe_fixstar(star, tjd_et, (int)iflag, xx, serr);
 	if (! (iflag & SEFLG_SPEED)) {
@@ -1248,9 +1248,9 @@ PHP_FUNCTION(swe_fixstar2)
 			&star_ptr, &star_len, &tjd_et, &iflag) == FAILURE) {
 		return;
 	}
-	memset(star, 0, MAX_FIXSTAR_NAME + 1);
-	if (star_len > MAX_FIXSTAR_NAME) star_len = MAX_FIXSTAR_NAME;
-	strncpy(star, star_ptr, star_len);
+	// zend_parse_parameters null-terminates the string it has read
+	if (star_len > MAX_FIXSTAR_NAME) star_ptr[MAX_FIXSTAR_NAME] ='\0';
+	strcpy(star, star_ptr);
 	// php_printf("%s", star);
 	rc = swe_fixstar2(star, tjd_et, (int)iflag, xx, serr);
 	// php_printf("%s %s %d\n", star, serr, rc);
@@ -1306,9 +1306,9 @@ PHP_FUNCTION(swe_fixstar_ut)
 			&star_ptr, &star_len, &tjd_ut, &iflag) == FAILURE) {
 		return;
 	}
-	memset(star, 0, MAX_FIXSTAR_NAME + 1);
-	if (star_len > MAX_FIXSTAR_NAME) star_len = MAX_FIXSTAR_NAME;
-	strncpy(star, star_ptr, star_len);
+	// zend_parse_parameters null-terminates the string it has read
+	if (star_len > MAX_FIXSTAR_NAME) star_ptr[MAX_FIXSTAR_NAME] ='\0';
+	strcpy(star, star_ptr);
 	rc = swe_fixstar_ut(star, tjd_ut, (int)iflag, xx, serr);
 	if (! (iflag & SEFLG_SPEED)) {
 		for (i =3; i < 6; i++) xx[i] = 0; 
@@ -1365,9 +1365,9 @@ PHP_FUNCTION(swe_fixstar2_ut)
 			&star_ptr, &star_len, &tjd_ut, &iflag) == FAILURE) {
 		return;
 	}
-	memset(star, 0, MAX_FIXSTAR_NAME + 1);
-	if (star_len > MAX_FIXSTAR_NAME) star_len = MAX_FIXSTAR_NAME;
-	strncpy(star, star_ptr, star_len);
+	// zend_parse_parameters null-terminates the string it has read
+	if (star_len > MAX_FIXSTAR_NAME) star_ptr[MAX_FIXSTAR_NAME] ='\0';
+	strcpy(star, star_ptr);
 	rc = swe_fixstar2_ut(star, tjd_ut, (int)iflag, xx, serr);
 
   
@@ -1419,9 +1419,9 @@ PHP_FUNCTION(swe_fixstar_mag)
 			&star_ptr, &star_len) == FAILURE) {
 		return;
 	}
-	memset(star, 0, MAX_FIXSTAR_NAME + 1);
-	if (star_len > MAX_FIXSTAR_NAME) star_len = MAX_FIXSTAR_NAME;
-	strncpy(star, star_ptr, star_len);
+	// zend_parse_parameters null-terminates the string it has read
+	if (star_len > MAX_FIXSTAR_NAME) star_ptr[MAX_FIXSTAR_NAME] ='\0';
+	strcpy(star, star_ptr);
 	rc = swe_fixstar_mag(star, &dmag, serr);
 
 	array_init(return_value);
@@ -1471,9 +1471,9 @@ PHP_FUNCTION(swe_fixstar2_mag)
 			&star_ptr, &star_len) == FAILURE) {
 		return;
 	}
-	memset(star, 0, MAX_FIXSTAR_NAME + 1);
-	if (star_len > MAX_FIXSTAR_NAME) star_len = MAX_FIXSTAR_NAME;
-	strncpy(star, star_ptr, star_len);
+	// zend_parse_parameters null-terminates the string it has read
+	if (star_len > MAX_FIXSTAR_NAME) star_ptr[MAX_FIXSTAR_NAME] ='\0';
+	strcpy(star, star_ptr);
 	rc = swe_fixstar2_mag(star, &dmag, serr);
 
 	array_init(return_value);
