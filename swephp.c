@@ -3022,7 +3022,7 @@ PHP_FUNCTION(swe_sol_eclipse_where)
 	size_t arg_len;
 	long ifl;
 	int rc;
-	double tjd_ut, geopos[2], attr[20];
+	double tjd_ut, geopos[10], attr[20];
 	char serr[AS_MAXCH]; 
 	int i;
 	zval geopos_arr, attr_arr;
@@ -3097,7 +3097,7 @@ PHP_FUNCTION(swe_lun_occult_where)
 {
 	long ipl, ifl;
 	size_t arg_len, s_len;
-	double tjd_ut, geopos[2], attr[20];
+	double tjd_ut, geopos[10], attr[20];
 	char serr[AS_MAXCH], *starname = NULL; 
 	char star[AS_MAXCH];
 	int i, rc;
