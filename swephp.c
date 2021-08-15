@@ -1186,7 +1186,7 @@ PHP_FUNCTION(swe_fixstar)
 		return;
 	}
 	memset(star, 0, MAX_FIXSTAR_NAME);
-	strncpy(star, star_ptr, star_len);
+	strncpy(star, star_ptr, MAX_FIXSTAR_NAME-1);
 	// php_printf("%s", star);
 	rc = swe_fixstar(star, tjd_et, (int)iflag, xx, serr);
 	if (! (iflag & SEFLG_SPEED)) {
@@ -1245,7 +1245,7 @@ PHP_FUNCTION(swe_fixstar2)
 		return;
 	}
 	memset(star, 0, MAX_FIXSTAR_NAME);
-	strncpy(star, star_ptr, star_len);
+	strncpy(star, star_ptr, MAX_FIXSTAR_NAME-1);
 	// php_printf("%s", star);
 	rc = swe_fixstar2(star, tjd_et, (int)iflag, xx, serr);
 	// php_printf("%s %s %d\n", star, serr, rc);
@@ -1302,7 +1302,7 @@ PHP_FUNCTION(swe_fixstar_ut)
 		return;
 	}
 	memset(star, 0, MAX_FIXSTAR_NAME);
-	strncpy(star, star_ptr, star_len);
+	strncpy(star, star_ptr, MAX_FIXSTAR_NAME-1);
 	rc = swe_fixstar_ut(star, tjd_ut, (int)iflag, xx, serr);
 	if (! (iflag & SEFLG_SPEED)) {
 		for (i =3; i < 6; i++) xx[i] = 0; 
@@ -1360,7 +1360,7 @@ PHP_FUNCTION(swe_fixstar2_ut)
 		return;
 	}
 	memset(star, 0, MAX_FIXSTAR_NAME);
-	strncpy(star, star_ptr, star_len);
+	strncpy(star, star_ptr, MAX_FIXSTAR_NAME-1);
 	rc = swe_fixstar2_ut(star, tjd_ut, (int)iflag, xx, serr);
 
   
@@ -1413,7 +1413,7 @@ PHP_FUNCTION(swe_fixstar_mag)
 		return;
 	}
 	memset(star, 0, MAX_FIXSTAR_NAME);
-	strncpy(star, star_ptr, star_len);
+	strncpy(star, star_ptr, MAX_FIXSTAR_NAME-1);
 	rc = swe_fixstar_mag(star, &dmag, serr);
 
 	array_init(return_value);
@@ -1464,7 +1464,7 @@ PHP_FUNCTION(swe_fixstar2_mag)
 		return;
 	}
 	memset(star, 0, MAX_FIXSTAR_NAME);
-	strncpy(star, star_ptr, star_len);
+	strncpy(star, star_ptr, MAX_FIXSTAR_NAME-1);
 	rc = swe_fixstar2_mag(star, &dmag, serr);
 
 	array_init(return_value);
