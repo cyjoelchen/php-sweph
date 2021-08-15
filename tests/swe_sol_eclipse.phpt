@@ -39,12 +39,6 @@ $rv = swe_sol_eclipse_how($tjd_ut, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2]);
 printf( "retflag = %d %b\n", $rv['retflag'], $rv['retflag']);
 var_dump(Format::round(array_slice($rv['attr'], 0, 11)));
 
-function print_array_t($arr, $n, $name)
-{
-  for ($i = 0; $i < $n; $i++) {
-   printf( "%s[%d] = %f %s\n", $name, $i, $arr[$i], Format::date($arr[$i]));;
-  }
-}
 ?>
 --EXPECT--
 swe_sol_eclipse_when_glob(2454466.5, SEFLG_SWIEPH, 0, 0)
