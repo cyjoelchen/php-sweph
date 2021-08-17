@@ -18,6 +18,9 @@ As such, the `master` branch should be considered unstable and "bleeding edge".
 Follow the steps to build the latest version of this extension.
 Make sure `php-dev` has installed already.
 
+_If you are on a Mac and use or want to use Homebrew, please see:_
+[Installation on macOS Big Sur](https://github.com/cyjoelchen/php-sweph/wiki/Install-on-macOS-Big-Sur.)
+
 ```
 git clone -b 4.0.2 https://github.com/cyjoelchen/php-sweph.git
 cd php-sweph
