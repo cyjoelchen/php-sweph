@@ -1759,6 +1759,8 @@ PHP_FUNCTION(swe_get_ayanamsa_ex)
 	}
 
 	rc = swe_get_ayanamsa_ex(tjd_et, iflag, &daya, serr);
+	if (!(iflag & SEFLG_NONUT))	// these two lines can be removed once bug in upstream is fixed 
+		rc &= (~SEFLG_NONUT); // must remove flag which was added internally in swi_get_ayanamsa_ex()   
 
     array_init(return_value);
 
@@ -1844,6 +1846,8 @@ PHP_FUNCTION(swe_get_ayanamsa_ex_ut)
 	}
 
 	rc = swe_get_ayanamsa_ex_ut(tjd_ut, iflag, &daya, serr);
+	if (!(iflag & SEFLG_NONUT))	// these two lines can be removed once bug in upstream is fixed 
+		rc &= (~SEFLG_NONUT); // must remove flag which was added internally in swi_get_ayanamsa_ex()   
 
     array_init(return_value);
 
