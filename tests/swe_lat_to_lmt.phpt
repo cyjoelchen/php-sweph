@@ -17,7 +17,7 @@ array(3) {
   ["rc"]=>
   int(0)
   ["tjd_lmt"]=>
-  float(2452275.495652)
+  float(2452275.5)
   ["serr"]=>
   string(0) ""
 }

@@ -5009,7 +5009,7 @@ PHP_FUNCTION(swe_lat_to_lmt)
 			&tjd_lat, &geolon) == FAILURE) {
 		return;
 	}
-	rc = swe_lmt_to_lat(tjd_lat, geolon, &tjd_lmt, serr);
+	rc = swe_lat_to_lmt(tjd_lat, geolon, &tjd_lmt, serr);
 	array_init(return_value);
 	
 	add_assoc_long(return_value, "rc", rc);
