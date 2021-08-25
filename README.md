@@ -171,7 +171,7 @@ Setup your local environment for iterative testing:
 
 ```
 > docker build -t php_sweph .
-> docker run --name php-sweph -dit -v ${PWD}:/root/php-sweph php_sweph
+> docker run --rm --name php-sweph -dit -v ${PWD}:/root/php-sweph php_sweph
 ```
 
 _The container `php-sweph` will run in the background._
@@ -187,11 +187,12 @@ The `build-se` bash script will compile the PHP extension and install it for you
 Run tests from the PHP command line via `php -a`.
 Repeat `build-se` execution runs as needed.
 
-When you're finished, exit the container and stop it:
+When you're finished, exit the container[1]:
 
 ```
 > exit
 > docker stop php-sweph
 ```
-
-
+[1]
+_If you started the container with the command above (i.e. by including the `--rm` switch),
+the container will be removed automatically._
