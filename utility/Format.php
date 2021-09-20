@@ -12,7 +12,7 @@ class Format
      *
      * @const int
      */
-    public const PRECISION = 6;
+    const PRECISION = 6;
 
     /**
      * Convert a Julian datetime value into a human-readable datetime string.
