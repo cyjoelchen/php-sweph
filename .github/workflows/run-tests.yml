@@ -33,4 +33,6 @@ jobs:
           sudo make install
 
       - name: Run Tests.
+        env:
+          REPORT_EXIT_STATUS: 1
         run: yes n | make test
