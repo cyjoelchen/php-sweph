@@ -33,4 +33,7 @@ jobs:
           sudo make install
 
       - name: Run Tests.
-        run: yes n | make test
+        env:
+          NO_INTERACTION: 1
+          REPORT_EXIT_STATUS: 1
+        run: make test
