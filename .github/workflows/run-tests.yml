@@ -34,5 +34,6 @@ jobs:
 
       - name: Run Tests.
         env:
+          NO_INTERACTION: 1
           REPORT_EXIT_STATUS: 1
-        run: yes n | make test
+        run: make test
