@@ -645,7 +645,7 @@ Converts a calendar date to julian day number tjd, no validity check for date.
     int           month           (1..12)
     int           day                     (1..31)
     double        hour            UT (0.0 .. 23.99999) clock time as double
-    int           gregflag        SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+    int           gregflag        SE_GREG_CAL (==1, default) or SE_JUL_CAL (==0)
 
 ### return value
 
@@ -662,7 +662,7 @@ Converts julian day number to calendar date
 ### Parameters
 
     double        jd              julian day number
-    int           gregflag        SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+    int           gregflag        SE_GREG_CAL (==1, default) or SE_JUL_CAL (==0)
 
 ### return array
 
