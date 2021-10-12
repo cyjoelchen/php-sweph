@@ -1,5 +1,5 @@
 /* This is a generated file, edit the .stub.php file instead.
- * Stub hash: c8316eec6b859be423c29aeabf2f3b62495407c9 */
+ * Stub hash: d979e9ef23a3db1b9f5a5c0de88c470c1938b073 */
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_calc, 0, 0, 3)
 	ZEND_ARG_INFO(0, tjd_et)
@@ -145,7 +145,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_date_conversion, 0, 0, 5)
 	ZEND_ARG_INFO(0, cal_flag)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_julday, 0, 0, 5)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_julday, 0, 0, 4)
 	ZEND_ARG_INFO(0, year)
 	ZEND_ARG_INFO(0, month)
 	ZEND_ARG_INFO(0, day)
@@ -153,7 +153,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_julday, 0, 0, 5)
 	ZEND_ARG_INFO(0, gregflag)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_revjul, 0, 0, 2)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_revjul, 0, 0, 1)
 	ZEND_ARG_INFO(0, jd)
 	ZEND_ARG_INFO(0, gregflag)
 ZEND_END_ARG_INFO()

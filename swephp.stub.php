@@ -243,17 +243,17 @@ function swe_date_conversion(int $year, int $month, int $day, double $hour, int 
  * @param int $month
  * @param int $day
  * @param double $hour
- * @param int $gregflag
+ * @param int|null $gregflag
  * @return double
  */
-function swe_julday(int $year, int $month, int $day, double $hour, int $gregflag): double {}
+function swe_julday(int $year, int $month, int $day, double $hour, ?int $gregflag = null): double {}
 
 /**
  * @param double $jd
- * @param int $gregflag
+ * @param int|null $gregflag
  * @return array
  */
-function swe_revjul(double $jd, int $gregflag): array {}
+function swe_revjul(double $jd, ?int $gregflag = null): array {}
 
 /**
  * @param double $tjd_et
