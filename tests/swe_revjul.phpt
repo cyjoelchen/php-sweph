@@ -8,8 +8,9 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
-var_dump(swe_revjul(2452275.5, 1));
-var_dump(swe_revjul(2452275.3, 1));
+include 'utility/Format.php';
+var_dump(Format::round(swe_revjul(2452275.5, 1)));
+var_dump(Format::round(swe_revjul(2452275.3, 1)));
 ?>
 --EXPECT--
 array(8) {
@@ -38,7 +39,7 @@ array(8) {
   ["day"]=>
   int(31)
   ["hour"]=>
-  float(19.19999999552965)
+  float(19.2)
   ["ihour"]=>
   int(19)
   ["imin"]=>
@@ -46,5 +47,5 @@ array(8) {
   ["isec"]=>
   int(59)
   ["dsec"]=>
-  float(59.99998390674591)
+  float(59.999984)
 }
