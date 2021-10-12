@@ -1,5 +1,5 @@
 /* This is a generated file, edit the .stub.php file instead.
- * Stub hash: c8316eec6b859be423c29aeabf2f3b62495407c9 */
+ * Stub hash: d979e9ef23a3db1b9f5a5c0de88c470c1938b073 */
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_calc, 0, 3, IS_ARRAY, 0)
 	ZEND_ARG_OBJ_INFO(0, tjd_et, double, 0)
@@ -146,17 +146,17 @@ ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_swe_date_conversion, 0, 5, double
 	ZEND_ARG_TYPE_INFO(0, cal_flag, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_swe_julday, 0, 5, double, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_swe_julday, 0, 4, double, 0)
 	ZEND_ARG_TYPE_INFO(0, year, IS_LONG, 0)
 	ZEND_ARG_TYPE_INFO(0, month, IS_LONG, 0)
 	ZEND_ARG_TYPE_INFO(0, day, IS_LONG, 0)
 	ZEND_ARG_OBJ_INFO(0, hour, double, 0)
-	ZEND_ARG_TYPE_INFO(0, gregflag, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, gregflag, IS_LONG, 1, "null")
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_revjul, 0, 2, IS_ARRAY, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_revjul, 0, 1, IS_ARRAY, 0)
 	ZEND_ARG_OBJ_INFO(0, jd, double, 0)
-	ZEND_ARG_TYPE_INFO(0, gregflag, IS_LONG, 0)
+	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, gregflag, IS_LONG, 1, "null")
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_swe_jdet_to_utc, 0, 2, IS_ARRAY, 0)
