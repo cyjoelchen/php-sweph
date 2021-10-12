@@ -2127,19 +2127,22 @@ Converts julian day number to calendar date
   ['month']		int
   ['day']		int
   ['hour']		double
+  ['ihour']		int
+  ['imin']		int
+  ['isec']		int
+  ['dsec']		double
 
 =head3 C declaration
 
   void swe_revjul ( double jd, int gregflag, int *jyear, int *jmon, int *jday, double *jut);
 
-
 =cut
  }}} */
 PHP_FUNCTION(swe_revjul)
 {
-	int year, month, day;
+	int year, month, day, ihour, imin, isec;
 	long gregflag;
-	double hour, jd;
+	double hour, jd, dmin, dsec;
 	
 	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
 
@@ -2150,12 +2153,22 @@ PHP_FUNCTION(swe_revjul)
 
 	swe_revjul(jd, gregflag, &year, &month, &day, &hour);
 
+    ihour = floor(hour);
+    dmin = (hour - ihour) * 60;
+    imin = floor(dmin);
+    dsec = (dmin - imin) * 60;
+    isec = floor(dsec);
+
 	array_init(return_value);
 
 	add_assoc_long(return_value, "year", year);
 	add_assoc_long(return_value, "month", month);
 	add_assoc_long(return_value, "day", day);
 	add_assoc_double(return_value, "hour", hour);
+	add_assoc_long(return_value, "ihour", ihour);
+	add_assoc_long(return_value, "imin", imin);
+	add_assoc_long(return_value, "isec", isec);
+	add_assoc_double(return_value, "dsec", dsec);
 }
 
 /* {{{ pod
