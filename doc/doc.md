@@ -454,7 +454,7 @@ Set topocentric reference places, used with flag SEFLG\_TOPOCTR and some functio
 
 void swe\_set\_topo(double geolon, double geolat, double geoalt)
 
-# function swe\_set\_sid\_mode(sid\_mode, &t0, &ayan\_t0)
+# function swe\_set\_sid\_mode(sid\_mode, t0, ayan\_t0)
 
 Set one of the numerous sidereal modes, used with flag SEFLG\_SIDEREAL and some functions
 
@@ -670,6 +670,10 @@ Converts julian day number to calendar date
     ['month']             int
     ['day']               int
     ['hour']              double
+    ['ihour']             int
+    ['imin']              int
+    ['isec']              int
+    ['dsec']              double
 
 ### C declaration
 
@@ -1061,7 +1065,7 @@ time.
 
     int swe_lun_occult_where(double tjd, int32 ipl, char *starname, int32 ifl, double *geopos, double *attr, char *serr);
 
-# function swe\_sol\_eclipse\_how(tjd\_ut, iflag, geopos\[0\], geopos\[1\], geopos\[2\]);
+# function swe\_sol\_eclipse\_how(tjd\_ut, iflag, geolng, geolat, geoalt);
 
 Computes attributes of a solar eclipse for given tjd, geo. longitude, geo. latitude, and geo. height.
 
@@ -1069,9 +1073,9 @@ Computes attributes of a solar eclipse for given tjd, geo. longitude, geo. latit
 
     tjd_ut        double   Julian day number, Universal Time
     iflag         int      (specify ephemeris to be used, cf. swe_calc( ))
-    geopos[0] double       geographic longitude
-    geopos[1] double       geographic latitude
-    geopos[2] double       altitude above sea level, in meters
+    geolng    double       geographic longitude
+    geolat    double       geographic latitude
+    geoalt    double       altitude above sea level, in meters
 
 ### return array
 
@@ -1462,7 +1466,7 @@ Transforms apparent to true altitude and vice-versa.
 
     double                inalt           altitude of object in degrees 
     double                atpress         atmospheric pressure (hectopascal)
-    double                attemp          atmospheric temperature °C
+    double                attemp          atmospheric temperature Â°C
     int           calc_flag   either SE_APP_TO_TRUE or  SE_TRUE_TO_APP
 
 ### return value
@@ -1492,8 +1496,8 @@ It is more correct and more skilled than the old function swe\_refrac():
     double        inalt           altitude of object in degrees 
     double        geoalt      altitude of observer above sea level in meters 
     double        atpress         atmospheric pressure (hectopascal)
+    double        attemp          atmospheric temperature Â°C
     double        lapse_rate  (dT/dh) [deg K/m]
-    double        attemp          atmospheric temperature °C
     int       calc_flag   either SE_APP_TO_TRUE or  SE_TRUE_TO_APP
 
 ### return array
@@ -1639,16 +1643,19 @@ Computes azimut and height, from either ecliptic or equatorial coordinates
 
     void  swe_azalt( double tjd_ut, int32  calc_flag, double *geopos, double atpress, double attemp, double *xin, double *xaz)
 
-# function swe\_azalt\_rev(tjd\_ut, calc\_flag, xin0, xin1)
+# function swe\_azalt\_rev(tjd\_ut, calc\_flag, lng, lat, alt, xin0, xin1)
 
 computes either ecliptical or equatorial coordinates from azimuth and true altitude in degrees.
 
 ### Parameters
 
     double        tjd_ut      
-    int           calc_flag               either SE_HOR2ECL or SE_HOR2EQU
-    double                xin0            azimut, in degrees
-    double                xin1            true altitude, in degrees
+    int           calc_flag   Either SE_HOR2ECL or SE_HOR2EQU
+    double        lng         Longitude position of observer.
+    double        lat         Latitude position of observer.
+    double        alt         Altitude of observer.
+    double        xin0        azimut, in degrees
+    double        xin1        true altitude, in degrees
 
 ### return array
 
@@ -1779,7 +1786,7 @@ Detailed documentation in Programmer's manual and in comments in C source file s
 
     int swe_nod_aps_ut(double tjd_ut, int32 ipl, int32 iflag, int32  method, double *xnasc, double *xndsc, double *xperi, double *xaphe, char *serr)
 
-# function swe\_get\_orbital\_elements(tjd\_1t, ipl, iflag)
+# function swe\_get\_orbital\_elements(tjd\_et, ipl, iflag)
 
 Calculates osculating orbital elements (Kepler elements) of a planet 
 or asteroid or the Earth-Moon barycentre. 
@@ -1973,6 +1980,7 @@ Convert ecliptic to equatorial if eps is negative.
     double        lng     Longitude/right ascension position.
     double        lat     Latitude/declination position.
     double        dist    Distance (ignored).
+    double        eps     Obliquity of ecliptic, in degrees.
 
 ### return array
 
@@ -2000,6 +2008,7 @@ Convert ecliptic to equatorial if eps is negative.
     double        lngs    Longitude/right ascension velocity.
     double        lat     Latitude/declination velocity.
     double        dists   Distance velocity (ignored).
+    double        eps     Obliquity of ecliptic, in degrees.
 
 ### return array
 
@@ -2140,7 +2149,7 @@ It can also round to seconds, minutes, degrees.
 ### Parameters
 
     double      ddeg            Decimal degree value to "split".
-    double      roundflag       Default is no rounding; otherwise use flags:
+    int         roundflag       Default is no rounding; otherwise use flags:
                                 SE_SPLIT_DEG_ROUND_SEC
                                 SE_SPLIT_DEG_ROUND_MIN
                                 SE_SPLIT_DEG_ROUND_DEG

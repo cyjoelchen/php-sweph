@@ -7,7 +7,7 @@
 <link rev="made" href="mailto:root@localhost" />
 </head>
 
-<body style="background-color: white">
+<body>
 
 
 
@@ -255,7 +255,7 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_set_sid_mode-sid_mode-t0-ayan_t0">function swe_set_sid_mode(sid_mode, &amp;t0, &amp;ayan_t0)</a>
+  <li><a href="#function-swe_set_sid_mode-sid_mode-t0-ayan_t0">function swe_set_sid_mode(sid_mode, t0, ayan_t0)</a>
     <ul>
       <li>
         <ul>
@@ -541,7 +541,7 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_sol_eclipse_how-tjd_ut-iflag-geopos-0-geopos-1-geopos-2">function swe_sol_eclipse_how(tjd_ut, iflag, geopos[0], geopos[1], geopos[2]);</a>
+  <li><a href="#function-swe_sol_eclipse_how-tjd_ut-iflag-geolng-geolat-geoalt">function swe_sol_eclipse_how(tjd_ut, iflag, geolng, geolat, geoalt);</a>
     <ul>
       <li>
         <ul>
@@ -717,7 +717,7 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_azalt_rev-tjd_ut-calc_flag-xin0-xin1">function swe_azalt_rev(tjd_ut, calc_flag, xin0, xin1)</a>
+  <li><a href="#function-swe_azalt_rev-tjd_ut-calc_flag-lng-lat-alt-xin0-xin1">function swe_azalt_rev(tjd_ut, calc_flag, lng, lat, alt, xin0, xin1)</a>
     <ul>
       <li>
         <ul>
@@ -772,7 +772,7 @@
       </li>
     </ul>
   </li>
-  <li><a href="#function-swe_get_orbital_elements-tjd_1t-ipl-iflag">function swe_get_orbital_elements(tjd_1t, ipl, iflag)</a>
+  <li><a href="#function-swe_get_orbital_elements-tjd_et-ipl-iflag">function swe_get_orbital_elements(tjd_et, ipl, iflag)</a>
     <ul>
       <li>
         <ul>
@@ -1570,7 +1570,7 @@
 
 <p>void swe_set_topo(double geolon, double geolat, double geoalt)</p>
 
-<h1 id="function-swe_set_sid_mode-sid_mode-t0-ayan_t0">function swe_set_sid_mode(sid_mode, &amp;t0, &amp;ayan_t0)</h1>
+<h1 id="function-swe_set_sid_mode-sid_mode-t0-ayan_t0">function swe_set_sid_mode(sid_mode, t0, ayan_t0)</h1>
 
 <p>Set one of the numerous sidereal modes, used with flag SEFLG_SIDEREAL and some functions</p>
 
@@ -1780,7 +1780,11 @@
 <pre><code>  [&#39;year&#39;]              int
   [&#39;month&#39;]             int
   [&#39;day&#39;]               int
-  [&#39;hour&#39;]              double</code></pre>
+  [&#39;hour&#39;]              double
+  [&#39;ihour&#39;]             int
+  [&#39;imin&#39;]              int
+  [&#39;isec&#39;]              int
+  [&#39;dsec&#39;]              double</code></pre>
 
 <h3 id="C-declaration33">C declaration</h3>
 
@@ -2165,7 +2169,7 @@
 
 <pre><code>  int swe_lun_occult_where(double tjd, int32 ipl, char *starname, int32 ifl, double *geopos, double *attr, char *serr);</code></pre>
 
-<h1 id="function-swe_sol_eclipse_how-tjd_ut-iflag-geopos-0-geopos-1-geopos-2">function swe_sol_eclipse_how(tjd_ut, iflag, geopos[0], geopos[1], geopos[2]);</h1>
+<h1 id="function-swe_sol_eclipse_how-tjd_ut-iflag-geolng-geolat-geoalt">function swe_sol_eclipse_how(tjd_ut, iflag, geolng, geolat, geoalt);</h1>
 
 <p>Computes attributes of a solar eclipse for given tjd, geo. longitude, geo. latitude, and geo. height.</p>
 
@@ -2173,9 +2177,9 @@
 
 <pre><code>  tjd_ut        double   Julian day number, Universal Time
   iflag         int      (specify ephemeris to be used, cf. swe_calc( ))
-  geopos[0] double       geographic longitude
-  geopos[1] double       geographic latitude
-  geopos[2] double       altitude above sea level, in meters</code></pre>
+  geolng    double       geographic longitude
+  geolat    double       geographic latitude
+  geoalt    double       altitude above sea level, in meters</code></pre>
 
 <h3 id="return-array32">return array</h3>
 
@@ -2559,7 +2563,7 @@
 
 <pre><code>  double                inalt           altitude of object in degrees 
   double                atpress         atmospheric pressure (hectopascal)
-  double                attemp          atmospheric temperature &deg;C
+  double                attemp          atmospheric temperature °C
   int           calc_flag   either SE_APP_TO_TRUE or  SE_TRUE_TO_APP</code></pre>
 
 <h3 id="return-value4">return value</h3>
@@ -2583,8 +2587,8 @@
 <pre><code>  double        inalt           altitude of object in degrees 
   double        geoalt      altitude of observer above sea level in meters 
   double        atpress         atmospheric pressure (hectopascal)
+  double        attemp          atmospheric temperature °C
   double        lapse_rate  (dT/dh) [deg K/m]
-  double        attemp          atmospheric temperature &deg;C
   int       calc_flag   either SE_APP_TO_TRUE or  SE_TRUE_TO_APP</code></pre>
 
 <h3 id="return-array42">return array</h3>
@@ -2727,16 +2731,19 @@
 
 <pre><code>  void  swe_azalt( double tjd_ut, int32  calc_flag, double *geopos, double atpress, double attemp, double *xin, double *xaz)</code></pre>
 
-<h1 id="function-swe_azalt_rev-tjd_ut-calc_flag-xin0-xin1">function swe_azalt_rev(tjd_ut, calc_flag, xin0, xin1)</h1>
+<h1 id="function-swe_azalt_rev-tjd_ut-calc_flag-lng-lat-alt-xin0-xin1">function swe_azalt_rev(tjd_ut, calc_flag, lng, lat, alt, xin0, xin1)</h1>
 
 <p>computes either ecliptical or equatorial coordinates from azimuth and true altitude in degrees.</p>
 
 <h3 id="Parameters61">Parameters</h3>
 
 <pre><code>  double        tjd_ut      
-  int           calc_flag               either SE_HOR2ECL or SE_HOR2EQU
-  double                xin0            azimut, in degrees
-  double                xin1            true altitude, in degrees</code></pre>
+  int           calc_flag   Either SE_HOR2ECL or SE_HOR2EQU
+  double        lng         Longitude position of observer.
+  double        lat         Latitude position of observer.
+  double        alt         Altitude of observer.
+  double        xin0        azimut, in degrees
+  double        xin1        true altitude, in degrees</code></pre>
 
 <h3 id="return-array47">return array</h3>
 
@@ -2867,7 +2874,7 @@
 
 <pre><code>  int swe_nod_aps_ut(double tjd_ut, int32 ipl, int32 iflag, int32  method, double *xnasc, double *xndsc, double *xperi, double *xaphe, char *serr)</code></pre>
 
-<h1 id="function-swe_get_orbital_elements-tjd_1t-ipl-iflag">function swe_get_orbital_elements(tjd_1t, ipl, iflag)</h1>
+<h1 id="function-swe_get_orbital_elements-tjd_et-ipl-iflag">function swe_get_orbital_elements(tjd_et, ipl, iflag)</h1>
 
 <p>Calculates osculating orbital elements (Kepler elements) of a planet or asteroid or the Earth-Moon barycentre. The function returns error if called for the Sun, the lunar nodes, or the apsides.</p>
 
@@ -3051,7 +3058,8 @@
 
 <pre><code>  double        lng     Longitude/right ascension position.
   double        lat     Latitude/declination position.
-  double        dist    Distance (ignored).</code></pre>
+  double        dist    Distance (ignored).
+  double        eps     Obliquity of ecliptic, in degrees.</code></pre>
 
 <h3 id="return-array58">return array</h3>
 
@@ -3076,7 +3084,8 @@
   double        dist    Distance (ignored).
   double        lngs    Longitude/right ascension velocity.
   double        lat     Latitude/declination velocity.
-  double        dists   Distance velocity (ignored).</code></pre>
+  double        dists   Distance velocity (ignored).
+  double        eps     Obliquity of ecliptic, in degrees.</code></pre>
 
 <h3 id="return-array59">return array</h3>
 
@@ -3214,7 +3223,7 @@
 <h3 id="Parameters83">Parameters</h3>
 
 <pre><code>    double      ddeg            Decimal degree value to &quot;split&quot;.
-    double      roundflag       Default is no rounding; otherwise use flags:
+    int         roundflag       Default is no rounding; otherwise use flags:
                                 SE_SPLIT_DEG_ROUND_SEC
                                 SE_SPLIT_DEG_ROUND_MIN
                                 SE_SPLIT_DEG_ROUND_DEG
