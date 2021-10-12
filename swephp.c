@@ -2081,7 +2081,7 @@ Converts a calendar date to julian day number tjd, no validity check for date.
   int		month		(1..12)
   int		day			(1..31)
   double	hour		UT (0.0 .. 23.99999) clock time as double
-  int		gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+  int		gregflag	SE_GREG_CAL (==1, default) or SE_JUL_CAL (==0)
 
 =head3 return value
   
@@ -2096,12 +2096,12 @@ Converts a calendar date to julian day number tjd, no validity check for date.
  }}} */
 PHP_FUNCTION(swe_julday)
 {
-	long year, month, day, gregflag;
+	long year, month, day, gregflag = 1;
 	double hour;
 
-	if(ZEND_NUM_ARGS() != 5) WRONG_PARAM_COUNT;
+	if (ZEND_NUM_ARGS() < 4 || ZEND_NUM_ARGS() > 5) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "llldl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "llld|l",
 			&year, &month, &day, &hour, &gregflag) == FAILURE) {
 		return;
 	}
@@ -2119,7 +2119,7 @@ Converts julian day number to calendar date
 =head3 Parameters
 
   double	jd		julian day number
-  int		gregflag	SE_GREG_CAL (==1) or SE_JUL_CAL (==0)
+  int		gregflag	SE_GREG_CAL (==1, default) or SE_JUL_CAL (==0)
 
 =head3 return array
 
@@ -2141,12 +2141,12 @@ Converts julian day number to calendar date
 PHP_FUNCTION(swe_revjul)
 {
 	int year, month, day, ihour, imin, isec;
-	long gregflag;
+	long gregflag = 1;
 	double hour, jd, dmin, dsec;
 	
-	if(ZEND_NUM_ARGS() != 2) WRONG_PARAM_COUNT;
+	if (ZEND_NUM_ARGS() < 1 || ZEND_NUM_ARGS() > 2) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "dl",
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "d|l",
 			&jd, &gregflag) == FAILURE) {
 		return;
 	}
