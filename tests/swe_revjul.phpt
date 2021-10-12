@@ -10,8 +10,13 @@ if (!extension_loaded('swephp')) {
 <?php
 include 'utility/Format.php';
 var_dump(Format::round(swe_revjul(2452275.5, 1)));
-var_dump(Format::round(swe_revjul(2452275.3, 1)));
+
+# Gregorian calendar is the default.
 var_dump(Format::round(swe_revjul(2452275.3)));
+
+# Rounding is used to prevent unlikely times such as 59.9999 seconds.
+$jdt = swe_julday(2001, 1, 1, 7.00);
+var_dump(Format::round(swe_revjul($jdt)));
 ?>
 --EXPECT--
 array(8) {
@@ -30,7 +35,7 @@ array(8) {
   ["isec"]=>
   int(0)
   ["dsec"]=>
-  float(0)
+  float(5.0E-5)
 }
 array(8) {
   ["year"]=>
@@ -44,27 +49,27 @@ array(8) {
   ["ihour"]=>
   int(19)
   ["imin"]=>
-  int(11)
+  int(12)
   ["isec"]=>
-  int(59)
+  int(0)
   ["dsec"]=>
-  float(59.999984)
+  float(3.4E-5)
 }
 array(8) {
   ["year"]=>
   int(2001)
   ["month"]=>
-  int(12)
+  int(1)
   ["day"]=>
-  int(31)
+  int(1)
   ["hour"]=>
-  float(19.2)
+  float(7)
   ["ihour"]=>
-  int(19)
+  int(7)
   ["imin"]=>
-  int(11)
+  int(0)
   ["isec"]=>
-  int(59)
+  int(0)
   ["dsec"]=>
-  float(59.999984)
+  float(3.7E-5)
 }

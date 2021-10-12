@@ -2153,10 +2153,11 @@ PHP_FUNCTION(swe_revjul)
 
 	swe_revjul(jd, gregflag, &year, &month, &day, &hour);
 
-    ihour = floor(hour);
-    dmin = (hour - ihour) * 60;
-    imin = floor(dmin);
-    dsec = (dmin - imin) * 60;
+    dsec = (hour * 3600) + 0.00005;
+    ihour = floor(dsec / 3600);
+    dsec -= ihour * 3600;
+    imin = floor(dsec / 60);
+    dsec -= imin * 60;
     isec = floor(dsec);
 
 	array_init(return_value);
