@@ -41,6 +41,11 @@ Now you should able to see swephp section from `phpinfo()`.
 
 You are all set!
 
+## PhpStorm IDE Support
+A plugin repository is maintained for this extension, allowing auto-complete and static analysis in PhpStorm for all Swiss Ephemeris methods:
+
+https://github.com/arcpointgroup/phpstorm-library-plugin
+
 ## Contributing
 
 ### If you have collaborator access on this project:
