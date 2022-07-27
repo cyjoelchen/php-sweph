@@ -9,4 +9,5 @@ yes n | make test && \
 phpize --clean && \
 rm sweph/src/libswe.a && \
 rm sweph/src/*.o && \
+rm swephp.dep && \
 rmdir include

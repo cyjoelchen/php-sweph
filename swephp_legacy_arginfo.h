@@ -1,5 +1,5 @@
 /* This is a generated file, edit the .stub.php file instead.
- * Stub hash: d979e9ef23a3db1b9f5a5c0de88c470c1938b073 */
+ * Stub hash: c15625c090d886fe9ba224131e4ea0ea8e868f6f */
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_calc, 0, 0, 3)
 	ZEND_ARG_INFO(0, tjd_et)
@@ -83,7 +83,7 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_close, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_set_ephe_path, 0, 0, 1)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_swe_set_ephe_path, 0, 0, 0)
 	ZEND_ARG_INFO(0, path)
 ZEND_END_ARG_INFO()
 

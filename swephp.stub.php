@@ -147,10 +147,10 @@ function swe_fixstar2_mag(string $star): array {}
 function swe_close() {}
 
 /**
- * @param string $path
+ * @param string|null $path
  * @return null
  */
-function swe_set_ephe_path(string $path) {}
+function swe_set_ephe_path(?string $path = null) {}
 
 /**
  * @param string $fname

@@ -3,6 +3,16 @@
 ## Introduction
 `php-sweph` is a PHP extension to Astrodienst Swiss Ephemeris library. It's statically linked with libswe.a to implement one-to-one, C-to-PHP function mapping, no external binary executable required.
 
+## Compatibility
+This extension is tested with PHP versions:
+- 7.0
+- 7.1
+- 7.2
+- 7.3
+- 7.4
+- 8.0
+- 8.1
+
 ## License
 `php-sweph` is work derived from the original release of the Astrodienst Swiss Ephemeris library.
 To use `php-sweph`, the licensing conditions imposed by Astrodienst for Swiss Ephemeris must
@@ -22,7 +32,7 @@ _If you are on a Mac and use or want to use Homebrew, please see:_
 [Installation on macOS Big Sur](https://github.com/cyjoelchen/php-sweph/wiki/Install-on-macOS-Big-Sur.)
 
 ```
-git clone -b 4.0.5 https://github.com/cyjoelchen/php-sweph.git
+git clone -b 4.0.6 https://github.com/cyjoelchen/php-sweph.git
 cd php-sweph
 phpize
 ./configure
