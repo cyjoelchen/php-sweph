@@ -1,5 +1,5 @@
 --TEST--
-Basic test
+Null test
 --SKIPIF--
 <?php
 if (!extension_loaded('swephp')) {
@@ -8,7 +8,7 @@ if (!extension_loaded('swephp')) {
 ?>
 --FILE--
 <?php
-var_dump(swe_set_ephe_path('~/'));
+var_dump(swe_set_ephe_path(null));
 ?>
 --EXPECT--
 NULL

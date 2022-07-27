@@ -1533,9 +1533,9 @@ PHP_FUNCTION(swe_set_ephe_path)
 	char *arg = emalloc(100);
 	size_t arg_len;
 
-	if(ZEND_NUM_ARGS() != 1) WRONG_PARAM_COUNT;
+	if(ZEND_NUM_ARGS() > 1) WRONG_PARAM_COUNT;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s", &arg, &arg_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s!", &arg, &arg_len) == FAILURE) {
 		return;
 	}
 	
