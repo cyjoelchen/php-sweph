@@ -7,7 +7,7 @@ make install && \
 echo "extension=swephp.so" > /usr/local/etc/php/conf.d/swephp.ini && \
 yes n | make test && \
 phpize --clean && \
-rm sweph/src/libswe.a && \
-rm sweph/src/*.o && \
-rm swephp.dep && \
-rmdir include
+rm -f sweph/src/libswe.a && \
+rm -f sweph/src/*.o && \
+rm -f swephp.dep && \
+rm -rf include
