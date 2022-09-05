@@ -40,7 +40,7 @@ array(5) {
   ["sec"]=>
   int(23)
   ["secfr"]=>
-  float(0)
+  float(23)
   ["sgn"]=>
   int(1)
 }
@@ -52,7 +52,7 @@ array(5) {
   ["sec"]=>
   int(52)
   ["secfr"]=>
-  float(0)
+  float(52)
   ["sgn"]=>
   int(1)
 }
@@ -64,7 +64,7 @@ array(5) {
   ["sec"]=>
   int(22)
   ["secfr"]=>
-  float(0)
+  float(22)
   ["sgn"]=>
   int(1)
 }
