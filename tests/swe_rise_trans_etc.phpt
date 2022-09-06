@@ -115,7 +115,7 @@ array(12) {
     ["name"]=>
     string(4) "Moon"
     ["lng"]=>
-    float(221.700155)
+    float(221.700162)
     ["lat"]=>
     float(2.433219)
     ["speed"]=>
@@ -126,7 +126,7 @@ array(12) {
     ["name"]=>
     string(7) "Mercury"
     ["lng"]=>
-    float(101.038063)
+    float(101.038064)
     ["lat"]=>
     float(-0.15312)
     ["speed"]=>
@@ -137,7 +137,7 @@ array(12) {
     ["name"]=>
     string(5) "Venus"
     ["lng"]=>
-    float(145.887149)
+    float(145.88715)
     ["lat"]=>
     float(1.60649)
     ["speed"]=>
@@ -148,7 +148,7 @@ array(12) {
     ["name"]=>
     string(4) "Mars"
     ["lng"]=>
-    float(142.958951)
+    float(142.958952)
     ["lat"]=>
     float(1.15981)
     ["speed"]=>
