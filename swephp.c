@@ -2885,7 +2885,7 @@ PHP_FUNCTION(swe_house_name)
 
 	if (hsys_len < 1)
 		return;
-	name = swe_house_name(hsys[0]);
+	name = (char*)swe_house_name(hsys[0]);
 
 	RETURN_STRING(name);
 }
