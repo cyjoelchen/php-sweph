@@ -25,11 +25,11 @@ var_dump(Format::round(swe_fixstar2_mag('Sirius')));
 swe_fixstar
 array(9) {
   [0]=>
-  float(104.11215)
+  float(104.112149)
   [1]=>
   float(-39.605526)
   [2]=>
-  float(543929.857183)
+  float(543929.857182)
   [3]=>
   float(0)
   [4]=>
@@ -46,11 +46,11 @@ array(9) {
 swe_fixstar2
 array(9) {
   [0]=>
-  float(104.11215)
+  float(104.112149)
   [1]=>
   float(-39.605526)
   [2]=>
-  float(543929.857183)
+  float(543929.857182)
   [3]=>
   float(0)
   [4]=>
@@ -67,11 +67,11 @@ array(9) {
 swe_fixstar_ut
 array(9) {
   [0]=>
-  float(38.647425)
+  float(38.647424)
   [1]=>
   float(89.276469)
   [2]=>
-  float(27356067.783758)
+  float(27356067.783757)
   [3]=>
   float(0)
   [4]=>
@@ -88,11 +88,11 @@ array(9) {
 swe_fixstar2_ut
 array(9) {
   [0]=>
-  float(38.647425)
+  float(38.647424)
   [1]=>
   float(89.276469)
   [2]=>
-  float(27356067.783758)
+  float(27356067.783757)
   [3]=>
   float(0)
   [4]=>

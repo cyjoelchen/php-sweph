@@ -47,19 +47,19 @@ for ($p = SE_SUN; $p <= SE_PLUTO; $p++) {
 
 ?>
 --EXPECT--
-swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 317.131451, -8.2E-5)
-planet Sun	lon=317.131451	lat=-0.000082
+swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 317.13145, -8.1E-5)
+planet Sun	lon=317.131450	lat=-0.000081
 horizon coordinates
 array(3) {
   [0]=>
-  float(31.000507)
+  float(31.000508)
   [1]=>
   float(19.979725)
   [2]=>
   float(20.019722)
 }
-swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 31.000507, 19.979725)
-converted back	lon=317.131451	lat=-0.000082
+swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 31.000508, 19.979725)
+converted back	lon=317.131450	lat=-0.000081
 swe_refrac(19.979725, 0, 30, SE_TRUE_TO_APP)
 app. alt = 19.979725
 swe_refrac_extended(19.979725, 330, 0, 30, 10.0, SE_TRUE_TO_APP)
@@ -71,7 +71,7 @@ array(6) {
   [1]=>
   float(19.976138)
   [2]=>
-  float(-0.003587)
+  float(-0.003586)
   [3]=>
   float(-0.582825)
   ["retflag"]=>
@@ -82,13 +82,13 @@ planet Moon	lon=309.888398	lat=-1.616416
 horizon coordinates
 array(3) {
   [0]=>
-  float(35.830422)
+  float(35.830421)
   [1]=>
   float(14.168707)
   [2]=>
   float(14.225327)
 }
-swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 35.830422, 14.168707)
+swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 35.830421, 14.168707)
 converted back	lon=309.888398	lat=-1.616416
 swe_refrac(14.168707, 0, 30, SE_TRUE_TO_APP)
 app. alt = 14.168707
@@ -99,7 +99,7 @@ array(6) {
   [0]=>
   float(14.168707)
   [1]=>
-  float(14.16362)
+  float(14.163619)
   [2]=>
   float(-0.005087)
   [3]=>
@@ -107,119 +107,119 @@ array(6) {
   ["retflag"]=>
   float(14)
 }
-swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 317.58169, 3.572777)
-planet Mercury	lon=317.581690	lat=3.572777
+swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 317.58169, 3.572776)
+planet Mercury	lon=317.581690	lat=3.572776
 horizon coordinates
 array(3) {
   [0]=>
-  float(33.015528)
+  float(33.015527)
   [1]=>
-  float(23.054619)
+  float(23.054618)
   [2]=>
-  float(23.088824)
+  float(23.088823)
 }
-swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 33.015528, 23.054619)
-converted back	lon=317.581690	lat=3.572776
-swe_refrac(23.054619, 0, 30, SE_TRUE_TO_APP)
-app. alt = 23.054619
-swe_refrac_extended(23.054619, 330, 0, 30, 10.0, SE_TRUE_TO_APP)
+swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 33.015527, 23.054618)
+converted back	lon=317.581690	lat=3.572775
+swe_refrac(23.054618, 0, 30, SE_TRUE_TO_APP)
+app. alt = 23.054618
+swe_refrac_extended(23.054618, 330, 0, 30, 10.0, SE_TRUE_TO_APP)
 array(6) {
   ["rc"]=>
   int(23)
   [0]=>
-  float(23.054619)
+  float(23.054618)
   [1]=>
-  float(23.051553)
+  float(23.051552)
   [2]=>
-  float(-0.003066)
+  float(-0.003065)
   [3]=>
   float(-0.582825)
   ["retflag"]=>
   float(23)
 }
-swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 286.274618, 0.45825)
-planet Venus	lon=286.274618	lat=0.458250
+swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 286.274617, 0.458249)
+planet Venus	lon=286.274617	lat=0.458249
 horizon coordinates
 array(3) {
   [0]=>
-  float(55.087223)
+  float(55.087222)
   [1]=>
-  float(0.0741)
+  float(0.074098)
   [2]=>
-  float(0.490626)
+  float(0.490624)
 }
-swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 55.087223, 0.0741)
-converted back	lon=286.274618	lat=0.458250
-swe_refrac(0.0741, 0, 30, SE_TRUE_TO_APP)
-app. alt = 0.074100
-swe_refrac_extended(0.0741, 330, 0, 30, 10.0, SE_TRUE_TO_APP)
+swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 55.087222, 0.074098)
+converted back	lon=286.274617	lat=0.458248
+swe_refrac(0.074098, 0, 30, SE_TRUE_TO_APP)
+app. alt = 0.074098
+swe_refrac_extended(0.074098, 330, 0, 30, 10.0, SE_TRUE_TO_APP)
 array(6) {
   ["rc"]=>
   int(0)
   [0]=>
-  float(0.0741)
+  float(0.074098)
   [1]=>
-  float(0.030375)
+  float(0.030373)
   [2]=>
-  float(-0.043725)
+  float(-0.043724)
   [3]=>
   float(-0.582825)
   ["retflag"]=>
   float(0)
 }
-swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 84.347674, 3.269828)
-planet Mars	lon=84.347674	lat=3.269828
+swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 84.347673, 3.269827)
+planet Mars	lon=84.347673	lat=3.269827
 horizon coordinates
 array(3) {
   [0]=>
-  float(249.152267)
+  float(249.152268)
   [1]=>
-  float(17.317287)
+  float(17.317286)
   [2]=>
-  float(17.363768)
+  float(17.363767)
 }
-swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 249.152267, 17.317287)
-converted back	lon=84.347674	lat=3.269828
-swe_refrac(17.317287, 0, 30, SE_TRUE_TO_APP)
-app. alt = 17.317287
-swe_refrac_extended(17.317287, 330, 0, 30, 10.0, SE_TRUE_TO_APP)
+swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 249.152268, 17.317286)
+converted back	lon=84.347673	lat=3.269826
+swe_refrac(17.317286, 0, 30, SE_TRUE_TO_APP)
+app. alt = 17.317286
+swe_refrac_extended(17.317286, 330, 0, 30, 10.0, SE_TRUE_TO_APP)
 array(6) {
   ["rc"]=>
   int(17)
   [0]=>
-  float(17.317287)
+  float(17.317286)
   [1]=>
-  float(17.313116)
+  float(17.313115)
   [2]=>
-  float(-0.004171)
+  float(-0.00417)
   [3]=>
   float(-0.582825)
   ["retflag"]=>
   float(17)
 }
-swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 281.081049, 0.116116)
-planet Jupiter	lon=281.081049	lat=0.116116
+swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 281.081048, 0.116115)
+planet Jupiter	lon=281.081048	lat=0.116115
 horizon coordinates
 array(3) {
   [0]=>
-  float(58.699497)
+  float(58.699496)
   [1]=>
-  float(-3.675365)
+  float(-3.675366)
   [2]=>
-  float(-3.675365)
+  float(-3.675366)
 }
-swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 58.699497, -3.675365)
-converted back	lon=281.081049	lat=0.116116
-swe_refrac(-3.675365, 0, 30, SE_TRUE_TO_APP)
-app. alt = -3.675365
-swe_refrac_extended(-3.675365, 330, 0, 30, 10.0, SE_TRUE_TO_APP)
+swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 58.699496, -3.675366)
+converted back	lon=281.081048	lat=0.116114
+swe_refrac(-3.675366, 0, 30, SE_TRUE_TO_APP)
+app. alt = -3.675366
+swe_refrac_extended(-3.675366, 330, 0, 30, 10.0, SE_TRUE_TO_APP)
 array(6) {
   ["rc"]=>
   int(-3)
   [0]=>
-  float(-3.675365)
+  float(-3.675366)
   [1]=>
-  float(-3.675365)
+  float(-3.675366)
   [2]=>
   float(0)
   [3]=>
@@ -227,29 +227,29 @@ array(6) {
   ["retflag"]=>
   float(-3)
 }
-swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 156.556641, 1.807919)
-planet Saturn	lon=156.556641	lat=1.807919
+swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 156.55664, 1.807919)
+planet Saturn	lon=156.556640	lat=1.807919
 horizon coordinates
 array(3) {
   [0]=>
-  float(192.185196)
+  float(192.185197)
   [1]=>
-  float(-29.463314)
+  float(-29.463313)
   [2]=>
-  float(-29.463314)
+  float(-29.463313)
 }
-swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 192.185196, -29.463314)
-converted back	lon=156.556641	lat=1.807919
-swe_refrac(-29.463314, 0, 30, SE_TRUE_TO_APP)
-app. alt = -29.463314
-swe_refrac_extended(-29.463314, 330, 0, 30, 10.0, SE_TRUE_TO_APP)
+swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 192.185197, -29.463313)
+converted back	lon=156.556639	lat=1.807919
+swe_refrac(-29.463313, 0, 30, SE_TRUE_TO_APP)
+app. alt = -29.463313
+swe_refrac_extended(-29.463313, 330, 0, 30, 10.0, SE_TRUE_TO_APP)
 array(6) {
   ["rc"]=>
   int(-29)
   [0]=>
-  float(-29.463314)
+  float(-29.463313)
   [1]=>
-  float(-29.463314)
+  float(-29.463313)
   [2]=>
   float(0)
   [3]=>
@@ -257,19 +257,19 @@ array(6) {
   ["retflag"]=>
   float(-29)
 }
-swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 346.911443, -0.738806)
-planet Uranus	lon=346.911443	lat=-0.738806
+swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 346.911442, -0.738805)
+planet Uranus	lon=346.911442	lat=-0.738805
 horizon coordinates
 array(3) {
   [0]=>
-  float(1.848702)
+  float(1.848703)
   [1]=>
   float(35.134978)
   [2]=>
   float(35.15571)
 }
-swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 1.848702, 35.134978)
-converted back	lon=346.911443	lat=-0.738806
+swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 1.848703, 35.134978)
+converted back	lon=346.911442	lat=-0.738805
 swe_refrac(35.134978, 0, 30, SE_TRUE_TO_APP)
 app. alt = 35.134978
 swe_refrac_extended(35.134978, 330, 0, 30, 10.0, SE_TRUE_TO_APP)
@@ -279,7 +279,7 @@ array(6) {
   [0]=>
   float(35.134978)
   [1]=>
-  float(35.133122)
+  float(35.133121)
   [2]=>
   float(-0.001856)
   [3]=>
@@ -287,29 +287,29 @@ array(6) {
   ["retflag"]=>
   float(35)
 }
-swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 321.544645, -0.292381)
-planet Neptune	lon=321.544645	lat=-0.292381
+swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 321.544644, -0.29238)
+planet Neptune	lon=321.544644	lat=-0.292380
 horizon coordinates
 array(3) {
   [0]=>
-  float(27.05245)
+  float(27.052451)
   [1]=>
-  float(22.432809)
+  float(22.432808)
   [2]=>
-  float(22.468064)
+  float(22.468063)
 }
-swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 27.05245, 22.432809)
-converted back	lon=321.544645	lat=-0.292381
-swe_refrac(22.432809, 0, 30, SE_TRUE_TO_APP)
-app. alt = 22.432809
-swe_refrac_extended(22.432809, 330, 0, 30, 10.0, SE_TRUE_TO_APP)
+swe_azalt_rev(2454503.06, SE_HOR2ECL, 12.1, 49, 330, 27.052451, 22.432808)
+converted back	lon=321.544643	lat=-0.292380
+swe_refrac(22.432808, 0, 30, SE_TRUE_TO_APP)
+app. alt = 22.432808
+swe_refrac_extended(22.432808, 330, 0, 30, 10.0, SE_TRUE_TO_APP)
 array(6) {
   ["rc"]=>
   int(22)
   [0]=>
-  float(22.432809)
+  float(22.432808)
   [1]=>
-  float(22.429649)
+  float(22.429647)
   [2]=>
   float(-0.00316)
   [3]=>
@@ -317,8 +317,8 @@ array(6) {
   ["retflag"]=>
   float(22)
 }
-swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 270.338456, 6.283563)
-planet Pluto	lon=270.338456	lat=6.283563
+swe_azalt(2454503.06, SE_ECL2HOR, 12.1, 49, 330, 0, 30, 270.338455, 6.283563)
+planet Pluto	lon=270.338455	lat=6.283563
 horizon coordinates
 array(3) {
   [0]=>

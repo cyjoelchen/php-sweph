@@ -49,7 +49,7 @@ class Format
     {
         return array_map(function ($value) {
             return is_double($value)
-                ? sprintf('%f %s', round($value, Format::PRECISION), Format::asUtc($value))
+                ? sprintf('%f %s', Format::truncate($value, Format::PRECISION), Format::asUtc($value))
                 : $value;
         }, $input);
     }
@@ -66,7 +66,7 @@ class Format
         return array_map(function ($value) use ($precision) {
             switch (gettype($value)) {
                 case 'double':
-                    return round($value, $precision);
+                    return Format::truncate($value, $precision);
 
                 case 'array':
                     return Format::round($value, $precision);
