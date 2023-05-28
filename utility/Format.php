@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * Class Formatter.
@@ -8,7 +9,7 @@
 class Format
 {
     /**
-     * Default precision value to use for rounding.
+     * Default precision value to use for truncating floating-point values.
      *
      * @const int
      */
@@ -74,5 +75,48 @@ class Format
                     return $value;
             }
         }, $input);
+    }
+
+    /**
+     * Convert input float to a string, then truncate the string to `$precision`.
+     * This method is preferred to `round()`ing the value which can change the last digit.
+     *
+     * @param float $value Value to truncate.
+     * @param int $precision Amount of non-rounded precision to retain.
+     * @return float
+     */
+    public static function truncate(float $value, int $precision = Format::PRECISION): float
+    {
+        $maxPrecision = (int)ini_get('precision');
+        $string = (string)$value;
+
+        # Handle scientific notation.
+        if (stripos($string, 'E') !== false) {
+            $string = number_format($value, $maxPrecision, '.', null);
+            $string = rtrim($string, '0');
+
+            if ($string === '0.') {
+                $string = '0.0';
+            }
+        }
+
+        $len = strlen($string);
+
+        if (strchr($string, '.') !== false) {
+            $len--;
+        }
+
+        if ($len >= $maxPrecision) {
+            $string = sprintf("%.{$maxPrecision}f", $value);
+        }
+
+        // there were no decimals, put a zero back on the end
+        if (strrchr($string, '.') === false) {
+            $string .= '.0';
+        }
+
+        $value = explode('.', $string);
+
+        return (float)sprintf('%s.%s', $value[0], substr($value[1], 0, $precision));
     }
 }
