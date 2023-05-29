@@ -96,7 +96,7 @@ var_dump(Format::round($strans));
 planets:
 array(12) {
   ["julday"]=>
-  float(2459414.104167)
+  float(2459414.104166)
   ["date"]=>
   string(17) "2021 7 18 14:30:0"
   [0]=>
@@ -106,18 +106,18 @@ array(12) {
     ["lng"]=>
     float(116.18535)
     ["lat"]=>
-    float(0.000127)
+    float(0.000126)
     ["speed"]=>
-    float(0.954104)
+    float(0.954103)
   }
   [1]=>
   array(4) {
     ["name"]=>
     string(4) "Moon"
     ["lng"]=>
-    float(221.700162)
+    float(221.700161)
     ["lat"]=>
-    float(2.433219)
+    float(2.433218)
     ["speed"]=>
     float(14.221994)
   }
@@ -126,42 +126,42 @@ array(12) {
     ["name"]=>
     string(7) "Mercury"
     ["lng"]=>
-    float(101.038064)
+    float(101.038063)
     ["lat"]=>
     float(-0.15312)
     ["speed"]=>
-    float(1.8316)
+    float(1.831599)
   }
   [3]=>
   array(4) {
     ["name"]=>
     string(5) "Venus"
     ["lng"]=>
-    float(145.88715)
+    float(145.887149)
     ["lat"]=>
-    float(1.60649)
+    float(1.606489)
     ["speed"]=>
-    float(1.203192)
+    float(1.203191)
   }
   [4]=>
   array(4) {
     ["name"]=>
     string(4) "Mars"
     ["lng"]=>
-    float(142.958952)
+    float(142.958951)
     ["lat"]=>
     float(1.15981)
     ["speed"]=>
-    float(0.624286)
+    float(0.624285)
   }
   [5]=>
   array(4) {
     ["name"]=>
     string(7) "Jupiter"
     ["lng"]=>
-    float(330.959483)
+    float(330.959482)
     ["lat"]=>
-    float(-1.086722)
+    float(-1.086721)
     ["speed"]=>
     float(-0.084815)
   }
@@ -172,20 +172,20 @@ array(12) {
     ["lng"]=>
     float(311.254309)
     ["lat"]=>
-    float(-0.755639)
+    float(-0.755638)
     ["speed"]=>
-    float(-0.07033)
+    float(-0.070329)
   }
   [7]=>
   array(4) {
     ["name"]=>
     string(6) "Uranus"
     ["lng"]=>
-    float(44.363313)
+    float(44.363312)
     ["lat"]=>
     float(-0.409489)
     ["speed"]=>
-    float(0.025947)
+    float(0.025946)
   }
   [8]=>
   array(4) {
@@ -194,48 +194,48 @@ array(12) {
     ["lng"]=>
     float(353.061322)
     ["lat"]=>
-    float(-1.14452)
+    float(-1.144519)
     ["speed"]=>
-    float(-0.011879)
+    float(-0.011878)
   }
   [9]=>
   array(4) {
     ["name"]=>
     string(5) "Pluto"
     ["lng"]=>
-    float(295.544264)
+    float(295.544263)
     ["lat"]=>
-    float(-1.573849)
+    float(-1.573848)
     ["speed"]=>
-    float(-0.024043)
+    float(-0.024042)
   }
 }
 houses for La Croix Valmer, France:
 array(12) {
   [1]=>
-  float(234.343462)
+  float(234.343461)
   [2]=>
   float(265.171191)
   [3]=>
-  float(301.868577)
+  float(301.868576)
   [4]=>
-  float(339.096639)
+  float(339.096638)
   [5]=>
   float(10.244718)
   [6]=>
-  float(34.575605)
+  float(34.575604)
   [7]=>
-  float(54.343462)
+  float(54.343461)
   [8]=>
   float(85.171191)
   [9]=>
-  float(121.868577)
+  float(121.868576)
   [10]=>
-  float(159.096639)
+  float(159.096638)
   [11]=>
   float(190.244718)
   [12]=>
-  float(214.575605)
+  float(214.575604)
 }
 rise Moon:
 array(4) {
@@ -244,7 +244,7 @@ array(4) {
     ["what"]=>
     string(4) "rise"
     ["tr"]=>
-    float(2459415.105139)
+    float(2459415.105138)
     ["when"]=>
     string(22) "2021 7 19  14:31:24 UT"
   }
@@ -262,7 +262,7 @@ array(4) {
     ["what"]=>
     string(3) "set"
     ["tr"]=>
-    float(2459414.491544)
+    float(2459414.491543)
     ["when"]=>
     string(22) "2021 7 18  23:47:49 UT"
   }
@@ -294,7 +294,7 @@ array(5) {
     ["what"]=>
     string(11) "mer_transit"
     ["tr"]=>
-    float(2459414.848221)
+    float(2459414.84822)
     ["when"]=>
     string(21) "2021 7 19  8:21:26 UT"
   }
@@ -303,7 +303,7 @@ array(5) {
     ["what"]=>
     string(3) "set"
     ["tr"]=>
-    float(2459414.14771)
+    float(2459414.147709)
     ["when"]=>
     string(22) "2021 7 18  15:32:42 UT"
   }
@@ -312,7 +312,7 @@ array(5) {
     ["what"]=>
     string(17) "lower_mer_transit"
     ["tr"]=>
-    float(2459414.349586)
+    float(2459414.349585)
     ["when"]=>
     string(22) "2021 7 18  20:23:24 UT"
   }

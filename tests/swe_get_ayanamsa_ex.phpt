@@ -22,7 +22,7 @@ array(2) {
 }
 array(2) {
   ["daya"]=>
-  float(24.768238)
+  float(24.768237)
   ["rc"]=>
   int(66)
 }

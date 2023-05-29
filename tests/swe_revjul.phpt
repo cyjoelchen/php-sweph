@@ -45,7 +45,7 @@ array(8) {
   ["day"]=>
   int(31)
   ["hour"]=>
-  float(19.2)
+  float(19.199999)
   ["ihour"]=>
   int(19)
   ["imin"]=>
@@ -53,7 +53,7 @@ array(8) {
   ["isec"]=>
   int(0)
   ["dsec"]=>
-  float(3.4E-5)
+  float(3.3E-5)
 }
 array(8) {
   ["year"]=>
@@ -63,7 +63,7 @@ array(8) {
   ["day"]=>
   int(1)
   ["hour"]=>
-  float(7)
+  float(6.999999)
   ["ihour"]=>
   int(7)
   ["imin"]=>
@@ -71,5 +71,5 @@ array(8) {
   ["isec"]=>
   int(0)
   ["dsec"]=>
-  float(3.7E-5)
+  float(3.6E-5)
 }

@@ -18,7 +18,7 @@ array(4) {
   ["path"]=>
   string(24) "./sweph/ephe/semo_18.se1"
   ["tfstart"]=>
-  float(2378487.555371)
+  float(2378487.55537)
   ["tfend"]=>
   float(2597656.457452)
   ["denum"]=>

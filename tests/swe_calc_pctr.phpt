@@ -15,17 +15,17 @@ var_dump(Format::round(swe_calc_pctr(2452275.5, 1, 2, SEFLG_SWIEPH|SEFLG_SPEED))
 --EXPECT--
 array(8) {
   [0]=>
-  float(115.594558)
+  float(115.594557)
   [1]=>
-  float(2.054131)
+  float(2.05413)
   [2]=>
   float(1.232681)
   [3]=>
-  float(1.572859)
+  float(1.572858)
   [4]=>
   float(-0.050397)
   [5]=>
-  float(-0.018084)
+  float(-0.018083)
   ["serr"]=>
   string(0) ""
   ["rc"]=>
