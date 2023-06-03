@@ -13,17 +13,17 @@ swe_set_ephe_path('./sweph/ephe');
 
 echo "swe_lun_occult_when_glob for Venus\n";
 $rv = swe_lun_occult_when_glob(2454466.5, SE_VENUS, "", SEFLG_SWIEPH, 0, 0);
-var_dump(Format::round($rv));
+var_dump(Format::round($rv, 3));
 
 $tjd_ut = $rv['tret'][0];
-var_dump(round($tjd_ut, 6), Format::asUtc($tjd_ut));
+var_dump(Format::round([$tjd_ut], 3), Format::asUtc($tjd_ut));
 
 echo "swe_lun_occult_where for Venus\n";
-var_dump(Format::round(swe_lun_occult_where($tjd_ut, SE_VENUS, "", SEFLG_SWIEPH)));
+var_dump(Format::round(swe_lun_occult_where($tjd_ut, SE_VENUS, "", SEFLG_SWIEPH), 3));
 
 echo "swe_lun_occult_when_loc for Venus\n";
 $rv = swe_lun_occult_when_loc(2454466.5, SE_VENUS, "", SEFLG_SWIEPH, 12.1, 49.0, 330, 0);
-var_dump(Format::round($rv));
+var_dump(Format::round($rv, 3));
 ?>
 --EXPECT--
 swe_lun_occult_when_glob for Venus
@@ -33,28 +33,31 @@ array(2) {
   ["tret"]=>
   array(10) {
     [0]=>
-    float(2454531.296945)
+    float(2454531.296)
     [1]=>
-    float(2454531.305141)
+    float(2454531.305)
     [2]=>
-    float(2454531.198629)
+    float(2454531.198)
     [3]=>
-    float(2454531.395079)
+    float(2454531.395)
     [4]=>
-    float(2454531.198885)
+    float(2454531.198)
     [5]=>
-    float(2454531.394823)
+    float(2454531.394)
     [6]=>
-    float(2454531.220605)
+    float(2454531.22)
     [7]=>
-    float(2454531.37312)
+    float(2454531.373)
     [8]=>
     float(0)
     [9]=>
     float(0)
   }
 }
-float(2454531.296945)
+array(1) {
+  [0]=>
+  float(2454531.296)
+}
 string(20) "2008 3 5  19:7:36 UT"
 swe_lun_occult_where for Venus
 array(3) {
@@ -63,28 +66,28 @@ array(3) {
   ["geopos"]=>
   array(2) {
     [0]=>
-    float(-132.448083)
+    float(-132.448)
     [1]=>
-    float(-3.22394)
+    float(-3.223)
   }
   ["attr"]=>
   array(8) {
     [0]=>
-    float(86.757453)
+    float(86.757)
     [1]=>
-    float(172.526684)
+    float(172.526)
     [2]=>
-    float(29765.456995)
+    float(29765.456)
     [3]=>
-    float(-3461.913794)
+    float(-3461.913)
     [4]=>
-    float(336.207118)
+    float(336.207)
     [5]=>
-    float(76.844796)
+    float(76.844)
     [6]=>
-    float(76.848587)
+    float(76.848)
     [7]=>
-    float(1.8E-5)
+    float(0)
   }
 }
 swe_lun_occult_when_loc for Venus
@@ -94,15 +97,15 @@ array(3) {
   ["tret"]=>
   array(8) {
     [0]=>
-    float(2454802.200597)
+    float(2454802.2)
     [1]=>
-    float(2454802.173096)
+    float(2454802.173)
     [2]=>
-    float(2454802.173765)
+    float(2454802.173)
     [3]=>
-    float(2454802.22611)
+    float(2454802.226)
     [4]=>
-    float(2454802.226715)
+    float(2454802.226)
     [5]=>
     float(0)
     [6]=>
@@ -113,21 +116,21 @@ array(3) {
   ["attr"]=>
   array(10) {
     [0]=>
-    float(30.827889)
+    float(30.827)
     [1]=>
-    float(106.805641)
+    float(106.805)
     [2]=>
-    float(11407.445011)
+    float(11407.445)
     [3]=>
-    float(-3452.982324)
+    float(-3452.982)
     [4]=>
-    float(36.788614)
+    float(36.788)
     [5]=>
-    float(8.70557)
+    float(8.705)
     [6]=>
-    float(8.801795)
+    float(8.801)
     [7]=>
-    float(0.106551)
+    float(0.106)
     [8]=>
     float(0)
     [9]=>
