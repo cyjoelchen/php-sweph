@@ -117,7 +117,7 @@ for($i = SE_SUN; $i <= SE_VESTA; $i++)
     $xx = swe_calc_ut($jul_ut, $i, SEFLG_SPEED);
     if ($xx['rc'] < 0) 
     { // error calling swe_calc_ut();
-        $planets[$i] = array('error' => $xx['rc']);
+        $planets[$i] = array('error' => $xx['rc'], 'message' => $xx['serr']);
         continue;
     }
 
