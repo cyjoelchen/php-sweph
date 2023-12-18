@@ -10,7 +10,7 @@ if (!extension_loaded('swephp')) {
 <?php
 include 'utility/Format.php';
 swe_set_ephe_path('./sweph/ephe');
-var_dump(Format::round(swe_heliacal_ut(2452275.5, 121.34, 43.57, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Venus', SE_HELIACAL_RISING, SEFLG_SWIEPH | SE_HELFLAG_OPTICAL_PARAMS)));
+var_dump(Format::round(swe_heliacal_ut(2452275.5, 121.34, 43.57, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Venus', SE_HELIACAL_RISING, SEFLG_SWIEPH)));
 ?>
 --EXPECT--
 array(4) {
