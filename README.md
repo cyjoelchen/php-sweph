@@ -5,10 +5,6 @@
 
 ## Compatibility
 This extension is tested with PHP versions:
-- 7.0
-- 7.1
-- 7.2
-- 7.3
 - 7.4
 - 8.0
 - 8.1
@@ -33,7 +29,7 @@ _If you are on a Mac and use or want to use Homebrew, please see:_
 [Installation on macOS Big Sur](https://github.com/cyjoelchen/php-sweph/wiki/Install-on-macOS-Big-Sur.)
 
 ```
-git clone -b 4.0.9 https://github.com/cyjoelchen/php-sweph.git
+git clone -b 4.0.10 https://github.com/cyjoelchen/php-sweph.git
 cd php-sweph
 phpize
 ./configure
