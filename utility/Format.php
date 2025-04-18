@@ -45,11 +45,11 @@ class Format
      * @param array $input Input array.
      * @return array
      */
-    public static function jdtWithUtc(array $input): array
+    public static function jdtWithUtc(array $input, int $precision = Format::PRECISION): array
     {
-        return array_map(function ($value) {
+        return array_map(function ($value) use ($precision) {
             return is_double($value)
-                ? sprintf('%f %s', Format::truncate($value, Format::PRECISION), Format::asUtc($value))
+                ? sprintf('%f %s', Format::truncate($value, $precision), Format::asUtc($value))
                 : $value;
         }, $input);
     }
