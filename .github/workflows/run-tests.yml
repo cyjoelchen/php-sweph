@@ -37,10 +37,3 @@ jobs:
           NO_INTERACTION: 1
           REPORT_EXIT_STATUS: 1
         run: make test
-
-      - name: Persist Artifacts.
-        uses: actions/upload-artifact@v4
-        with:
-          path: |
-            ./tests/*.diff
-            ./tests/*.log
