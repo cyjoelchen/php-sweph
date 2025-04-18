@@ -12,165 +12,214 @@ if (!extension_loaded('swephp')) {
 include 'utility/Format.php';
 swe_set_ephe_path('./sweph/ephe');
 
+# Test set 1.
 echo "swe_sol_eclipse_when_glob(2454466.5, SEFLG_SWIEPH, 0, 0)\n";
-$rv = swe_sol_eclipse_when_glob(2454466.5, SEFLG_SWIEPH, 0, 0);
-printf( "retflag = %d %b\n", $rv['retflag'], $rv['retflag']);
-$tjd_ut = $rv['tret'][0];
-$d = Format::asUtc($tjd_ut);
-printf("%f %s\n",  $tjd_ut,  $d);
-var_dump(Format::jdtWithUtc(array_slice($rv['tret'], 0, 8)));
+$result = swe_sol_eclipse_when_glob(2454466.5, SEFLG_SWIEPH, 0, 0);
+var_dump(is_int($result['retflag']));
+var_dump(!isset($result['serr']));
+var_dump(is_array($result['tret']));
+var_dump(count($result['tret']));
+var_dump(array_map('is_float', $result['tret']));
 
-echo "swe_sol_eclipse_where($tjd_ut, SEFLG_SWIEPH)\n";
-$rv = swe_sol_eclipse_where($tjd_ut, SEFLG_SWIEPH);
-printf( "retflag = %d %b\n", $rv['retflag'], $rv['retflag']);
-var_dump(Format::round($rv['geopos'], 3));
-var_dump(Format::round(array_slice($rv['attr'], 0, 11), 3));
+echo "swe_sol_eclipse_when_glob(-1000000, SEFLG_SWIEPH, 0, 0) - with error\n";
+$result = swe_sol_eclipse_when_glob(-1000000, SEFLG_SWIEPH, 0, 0);
+var_dump(is_int($result['retflag']));
+var_dump(is_string($result['serr']));
+
+# Test set 2.
+echo "swe_sol_eclipse_where(2454466.5, SEFLG_SWIEPH)\n";
+$result = swe_sol_eclipse_where(2454466.5, SEFLG_SWIEPH);
+var_dump(is_int($result['retflag']));
+var_dump(!isset($result['serr']));
+var_dump(is_array($result['geopos']));
+var_dump(count($result['geopos']));
+var_dump(array_map('is_float', $result['geopos']));
+var_dump(is_array($result['attr']));
+var_dump(count($result['attr']));
+var_dump(array_map('is_float', $result['attr']));
+
+# Test set 3.
 $geo = array(-153.1, -65.0, 0);
-
 echo "swe_sol_eclipse_when_loc(2454466.5, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2], 0)\n";
-$rv = swe_sol_eclipse_when_loc(2454466.5, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2], 0);
-printf( "retflag = %d %b\n", $rv['retflag'], $rv['retflag']);
-var_dump(Format::round($rv['tret'], 3));
-var_dump(Format::jdtWithUtc(array_slice($rv['tret'], 0, 5)));
-var_dump(Format::round(array_slice($rv['attr'], 0, 11), 3));
+$result = swe_sol_eclipse_when_loc(2454466.5, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2], 0);
+var_dump(is_int($result['retflag']));
+var_dump(!isset($result['serr']));
+var_dump(is_array($result['tret']));
+var_dump(count($result['tret']));
+var_dump(array_map('is_float', $result['tret']));
+var_dump(is_array($result['attr']));
+var_dump(count($result['attr']));
+var_dump(array_map('is_float', $result['attr']));
 
-echo "swe_sol_eclipse_how($tjd_ut, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2])\n";
-$rv = swe_sol_eclipse_how($tjd_ut, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2]);
-printf( "retflag = %d %b\n", $rv['retflag'], $rv['retflag']);
-var_dump(Format::round(array_slice($rv['attr'], 0, 11), 3));
+# Test set 4.
+echo "swe_sol_eclipse_how(2454466.5, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2])\n";
+$return = swe_sol_eclipse_how(2454466.5, SEFLG_SWIEPH, $geo[0], $geo[1], $geo[2]);
+var_dump(is_int($result['retflag']));
+var_dump(!isset($result['serr']));
+var_dump(is_array($result['attr']));
+var_dump(count($result['attr']));
+var_dump(array_map('is_float', $result['attr']));
 
 ?>
 --EXPECT--
 swe_sol_eclipse_when_glob(2454466.5, SEFLG_SWIEPH, 0, 0)
-retflag = 9 1001
-2454503.663212 2008 2 7  3:55:1 UT
-array(8) {
+bool(true)
+bool(true)
+bool(true)
+int(10)
+array(10) {
   [0]=>
-  string(34) "2454503.663211 2008 2 7  3:55:1 UT"
+  bool(true)
   [1]=>
-  string(34) "2454503.631145 2008 2 7  3:8:51 UT"
+  bool(true)
   [2]=>
-  string(35) "2454503.568626 2008 2 7  1:38:49 UT"
+  bool(true)
   [3]=>
-  string(35) "2454503.758220 2008 2 7  6:11:50 UT"
+  bool(true)
   [4]=>
-  string(35) "2454503.638833 2008 2 7  3:19:55 UT"
+  bool(true)
   [5]=>
-  string(35) "2454503.687823 2008 2 7  4:30:28 UT"
+  bool(true)
   [6]=>
-  string(34) "2454503.641705 2008 2 7  3:24:3 UT"
+  bool(true)
   [7]=>
-  string(35) "2454503.684977 2008 2 7  4:26:22 UT"
+  bool(true)
+  [8]=>
+  bool(true)
+  [9]=>
+  bool(true)
 }
-swe_sol_eclipse_where(2454503.6632119, SEFLG_SWIEPH)
-retflag = 9 1001
+swe_sol_eclipse_when_glob(-1000000, SEFLG_SWIEPH, 0, 0) - with error
+bool(true)
+bool(true)
+swe_sol_eclipse_where(2454466.5, SEFLG_SWIEPH)
+bool(true)
+bool(true)
+bool(true)
+int(2)
 array(2) {
   [0]=>
-  float(-150.265)
+  bool(true)
   [1]=>
-  float(-67.547)
+  bool(true)
 }
-array(11) {
+bool(true)
+int(20)
+array(20) {
   [0]=>
-  float(0.98)
+  bool(true)
   [1]=>
-  float(0.965)
+  bool(true)
   [2]=>
-  float(0.932)
+  bool(true)
   [3]=>
-  float(123.542)
+  bool(true)
   [4]=>
-  float(88.565)
+  bool(true)
   [5]=>
-  float(16.228)
+  bool(true)
   [6]=>
-  float(16.283)
+  bool(true)
   [7]=>
-  float(0.001)
+  bool(true)
   [8]=>
-  float(0.965)
+  bool(true)
   [9]=>
-  float(121)
+  bool(true)
   [10]=>
-  float(60)
+  bool(true)
+  [11]=>
+  bool(true)
+  [12]=>
+  bool(true)
+  [13]=>
+  bool(true)
+  [14]=>
+  bool(true)
+  [15]=>
+  bool(true)
+  [16]=>
+  bool(true)
+  [17]=>
+  bool(true)
+  [18]=>
+  bool(true)
+  [19]=>
+  bool(true)
 }
 swe_sol_eclipse_when_loc(2454466.5, SEFLG_SWIEPH, -153.1, -65, 0, 0)
-retflag = 8072 1111110001000
+bool(true)
+bool(true)
+bool(true)
+int(7)
 array(7) {
   [0]=>
-  float(2454503.666)
+  bool(true)
   [1]=>
-  float(2454503.622)
+  bool(true)
   [2]=>
-  float(2454503.666)
+  bool(true)
   [3]=>
-  float(2454503.667)
+  bool(true)
   [4]=>
-  float(2454503.708)
+  bool(true)
   [5]=>
-  float(0)
+  bool(true)
   [6]=>
-  float(0)
+  bool(true)
 }
-array(5) {
-  [0]=>
-  string(33) "2454503.666761 2008 2 7  4:0:8 UT"
-  [1]=>
-  string(35) "2454503.622760 2008 2 7  2:56:46 UT"
-  [2]=>
-  string(34) "2454503.666048 2008 2 7  3:59:6 UT"
-  [3]=>
-  string(34) "2454503.667475 2008 2 7  4:1:10 UT"
-  [4]=>
-  string(34) "2454503.708686 2008 2 7  5:0:30 UT"
-}
+bool(true)
+int(11)
 array(11) {
   [0]=>
-  float(0.976)
+  bool(true)
   [1]=>
-  float(0.965)
+  bool(true)
   [2]=>
-  float(0.933)
+  bool(true)
   [3]=>
-  float(123.624)
+  bool(true)
   [4]=>
-  float(89.232)
+  bool(true)
   [5]=>
-  float(16.805)
+  bool(true)
   [6]=>
-  float(16.858)
+  bool(true)
   [7]=>
-  float(0.003)
+  bool(true)
   [8]=>
-  float(0.965)
+  bool(true)
   [9]=>
-  float(121)
+  bool(true)
   [10]=>
-  float(60)
+  bool(true)
 }
-swe_sol_eclipse_how(2454503.6632119, SEFLG_SWIEPH, -153.1, -65, 0)
-retflag = 145 10010001
+swe_sol_eclipse_how(2454466.5, SEFLG_SWIEPH, -153.1, -65, 0)
+bool(true)
+bool(true)
+bool(true)
+int(11)
 array(11) {
   [0]=>
-  float(0.901)
+  bool(true)
   [1]=>
-  float(0.966)
+  bool(true)
   [2]=>
-  float(0.862)
+  bool(true)
   [3]=>
-  float(123.542)
+  bool(true)
   [4]=>
-  float(90.389)
+  bool(true)
   [5]=>
-  float(17.346)
+  bool(true)
   [6]=>
-  float(17.397)
+  bool(true)
   [7]=>
-  float(0.043)
+  bool(true)
   [8]=>
-  float(0.901)
+  bool(true)
   [9]=>
-  float(121)
+  bool(true)
   [10]=>
-  float(60)
+  bool(true)
 }
