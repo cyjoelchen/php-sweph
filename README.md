@@ -50,6 +50,10 @@ Now you should able to see swephp section from `phpinfo()`.
 
 You are all set!
 
+## Troubleshooting
+Please see the Wiki for additional details on troubleshooting the installation of this extension:
+- https://github.com/cyjoelchen/php-sweph/wiki
+
 ## PhpStorm IDE Support
 A plugin repository is maintained for this extension, allowing auto-complete and static analysis in PhpStorm for all Swiss Ephemeris methods:
 
