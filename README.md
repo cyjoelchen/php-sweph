@@ -32,7 +32,7 @@ _If you are on a Mac and use or want to use Homebrew, please see:_
 [Installation on macOS Big Sur](https://github.com/cyjoelchen/php-sweph/wiki/Install-on-macOS-Big-Sur.)
 
 ```
-git clone -b 4.0.11 https://github.com/cyjoelchen/php-sweph.git
+git clone -b 4.0.12 https://github.com/cyjoelchen/php-sweph.git
 cd php-sweph
 phpize
 ./configure
