@@ -11,6 +11,7 @@ This extension is tested with PHP versions:
 - 8.2
 - 8.3
 - 8.4
+- 8.5
 
 ## License
 `php-sweph` is work derived from the original release of the Astrodienst Swiss Ephemeris library.
